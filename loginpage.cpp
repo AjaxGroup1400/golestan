@@ -11,21 +11,12 @@ LoginPage::LoginPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LoginPage)
 {
-    // creates users.txt file for storing users data
-    FileManager userFile;
-
-    userFile.create("users.txt");
-
-    userFile.write();
-
     ui->setupUi(this);
     this->ui->forgotPass->setStyleSheet("background-color:transparent");
     this->ui->Loginbtn->setStyleSheet("background-color:transparent");
 
     ui->passLine->setEchoMode(QLineEdit::Password);
     connect(ui->showPass,SIGNAL(clicked(bool)),this,SLOT(on_showPass_clicked(bool)));
-
-
 }
 
 LoginPage::~LoginPage()

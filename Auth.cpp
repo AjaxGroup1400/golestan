@@ -51,7 +51,7 @@ int Auth::isHintValid(QString username, QString phoneNumber)
 {
     FileManager usersFile;
 
-    usersFile.create("users.txt");
+    usersFile.create();
 
     usersFile.loadData();
 

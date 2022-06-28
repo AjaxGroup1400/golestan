@@ -37,6 +37,9 @@ public:
 
     void deleteRecord(int index);
 
+    // update a record in data
+    void update(int index, QString newValue);
+
     QVector<QString> parse(QString str, char delimiter = '\t');
 
     QString getRecord(int index);

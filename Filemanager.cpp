@@ -2,7 +2,6 @@
 #include <QString>
 #include <QDir>
 
-#include <string>
 #include <iostream>
 #include <sstream>
 
@@ -124,7 +123,6 @@ void FileManager::write()
         return;
     }
 
-
     QTextStream stream(&file);
 
     for(size_t i = 0; i < this->data.size(); i++)
@@ -137,7 +135,10 @@ void FileManager::write()
 
 void FileManager::append(QString record)
 {
-    this->data.push_back(record);
+    if(!this->data.contains(record))
+    {
+        this->data.push_back(record);
+    }
 }
 
 QString FileManager::getRecord(int index)
@@ -148,6 +149,13 @@ QString FileManager::getRecord(int index)
 void FileManager::deleteRecord(int index)
 {
     this->data.removeAt(index);
+}
+
+void FileManager::update(int index, QString newValue)
+{
+    this->data[index] = newValue;
+
+    return;
 }
 
 QVector<QString> FileManager::parse(QString str, char delimiter)

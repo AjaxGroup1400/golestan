@@ -25,17 +25,24 @@ void ForgotPassPage::on_Confirmbtn_clicked()
 {
     QString phoneNumber = ui->phoneLine->text() ;
     QString username = ui->userLine->text() ;
-    if ( Auth::isHintValid(username , phoneNumber) == -1 )
+
+    int index = Auth::isHintValid(username , phoneNumber);
+
+    if (!(index > -1))
     {
-        QMessageBox * msgb = new QMessageBox(QMessageBox::Icon::Critical , "Invalid usernme or phone number" , "the usernme or phone number doesn't match or doesn't exist at all. please check your answers again" , QMessageBox::Button::Ok);
-        QObject::connect(msgb , &QMessageBox::buttonClicked , msgb , &QMessageBox::deleteLater);
-        return ;
+        QMessageBox * noUserFound = new QMessageBox(QMessageBox::Icon::Critical , "Invalid usernme or phone number" , "the usernme or phone number doesn't match or doesn't exist at all. please check your answers again" , QMessageBox::Button::Ok);
+
+        QObject::connect(noUserFound , &QMessageBox::buttonClicked , noUserFound , &QMessageBox::deleteLater);
+
+        noUserFound->show();
+
+        return;
     }
+    
+    EntereNewPass* enp = new EntereNewPass;
 
+    enp->setIndex(index);
 
-
-
-    EntereNewPass* enp = new EntereNewPass;   
     enp->show();
     close();
 
