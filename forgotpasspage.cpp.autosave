@@ -31,7 +31,7 @@ void ForgotPassPage::on_Confirmbtn_clicked()
         QObject::connect(msgb , &QMessageBox::buttonClicked , msgb , &QMessageBox::deleteLater);
         return ;
     }
-
+    
 
 
 

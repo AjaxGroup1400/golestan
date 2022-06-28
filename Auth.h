@@ -13,7 +13,7 @@ public:
     static QString formUserData(QString username, QString password, QString firstname, QString lastname, QString nationalCode, QString phoneNumber, QString role);
 
     static int canLogin(QString username, QString password);
-
+// if int > -1 means that the member exists
     static int isHintValid(QString username, QString phoneNumber);
 };
 
