@@ -1,3 +1,9 @@
+#include <QMessageBox>
+#include <iostream>
+
+#include "Auth.h"
+#include "Filemanager.h"
+
 #include "loginpage.h"
 #include "ui_loginpage.h"
 
@@ -5,6 +11,21 @@ LoginPage::LoginPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LoginPage)
 {
+    // creates users.txt file for storing users data
+    FileManager userFile;
+
+    userFile.create("users.txt");
+
+    userFile.append(Auth::formUserData(
+        "123456",
+        "@mir1990",
+        "Amirhossein",
+        "Mazaheri",
+        "456789"
+        ));
+
+    userFile.write();
+
     ui->setupUi(this);
     this->ui->forgotPass->setStyleSheet("background-color:transparent");
     this->ui->Loginbtn->setStyleSheet("background-color:transparent");
@@ -39,9 +60,32 @@ void LoginPage::on_forgotPass_clicked(bool checked)
     close();
 }
 
+bool LoginPage::isUserValid()
+{
+    QString username = ui->userLine->text();
+    QString password = ui->passLine->text();
+
+    return Auth::canLogin(username, password) > -1;
+}
 
 void LoginPage::on_Loginbtn_clicked()
 {
+
+    if(!isUserValid())
+    {
+        QMessageBox* loginStatus = new QMessageBox(
+            QMessageBox::Critical,
+            "Can't Login",
+            "Username or password is wrong, please enter valid information.",
+            QMessageBox::Ok
+            );
+
+
+        loginStatus->show();
+
+        return;
+    }
+
     AdminMainMenu* amm = new AdminMainMenu;
     amm->show();
     close();
