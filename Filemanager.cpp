@@ -10,6 +10,21 @@
 
 using namespace std;
 
+const QString &FileManager::getFilename() const
+{
+    return this->filename;
+}
+
+void FileManager::setFilename(const QString &filename)
+{
+    this->filename = this->dirPath + filename;
+}
+
+const QList<QString> &FileManager::getData() const
+{
+    return this->data;
+}
+
 void FileManager::init()
 {
     QDir dir;
@@ -34,7 +49,13 @@ FileManager::FileManager(QString dirPath)
 
 FileManager::~FileManager()
 {
+    this->filename = "";
 
+    this->dirPath = "";
+
+    this->data.clear();
+
+    return;
 }
 
 const QString &FileManager::getDirPath() const
@@ -69,7 +90,6 @@ void FileManager::create(QString filename)
     }
 }
 
-// loads all data in file into a list in class to have easier access
 void FileManager::loadData()
 {
     QFile file(this->filename);
@@ -93,8 +113,6 @@ void FileManager::loadData()
     file.close();
 }
 
-// write the whole data into file
-// NOTE: use it after appending, deleting, or updating to submit the changes into file
 void FileManager::write()
 {
     QFile file(this->filename);
@@ -146,7 +164,6 @@ QVector<QString> FileManager::parse(QString str, char delimiter)
 
     return splittedWords;
 }
-
 
 
 

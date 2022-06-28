@@ -17,6 +17,8 @@ public:
     explicit LoginPage(QWidget *parent = nullptr);
     ~LoginPage();
 
+    bool isUserValid();
+
 private slots:
     void on_showPass_clicked(bool checked);
 
