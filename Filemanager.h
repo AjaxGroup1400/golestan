@@ -24,10 +24,13 @@ public:
 
     const QString &getDirPath() const;
 
-    void create(QString filename);
+    void create(QString filename = "users.txt");
 
+    // loads all data in file into a list in class to have easier access
     void loadData();
 
+    // write the whole data into file
+    // NOTE: use it after appending, deleting, or updating to submit the changes into file
     void write();
 
     void append(QString record);
@@ -40,7 +43,8 @@ public:
 
     const QString &getFilename() const;
 
-    void setFilename(const QString &filename);
+    void setFilename(const QString &filename = "users.txt");
+
     const QList<QString> &getData() const;
 };
 

@@ -17,4 +17,12 @@ public:
     static int isHintValid(QString hint);
 };
 
+//FileManager file;
+
+//file.loadData();
+
+//file.apeend(Auth::formUserData("sdfsdf", "354654", "AMir", "", ""));
+
+//file.write();
+
 #endif // AUTH_H

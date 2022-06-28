@@ -17,7 +17,7 @@ const QString &FileManager::getFilename() const
 
 void FileManager::setFilename(const QString &filename)
 {
-    this->filename = filename;
+    this->filename = this->dirPath + filename;
 }
 
 const QList<QString> &FileManager::getData() const
@@ -90,7 +90,6 @@ void FileManager::create(QString filename)
     }
 }
 
-// loads all data in file into a list in class to have easier access
 void FileManager::loadData()
 {
     QFile file(this->filename);
@@ -114,8 +113,6 @@ void FileManager::loadData()
     file.close();
 }
 
-// write the whole data into file
-// NOTE: use it after appending, deleting, or updating to submit the changes into file
 void FileManager::write()
 {
     QFile file(this->filename);
