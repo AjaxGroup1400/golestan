@@ -10,6 +10,21 @@
 
 using namespace std;
 
+const QString &FileManager::getFilename() const
+{
+    return this->filename;
+}
+
+void FileManager::setFilename(const QString &filename)
+{
+    this->filename = filename;
+}
+
+const QList<QString> &FileManager::getData() const
+{
+    return this->data;
+}
+
 void FileManager::init()
 {
     QDir dir;
@@ -34,7 +49,13 @@ FileManager::FileManager(QString dirPath)
 
 FileManager::~FileManager()
 {
+    this->filename = "";
 
+    this->dirPath = "";
+
+    this->data.clear();
+
+    return;
 }
 
 const QString &FileManager::getDirPath() const

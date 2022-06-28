@@ -37,6 +37,11 @@ public:
     QVector<QString> parse(QString str, char delimiter = '\t');
 
     QString getRecord(int index);
+
+    const QString &getFilename() const;
+
+    void setFilename(const QString &filename);
+    const QList<QString> &getData() const;
 };
 
 #endif // FILEMANAGER_H
