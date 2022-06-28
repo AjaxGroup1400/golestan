@@ -1,6 +1,6 @@
 #ifndef PERMISSION_H
 #define PERMISSION_H
-
+#include<QList>>
 #include <QObject>
 
 class Permission : public QObject
@@ -9,13 +9,13 @@ class Permission : public QObject
 public:
     explicit Permission(QObject *parent = nullptr);
 
-        QString get_permission();
+        QList<QString> get_permission();
         bool is_allowed(QString value);
 
 signals:
 
 private:
-    QString allowed_tasks ;
+    QList<QString>  allowed_tasks ;
 
 };
 
