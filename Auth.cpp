@@ -13,13 +13,15 @@ Auth::~Auth()
     return;
 }
 
-QString Auth::formUserData(QString username, QString password, QString firstname, QString lastname, QString hint)
+QString Auth::formUserData(QString username, QString password, QString firstname, QString lastname, QString nationalCode, QString phoneNumber, QString role)
 {
     QString mergedData = username + '\t' +
                          password + '\t' +
                          firstname + '\t' +
                          lastname + '\t' +
-                         hint;
+                         nationalCode + '\t' +
+                         phoneNumber + '\t'
+                         + role;
 
     return mergedData;
 }
@@ -45,7 +47,7 @@ int Auth::canLogin(QString username, QString password)
     return -1;
 }
 
-int Auth::isHintValid(QString hint)
+int Auth::isHintValid(QString username, QString phoneNumber)
 {
     FileManager usersFile;
 
@@ -60,7 +62,7 @@ int Auth::isHintValid(QString hint)
         QVector<QString> parsedUser = usersFile.parse(dataCopy.at(i));
 
         // last element in parsed user is hint
-        if(parsedUser.at(parsedUser.size() - 1) == hint)
+        if(parsedUser.at(0) == username && parsedUser.at(5) == phoneNumber)
             return i;
     }
 

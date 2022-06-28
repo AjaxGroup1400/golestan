@@ -10,11 +10,11 @@ public:
 
     ~Auth();
 
-    static QString formUserData(QString username, QString password, QString firstname, QString lastname, QString hint);
+    static QString formUserData(QString username, QString password, QString firstname, QString lastname, QString nationalCode, QString phoneNumber, QString role);
 
     static int canLogin(QString username, QString password);
 
-    static int isHintValid(QString hint);
+    static int isHintValid(QString username, QString phoneNumber);
 };
 
 //FileManager file;
