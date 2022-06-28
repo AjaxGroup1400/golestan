@@ -13,6 +13,7 @@ SOURCES += \
     Filemanager.cpp \
     Permission.cpp \
     User.cpp \
+    Weeklycalender.cpp \
     adminmainmenu.cpp \
     enterenewpass.cpp \
     forgotpasspage.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     Filemanager.h \
     Permission.h \
     User.h \
+    Weeklycalender.h \
     adminmainmenu.h \
     enterenewpass.h \
     forgotpasspage.h \
