@@ -16,7 +16,7 @@ LoginPage::LoginPage(QWidget *parent) :
     this->ui->Loginbtn->setStyleSheet("background-color:transparent");
 
     ui->passLine->setEchoMode(QLineEdit::Password);
-    connect(ui->showPass,SIGNAL(clicked(bool)),this,SLOT(on_showPass_clicked(bool)));
+    connect(ui->showPass, SIGNAL(clicked(bool)), this, SLOT(on_showPass_clicked(bool)));
 }
 
 LoginPage::~LoginPage()

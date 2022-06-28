@@ -11,6 +11,8 @@ CONFIG += c++17
 SOURCES += \
     Auth.cpp \
     Filemanager.cpp \
+    Permission.cpp \
+    User.cpp \
     adminmainmenu.cpp \
     enterenewpass.cpp \
     forgotpasspage.cpp \
@@ -20,6 +22,8 @@ SOURCES += \
 HEADERS += \
     Auth.h \
     Filemanager.h \
+    Permission.h \
+    User.h \
     adminmainmenu.h \
     enterenewpass.h \
     forgotpasspage.h \
