@@ -9,6 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Auth.cpp \
+    Filemanager.cpp \
     adminmainmenu.cpp \
     enterenewpass.cpp \
     forgotpasspage.cpp \
@@ -16,6 +18,8 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    Auth.h \
+    Filemanager.h \
     adminmainmenu.h \
     enterenewpass.h \
     forgotpasspage.h \
