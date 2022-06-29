@@ -21,7 +21,8 @@ Teacher::Teacher(QWidget *parent) :
 
     userFile.loadData();
 
-    for(const QString& item: userFile.getData()){
+    for(const QString& item: userFile.getData())
+    {
         auto parse = userFile.parse(item);
 
         if (parse[0] == this->get_username()){
