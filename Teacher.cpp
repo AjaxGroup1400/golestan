@@ -47,9 +47,10 @@ QList<QString> Teacher::studentsList(QString classname)
         }
         return classlist;
     }
-}
+
     return classlist;
 }
+
 void Teacher::deletest(QString name , QString lesson)
 {
     int index = Auth::validStudent(name , lesson);

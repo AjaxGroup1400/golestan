@@ -12,6 +12,7 @@ SOURCES += \
     Auth.cpp \
     Filemanager.cpp \
     Permission.cpp \
+    adminprofile.cpp \
     Teacher.cpp \
     TeacherWeeklycalender.cpp \
     User.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     Auth.h \
     Filemanager.h \
     Permission.h \
+    adminprofile.h \
     Teacher.h \
     TeacherWeeklycalender.h \
     User.h \
@@ -49,6 +51,7 @@ HEADERS += \
 FORMS += \
     Teacher.ui \
     adminmainmenu.ui \
+    adminprofile.ui \
     enterenewpass.ui \
     forgotpasspage.ui \
     loginpage.ui \
