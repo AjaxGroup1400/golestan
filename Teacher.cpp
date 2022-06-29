@@ -5,12 +5,13 @@
 #include"Auth.h"
 #include"Filemanager.h"
 #include"User.h"
+#include <QAbstractButton>
 
 Teacher::Teacher(QWidget *parent) :
-    QDialog(parent),
+    //QDialog(parent),
     ui(new Ui::Teacher)
 {
-    ui->setupUi(this);
+    //ui->setupUi(this);
 }
 
 Teacher::~Teacher()

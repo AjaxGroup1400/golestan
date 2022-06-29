@@ -15,7 +15,7 @@ class Teacher;
 
 class Teacher :  public  User ,  public QDialog
 {
-    Q_OBJECT
+    //Q_OBJECT
 
 public:
 
