@@ -1,4 +1,6 @@
 #include<QMessageBox>
+#include<QAbstractButton>
+
 
 #include "Teacher.h"
 #include "ui_Teacher.h"
@@ -26,9 +28,8 @@ for (auto i=this->students.begin(); i!=this->students.end(); i++){
     if (i.value()== classname){
         classlist.push_back(i.key());
     }
-    return classlist;
 }
-
+    return classlist;
 }
 void Teacher::deletest(QString name , QString lesson)
 {
