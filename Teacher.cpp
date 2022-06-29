@@ -50,7 +50,7 @@ for (auto i=this->students.begin(); i!=this->students.end(); i++){
 
         classlist.insert( i.key(), j.value() );
     }
-}
+
     return classlist;
 }
 

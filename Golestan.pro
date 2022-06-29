@@ -12,33 +12,53 @@ SOURCES += \
     Auth.cpp \
     Filemanager.cpp \
     Permission.cpp \
+    adminprofile.cpp \
     Teacher.cpp \
+    TeacherWeeklycalender.cpp \
     User.cpp \
     Weeklycalender.cpp \
     adminmainmenu.cpp \
     enterenewpass.cpp \
     forgotpasspage.cpp \
     loginpage.cpp \
-    main.cpp
+    main.cpp \
+	dist/jsoncpp.cpp \
+    studentmainmenu.cpp \
+    studentprofile.cpp \
+    teachermainmenu.cpp \
+    teacherprofile.cpp
 
 HEADERS += \
     Auth.h \
     Filemanager.h \
     Permission.h \
+    adminprofile.h \
     Teacher.h \
+    TeacherWeeklycalender.h \
     User.h \
     Weeklycalender.h \
     adminmainmenu.h \
     enterenewpass.h \
     forgotpasspage.h \
-    loginpage.h
+    loginpage.h \
+	dist/json/json.h \
+	dist/json/json-forwards.h \
+    studentmainmenu.h \
+    studentprofile.h \
+    teachermainmenu.h \
+    teacherprofile.h
 
 FORMS += \
     Teacher.ui \
     adminmainmenu.ui \
+    adminprofile.ui \
     enterenewpass.ui \
     forgotpasspage.ui \
-    loginpage.ui
+    loginpage.ui \
+    studentmainmenu.ui \
+    studentprofile.ui \
+    teachermainmenu.ui \
+    teacherprofile.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -46,4 +66,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    pictures.qrc
+    arrowIcon.qrc \
+    icon.qrc \
+    pictures.qrc \
+    second-icon.qrc \
+    third-icon-group.qrc
+
+DISTFILES += \
+    scorecard.png

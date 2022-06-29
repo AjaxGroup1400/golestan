@@ -5,6 +5,10 @@
 #include "Filemanager.h"
 
 #include "loginpage.h"
+#include "studentmainmenu.h"
+#include "adminmainmenu.h"
+#include "teachermainmenu.h"
+
 #include "ui_loginpage.h"
 
 LoginPage::LoginPage(QWidget *parent) :
@@ -69,7 +73,15 @@ void LoginPage::on_Loginbtn_clicked()
         return;
     }
 
-    AdminMainMenu* amm = new AdminMainMenu;
+    //    StudentMainMenu* smm = new StudentMainMenu;
+//    smm->show();
+//    close();
+
+//    TeacherMainMenu* tmm = new TeacherMainMenu;
+//    tmm->show();
+//    close();
+
+    /*AdminMainMenu* amm = new AdminMainMenu;
     amm->show();
-    close();
+    close();*/
 }

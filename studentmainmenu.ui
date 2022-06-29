@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AdminMainMenu</class>
- <widget class="QWidget" name="AdminMainMenu">
+ <class>StudentMainMenu</class>
+ <widget class="QWidget" name="StudentMainMenu">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -22,6 +22,55 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(240, 240, 240);</string>
   </property>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>285</x>
+     <y>20</y>
+     <width>111</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(178, 8, 55);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="pictures.qrc">:/logo/filename.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>20</y>
+     <width>121</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(178, 8, 55);
+border-color: rgb(178, 8, 55);
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>:/AjaxLogo/filename.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
@@ -64,7 +113,7 @@ border-color: rgb(41, 39, 40);</string>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>59</x>
+      <x>60</x>
       <y>100</y>
       <width>161</width>
       <height>35</height>
@@ -81,7 +130,7 @@ border-color: rgb(41, 39, 40);</string>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>59</x>
+      <x>60</x>
       <y>160</y>
       <width>161</width>
       <height>35</height>
@@ -98,7 +147,7 @@ border-color: rgb(41, 39, 40);</string>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>59</x>
+      <x>60</x>
       <y>220</y>
       <width>161</width>
       <height>35</height>
@@ -115,7 +164,7 @@ border-color: rgb(41, 39, 40);</string>
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>59</x>
+      <x>60</x>
       <y>280</y>
       <width>161</width>
       <height>35</height>
@@ -148,11 +197,11 @@ border-color: rgb(178, 8, 55);</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_6">
+    <widget class="QLabel" name="label_21">
      <property name="geometry">
       <rect>
        <x>5</x>
-       <y>1</y>
+       <y>2</y>
        <width>31</width>
        <height>31</height>
       </rect>
@@ -193,7 +242,7 @@ border-color: rgb(178, 8, 55);</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_10">
+    <widget class="QLabel" name="label_18">
      <property name="geometry">
       <rect>
        <x>5</x>
@@ -232,7 +281,7 @@ border-color: rgb(178, 8, 55);</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
        <x>5</x>
@@ -245,7 +294,7 @@ border-color: rgb(178, 8, 55);</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="icon.qrc">:/icon/add-user.png</pixmap>
+      <pixmap resource="icon.qrc">:/icon/schedule.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -271,7 +320,7 @@ border-color: rgb(178, 8, 55);</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_11">
+    <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
        <x>5</x>
@@ -284,7 +333,7 @@ border-color: rgb(178, 8, 55);</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="icon.qrc">:/icon/upload-mail.png</pixmap>
+      <pixmap resource="icon.qrc">:/icon/manage.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -314,9 +363,9 @@ color: rgb(240, 240, 240);</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>110</x>
       <y>100</y>
-      <width>81</width>
+      <width>71</width>
       <height>30</height>
      </rect>
     </property>
@@ -342,26 +391,6 @@ color: rgb(240, 240, 240);</string>
      <rect>
       <x>90</x>
       <y>160</y>
-      <width>101</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 11pt &quot;Montserrat&quot;;
-color: rgb(240, 240, 240);</string>
-    </property>
-    <property name="text">
-     <string>Messges</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>220</y>
       <width>111</width>
       <height>30</height>
      </rect>
@@ -371,18 +400,18 @@ color: rgb(240, 240, 240);</string>
 color: rgb(240, 240, 240);</string>
     </property>
     <property name="text">
-     <string>Add People</string>
+     <string>Messages</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>280</y>
-      <width>141</width>
+      <x>60</x>
+      <y>220</y>
+      <width>161</width>
       <height>30</height>
      </rect>
     </property>
@@ -391,23 +420,46 @@ color: rgb(240, 240, 240);</string>
 color: rgb(240, 240, 240);</string>
     </property>
     <property name="text">
-     <string>Send Assertion</string>
+     <string>Weekly Schedule</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_14">
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>280</y>
+      <width>161</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 11pt &quot;Montserrat&quot;;
+color: rgb(240, 240, 240);</string>
+    </property>
+    <property name="text">
+     <string>Term Managment</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
       <x>92</x>
-      <y>680</y>
+      <y>690</y>
       <width>40</width>
       <height>40</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true"/>
+    <property name="minimumSize">
+     <size>
+      <width>15</width>
+      <height>15</height>
+     </size>
     </property>
     <property name="text">
      <string/>
@@ -423,7 +475,7 @@ color: rgb(240, 240, 240);</string>
     <property name="geometry">
      <rect>
       <x>87</x>
-      <y>670</y>
+      <y>680</y>
       <width>51</width>
       <height>51</height>
      </rect>
@@ -439,64 +491,19 @@ color: rgb(240, 240, 240);</string>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
    <zorder>label_5</zorder>
-   <zorder>label_8</zorder>
+   <zorder>label_6</zorder>
    <zorder>frame_3</zorder>
    <zorder>pushButton</zorder>
    <zorder>pushButton_2</zorder>
    <zorder>pushButton_3</zorder>
    <zorder>pushButton_4</zorder>
-   <zorder>label_14</zorder>
+   <zorder>label_8</zorder>
    <zorder>pushButton_5</zorder>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>20</y>
-     <width>121</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(178, 8, 55);
-border-color: rgb(178, 8, 55);
-</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>:/AjaxLogo/filename.jpg</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>285</x>
-     <y>20</y>
-     <width>111</width>
-     <height>111</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(178, 8, 55);</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="pictures.qrc">:/logo/filename.jpg</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
+  <zorder>frame</zorder>
+  <zorder>frame_2</zorder>
+  <zorder>label</zorder>
+  <zorder>label_9</zorder>
  </widget>
  <resources>
   <include location="icon.qrc"/>
