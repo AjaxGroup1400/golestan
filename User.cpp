@@ -1,7 +1,7 @@
 #include "User.h"
 
-User::User(QObject *parent)
-    : QObject{parent}
+User::User(QWidget *parent)
+    : QWidget{parent}
 {
 
 }
