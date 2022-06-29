@@ -1,5 +1,6 @@
 #include "loginpage.h"
 #include "Filemanager.h"
+#include "TeacherWeeklyCalendar.h"
 #include "Auth.h"
 
 #include <QApplication>
@@ -39,6 +40,12 @@ int main(int argc, char *argv[])
         ));
 
     userFile.write();
+
+    TeacherWeeklycalendar cal;
+
+    cal.show("139924082");
+
+    qDebug() << cal.getCalendar()[0]["name"];
 
     QApplication a(argc, argv);
     LoginPage w;

@@ -12,11 +12,11 @@ SOURCES += \
     Auth.cpp \
     Filemanager.cpp \
     Permission.cpp \
+    TeacherWeeklyCalendar.cpp \
+    WeeklyCalendar.cpp \
     adminprofile.cpp \
     Teacher.cpp \
-    TeacherWeeklycalender.cpp \
     User.cpp \
-    Weeklycalender.cpp \
     adminmainmenu.cpp \
     enterenewpass.cpp \
     forgotpasspage.cpp \
@@ -32,11 +32,11 @@ HEADERS += \
     Auth.h \
     Filemanager.h \
     Permission.h \
+    TeacherWeeklyCalendar.h \
+    WeeklyCalendar.h \
     adminprofile.h \
     Teacher.h \
-    TeacherWeeklycalender.h \
     User.h \
-    Weeklycalender.h \
     adminmainmenu.h \
     enterenewpass.h \
     forgotpasspage.h \
