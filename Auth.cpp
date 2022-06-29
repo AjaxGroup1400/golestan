@@ -26,11 +26,12 @@ QString Auth::formUserData(QString username, QString password, QString firstname
     return mergedData;
 }
 
-QString Auth::formUserData(QString teacherusername, QString studentusername, QString lesson)
+QString Auth::formUserData(QString teacherusername, QString studentusername, QString lesson, float score)
 {
     QString mergedData = teacherusername + '\t' +
                          studentusername + '\t' +
-                         lesson;
+                         lesson + '\t'+
+                         QString:: number( score );
 
     return mergedData;
 }
