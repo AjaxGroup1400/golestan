@@ -5,15 +5,14 @@
 #include <QList>
 #include <QMap>
 #include <QString>
-#include<QString>
 
-#include"User.h"
+#include "User.h"
 
 namespace Ui {
 class Teacher;
 }
 
-class Teacher :  public  User ,  public QDialog
+class Teacher : public  User
 {
     Q_OBJECT
 

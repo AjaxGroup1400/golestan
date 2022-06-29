@@ -5,12 +5,13 @@
 #include"Auth.h"
 #include"Filemanager.h"
 #include"User.h"
+#include <QAbstractButton>
 
 Teacher::Teacher(QWidget *parent) :
-    QDialog(parent),
+//    QWidget(parent),
     ui(new Ui::Teacher)
 {
-    ui->setupUi(this);
+//    ui->setupUi(this);
 }
 
 Teacher::~Teacher()
@@ -22,12 +23,12 @@ QList<QString> Teacher::studensList(QString classname)
 {
     QList <QString> classlist;
 
-for (auto i=this->students.begin(); i!=this->students.end(); i++){
-    if (i.value()== classname){
-        classlist.push_back(i.key());
+    for (auto i=this->students.begin(); i!=this->students.end(); i++){
+        if (i.value()== classname){
+            classlist.push_back(i.key());
+        }
+        return classlist;
     }
-    return classlist;
-}
 
 }
 void Teacher::deletest(QString name , QString lesson)
