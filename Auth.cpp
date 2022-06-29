@@ -26,6 +26,36 @@ QString Auth::formUserData(QString username, QString password, QString firstname
     return mergedData;
 }
 
+QString Auth::formUserData(QString teacherusername, QString studentusername, QString lesson)
+{
+    QString mergedData = teacherusername + '\t' +
+                         studentusername + '\t' +
+                         lesson;
+
+    return mergedData;
+}
+
+int Auth::validStudent(QString studentusername, QString lesson)
+{
+    FileManager usersFile;
+
+    usersFile.create("teachers.txt");
+
+    usersFile.loadData();
+
+    auto& dataCopy = usersFile.getData();
+
+    for(int i = 0; i < dataCopy.size(); i++)
+    {
+        QVector<QString> parsedUser = usersFile.parse(dataCopy.at(i));
+
+        if(parsedUser.at(1) == studentusername && parsedUser.at(2) == lesson)
+            return i;
+    }
+
+    return -1;
+}
+
 int Auth::canLogin(QString username, QString password)
 {
     FileManager usersFile;

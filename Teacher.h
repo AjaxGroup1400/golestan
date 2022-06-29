@@ -5,12 +5,15 @@
 #include <QList>
 #include <QMap>
 #include <QString>
+#include<QString>
+
+#include"User.h"
 
 namespace Ui {
 class Teacher;
 }
 
-class Teacher : public QDialog
+class Teacher :  public  User ,  public QDialog
 {
     Q_OBJECT
 
@@ -20,6 +23,8 @@ public:
     ~Teacher();
     QList<QString> studensList(QString classname);
 
+    void deletest(QString name , QString lesson);
+    void sendingNotification(QString message , QString lesson , QList<QString> list);
 private:
     Ui::Teacher *ui;
     QMap <QString, QString> students;

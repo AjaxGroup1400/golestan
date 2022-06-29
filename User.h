@@ -1,15 +1,15 @@
 #ifndef USER_H
 #define USER_H
 
-#include <QObject>
+#include <QWidget>
 #include<QString>
 
 
-class User : public QObject
+class User : public QWidget
 {
     Q_OBJECT
 public:
-    explicit User(QObject *parent = nullptr);
+    explicit User(QWidget *parent = nullptr);
 
     void set_first_name(QString name);
     void set_last_name(QString name);
