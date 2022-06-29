@@ -14,6 +14,7 @@ SOURCES += \
     Permission.cpp \
     Teacher.cpp \
     User.cpp \
+    Weeklycalender.cpp \
     adminmainmenu.cpp \
     enterenewpass.cpp \
     forgotpasspage.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     Permission.h \
     Teacher.h \
     User.h \
+    Weeklycalender.h \
     adminmainmenu.h \
     enterenewpass.h \
     forgotpasspage.h \
