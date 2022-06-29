@@ -5,14 +5,14 @@
 #include <QList>
 #include <QMap>
 #include <QString>
-
-#include "User.h"
+#include <QObject>
+#include"User.h"
 
 namespace Ui {
 class Teacher;
 }
 
-class Teacher : public  User
+class Teacher :  public  User
 {
     Q_OBJECT
 
@@ -20,7 +20,7 @@ public:
 
     explicit Teacher(QWidget *parent = nullptr);
     ~Teacher();
-    QList<QString> studensList(QString classname);
+    QList<QString> studentsList(QString classname);
 
     void deletest(QString name , QString lesson);
     void sendingNotification(QString message , QString lesson , QList<QString> list);
@@ -28,6 +28,8 @@ private:
     Ui::Teacher *ui;
     QMap <QString, QString> students;
 
+signals:
+    QString notificationSent(QString);
 };
 
 #endif // TEACHER_H

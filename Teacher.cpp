@@ -1,4 +1,6 @@
 #include<QMessageBox>
+#include<QAbstractButton>
+
 
 #include "Teacher.h"
 #include "ui_Teacher.h"
@@ -6,12 +8,28 @@
 #include"Filemanager.h"
 #include"User.h"
 #include <QAbstractButton>
+#include <QVector>
+#include <QMap>
 
 Teacher::Teacher(QWidget *parent) :
-//    QWidget(parent),
+    //QDialog(parent),
     ui(new Ui::Teacher)
 {
-//    ui->setupUi(this);
+    FileManager userFile;
+
+    userFile.create("teacher.txt");
+
+    userFile.loadData();
+
+    for(const QString& item: userFile.getData()){
+        auto parse = userFile.parse(item);
+
+        if (parse[0] == this->get_username()){
+            this->students.insert( parse[1] , parse[2] ) ;
+        }
+    }
+
+    //ui->setupUi(this);
 }
 
 Teacher::~Teacher()
@@ -19,7 +37,7 @@ Teacher::~Teacher()
     delete ui;
 }
 
-QList<QString> Teacher::studensList(QString classname)
+QList<QString> Teacher::studentsList(QString classname)
 {
     QList <QString> classlist;
 
@@ -29,7 +47,8 @@ QList<QString> Teacher::studensList(QString classname)
         }
         return classlist;
     }
-
+}
+    return classlist;
 }
 void Teacher::deletest(QString name , QString lesson)
 {
@@ -70,11 +89,14 @@ void Teacher::deletest(QString name , QString lesson)
 
 void Teacher::sendingNotification(QString message , QString lesson , QList<QString> list)
 {
-    QString finalmessage = "from teacher" + this->get_first_name() ;
+    QString finalmessage = "Lesson" + lesson + "from" + this->get_first_name() + this->get_last_name() +": \n" + message;
+
     for (auto i = list.begin() ; i != list.end() ; i++ )
     {
+//        QObject::connect (this, &Teacher::notificationSent, , )
 
     }
+    emit (Teacher:: notificationSent(finalmessage) );
 
 }
 
