@@ -4,12 +4,12 @@
 
 #include "Teacher.h"
 #include "ui_Teacher.h"
-#include"Auth.h"
-#include"Filemanager.h"
-#include"User.h"
+#include "Auth.h"
+#include "Filemanager.h"
+#include "User.h"
 #include <QAbstractButton>
 #include <QVector>
-#include <QMap>
+#include <QMultiMap>
 
 Teacher::Teacher(QWidget *parent) :
     //QDialog(parent),
@@ -21,11 +21,14 @@ Teacher::Teacher(QWidget *parent) :
 
     userFile.loadData();
 
-    for(const QString& item: userFile.getData()){
+    for(const QString& item: userFile.getData())
+    {
         auto parse = userFile.parse(item);
 
         if (parse[0] == this->get_username()){
-            this->students.insert( parse[1] , parse[2] ) ;
+            QMap <QString, float> studentscore;
+            studentscore.insert(parse[2],parse[3].toFloat()) ;
+            this->students.insert( parse[1] , studentscore ) ;
         }
     }
 
@@ -37,17 +40,18 @@ Teacher::~Teacher()
     delete ui;
 }
 
-QList<QString> Teacher::studentsList(QString classname)
+QMap<QString, float> Teacher::studentsList(QString classname)
 {
-    QList <QString> classlist;
+    QMap <QString, float> classlist;
 
-    for (auto i=this->students.begin(); i!=this->students.end(); i++){
-        if (i.value()== classname){
-            classlist.push_back(i.key());
-        }
-        return classlist;
+for (auto i=this->students.begin(); i!=this->students.end(); i++){
+    auto j = i.value().begin();
+
+    if (j.key() == classname){
+
+        classlist.insert( i.key(), j.value() );
     }
-
+}
     return classlist;
 }
 

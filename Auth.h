@@ -15,7 +15,7 @@ public:
 //
 //
 //
-    static QString formUserData(QString teacherusername , QString studentusername , QString lesson);
+    static QString formUserData(QString teacherusername , QString studentusername , QString lesson , float score);
 // if int > -1 means that the member exists
     static int validStudent(QString studentusername, QString lesson);
 //

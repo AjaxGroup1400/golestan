@@ -77,9 +77,9 @@ void LoginPage::on_Loginbtn_clicked()
 //    smm->show();
 //    close();
 
-//    TeacherMainMenu* tmm = new TeacherMainMenu;
-//    tmm->show();
-//    close();
+    TeacherMainMenu* tmm = new TeacherMainMenu;
+    tmm->show();
+    close();
 
     /*AdminMainMenu* amm = new AdminMainMenu;
     amm->show();

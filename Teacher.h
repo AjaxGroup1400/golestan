@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QList>
-#include <QMap>
+#include <QMultiMap>
 #include <QString>
 #include <QObject>
 #include"User.h"
@@ -20,13 +20,13 @@ public:
 
     explicit Teacher(QWidget *parent = nullptr);
     ~Teacher();
-    QList<QString> studentsList(QString classname);
+    QMap<QString, float> studentsList(QString classname);
 
     void deletest(QString name , QString lesson);
     void sendingNotification(QString message , QString lesson , QList<QString> list);
 private:
     Ui::Teacher *ui;
-    QMap <QString, QString> students;
+    QMultiMap < QString ,QMap<QString, float> > students;
 
 signals:
     QString notificationSent(QString);
