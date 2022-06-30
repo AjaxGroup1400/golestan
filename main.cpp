@@ -2,6 +2,7 @@
 #include "Filemanager.h"
 #include "TeacherWeeklyCalendar.h"
 #include "CalendarCreator.h"
+#include "Poll.h"
 #include "Auth.h"
 
 #include <QApplication>
@@ -67,6 +68,12 @@ int main(int argc, char *argv[])
 //    cal.appendClass(newClass, "128824073", "teachers");
 
 //    cal.deleteClass("Fundamental Programing", "128824073", "teachers");
+
+
+    Poll p;
+
+//    p.addScore(4, "3546484", "calculus", "mahdavi");
+
 
     QApplication a(argc, argv);
     LoginPage w;

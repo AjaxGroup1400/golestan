@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     CalendarCreator.cpp \
+    Poll.cpp \
     adminaddpeople.cpp \
     adminsendassertion.cpp \
     teachersendassertion.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 
 HEADERS += \
     CalendarCreator.h \
+    Poll.h \
     adminaddpeople.h \
     adminsendassertion.h \
     teachersendassertion.h \
