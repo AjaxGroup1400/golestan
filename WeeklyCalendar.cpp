@@ -1,11 +1,55 @@
 #include "WeeklyCalendar.h"
 
+#include <iostream>
 #include <fstream>
 
 using namespace std;
 
+bool WeeklyCalendar::isClassExist(Json::Value classData)
+{
+    QString classDataName = QString::fromStdString(classData["name"].asString());
+
+    for(int i = 0; i < calendar.size(); i++)
+    {
+        if(calendar[i]["name"] == classDataName)
+            return true;
+    }
+
+    return false;
+}
+
 WeeklyCalendar::WeeklyCalendar()
 {
+    // these few line(to the if statement) checks wether file exists or not if it exists construcor won't init data
+    ifstream ifs(filePath.toStdString());
+
+    if(ifs)
+    {
+        cout << "Json File Found..." << endl;
+
+        return;
+    }
+
+    // to form base json structor
+    Json::Value baseData;
+
+    // an empty list for each role(teachers, admins, students)
+    Json::Value baseUserList = Json::arrayValue;
+
+    baseData["teachers"] = baseUserList;
+    baseData["students"] = baseUserList;
+    baseData["admins"] = baseUserList;
+
+    Json::StyledWriter writer;
+
+    ofstream jsonWriter(filePath.toStdString());
+
+    string serializedData = writer.write(baseData);
+
+    jsonWriter << serializedData;
+
+    jsonWriter.close();
+
     return;
 }
 

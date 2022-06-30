@@ -9,6 +9,9 @@
 
 class WeeklyCalendar
 {
+private:
+    bool isClassExist(Json::Value classData);
+
 protected:
     Json::Value dataHolder;
     Json::Reader dataReader;
@@ -20,6 +23,9 @@ public:
     WeeklyCalendar();
 
     virtual void loadCalendar(QString username) = 0;
+
+    // initialize data for calendar
+    virtual void addUser(Json::Value data) = 0;
 
     const QList<QMap<QString, QString> > &getCalendar() const;
 

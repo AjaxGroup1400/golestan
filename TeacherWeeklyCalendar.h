@@ -10,6 +10,8 @@ public:
     TeacherWeeklycalendar();
 
     virtual void loadCalendar(QString username);
+
+    virtual void addUser(Json::Value data);
 };
 
 #endif // TEACHERWEEKLYCALENDAR_H
