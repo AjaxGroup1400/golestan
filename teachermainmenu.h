@@ -42,8 +42,8 @@ private:
 
         QMultiMap < QString ,QMap<QString, float> > students;
 
-signals:
-    QString notificationSent(QString);
+
+
 
 };
 

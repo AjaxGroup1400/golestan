@@ -143,10 +143,8 @@ void TeacherMainMenu::sendingNotification(QString message , QString lesson , QLi
 
     for (auto i = list.begin() ; i != list.end() ; i++ )
     {
-//        QObject::connect (this, &Teacher::notificationSent, , )
 
     }
-    emit (TeacherMainMenu:: notificationSent(finalmessage) );
 
 }
 
