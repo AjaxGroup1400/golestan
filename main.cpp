@@ -1,6 +1,7 @@
 #include "loginpage.h"
 #include "Filemanager.h"
 #include "TeacherWeeklyCalendar.h"
+#include "CalendarCreator.h"
 #include "Auth.h"
 
 #include <QApplication>
@@ -43,9 +44,27 @@ int main(int argc, char *argv[])
 
     TeacherWeeklycalendar cal;
 
-    Json::Value newClass = cal.formClassData("Gosasteh123456", "Saturday", "11:00");
+    CalendarCreator class01;
 
-    cal.appendClass(newClass, "128824073", "teachers");
+    class01.setUsername("1253982608");
+
+    class01.append("Descrete Math", "Monday", "9:00");
+    class01.append("Calculos", "Thursday", "8:00");
+    class01.append("General", "Wensday", "11:00");
+
+//    qDebug() << QString::fromStdString(class01.exportJson()["username"].asString());
+
+//    for(int i = 0; i < class01.exportJson()["classes"].size(); i++)
+//    {
+//        qDebug() << QString::fromStdString(class01.exportJson()["classes"][i]["name"].asString());
+//    }
+
+
+    cal.addUser(class01.exportJson());
+
+//    Json::Value newClass = cal.formClassData("Gosasteh123456", "Saturday", "11:00");
+
+//    cal.appendClass(newClass, "128824073", "teachers");
 
 //    cal.deleteClass("Fundamental Programing", "128824073", "teachers");
 

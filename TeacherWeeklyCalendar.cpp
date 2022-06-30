@@ -5,6 +5,7 @@
 using namespace std;
 
 TeacherWeeklycalendar::TeacherWeeklycalendar()
+    : WeeklyCalendar()
 {
     return;
 }
@@ -23,6 +24,9 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
             {
                 Json::Value wantedTeacherClasses = teacherClasses[i]["classes"];
 
+                // clear(empty) calendar before filling it with new data
+                calendar.clear();
+
                 for(int j = 0; j < wantedTeacherClasses.size(); j++)
                 {
                     QMap<QString, QString> classData;
@@ -37,3 +41,30 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
         }
     }
 }
+
+void TeacherWeeklycalendar::addUser(Json::Value data)
+{
+    ifstream ifs(filePath.toStdString());
+
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        Json::Value dataHolderCopy = dataHolder["teachers"];
+
+        dataHolderCopy.append(data);
+
+        dataHolder["teachers"] = dataHolderCopy;
+
+        Json::StyledWriter writer;
+
+        ofstream jsonWriter(filePath.toStdString());
+
+        string serializedData = writer.write(dataHolder);
+
+        jsonWriter << serializedData;
+
+        jsonWriter.close();
+    }
+}
+
+
+
