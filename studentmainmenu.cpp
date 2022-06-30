@@ -7,7 +7,7 @@
 #include "studentprofile.h"
 
 StudentMainMenu::StudentMainMenu(QWidget *parent) :
-    QWidget(parent),
+//    QWidget(parent),
     ui(new Ui::StudentMainMenu)
 {
     ui->setupUi(this);
@@ -24,6 +24,21 @@ StudentMainMenu::~StudentMainMenu()
 {
     delete ui;
 }
+
+void StudentMainMenu::surveyOfTeachers(QString lesson, int result )
+{
+    for (auto i = this->teachers.begin() ; i!=this->teachers.end() ; i++ )
+    {
+        if (lesson == i.key())
+        {
+
+        }
+    }
+}
+
+
+
+
 
 void StudentMainMenu::on_pushButton_5_clicked()
 {
