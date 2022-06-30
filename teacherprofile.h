@@ -26,6 +26,8 @@ private slots:
 
     void on_backToMenu_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     Ui::teacherProfile *ui;
 };

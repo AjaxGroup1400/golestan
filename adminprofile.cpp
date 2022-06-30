@@ -3,6 +3,9 @@
 #include <QValidator>
 #include <QMessageBox>
 #include "adminmainmenu.h"
+#include "adminsendassertion.h"
+#include "adminaddpeople.h"
+
 AdminProfile::AdminProfile(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminProfile)
@@ -88,8 +91,46 @@ void AdminProfile::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminMainMenu* smm = new AdminMainMenu;
-        smm->show();
+        AdminMainMenu* amm = new AdminMainMenu;
+        amm->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void AdminProfile::on_pushButton_4_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        AdminSendAssertion* asa= new AdminSendAssertion;
+        asa->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void AdminProfile::on_pushButton_3_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add people","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        AdminAddPeople* aap= new AdminAddPeople;
+        aap->show();
         exit->close();
         close();
     }

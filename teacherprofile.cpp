@@ -2,6 +2,7 @@
 #include <QValidator>
 #include "ui_teacherprofile.h"
 #include <QMessageBox>
+#include "teachersendassertion.h"
 #include "teachermainmenu.h"
 
 teacherProfile::teacherProfile(QWidget *parent) :
@@ -91,6 +92,25 @@ void teacherProfile::on_backToMenu_clicked()
     if(exit->exec() == QMessageBox::Yes){
         TeacherMainMenu* smm = new TeacherMainMenu;
         smm->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void teacherProfile::on_pushButton_4_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        TeacherSendAssertion* tsa= new TeacherSendAssertion;
+        tsa->show();
         exit->close();
         close();
     }

@@ -9,6 +9,9 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    adminaddpeople.cpp \
+    adminsendassertion.cpp \
+    teachersendassertion.cpp \
     Auth.cpp \
     Filemanager.cpp \
     Permission.cpp \
@@ -29,6 +32,9 @@ SOURCES += \
     teacherprofile.cpp
 
 HEADERS += \
+    adminaddpeople.h \
+    adminsendassertion.h \
+    teachersendassertion.h \
     Auth.h \
     Filemanager.h \
     Permission.h \
@@ -49,6 +55,9 @@ HEADERS += \
     teacherprofile.h
 
 FORMS += \
+    adminaddpeople.ui \
+    adminsendassertion.ui \
+    teachersendassertion.ui \
     Teacher.ui \
     adminmainmenu.ui \
     adminprofile.ui \

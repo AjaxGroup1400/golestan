@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AdminProfile</class>
- <widget class="QWidget" name="AdminProfile">
+ <class>AdminAddPeople</class>
+ <widget class="QWidget" name="AdminAddPeople">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -22,6 +22,75 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(240, 240, 240);</string>
   </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>20</y>
+     <width>121</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(178, 8, 55);
+border-color: rgb(178, 8, 55);
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>:/AjaxLogo/filename.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>285</x>
+     <y>20</y>
+     <width>111</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(178, 8, 55);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="pictures.qrc">:/logo/filename.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>-10</y>
+     <width>1161</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(178, 8, 55);
+border-color: rgb(178, 8, 55);</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+  </widget>
   <widget class="QFrame" name="frame_2">
    <property name="geometry">
     <rect>
@@ -391,82 +460,45 @@ color: rgb(240, 240, 240);</string>
    <zorder>pushButton_3</zorder>
    <zorder>pushButton_4</zorder>
   </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>285</x>
-     <y>20</y>
-     <width>111</width>
-     <height>111</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(178, 8, 55);</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="pictures.qrc">:/logo/filename.jpg</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QFrame" name="frame">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1151</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(178, 8, 55);
-border-color: rgb(178, 8, 55);</string>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QPushButton" name="backToMenu">
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>20</y>
-     <width>121</width>
-     <height>121</height>
+     <y>680</y>
+     <width>61</width>
+     <height>51</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(178, 8, 55);
-border-color: rgb(178, 8, 55);
-</string>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_14">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>680</y>
+     <width>41</width>
+     <height>46</height>
+    </rect>
    </property>
    <property name="text">
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>:/AjaxLogo/filename.jpg</pixmap>
+    <pixmap resource="arrowIcon.qrc">:/new/prefix1/icons8-left-arrow-50.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QGroupBox" name="INFO">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>140</y>
-     <width>301</width>
-     <height>271</height>
+     <x>490</x>
+     <y>170</y>
+     <width>411</width>
+     <height>311</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -474,26 +506,44 @@ border-color: rgb(178, 8, 55);
 font: 9pt &quot;Montserrat&quot;;</string>
    </property>
    <property name="title">
-    <string>Profile Information</string>
+    <string>Add Profile</string>
    </property>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>281</width>
-      <height>231</height>
+      <width>396</width>
+      <height>271</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_12">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_17">
        <property name="styleSheet">
         <string notr="true">color: rgb(41, 39, 40);
 font: 9pt &quot;Montserrat&quot;;</string>
        </property>
        <property name="text">
-        <string>Phone Number</string>
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_13">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(41, 39, 40);
+font: 9pt &quot;Montserrat&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Role</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="text">
+        <string>Student</string>
        </property>
       </widget>
      </item>
@@ -519,52 +569,68 @@ font: 9pt &quot;Montserrat&quot;;</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lastNameLine"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_17">
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_12">
        <property name="styleSheet">
         <string notr="true">color: rgb(41, 39, 40);
 font: 9pt &quot;Montserrat&quot;;</string>
        </property>
        <property name="text">
-        <string>Name</string>
+        <string>Phone Number</string>
        </property>
       </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_13">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-       </property>
-       <property name="text">
-        <string>Role</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="NcodeLine"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="nameLine"/>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="numberLine"/>
      </item>
      <item row="4" column="1">
-      <widget class="QLineEdit" name="RoleLine"/>
+      <widget class="QRadioButton" name="radioButton">
+       <property name="text">
+        <string>Admin</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QRadioButton" name="radioButton_3">
+       <property name="text">
+        <string>Teacher</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="3">
+      <widget class="QLineEdit" name="numberLine"/>
+     </item>
+     <item row="2" column="1" colspan="3">
+      <widget class="QLineEdit" name="NcodeLine"/>
+     </item>
+     <item row="1" column="1" colspan="3">
+      <widget class="QLineEdit" name="lastNameLine"/>
+     </item>
+     <item row="0" column="1" colspan="3">
+      <widget class="QLineEdit" name="nameLine"/>
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="AddBtn">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>500</y>
+     <width>81</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
   <widget class="QLabel" name="label_18">
    <property name="geometry">
     <rect>
-     <x>580</x>
-     <y>424</y>
-     <width>181</width>
+     <x>670</x>
+     <y>500</y>
+     <width>63</width>
      <height>20</height>
     </rect>
    </property>
@@ -573,238 +639,21 @@ font: 9pt &quot;Montserrat&quot;;</string>
 font: 9pt &quot;Montserrat&quot;;</string>
    </property>
    <property name="text">
-    <string>Change Phone Number</string>
+    <string>Add </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_19">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>464</y>
-     <width>141</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(178, 8, 55);
-font: 9pt &quot;Montserrat&quot;;
-</string>
-   </property>
-   <property name="text">
-    <string>Change Password</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="changeNumber">
-   <property name="geometry">
-    <rect>
-     <x>580</x>
-     <y>420</y>
-     <width>181</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="changePassBtn">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>460</y>
-     <width>141</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_20">
-   <property name="geometry">
-    <rect>
-     <x>840</x>
-     <y>320</y>
-     <width>111</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-   </property>
-   <property name="text">
-    <string>Apply changes</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="applyChangeNumber">
-   <property name="geometry">
-    <rect>
-     <x>840</x>
-     <y>320</y>
-     <width>121</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="changePass">
-   <property name="geometry">
-    <rect>
-     <x>520</x>
-     <y>520</y>
-     <width>301</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-   </property>
-   <property name="title">
-    <string>Change Password</string>
-   </property>
-   <widget class="QWidget" name="gridLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>281</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_2"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_22">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-       </property>
-       <property name="text">
-        <string>Enter New Pass</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_23">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-       </property>
-       <property name="text">
-        <string>Current Password</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_21">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-       </property>
-       <property name="text">
-        <string>New Password</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_3"/>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="applyChangePass">
-   <property name="geometry">
-    <rect>
-     <x>610</x>
-     <y>710</y>
-     <width>121</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_24">
-   <property name="geometry">
-    <rect>
-     <x>616</x>
-     <y>713</y>
-     <width>111</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-   </property>
-   <property name="text">
-    <string>Apply changes</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_14">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>680</y>
-     <width>41</width>
-     <height>46</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="arrowIcon.qrc">:/new/prefix1/icons8-left-arrow-50.png</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="backToMenu">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>680</y>
-     <width>61</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <zorder>frame_2</zorder>
-  <zorder>frame</zorder>
   <zorder>label</zorder>
-  <zorder>label_9</zorder>
-  <zorder>INFO</zorder>
-  <zorder>label_18</zorder>
-  <zorder>label_19</zorder>
-  <zorder>changePassBtn</zorder>
-  <zorder>changeNumber</zorder>
-  <zorder>label_20</zorder>
-  <zorder>applyChangeNumber</zorder>
-  <zorder>changePass</zorder>
-  <zorder>label_24</zorder>
-  <zorder>applyChangePass</zorder>
+  <zorder>frame</zorder>
+  <zorder>frame_2</zorder>
   <zorder>label_14</zorder>
   <zorder>backToMenu</zorder>
+  <zorder>INFO</zorder>
+  <zorder>label_18</zorder>
+  <zorder>label_9</zorder>
+  <zorder>AddBtn</zorder>
  </widget>
  <resources>
   <include location="arrowIcon.qrc"/>

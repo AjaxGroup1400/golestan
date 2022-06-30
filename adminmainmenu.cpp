@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include "loginpage.h"
 #include "adminprofile.h"
+#include "adminsendassertion.h"
+#include "adminaddpeople.h"
 
 AdminMainMenu::AdminMainMenu(QWidget *parent) :
     QWidget(parent),
@@ -51,6 +53,22 @@ void AdminMainMenu::on_pushButton_clicked()
 {
     AdminProfile* ap = new AdminProfile;
     ap->show();
+    close();
+}
+
+
+void AdminMainMenu::on_pushButton_4_clicked()
+{
+    AdminSendAssertion* asa = new AdminSendAssertion;
+    asa->show();
+    close();
+}
+
+
+void AdminMainMenu::on_pushButton_3_clicked()
+{
+    AdminAddPeople* aap = new AdminAddPeople;
+    aap->show();
     close();
 }
 
