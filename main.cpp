@@ -1,5 +1,6 @@
 #include "loginpage.h"
 #include "Filemanager.h"
+#include "TeacherWeeklyCalendar.h"
 #include "Auth.h"
 
 #include <QApplication>
@@ -39,6 +40,14 @@ int main(int argc, char *argv[])
         ));
 
     userFile.write();
+
+    TeacherWeeklycalendar cal;
+
+    Json::Value newClass = cal.formClassData("Gosasteh123456", "Saturday", "11:00");
+
+    cal.appendClass(newClass, "128824073", "teachers");
+
+//    cal.deleteClass("Fundamental Programing", "128824073", "teachers");
 
     QApplication a(argc, argv);
     LoginPage w;
