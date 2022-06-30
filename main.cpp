@@ -43,9 +43,11 @@ int main(int argc, char *argv[])
 
     TeacherWeeklycalendar cal;
 
-    cal.show("139924082");
+    Json::Value newClass = cal.formClassData("Gosasteh123456", "Saturday", "11:00");
 
-    qDebug() << cal.getCalendar()[0]["name"];
+    cal.appendClass(newClass, "128824073", "teachers");
+
+//    cal.deleteClass("Fundamental Programing", "128824073", "teachers");
 
     QApplication a(argc, argv);
     LoginPage w;

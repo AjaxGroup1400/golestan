@@ -1,16 +1,15 @@
-#include "TeacherWeeklycalendar.h"
+#include "TeacherWeeklyCalendar.h"
 
 #include <fstream>
-
 
 using namespace std;
 
 TeacherWeeklycalendar::TeacherWeeklycalendar()
 {
-
+    return;
 }
 
-void TeacherWeeklycalendar::show(QString username)
+void TeacherWeeklycalendar::loadCalendar(QString username)
 {
     ifstream ifs(filePath.toStdString());
 

@@ -9,7 +9,7 @@ class TeacherWeeklycalendar : public WeeklyCalendar
 public:
     TeacherWeeklycalendar();
 
-    virtual void show(QString username);
+    virtual void loadCalendar(QString username);
 };
 
 #endif // TEACHERWEEKLYCALENDAR_H

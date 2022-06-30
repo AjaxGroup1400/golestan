@@ -18,8 +18,19 @@ protected:
 
 public:
     WeeklyCalendar();
-    virtual void show(QString username) = 0;
+
+    virtual void loadCalendar(QString username) = 0;
+
     const QList<QMap<QString, QString> > &getCalendar() const;
+
+    // name is the name of class(class means learning class)
+    Json::Value formClassData(QString name, QString day, QString time);
+
+    // adds class to target user based on username and user role
+    void appendClass(Json::Value newClass, QString username, QString role);
+
+    // deletes class from target user based on class name
+    void deleteClass(QString name, QString username, QString role);
 };
 
 #endif // WEEKLYCALENDAR_H
