@@ -9,7 +9,7 @@
 #include "adminaddpeople.h"
 
 AdminMainMenu::AdminMainMenu(QWidget *parent) :
-    QWidget(parent),
+//    QWidget(parent),
     ui(new Ui::AdminMainMenu)
 {
     ui->setupUi(this);

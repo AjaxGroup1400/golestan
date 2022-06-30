@@ -40,7 +40,8 @@ private slots:
 private:
     Ui::TeacherMainMenu *ui;
 
-        QMultiMap < QString ,QMap<QString, float> > students;
+    QMultiMap < QString ,QMap<QString, float> > students;
+    QMap<QString , int> SurveyResult;
 
 
 

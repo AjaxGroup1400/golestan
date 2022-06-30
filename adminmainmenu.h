@@ -3,17 +3,21 @@
 
 #include <QWidget>
 
+#include"User.h"
+
 namespace Ui {
 class AdminMainMenu;
 }
 
-class AdminMainMenu : public QWidget
+class AdminMainMenu : public User
 {
     Q_OBJECT
 
 public:
     explicit AdminMainMenu(QWidget *parent = nullptr);
     ~AdminMainMenu();
+
+
 
 private slots:
     void on_pushButton_5_clicked();
@@ -27,6 +31,9 @@ private slots:
 
 private:
     Ui::AdminMainMenu *ui;
+
+
 };
 
 #endif // ADMINMAINMENU_H
+//having a def to change the button accessibility to the arzeshyabi part

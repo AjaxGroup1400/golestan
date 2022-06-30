@@ -4,6 +4,8 @@
 #include <QWidget>
 #include<QString>
 
+#include"dist/json/json.h"
+
 
 class User : public QWidget
 {
