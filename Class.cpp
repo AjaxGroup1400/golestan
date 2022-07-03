@@ -2,7 +2,7 @@
 #include <iterator>
 #include <fstream>
 #include <string>
-
+#include<iostream>
 using namespace std;
 
 Class::Class(enum lesson lesson, QString teacher)
@@ -57,28 +57,110 @@ Class::Class(const Class &other)
 void Class::setLocation(QString loc)
 {
     this->location = loc;
+
+    ifstream ifs (this->filePath.toStdString());
+    if(this->dataReader.parse(ifs,this->dataHolder))
+    {
+        this->dataHolder["location"] = loc.toStdString();
+
+        ofstream ofs (this->filePath.toStdString());
+        Json::StyledWriter writer;
+        string finalPart = writer.write(this->dataHolder);
+        ofs << finalPart;
+        ofs.close();
+        return;
+    }
+
 }
 
 void Class::setTime(QString time)
 {
     this->time = time;
+
+    ifstream ifs (this->filePath.toStdString());
+    if(this->dataReader.parse(ifs,this->dataHolder))
+    {
+        this->dataHolder["time"] = time.toStdString();
+
+        ofstream ofs (this->filePath.toStdString());
+        Json::StyledWriter writer;
+        string finalPart = writer.write(this->dataHolder);
+        ofs << finalPart;
+        ofs.close();
+        return;
+    }
 }
 
 void Class::setDay(enum day day)
 {
     this->day = day;
+
+    ifstream ifs (this->filePath.toStdString());
+    if(this->dataReader.parse(ifs,this->dataHolder))
+    {
+        this->dataHolder["day"] = day_enum_str[day].toStdString();
+
+        ofstream ofs (this->filePath.toStdString());
+        Json::StyledWriter writer;
+        string finalPart = writer.write(this->dataHolder);
+        ofs << finalPart;
+        ofs.close();
+        return;
+    }
 }
 
 void Class::addStudent(QString student_username)
 {
     this->studentslist.insert(student_username, -1);
     this->number_of_students ++;
+
+    ifstream ifs(this->filePath.toStdString());
+    if (this->dataReader.parse(ifs , this->dataHolder))
+    {
+        this->dataHolder["number_of_students"] = this->dataHolder["number_of_students"].asInt() + 1 ;
+        Json::Value newStudent ;
+        newStudent["username"] = student_username.toStdString();
+        newStudent["score"] =  -1;
+        this->dataHolder["student_list"].append(newStudent);
+
+        ofstream ofs(this->filePath.toStdString());
+        Json::StyledWriter writer ;
+        string finalPart = writer.write(this->dataHolder);
+        ofs << finalPart ;
+        ofs.close();
+    }
 }
 
 void Class::deleteStudent(QString student_username)
 {
     this->studentslist.remove(student_username);
     this->number_of_students --;
+
+    ifstream ifs(this->filePath.toStdString());
+    if (this->dataReader.parse(ifs , this->dataHolder))
+    {
+        this->dataHolder["number_of_students"] = this->dataHolder["number_of_students"].asInt() - 1 ;
+        Json::Value undeletedStudents;
+        for(auto &i : this->dataHolder["student_list"])
+        {
+            if (student_username != QString::fromStdString(i["username"].asString()) )
+            {
+                undeletedStudents.append(i);
+            }
+        }
+        this->dataHolder["student_list"] = undeletedStudents;
+
+
+        ofstream ofs(this->filePath.toStdString());
+        Json::StyledWriter writer;
+        string finalPart = writer.write(this->dataHolder);
+        ofs << finalPart;
+        ofs.close();
+    }
+
+
+
+
 }
 
 void Class::setScore(QString student_username, float score)
@@ -88,6 +170,23 @@ void Class::setScore(QString student_username, float score)
             i.value()=score;
         }
     }
+
+    ifstream ifs (this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(int i = 0 ; i < this->dataHolder["student_list"].size() ; i++)
+        {
+            if(QString::fromStdString(this->dataHolder["student_list"][i]["username"].asString()) == student_username)
+                this->dataHolder["student_list"][i]["score"] = score;
+        }
+
+        ofstream ofs(this->filePath.toStdString());
+        Json::StyledWriter wrieter;
+        string finalPart = wrieter.write(this->dataHolder);
+        ofs << finalPart;
+        ofs.close();
+    }
+
 }
 
 //void Class::addSurveyResult(QString student_username, int result)
