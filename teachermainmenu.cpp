@@ -158,7 +158,6 @@ void TeacherMainMenu::sendingNotification(QString title , QString message , QStr
         studentUsernameList.push_back(usernames)  ;
     }
     member.addAlert(title , message , this->get_username() , studentUsernameList ) ;
-
 }
 
 

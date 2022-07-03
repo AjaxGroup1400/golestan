@@ -3,17 +3,20 @@
 
 #include <QString>
 #include <QMultiMap>
+#include "dist/json/json.h"
 
 enum lesson {
     CHEMISTRY,
     BP,
     DISCRETE,
     CALCULUS,
-    PHYSIC
+    PHYSICS
 };
-static QString lesson_enum_str[] =
-        { "CHEMISTRY", "BP", "DISCRETE", "CALCULUS" , "PHYSIC"};
 
+lesson string_to_lesson(QString lesson_str);
+
+static QString lesson_enum_str[] =
+        { "CHEMISTRY", "BP", "DISCRETE", "CALCULUS" , "PHYSICS"};
 
 enum day{
     SATURDAY,
@@ -24,6 +27,9 @@ enum day{
     THURSDAY,
     FRIDAY
 };
+
+day string_to_day(QString day_str);
+
 
 static QString day_enum_str[] =
         { "SATURDAY", "SUNDAY", "MONDAY", "TUESDAY" , "WEDNESDAY", "THURSDAY", "FRIDAY"};
@@ -45,17 +51,16 @@ static QString day_enum_str[] =
 class Class
 {
 public:
-    Class(); //read file?
-    Class(lesson lesson, QString teacher); //write new file?
-    //need def copy and move constrctor (but doesn't need read file, does it?)
 
+    Class(lesson lesson, QString teacher);
+    Class(const Class &other);
     lesson getLesson();
     QString getTeacher();
     QString getLocation();
     QString getTime();
     day getDay();
     QMap < QString , float > getList();
-    QMap < QString , int > getSurveyResult();
+//    QMap < QString , int > getSurveyResult();
 
     void setLocation(QString loc); //update file
     void setTime(QString time); //update file
@@ -63,9 +68,13 @@ public:
     void addStudent(QString student_username); //add record to file
     void deleteStudent(QString student_username); //check if student exists and delete record from file
     void setScore(QString student_username, float score); //update file
-    void addSurveyResult(QString student_username , int result); //update file
+//    void addSurveyResult(QString student_username , int result); //update file
 
 private:
+    QString filePath;
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+
     lesson lesson;
     QString teacher; //teacher username
     int number_of_students;
@@ -75,7 +84,7 @@ private:
     day day;
 
     QMap < QString , float > studentslist;
-    QMap < QString , int > surveyresult;
+//    QMap < QString , int > surveyresult;
 
 };
 
