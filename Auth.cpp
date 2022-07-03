@@ -26,16 +26,14 @@ QString Auth::formUserData(QString username, QString password, QString firstname
     return mergedData;
 }
 
-QString Auth::formUserData(QString teacherusername, QString studentusername, QString lesson, float score)
+QString Auth::formUserData(QString teacherusername, QString lesson)
 {
     QString mergedData = teacherusername + '\t' +
-                         studentusername + '\t' +
-                         lesson + '\t'+
-                         QString:: number( score );
+                         lesson;
 
     return mergedData;
 }
-
+/*
 int Auth::validStudent(QString studentusername, QString lesson)
 {
     FileManager usersFile;
@@ -56,7 +54,7 @@ int Auth::validStudent(QString studentusername, QString lesson)
 
     return -1;
 }
-
+*/
 int Auth::canLogin(QString username, QString password)
 {
     FileManager usersFile;

@@ -1,7 +1,6 @@
 #ifndef TEACHERMAINMENU_H
 #define TEACHERMAINMENU_H
 
-
 #include <QDialog>
 #include <QList>
 #include <QMultiMap>
@@ -9,7 +8,8 @@
 #include <QObject>
 #include <QWidget>
 
-#include"User.h"
+#include "User.h"
+#include "Class.h"
 
 namespace Ui {
 class TeacherMainMenu  ;
@@ -22,14 +22,15 @@ class TeacherMainMenu : public User
 public:
     explicit TeacherMainMenu(QWidget *parent = nullptr);
     ~TeacherMainMenu();
-    QMap<QString, float> studentsList(QString classname);
 
-    void deletest(QString name , QString lesson);
-    void sendingNotification(QString message , QString lesson , QList<QString> list);
+//    QMap<QString, float> studentsList(QString classname);
+    void sendingNotification(QString message , Class Class);
+    void deleteStudent(QString studentusername , Class Class);
+    void setScores(Class Class);
+
 
 private slots:
     void on_pushButton_7_clicked();
-
 
     void on_pushButton_clicked();
 
@@ -40,11 +41,9 @@ private slots:
 private:
     Ui::TeacherMainMenu *ui;
 
-    QMultiMap < QString ,QMap<QString, float> > students;
-    QMap<QString , int> SurveyResult;
-
-
-
+    QList <Class> classes;
+//    QMultiMap < QString ,QMap<QString, float> > students;
+//    QMap<QString , int> SurveyResult;
 
 };
 

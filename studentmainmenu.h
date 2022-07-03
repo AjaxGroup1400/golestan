@@ -2,10 +2,11 @@
 #define STUDENTMAINMENU_H
 
 #include <QWidget>
-#include<QMap>
-#include<QString>>
-
-#include"User.h"
+#include <QMap>
+#include <QString>
+#include <QList>
+#include "Class.h"
+#include "User.h"
 
 
 namespace Ui {
@@ -17,10 +18,12 @@ class StudentMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit StudentMainMenu(QWidget *parent = nullptr);
+    explicit StudentMainMenu(QWidget *parent = nullptr); //write student file that contains username and class and maybe scores
     ~StudentMainMenu();
 
-    void surveyOfTeachers(QString lesson , int result);
+    void scores(); //file can be updated
+    void registry(Class Class); //add class to student's file
+    void surveyOfTeachers(Class Class , int result);
 
 
 private slots:
@@ -31,22 +34,21 @@ private slots:
 private:
     Ui::StudentMainMenu *ui;
 
-    QMap<QString , QString> teachers;
+    QList <Class> classes;
+//    QMap<QString , QString> teachers;
 };
 
 #endif // STUDENTMAINMENU_H
 
-/*watching scores
+/* watching scores
  * registery
  * arzeshyabi ostad
+
  * weekly calender
- *
- *
  */
 
 
-/*
- *domination of teacher
+/*proficiency of teacher
  *responsiveness of the teacher
  *management of the class
  *creativity
