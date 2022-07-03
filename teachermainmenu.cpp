@@ -146,17 +146,19 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 }
 
 
-void TeacherMainMenu::sendingNotification(QString title , QString message , QString lesson , QList<QString> list)
+void TeacherMainMenu::sendingNotification(QString title , QString message , Class Class)
 {
-//    QString finalmessage = "Lesson" + lesson + "from" + this->get_first_name() + this->get_last_name() +": \n" + title + "\n" + message ;
+    QList list = Class.getList().keys();
 
     StudentNotification member;
     QList<QMap<QString , QString>> studentUsernameList ;
+
     for (int i = 0 ;  i < list.size() ; i++)
     {
-        QMap<QString , QString> usernames ;
-        usernames["username"] = list[i];
-        studentUsernameList.push_back(usernames)  ;
+        QMap<QString , QString> member ;
+        member["username"] = list[i];
+        member["is_read"] = "false";
+        studentUsernameList.push_back(member)  ;
     }
     member.addAlert(title , message , this->get_username() , studentUsernameList ) ;
 }

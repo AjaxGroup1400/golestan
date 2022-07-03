@@ -28,7 +28,7 @@ public:
     void setScores(Class Class);
 
 
-    void sendingNotification(QString title , QString message , QString lesson , QList<QString> list);
+    void sendingNotification(QString title , QString message , Class Class);
 
 private slots:
     void on_pushButton_7_clicked();
