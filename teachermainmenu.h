@@ -25,7 +25,7 @@ public:
     QMap<QString, float> studentsList(QString classname);
 
     void deletest(QString name , QString lesson);
-    void sendingNotification(QString message , QString lesson , QList<QString> list);
+    void sendingNotification(QString title , QString message , QString lesson , QList<QString> list);
 
 private slots:
     void on_pushButton_7_clicked();
