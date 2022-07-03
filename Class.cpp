@@ -189,6 +189,21 @@ void Class::setScore(QString student_username, float score)
 
 }
 
+bool Class::studentIsValid(QString studentUsername, QString lesson)
+{
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(auto i : this->dataHolder["student_list"] )
+        {
+            if(QString::fromStdString(i["username"].asString()) == studentUsername)
+                return true;
+        }
+        return false;
+    }
+
+}
+
 //void Class::addSurveyResult(QString student_username, int result)
 //{
 //    this->surveyresult.insert(student_username, result);
