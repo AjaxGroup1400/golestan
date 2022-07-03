@@ -52,13 +52,15 @@ bool LoginPage::isUserValid()
     QString username = ui->userLine->text();
     QString password = ui->passLine->text();
 
-    return Auth::canLogin(username, password) > -1;
+    return Auth::canLogin(username, password);
 }
 
 void LoginPage::on_Loginbtn_clicked()
 {
+    int userIndex=  isUserValid();
 
-    if(!isUserValid())
+
+    if(userIndex == -1)
     {
         QMessageBox* loginStatus = new QMessageBox(
             QMessageBox::Critical,
@@ -73,16 +75,34 @@ void LoginPage::on_Loginbtn_clicked()
         return;
     }
 
+    FileManager userFile;
 
-    //    StudentMainMenu* smm = new StudentMainMenu;
-//    smm->show();
-//    close();
+    userFile.create();
 
-    TeacherMainMenu* tmm = new TeacherMainMenu;
-    tmm->show();
-    close();
+    userFile.loadData();
 
-    /*AdminMainMenu* amm = new AdminMainMenu;
-    amm->show();
-    close();*/
+    QString wantedUser = userFile.getRecord(userIndex);
+
+    auto parsedUser = userFile.parse(wantedUser);
+
+    QString userType = parsedUser[parsedUser.size() - 1];
+
+    if(userType == "ADMIN")
+    {
+        AdminMainMenu* amm = new AdminMainMenu;
+        amm->show();
+        close();
+    }
+    else if(userType == "TEACHER")
+    {
+        TeacherMainMenu* tmm = new TeacherMainMenu;
+        tmm->show();
+        close();
+    }
+    else
+    {
+        StudentMainMenu* smm = new StudentMainMenu;
+        smm->show();
+        close();
+    }
 }

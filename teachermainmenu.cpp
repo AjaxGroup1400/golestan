@@ -6,6 +6,7 @@
 #include <iterator>
 
 #include "teachermainmenu.h"
+#include "teachersendassertion.h"
 #include "ui_teachermainmenu.h"
 #include "loginpage.h"
 #include "teacherprofile.h"
@@ -200,5 +201,13 @@ void TeacherMainMenu::on_pushButton_6_clicked()
     }
 
 
+}
+
+
+void TeacherMainMenu::on_pushButton_4_clicked()
+{
+    TeacherSendAssertion* tsa = new TeacherSendAssertion;
+    tsa->show();
+    close();
 }
 
