@@ -13,6 +13,7 @@
 #include "Auth.h"
 #include "Filemanager.h"
 #include "User.h"
+#include"StudentNotification.h"
 
 
 
@@ -144,15 +145,19 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 }
 
 
-void TeacherMainMenu::sendingNotification(QString message , Class Class)
+void TeacherMainMenu::sendingNotification(QString title , QString message , QString lesson , QList<QString> list)
 {
-    auto list = Class.getList();
-    QString finalmessage = "Lesson"  + day_enum_str[Class.getLesson()] +  "from" + this->get_first_name() + this->get_last_name() +": \n" + message;
+//    QString finalmessage = "Lesson" + lesson + "from" + this->get_first_name() + this->get_last_name() +": \n" + title + "\n" + message ;
 
-    for (auto i = list.begin() ; i != list.end() ; i++ )
+    StudentNotification member;
+    QList<QMap<QString , QString>> studentUsernameList ;
+    for (int i = 0 ;  i < list.size() ; i++)
     {
-
+        QMap<QString , QString> usernames ;
+        usernames["username"] = list[i];
+        studentUsernameList.push_back(usernames)  ;
     }
+    member.addAlert(title , message , this->get_username() , studentUsernameList ) ;
 
 }
 

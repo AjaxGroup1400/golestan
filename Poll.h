@@ -15,7 +15,10 @@ private:
 public:
     Poll();
 
-    void addScore(int score, QString studentUsername, QString lessonName, QString teacherName);
+    void addScore(int score, QString studentUsername, QString lessonName, QString teacherUsername);
+    float getScore(QString lessonName , QString teacherUsername );
+
+
 };
 
 #endif // POLL_H

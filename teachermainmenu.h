@@ -24,10 +24,11 @@ public:
     ~TeacherMainMenu();
 
 //    QMap<QString, float> studentsList(QString classname);
-    void sendingNotification(QString message , Class Class);
     void deleteStudent(QString studentusername , Class Class);
     void setScores(Class Class);
 
+
+    void sendingNotification(QString title , QString message , QString lesson , QList<QString> list);
 
 private slots:
     void on_pushButton_7_clicked();
