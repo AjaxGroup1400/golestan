@@ -27,9 +27,10 @@ SOURCES += \
     forgotpasspage.cpp \
     loginpage.cpp \
     main.cpp \
-        dist/jsoncpp.cpp \
+    dist/jsoncpp.cpp \
     studentmainmenu.cpp \
     studentprofile.cpp \
+    StudentNotification.cpp \
     teachermainmenu.cpp \
     teacherprofile.cpp
 
@@ -51,10 +52,11 @@ HEADERS += \
     enterenewpass.h \
     forgotpasspage.h \
     loginpage.h \
-        dist/json/json.h \
-        dist/json/json-forwards.h \
+    dist/json/json.h \
+    dist/json/json-forwards.h \
     studentmainmenu.h \
     studentprofile.h \
+    StudentNotification.h \
     teachermainmenu.h \
     teacherprofile.h
 
