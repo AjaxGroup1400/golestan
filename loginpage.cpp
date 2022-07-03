@@ -91,18 +91,17 @@ void LoginPage::on_Loginbtn_clicked()
     {
         AdminMainMenu* amm = new AdminMainMenu;
         amm->show();
-        close();
     }
     else if(userType == "TEACHER")
     {
         TeacherMainMenu* tmm = new TeacherMainMenu;
         tmm->show();
-        close();
     }
     else
     {
         StudentMainMenu* smm = new StudentMainMenu;
         smm->show();
-        close();
     }
+
+    close();
 }
