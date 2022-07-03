@@ -73,6 +73,6 @@ QList<QMap<QString, QString>> StudentNotification::getNotifications(QString stud
         ifs.close();
         return relatedAlerts;
     }
-    throw exception ("coulden't open the file \"../data_resources/studentnotification.json\"");
+//    throw exception ("coulden't open the file \"../data_resources/studentnotification.json\"");
 
 }

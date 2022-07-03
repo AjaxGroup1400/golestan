@@ -48,7 +48,7 @@ void StudentMainMenu::scores()
 
 void StudentMainMenu::surveyOfTeachers(Class Class, int result )
 {
-    Class.addSurveyResult(this->get_username(), result);
+//    Class.addSurveyResult(this->get_username(), result);
 }
 
 void StudentMainMenu::registry(Class Class)
