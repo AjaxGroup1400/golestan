@@ -68,6 +68,7 @@ public:
     void addStudent(QString student_username); //add record to file
     void deleteStudent(QString student_username); //check if student exists and delete record from file
     void setScore(QString student_username, float score); //update file
+    bool studentIsValid(QString studentUsername , QString lesson);
 //    void addSurveyResult(QString student_username , int result); //update file
 
 private:

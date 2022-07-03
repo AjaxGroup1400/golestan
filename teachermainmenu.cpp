@@ -4,6 +4,11 @@
 #include <QVector>
 #include <QMultiMap>
 #include <iterator>
+#include<fstream>
+#include<iostream>
+using namespace std;
+
+
 
 #include "teachermainmenu.h"
 #include "teachersendassertion.h"
@@ -15,7 +20,7 @@
 #include "Filemanager.h"
 #include "User.h"
 #include"StudentNotification.h"
-
+#include"dist/json/json.h"
 
 
 
@@ -34,23 +39,25 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
     this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->label_13->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
 
-    FileManager userFile;
+//    FileManager userFile;
 
-    userFile.create("teachers.txt");
+//    userFile.create("teachers.txt");
 
-    userFile.loadData();
+//    userFile.loadData();
 
-    for(const QString& item: userFile.getData()){
-        auto parse = userFile.parse(item);
+//    for(const QString& item: userFile.getData()){
+//        auto parse = userFile.parse(item);
 
-        if (parse[0] == this->get_username()){
-/*            QMap <QString, float> studentscore;
-            studentscore.insert(parse[2],parse[3].toFloat()) ;
-            this->students.insert( parse[1] , studentscore ) ;
-*/
-        }
-    }
+//        if (parse[0] == this->get_username()){
+///*            QMap <QString, float> studentscore;
+//            studentscore.insert(parse[2],parse[3].toFloat()) ;
+//            this->students.insert( parse[1] , studentscore ) ;
+//*/
+//        }
+//    }
 
+//working with file fot teacher class
+    initFile();
 }
 
 TeacherMainMenu::~TeacherMainMenu()
@@ -163,6 +170,79 @@ void TeacherMainMenu::sendingNotification(QString title , QString message , Clas
     member.addAlert(title , message , this->get_username() , studentUsernameList ) ;
 }
 
+void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
+{
+    ifstream ifs(this->filePath.toStdString());
+    this->dataReader.parse(ifs , this->dataHolder);
+    Json::Value teacherInformation ;
+    teacherInformation["teacher"] = this->get_username().toStdString();
+    for(auto &i : lessons)
+    {
+        teacherInformation["lessons"].append(i.toStdString());
+    }
+    this->dataHolder.append(teacherInformation);
+
+
+    ofstream ofs(this->filePath.toStdString());
+    Json::StyledWriter writer;
+    string finalPart = writer.write(this->dataHolder);
+    ofs.close();
+}
+
+void TeacherMainMenu::addNewLessonFile(QString lesson)
+{
+    this->lessons.push_back(lesson);
+
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(auto &members : this->dataHolder)
+        {
+            if(QString::fromStdString(members["teacher"].asString()) == this->get_username())
+            {
+                members["lessons"].append(lesson.toStdString());
+                break;
+            }
+        }
+        ofstream ofs(this->filePath.toStdString());
+        Json::StyledWriter writer ;
+        string finalPart = writer.write(this->dataHolder);
+        ofs << finalPart;
+        ofs.close();
+    }
+}
+
+void TeacherMainMenu::removeLessonFile(QString lesson)
+{
+    this->lessons.removeOne(lesson);
+
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        Json::Value undeletedLessons;
+        for(auto &members : this->dataHolder)
+        {
+            if(QString::fromStdString(members["teacher"].asString()) == this->get_username() )
+            {
+                for(auto &ls : members["lessons"])
+                {
+                    if(QString::fromStdString(ls.asString()) != lesson)
+                        undeletedLessons.append(ls);
+                }
+                members["lessons"] = undeletedLessons;
+                break;
+            }
+            ofstream ofs(this->filePath.toStdString());
+            Json::StyledWriter writer ;
+            string finalPart = writer.write(this->dataHolder);
+            ofs << finalPart;
+            ofs.close();
+        }
+
+
+
+    }
+}
 
 
 
@@ -211,5 +291,35 @@ void TeacherMainMenu::on_pushButton_4_clicked()
     TeacherSendAssertion* tsa = new TeacherSendAssertion;
     tsa->show();
     close();
+}
+
+void TeacherMainMenu::initFile()
+{
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(auto teacher : this->dataHolder)
+        {
+            if(QString::fromStdString(teacher["teacher"].asString()) == this->get_username())
+            {
+                for(auto &lesson : teacher["lessons"])
+                {
+                    this->lessons.push_back(QString::fromStdString(lesson.asString()));
+                }
+                return;
+            }
+        }
+        return;
+    }
+
+    ofstream ofs(filePath.toStdString());
+    Json::StyledWriter writer;
+//    this->dataHolder[0]["teacher"] = this->get_username().toStdString();
+//    this->dataHolder[0]["lessons"] = Json::arrayValue;
+    Json::Value baseData = Json::arrayValue;
+    string finalPart = writer.write(baseData);
+    ofs << finalPart;
+    ofs.close();
+    return;
 }
 
