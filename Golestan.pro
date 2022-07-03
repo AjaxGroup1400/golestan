@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     CalendarCreator.cpp \
+    Class.cpp \
     Poll.cpp \
     adminaddpeople.cpp \
     adminsendassertion.cpp \
@@ -20,14 +21,13 @@ SOURCES += \
     TeacherWeeklyCalendar.cpp \
     WeeklyCalendar.cpp \
     adminprofile.cpp \
-    Teacher.cpp \
     User.cpp \
     adminmainmenu.cpp \
     enterenewpass.cpp \
     forgotpasspage.cpp \
     loginpage.cpp \
     main.cpp \
-	dist/jsoncpp.cpp \
+        dist/jsoncpp.cpp \
     studentmainmenu.cpp \
     studentprofile.cpp \
     teachermainmenu.cpp \
@@ -35,6 +35,7 @@ SOURCES += \
 
 HEADERS += \
     CalendarCreator.h \
+    Class.h \
     Poll.h \
     adminaddpeople.h \
     adminsendassertion.h \
@@ -45,14 +46,13 @@ HEADERS += \
     TeacherWeeklyCalendar.h \
     WeeklyCalendar.h \
     adminprofile.h \
-    Teacher.h \
     User.h \
     adminmainmenu.h \
     enterenewpass.h \
     forgotpasspage.h \
     loginpage.h \
-	dist/json/json.h \
-	dist/json/json-forwards.h \
+        dist/json/json.h \
+        dist/json/json-forwards.h \
     studentmainmenu.h \
     studentprofile.h \
     teachermainmenu.h \
@@ -62,7 +62,6 @@ FORMS += \
     adminaddpeople.ui \
     adminsendassertion.ui \
     teachersendassertion.ui \
-    Teacher.ui \
     adminmainmenu.ui \
     adminprofile.ui \
     enterenewpass.ui \

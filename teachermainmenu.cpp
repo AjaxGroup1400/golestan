@@ -1,8 +1,9 @@
-#include<QMessageBox>
+#include <QMessageBox>
 #include <QAbstractButton>
 #include <QPushButton>
 #include <QVector>
 #include <QMultiMap>
+#include <iterator>
 
 #include "teachermainmenu.h"
 #include "teachersendassertion.h"
@@ -13,6 +14,7 @@
 #include "Auth.h"
 #include "Filemanager.h"
 #include "User.h"
+#include"StudentNotification.h"
 
 
 
@@ -34,7 +36,7 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
 
     FileManager userFile;
 
-    userFile.create("teacher.txt");
+    userFile.create("teachers.txt");
 
     userFile.loadData();
 
@@ -42,9 +44,10 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
         auto parse = userFile.parse(item);
 
         if (parse[0] == this->get_username()){
-            QMap <QString, float> studentscore;
+/*            QMap <QString, float> studentscore;
             studentscore.insert(parse[2],parse[3].toFloat()) ;
             this->students.insert( parse[1] , studentscore ) ;
+*/
         }
     }
 
@@ -84,25 +87,29 @@ void TeacherMainMenu::on_pushButton_clicked()
     close();
 }
 
-QMap<QString, float> TeacherMainMenu::studentsList(QString classname)
+//QMap<QString, float> TeacherMainMenu::studentsList(QString classname)
+//{
+//    QMap <QString, float> classlist;
+
+//for (auto i=this->students.begin(); i!=this->students.end(); i++){
+//    auto j = i.value().begin();
+
+//    if (j.key() == classname){
+
+//        classlist.insert( i.key(), j.value() );
+//    }
+//}
+//    return classlist;
+
+//}
+
+void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
+
 {
-    QMap <QString, float> classlist;
+//    can be checked in Class.cpp:
+//    int index = Auth::validStudent(studentname , Class.getLesson());
+    Class.deleteStudent(studentname);
 
-for (auto i=this->students.begin(); i!=this->students.end(); i++){
-    auto j = i.value().begin();
-
-    if (j.key() == classname){
-
-        classlist.insert( i.key(), j.value() );
-    }
-}
-    return classlist;
-
-}
-
-void TeacherMainMenu::deletest(QString name , QString lesson)
-{
-    int index = Auth::validStudent(name , lesson);
 //    if (newPass != confirmNewPass)
 //    {
 //        QMessageBox * confirmPassDoesntMatch = new QMessageBox(QMessageBox::Icon::Critical , "Error" , "field \"new password\" doesn't equal field \"confirm new password\"" , QMessageBox::Button::Ok);
@@ -111,17 +118,18 @@ void TeacherMainMenu::deletest(QString name , QString lesson)
 //        return;
 //    }
 
-    FileManager userFile;
+//    FileManager userFile;
 
-    userFile.create("teacher.txt");
+//    userFile.create("teachers.txt");
 
-    userFile.loadData();
-
-
-    userFile.deleteRecord(index);
+//    userFile.loadData();
 
 
-    userFile.write();
+//    userFile.deleteRecord(index);
+
+
+//    userFile.write();
+
 
     QMessageBox * studentdeleted = new QMessageBox(QMessageBox::Icon::Information, "Student deleted", "the student was deleted succesfuly", QMessageBox::Button::Ok);
 //    studentdeleted->setParent(this);
@@ -138,14 +146,19 @@ void TeacherMainMenu::deletest(QString name , QString lesson)
 }
 
 
-void TeacherMainMenu::sendingNotification(QString message , QString lesson , QList<QString> list)
+void TeacherMainMenu::sendingNotification(QString title , QString message , QString lesson , QList<QString> list)
 {
-    QString finalmessage = "Lesson" + lesson + "from" + this->get_first_name() + this->get_last_name() +": \n" + message;
+//    QString finalmessage = "Lesson" + lesson + "from" + this->get_first_name() + this->get_last_name() +": \n" + title + "\n" + message ;
 
-    for (auto i = list.begin() ; i != list.end() ; i++ )
+    StudentNotification member;
+    QList<QMap<QString , QString>> studentUsernameList ;
+    for (int i = 0 ;  i < list.size() ; i++)
     {
-
+        QMap<QString , QString> usernames ;
+        usernames["username"] = list[i];
+        studentUsernameList.push_back(usernames)  ;
     }
+    member.addAlert(title , message , this->get_username() , studentUsernameList ) ;
 
 }
 
@@ -158,14 +171,18 @@ void TeacherMainMenu::sendingNotification(QString message , QString lesson , QLi
 
 void TeacherMainMenu::on_pushButton_3_clicked()
 {
+    /*
     QMap<QString , float> chemistry = this->studentsList("chemistry");
     QMap<QString , float> physics = this->studentsList("physics");
     QMap<QString , float> bp = this->studentsList("bp");
     QMap<QString , float> calculus = this->studentsList("calculus");
     QMap<QString , float> discrete = this->studentsList("discrete");
+    */
+    for(auto i = this->classes.begin(); i!=classes.end(); i++){
 
+    }
 
-    //  new page(chemistry , chemistry.size , ...)
+//  new page(chemistry , chemistry.size , ...)
 //  class name , number of students , students' names , class location
 
 }
@@ -173,13 +190,16 @@ void TeacherMainMenu::on_pushButton_3_clicked()
 
 void TeacherMainMenu::on_pushButton_6_clicked()
 {
+    /*
     QMap<QString , float> chemistry = this->studentsList("chemistry");
     QMap<QString , float> physics = this->studentsList("physics");
     QMap<QString , float> bp = this->studentsList("bp");
     QMap<QString , float> calculus = this->studentsList("calculus");
     QMap<QString , float> discrete = this->studentsList("discrete");
+    */
+    for(auto i = this->classes.begin(); i!=classes.end(); i++){
 
-
+    }
 
 
 }

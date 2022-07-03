@@ -1,10 +1,13 @@
 #include "studentmainmenu.h"
 #include "ui_studentmainmenu.h"
+#include "loginpage.h"
+#include "studentprofile.h"
+
 #include <QMessageBox>
 #include <QAbstractButton>
 #include <QPushButton>
-#include "loginpage.h"
-#include "studentprofile.h"
+#include <iterator>
+
 
 StudentMainMenu::StudentMainMenu(QWidget *parent) :
 //    QWidget(parent),
@@ -25,15 +28,33 @@ StudentMainMenu::~StudentMainMenu()
     delete ui;
 }
 
-void StudentMainMenu::surveyOfTeachers(QString lesson, int result )
+void StudentMainMenu::scores()
 {
-    for (auto i = this->teachers.begin() ; i!=this->teachers.end() ; i++ )
-    {
-        if (lesson == i.key())
-        {
+    for(auto i = this->classes.begin(); i!= this->classes.end(); i++ ){
 
+        for(auto j = i->getList().begin(); j!=i->getList().end(); i++){
+
+            if(j.key()==this->get_username()){
+                float score = j.value();
+
+                if(score!=-1){
+                    //show...
+                }
+            }
         }
     }
+}
+
+
+void StudentMainMenu::surveyOfTeachers(Class Class, int result )
+{
+    Class.addSurveyResult(this->get_username(), result);
+}
+
+void StudentMainMenu::registry(Class Class)
+{
+    Class.addStudent(this->get_username());
+    this->classes.push_back(Class);
 }
 
 

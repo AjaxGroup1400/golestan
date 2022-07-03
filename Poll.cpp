@@ -39,7 +39,7 @@ Poll::Poll()
     return;
 }
 
-void Poll::addScore(int score, QString studentUsername, QString lessonName, QString teacherName)
+void Poll::addScore(int score, QString studentUsername, QString lessonName, QString teacherUsername)
 {
     ifstream ifs(filePath.toStdString());
 
@@ -49,7 +49,7 @@ void Poll::addScore(int score, QString studentUsername, QString lessonName, QStr
 
         pollStruct["student_username"] = studentUsername.toStdString();
         pollStruct["score"] = score;
-        pollStruct["teacher_name"] = teacherName.toStdString();
+        pollStruct["teacher_name"] = teacherUsername.toStdString();
 
         Json::Value wantedLesson = dataHolder[lessonName.toStdString()];
 
@@ -67,6 +67,27 @@ void Poll::addScore(int score, QString studentUsername, QString lessonName, QStr
 
         jsonWriter.close();
     }
+}
+
+float Poll::getScore(QString lessonName, QString teacherUsername)
+{
+    ifstream ifs(filePath.toStdString());
+    if (dataReader.parse(ifs , dataHolder))
+    {
+        Json::Value wantedLesson = dataHolder[lessonName.toStdString()] ;
+        int sum = 0;
+        int count =0 ;
+        for(int i = 0 ; i < wantedLesson.size() ; i++)
+        {
+            if (wantedLesson[i]["teacher_username"] == teacherUsername.toStdString() )
+            {
+                count++;
+                sum += wantedLesson[i]["score"].asInt() ;
+            }
+        }
+        return static_cast<float>(sum)/count;
+    }
+    return -1 ;
 }
 
 
