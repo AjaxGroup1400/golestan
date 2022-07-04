@@ -1,6 +1,7 @@
 #ifndef STUDENTMAINMENU_H
 #define STUDENTMAINMENU_H
 
+#include "dist/json/json.h"
 #include <QWidget>
 #include <QMap>
 #include <QString>
@@ -48,6 +49,13 @@ private:
 
     QMap <Class,float> this_term_classes; //Score: float
 
+    QList <Class> classes;
+    QString filePath;
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+
+    // checks for existance of student related file or create it (should be called in cosntructor)
+    void initFile();
 };
 
 //List[0]:{

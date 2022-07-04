@@ -110,3 +110,9 @@ void AdminSendAssertion::on_pushButton_3_clicked()
     }
 }
 
+
+void AdminSendAssertion::on_sendbtn_clicked()
+{
+
+}
+

@@ -7,7 +7,11 @@
 #include <QAbstractButton>
 #include <QPushButton>
 #include <iterator>
+#include <string>
+#include <fstream>
 
+using std::ifstream, std::string;
+using std::ofstream;
 
 StudentMainMenu::StudentMainMenu(QWidget *parent) :
 //    QWidget(parent),
@@ -21,6 +25,8 @@ StudentMainMenu::StudentMainMenu(QWidget *parent) :
     this->ui->pushButton_5->setStyleSheet("background-color:transparent");
     this->ui->label_8->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
 
+    // initialize file(s)
+    initFile();
 }
 
 StudentMainMenu::~StudentMainMenu()
@@ -110,4 +116,29 @@ void StudentMainMenu::on_pushButton_clicked()
     sp->show();
     close();
 }
+
+void StudentMainMenu::initFile()
+{
+    ifstream ifs(filePath.toStdString());
+
+    if(dataReader.parse(ifs, dataHolder))
+    {
+
+        return;
+    }
+
+    ofstream ofs(filePath.toStdString());
+
+    Json::StyledWriter writer;
+
+    Json::Value baseData = Json::arrayValue;
+
+    string serializedData = writer.write(baseData);
+
+    ofs << serializedData;
+
+    ofs.close();
+}
+
+
 

@@ -31,7 +31,7 @@ public:
     void sendingNotification(QString title , QString message , Class Class);
 
     void addNewTeacherToFile(QList<QString> lessons);
-    void addNewLessonFile( Class lesson );
+    void addNewLessonFile( Class new_class);
     void removeLessonFile( Class lesson );
     int teacherIsValidFile();
     Class getLesson(lesson lesson);

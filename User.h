@@ -32,6 +32,11 @@ public:
     QString get_password();
 
 signals:
+    std::exception  exceptioOccured(std::exception e);
+
+public slots:
+    void exceptionHandling(std::exception e);
+
 
 private:
     QString first_name ;
