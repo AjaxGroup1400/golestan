@@ -83,10 +83,6 @@ void TeacherMainMenu::on_pushButton_7_clicked()
     }
 }
 
-
-
-
-
 void TeacherMainMenu::on_pushButton_clicked()
 {
     teacherProfile* tp = new teacherProfile;
@@ -115,8 +111,11 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 {
 //    can be checked in Class.cpp:
 //    int index = Auth::validStudent(studentname , Class.getLesson());
+    if(Class.studentIsValid(studentname))
+    {
+        Class.deleteStudent(studentname);
 //    remove class from student's classes
-    Class.deleteStudent(studentname);
+
 
 //    if (newPass != confirmNewPass)
 //    {
@@ -125,18 +124,6 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 //        connect(confirmPassDoesntMatch , &QMessageBox::buttonClicked , confirmPassDoesntMatch, &QMessageBox::deleteLater);
 //        return;
 //    }
-
-//    FileManager userFile;
-
-//    userFile.create("teachers.txt");
-
-//    userFile.loadData();
-
-
-//    userFile.deleteRecord(index);
-
-
-//    userFile.write();
 
 
     QMessageBox * studentdeleted = new QMessageBox(QMessageBox::Icon::Information, "Student deleted", "the student was deleted succesfuly", QMessageBox::Button::Ok);
@@ -151,6 +138,10 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 //    connect(studentdeleted, &QMessageBox::buttonClicked, lg, &LoginPage::show);
 
     //    connect(studentdeleted, &QMessageBox::buttonClicked, this, &EntereNewPass::close);
+    }
+    else{
+//        student not valid
+    }
 }
 
 
@@ -213,7 +204,7 @@ void TeacherMainMenu::addNewLessonFile(Class new_class)
     }
 }
 
-void TeacherMainMenu::removeLessonFile(Class lesson)
+void TeacherMainMenu::removeLessonFile(Class lesson) //delete all lessons? delete all class json files?
 {
     for(auto i=0; i<classes.size(); i++){
 
@@ -258,6 +249,15 @@ int TeacherMainMenu::teacherIsValidFile()
                 return teacherIndex;
         }
         return -1 ;
+    }
+}
+
+Class TeacherMainMenu::getLesson(lesson lesson)
+{
+    for(int i=0; i<classes.size(); i++){
+        if(classes[i].getLesson()==lesson){
+            return this->classes[i];
+        }
     }
 }
 

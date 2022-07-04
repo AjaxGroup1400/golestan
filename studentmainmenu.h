@@ -18,12 +18,16 @@ class StudentMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit StudentMainMenu(QWidget *parent = nullptr); //write student file that contains username and class and maybe scores
+    explicit StudentMainMenu(QWidget *parent = nullptr);
+    //if student exists read it from file else write new student : Term = 1
     ~StudentMainMenu();
 
+//    bool is_equal(Class lesson);
+
     void scores(); //file can be updated
-    void registry(Class Class); //add class to student's file
+    void registry(Class Class); //add class to student's file and term++
     void surveyOfTeachers(Class Class , int result);
+    void deleteLesson(Class lesson);
 
 
 private slots:
@@ -34,12 +38,13 @@ private slots:
 private:
     Ui::StudentMainMenu *ui;
     int Term;
-    int currentAverege;
 
 //    QList < QMap <Class, float> > terms;
-//    QList <float> avereges;
 
-    QMap < QList <Class> , float> terms; //Averege: float
+    QList <float> avereges;
+    int currentAverege = avereges[Term-1];
+
+//    QMap < QList <Class> , float> terms; //Averege: float
 
     QMap <Class,float> this_term_classes; //Score: float
 

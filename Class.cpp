@@ -189,7 +189,7 @@ void Class::setScore(QString student_username, float score)
 
 }
 
-bool Class::studentIsValid(QString studentUsername, QString lesson)
+bool Class::studentIsValid(QString studentUsername)
 {
     ifstream ifs(this->filePath.toStdString());
     if(this->dataReader.parse(ifs , this->dataHolder))
