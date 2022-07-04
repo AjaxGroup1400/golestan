@@ -1,9 +1,16 @@
+#include<QMessageBox>
+#include<QAbstractButton>
+#include<iostream>
+using namespace std;
+
+
 #include "User.h"
+
 
 User::User(QWidget *parent)
     : QWidget{parent}
 {
-
+    connect(this , &User::exceptioOccured , this , &User::exceptionHandling );
 }
 
 void User::set_first_name(QString name)
@@ -75,6 +82,13 @@ QString User::get_username()
 QString User::get_password()
 {
     return this->password ;
+}
+
+void User::exceptionHandling(std::exception e)
+{
+    QMessageBox * errorMessage = new QMessageBox(QMessageBox::Icon::Critical , "Error occured" , e.what() , QMessageBox::Button::Ok ) ;
+    errorMessage->show();
+    connect(errorMessage , &QMessageBox::buttonClicked , errorMessage , &QMessageBox::deleteLater);
 }
 
 QString User::get_first_name()

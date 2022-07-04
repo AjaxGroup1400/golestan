@@ -71,6 +71,7 @@ void Class::setLocation(QString loc)
         return;
     }
 
+
 }
 
 void Class::setTime(QString time)

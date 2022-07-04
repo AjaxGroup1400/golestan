@@ -174,20 +174,24 @@ void TeacherMainMenu::sendingNotification(QString title , QString message , Clas
 void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
 {
     ifstream ifs(this->filePath.toStdString());
-    this->dataReader.parse(ifs , this->dataHolder);
-    Json::Value teacherInformation ;
-    teacherInformation["teacher"] = this->get_username().toStdString();
-    for(auto &i : lessons)
+    if(this->dataReader.parse(ifs , this->dataHolder))
     {
-        teacherInformation["lessons"].append(i.toStdString());
+        Json::Value teacherInformation ;
+        teacherInformation["teacher"] = this->get_username().toStdString();
+        for(auto &i : lessons)
+        {
+            teacherInformation["lessons"].append(i.toStdString());
+        }
+        this->dataHolder.append(teacherInformation);
+
+
+        ofstream ofs(this->filePath.toStdString());
+        Json::StyledWriter writer;
+        string finalPart = writer.write(this->dataHolder);
+        ofs.close();
     }
-    this->dataHolder.append(teacherInformation);
-
-
-    ofstream ofs(this->filePath.toStdString());
-    Json::StyledWriter writer;
-    string finalPart = writer.write(this->dataHolder);
-    ofs.close();
+    exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
 }
 
 void TeacherMainMenu::addNewLessonFile(Class new_class)
@@ -211,6 +215,8 @@ void TeacherMainMenu::addNewLessonFile(Class new_class)
         ofs << finalPart;
         ofs.close();
     }
+    exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
 }
 
 void TeacherMainMenu::removeLessonFile(Class lesson)
@@ -245,6 +251,8 @@ void TeacherMainMenu::removeLessonFile(Class lesson)
             ofs.close();
         }
     }
+    exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
 }
 
 int TeacherMainMenu::teacherIsValidFile()
@@ -259,6 +267,9 @@ int TeacherMainMenu::teacherIsValidFile()
         }
         return -1 ;
     }
+    exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
+    return -1;
 }
 
 
@@ -305,7 +316,7 @@ void TeacherMainMenu::on_pushButton_6_clicked()
 
 void TeacherMainMenu::on_pushButton_4_clicked()
 {
-    TeacherSendAssertion* tsa = new TeacherSendAssertion;
+    TeacherSendAssertion* tsa = new TeacherSendAssertion(this);
     tsa->show();
     close();
 }
