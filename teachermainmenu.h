@@ -33,6 +33,7 @@ public:
     void addNewTeacherToFile(QList<QString> lessons);
     void addNewLessonFile( QString lesson );
     void removeLessonFile( QString lesson );
+    int teacherIsValidFile();
 
 
 

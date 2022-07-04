@@ -155,7 +155,8 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 
 void TeacherMainMenu::sendingNotification(QString title , QString message , Class Class)
 {
-    QList list = Class.getList().keys();
+//    QList list = Class.getList().keys();
+    QList<QString> list = Class.getList().keys();
 
     StudentNotification member;
     QList<QMap<QString , QString>> studentUsernameList ;
@@ -241,6 +242,20 @@ void TeacherMainMenu::removeLessonFile(QString lesson)
 
 
 
+    }
+}
+
+int TeacherMainMenu::teacherIsValidFile()
+{
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(int teacherIndex = 0 ; teacherIndex < this->dataHolder.size() ; teacherIndex ++)
+        {
+            if(QString::fromStdString(this->dataHolder[teacherIndex]["teacher"].asString()) == this->get_username())
+                return teacherIndex;
+        }
+        return -1 ;
     }
 }
 
