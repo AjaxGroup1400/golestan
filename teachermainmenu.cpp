@@ -247,6 +247,20 @@ void TeacherMainMenu::removeLessonFile(Class lesson)
     }
 }
 
+int TeacherMainMenu::teacherIsValidFile()
+{
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(int teacherIndex = 0 ; teacherIndex < this->dataHolder.size() ; teacherIndex ++)
+        {
+            if(QString::fromStdString(this->dataHolder[teacherIndex]["teacher"].asString()) == this->get_username())
+                return teacherIndex;
+        }
+        return -1 ;
+    }
+}
+
 
 
 
