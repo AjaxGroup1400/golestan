@@ -189,6 +189,21 @@ void Class::setScore(QString student_username, float score)
 
 }
 
+bool Class::studentIsValid(QString studentUsername, QString lesson)
+{
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(auto i : this->dataHolder["student_list"] )
+        {
+            if(QString::fromStdString(i["username"].asString()) == studentUsername)
+                return true;
+        }
+        return false;
+    }
+
+}
+
 //void Class::addSurveyResult(QString student_username, int result)
 //{
 //    this->surveyresult.insert(student_username, result);
@@ -228,26 +243,3 @@ QMap<QString, float> Class::getList()
 //{
 //return this->surveyresult;
 //}
-
-lesson string_to_lesson(QString lesson_str)
-{
-
-
-            if(lesson_str=="BP") return lesson::BP;
-            else if(lesson_str=="CHEMISTRY") return lesson::CHEMISTRY;
-            else if(lesson_str=="DISCRETE") return lesson::DISCRETE;
-            else if(lesson_str=="CALCULUS") return lesson::CALCULUS;
-            else return lesson::PHYSICS;
-
-}
-
-day string_to_day(QString day_str)
-{
-    if(day_str=="SATURDAY") return day::SATURDAY;
-    else if(day_str=="SUNDAY") return day::SUNDAY;
-    else if(day_str=="MONDAY") return day::MONDAY;
-    else if(day_str=="TUESDAY") return day::TUESDAY;
-    else if(day_str=="WEDNESDAY") return day::WEDNESDAY;
-    else if(day_str=="THURSDAY") return day::THURSDAY;
-    else return day::FRIDAY;
-}

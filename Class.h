@@ -4,49 +4,7 @@
 #include <QString>
 #include <QMultiMap>
 #include "dist/json/json.h"
-
-enum lesson {
-    CHEMISTRY,
-    BP,
-    DISCRETE,
-    CALCULUS,
-    PHYSICS
-};
-
-lesson string_to_lesson(QString lesson_str);
-
-static QString lesson_enum_str[] =
-        { "CHEMISTRY", "BP", "DISCRETE", "CALCULUS" , "PHYSICS"};
-
-enum day{
-    SATURDAY,
-    SUNDAY,
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY
-};
-
-day string_to_day(QString day_str);
-
-
-static QString day_enum_str[] =
-        { "SATURDAY", "SUNDAY", "MONDAY", "TUESDAY" , "WEDNESDAY", "THURSDAY", "FRIDAY"};
-
-
-//QString LessonToString ( int enum_val )
-//{
-//    QString tmp(lesson_enum_str[enum_val]);
-//    return tmp;
-//}
-
-//QString DayToString ( int enum_val )
-//{
-//    QString tmp(day_enum_str[enum_val]);
-//    return tmp;
-//}
-
+#include "Enum.h"
 
 class Class
 {
@@ -68,6 +26,7 @@ public:
     void addStudent(QString student_username); //add record to file
     void deleteStudent(QString student_username); //check if student exists and delete record from file
     void setScore(QString student_username, float score); //update file
+    bool studentIsValid(QString studentUsername , QString lesson);
 //    void addSurveyResult(QString student_username , int result); //update file
 
 private:

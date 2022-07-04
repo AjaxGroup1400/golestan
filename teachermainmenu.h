@@ -10,6 +10,7 @@
 
 #include "User.h"
 #include "Class.h"
+#include"dist/json/json.h"
 
 namespace Ui {
 class TeacherMainMenu  ;
@@ -27,8 +28,14 @@ public:
     void deleteStudent(QString studentusername , Class Class);
     void setScores(Class Class);
 
-
     void sendingNotification(QString title , QString message , Class Class);
+
+    void addNewTeacherToFile(QList<QString> lessons);
+    void addNewLessonFile( QString lesson );
+    void removeLessonFile( QString lesson );
+    int teacherIsValidFile();
+
+
 
 private slots:
     void on_pushButton_7_clicked();
@@ -45,6 +52,13 @@ private:
     Ui::TeacherMainMenu *ui;
 
     QList <Class> classes;
+
+//    QList<QString> lessons;
+    void initFile();
+    Json::Reader dataReader;
+    Json::Value dataHolder;
+    QString filePath = "teacher_lessons.json";
+
 //    QMultiMap < QString ,QMap<QString, float> > students;
 //    QMap<QString , int> SurveyResult;
 

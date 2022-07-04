@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     CalendarCreator.cpp \
     Class.cpp \
+    Enum.cpp \
     Poll.cpp \
     adminaddpeople.cpp \
     adminsendassertion.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
 HEADERS += \
     CalendarCreator.h \
     Class.h \
+    Enum.h \
     Poll.h \
     adminaddpeople.h \
     adminsendassertion.h \
