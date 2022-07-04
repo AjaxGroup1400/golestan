@@ -1,6 +1,7 @@
 #ifndef STUDENTMAINMENU_H
 #define STUDENTMAINMENU_H
 
+#include "dist/json/json.h"
 #include <QWidget>
 #include <QMap>
 #include <QString>
@@ -35,7 +36,12 @@ private:
     Ui::StudentMainMenu *ui;
 
     QList <Class> classes;
-//    QMap<QString , QString> teachers;
+    QString filePath;
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+
+    // checks for existance of student related file or create it (should be called in cosntructor)
+    void initFile();
 };
 
 #endif // STUDENTMAINMENU_H
