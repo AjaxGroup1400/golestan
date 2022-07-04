@@ -33,10 +33,24 @@ private slots:
 
 private:
     Ui::StudentMainMenu *ui;
+    int Term;
+    int currentAverege;
 
-    QList <Class> classes;
-//    QMap<QString , QString> teachers;
+//    QList < QMap <Class, float> > terms;
+//    QList <float> avereges;
+
+    QMap < QList <Class> , float> terms; //Averege: float
+
+    QMap <Class,float> this_term_classes; //Score: float
+
 };
+
+//List[0]:{
+//    bp:19
+//    discrete: 18.5
+//    ...
+//}
+
 
 #endif // STUDENTMAINMENU_H
 

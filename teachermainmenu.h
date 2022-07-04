@@ -30,9 +30,9 @@ public:
 
     void sendingNotification(QString title , QString message , Class Class);
 
-    void addNewTeacherToFile(QList<QString> lessons);
-    void addNewLessonFile( QString lesson );
-    void removeLessonFile( QString lesson );
+    void addNewTeacherToFile(QList<QString> lessons);//constructor?
+    void addNewLessonFile( Class new_class );
+    void removeLessonFile( Class lesson );//how to remove old class from the class file?
 
 
 
@@ -52,7 +52,7 @@ private:
 
     QList <Class> classes;
 
-    QList<QString> lessons;
+//    QList<QString> lessons;
     void initFile();
     Json::Reader dataReader;
     Json::Value dataHolder;

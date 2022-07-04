@@ -30,19 +30,19 @@ StudentMainMenu::~StudentMainMenu()
 
 void StudentMainMenu::scores()
 {
-    for(auto i = this->classes.begin(); i!= this->classes.end(); i++ ){
+//    for(auto i = this->classes.begin(); i!= this->classes.end(); i++ ){
 
-        for(auto j = i->getList().begin(); j!=i->getList().end(); i++){
+//        for(auto j = i->getList().begin(); j!=i->getList().end(); i++){
 
-            if(j.key()==this->get_username()){
-                float score = j.value();
+//            if(j.key()==this->get_username()){
+//                float score = j.value();
 
-                if(score!=-1){
-                    //show...
-                }
-            }
-        }
-    }
+//                if(score!=-1){
+//                    //show...
+//                }
+//            }
+//        }
+//    }
 }
 
 
@@ -53,8 +53,8 @@ void StudentMainMenu::surveyOfTeachers(Class Class, int result )
 
 void StudentMainMenu::registry(Class Class)
 {
-    Class.addStudent(this->get_username());
-    this->classes.push_back(Class);
+//    Class.addStudent(this->get_username());
+//    this->classes.push_back(Class);
 }
 
 

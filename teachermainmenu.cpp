@@ -115,6 +115,7 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 {
 //    can be checked in Class.cpp:
 //    int index = Auth::validStudent(studentname , Class.getLesson());
+//    remove class from student's classes
     Class.deleteStudent(studentname);
 
 //    if (newPass != confirmNewPass)
@@ -155,7 +156,7 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 
 void TeacherMainMenu::sendingNotification(QString title , QString message , Class Class)
 {
-    QList list = Class.getList().keys();
+    QList <QString> list = Class.getList().keys();
 
     StudentNotification member;
     QList<QMap<QString , QString>> studentUsernameList ;
@@ -189,9 +190,9 @@ void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
     ofs.close();
 }
 
-void TeacherMainMenu::addNewLessonFile(QString lesson)
+void TeacherMainMenu::addNewLessonFile(Class new_class)
 {
-    this->lessons.push_back(lesson);
+    this->classes.push_back(new_class);
 
     ifstream ifs(this->filePath.toStdString());
     if(this->dataReader.parse(ifs , this->dataHolder))
@@ -200,7 +201,7 @@ void TeacherMainMenu::addNewLessonFile(QString lesson)
         {
             if(QString::fromStdString(members["teacher"].asString()) == this->get_username())
             {
-                members["lessons"].append(lesson.toStdString());
+                members["lessons"].append(lesson_enum_str[new_class.getLesson()].toStdString());
                 break;
             }
         }
@@ -212,9 +213,14 @@ void TeacherMainMenu::addNewLessonFile(QString lesson)
     }
 }
 
-void TeacherMainMenu::removeLessonFile(QString lesson)
+void TeacherMainMenu::removeLessonFile(Class lesson)
 {
-    this->lessons.removeOne(lesson);
+    for(auto i=0; i<classes.size(); i++){
+
+        if(classes[i].getLesson()==lesson.getLesson()){
+            this->classes.removeAt(i);
+            break;}
+    }
 
     ifstream ifs(this->filePath.toStdString());
     if(this->dataReader.parse(ifs , this->dataHolder))
@@ -226,7 +232,7 @@ void TeacherMainMenu::removeLessonFile(QString lesson)
             {
                 for(auto &ls : members["lessons"])
                 {
-                    if(QString::fromStdString(ls.asString()) != lesson)
+                    if(QString::fromStdString(ls.asString()) != lesson_enum_str[lesson.getLesson() ])
                         undeletedLessons.append(ls);
                 }
                 members["lessons"] = undeletedLessons;
@@ -238,9 +244,6 @@ void TeacherMainMenu::removeLessonFile(QString lesson)
             ofs << finalPart;
             ofs.close();
         }
-
-
-
     }
 }
 
@@ -304,7 +307,8 @@ void TeacherMainMenu::initFile()
             {
                 for(auto &lesson : teacher["lessons"])
                 {
-                    this->lessons.push_back(QString::fromStdString(lesson.asString()));
+                    Class new_class(string_to_lesson( QString::fromStdString( lesson.asString())), this->get_username());
+                    this->classes.push_back(new_class);
                 }
                 return;
             }
