@@ -34,6 +34,7 @@ public:
     void addNewLessonFile( Class new_class);
     void removeLessonFile( Class lesson );
     int teacherIsValidFile();
+    bool lessonIsValid(QString lesson);
     Class getLesson(lesson lesson);
     QString lessonNameCheck(QString sentName);
 

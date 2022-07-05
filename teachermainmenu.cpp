@@ -183,7 +183,7 @@ void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
         ofs.close();
         return;
     }
-    exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
     emit exceptioOccured(exceptionReason);
 }
 
@@ -208,7 +208,7 @@ void TeacherMainMenu::addNewLessonFile(Class new_class)
         ofs << finalPart;
         ofs.close();
     }
-    exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
     emit exceptioOccured(exceptionReason);
 }
 
@@ -244,7 +244,7 @@ void TeacherMainMenu::removeLessonFile(Class lesson) //delete all lessons? delet
             ofs.close();
         }
     }
-    exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
     emit exceptioOccured(exceptionReason);
 }
 
@@ -260,9 +260,32 @@ int TeacherMainMenu::teacherIsValidFile()
         }
         return -1 ;
     }
-    exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
     emit exceptioOccured(exceptionReason);
     return -1;
+}
+
+bool TeacherMainMenu::lessonIsValid(QString lesson)
+{
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(auto i : this->dataHolder)
+        {
+            if(QString::fromStdString(i["teacher"].asString()) == this->get_username())
+            {
+                for (auto j : i["lessons"])
+                {
+                    if (QString::fromStdString(j.asString()) == lesson)
+                        return true ;
+                }
+                return false;
+            }
+        }
+        return false ;
+    }
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
 }
 
 Class TeacherMainMenu::getLesson(lesson lesson)
@@ -362,6 +385,7 @@ void TeacherMainMenu::initFile()
         }
         return;
     }
+
 
     ofstream ofs(filePath.toStdString());
     Json::StyledWriter writer;

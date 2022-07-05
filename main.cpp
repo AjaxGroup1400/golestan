@@ -33,6 +33,12 @@ int main(int argc, char *argv[])
         "Teacher"
     ));
 
+    userFile.append(Auth::formUserData(
+                        "1287237406","@mir1990",
+                        "Mamad","Mamadi",
+                        "1273882407" ,"09921863951",
+                        "Teacher"
+                    ));
 
     userFile.append(Auth::formUserData(
         "1287237409", "@mir1990",

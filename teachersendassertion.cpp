@@ -93,15 +93,20 @@ void TeacherSendAssertion::on_sendbtn_clicked()
         QString title = ui->TitleLine->text();
         QString message = ui->messageLine->toPlainText();
         QString ls = "chemistry" ;
-        QString lesson = mainmenu->lessonNameCheck(ls);
-        Class lessonClass = mainmenu->getLesson(string_to_lesson(lesson));
-//        QMap<QString , float> stList;
-//        stList.insert("1287237409" , -1);
-//        stList.insert("1287237405" , -1);
+        if(mainmenu->lessonIsValid(ls))
+        {
+            QString lesson = mainmenu->lessonNameCheck(ls);
+            Class lessonClass = mainmenu->getLesson(string_to_lesson(lesson));
+//            QMap<QString , float> stList;
+//            stList.insert("1287237409" , -1);
+//            stList.insert("1287237405" , -1);
 
-//        lessonClass.setinformation(string_to_lesson("chemistry") , "talar2" , "11:00" , string_to_day("SUNDAY") , stList);
-        mainmenu->sendingNotification(title , message , lessonClass );
-//        this->close();
+//            lessonClass.setinformation(string_to_lesson("chemistry") , "talar2" , "11:00" , string_to_day("SUNDAY") , stList);
+            mainmenu->sendingNotification(title , message , lessonClass );
+//            this->close();
+        }
+        else
+            throw std::exception("you don't have this lesson");
     }
     catch(std::exception e)
     {

@@ -48,7 +48,7 @@ void LoginPage::on_forgotPass_clicked(bool checked)
     close();
 }
 
-bool LoginPage::isUserValid()
+int LoginPage::isUserValid()
 {
     QString username = ui->userLine->text();
     QString password = ui->passLine->text();
@@ -95,17 +95,23 @@ void LoginPage::on_Loginbtn_clicked()
     if(userType == "Admin")
     {
         AdminMainMenu* amm = new AdminMainMenu;
+        amm->set_username(ui->userLine->text());
+        amm->set_password(ui->passLine->text());
         amm->show();
     }
     else if(userType == "Teacher")
     {
         TeacherMainMenu* tmm = new TeacherMainMenu;
+        tmm->set_username(ui->userLine->text());
+        tmm->set_password(ui->passLine->text());
         tmm->show();
 
     }
     else if (userType == "Student")
     {
         StudentMainMenu* smm = new StudentMainMenu;
+        smm->set_username(ui->userLine->text());
+        smm->set_password(ui->passLine->text());
         smm->show();
     }
 //    else
