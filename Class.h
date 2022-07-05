@@ -28,6 +28,7 @@ public:
     void setScore(QString student_username, float score); //update file
     bool studentIsValid(QString studentUsername);
 //    void addSurveyResult(QString student_username , int result); //update file
+    void setinformation(lesson lesson , QString location , QString time , day day , QMap<QString , float> students);
 
 private:
     QString filePath;

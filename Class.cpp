@@ -10,7 +10,7 @@ Class::Class(enum lesson lesson, QString teacher)
     this->number_of_students = 0;
     this->lesson = lesson;
     this->teacher = teacher;
-
+    this->filePath = "../data_resources/" + lesson_enum_str[lesson] + '-' + teacher +".json" ;
     ifstream ifs(filePath.toStdString());
     if(this->dataReader.parse(ifs,this->dataHolder))
     {
@@ -28,7 +28,7 @@ Class::Class(enum lesson lesson, QString teacher)
     return;
     }
 
-    this->filePath = "../data_resources/" + lesson_enum_str[lesson] + '-' + teacher;
+
     ofstream ofs(filePath.toStdString());
     Json::StyledWriter writer;
 
@@ -201,6 +201,37 @@ bool Class::studentIsValid(QString studentUsername)
                 return true;
         }
         return false;
+    }
+
+}
+
+void Class::setinformation(enum lesson lesson, QString location, QString time, enum day day, QMap<QString , float> students)
+{
+    this->filePath = "../data_resources/" + lesson_enum_str[lesson] + '-' + this->getTeacher() +".json" ;
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        this->dataHolder["lesson"] = lesson_enum_str[lesson].toStdString();
+        this->dataHolder["location"] = location.toStdString();
+        this->dataHolder["time"] = time.toStdString();
+        this->dataHolder["day"] = day_enum_str[day].toStdString();
+        for(auto student =  students.begin() ; student != students.end() ; student++)
+        {
+            Json::Value usernmeKey;
+            usernmeKey["username"] = student.key().toStdString();
+            usernmeKey["score"] = student.value();
+            this->dataHolder["student_list"].append(usernmeKey);
+            if(this->number_of_students < 1 )
+                this->number_of_students = 0 ;
+            this->number_of_students++;
+        }
+        this->dataHolder["number_of_students"] = this->number_of_students;
+
+        ofstream ofs(this->filePath.toStdString());
+        Json::StyledWriter writer;
+        string finalPart = writer.write(this->dataHolder);
+        ofs << finalPart ;
+        ofs.close();
     }
 
 }

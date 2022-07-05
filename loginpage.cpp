@@ -1,9 +1,10 @@
 #include <QMessageBox>
 #include <iostream>
+#include<QAbstractButton>
+
 
 #include "Auth.h"
 #include "Filemanager.h"
-
 #include "loginpage.h"
 #include "studentmainmenu.h"
 #include "adminmainmenu.h"
@@ -71,7 +72,11 @@ void LoginPage::on_Loginbtn_clicked()
 
 
         loginStatus->show();
-
+        connect(loginStatus ,
+                &QMessageBox::buttonClicked ,
+                loginStatus ,
+                &QMessageBox::deleteLater
+                );
         return;
     }
 
@@ -87,21 +92,24 @@ void LoginPage::on_Loginbtn_clicked()
 
     QString userType = parsedUser[parsedUser.size() - 1];
 
-    if(userType == "ADMIN")
+    if(userType == "Admin")
     {
         AdminMainMenu* amm = new AdminMainMenu;
         amm->show();
     }
-    else if(userType == "TEACHER")
+    else if(userType == "Teacher")
     {
         TeacherMainMenu* tmm = new TeacherMainMenu;
         tmm->show();
+
     }
-    else
+    else if (userType == "Student")
     {
         StudentMainMenu* smm = new StudentMainMenu;
         smm->show();
     }
+//    else
+
 
     close();
 }

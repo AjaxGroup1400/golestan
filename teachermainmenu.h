@@ -35,6 +35,7 @@ public:
     void removeLessonFile( Class lesson );
     int teacherIsValidFile();
     Class getLesson(lesson lesson);
+    QString lessonNameCheck(QString sentName);
 
 
 
@@ -58,7 +59,7 @@ private:
     void initFile();
     Json::Reader dataReader;
     Json::Value dataHolder;
-    QString filePath = "teacher_lessons.json";
+    QString filePath = "../data_resources/teacher_lessons.json";
 
 //    QMultiMap < QString ,QMap<QString, float> > students;
 //    QMap<QString , int> SurveyResult;

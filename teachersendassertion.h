@@ -14,7 +14,7 @@ class TeacherSendAssertion : public QWidget
     Q_OBJECT
 
 public:
-    explicit TeacherSendAssertion( TeacherMainMenu * tm , QWidget *parent = nullptr);
+    explicit TeacherSendAssertion( TeacherMainMenu * tm = nullptr , QWidget *parent = nullptr);
     ~TeacherSendAssertion();
 
 private slots:

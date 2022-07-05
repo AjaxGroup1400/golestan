@@ -49,10 +49,10 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
 //        auto parse = userFile.parse(item);
 
 //        if (parse[0] == this->get_username()){
-///*            QMap <QString, float> studentscore;
+/*            QMap <QString, float> studentscore;
 //            studentscore.insert(parse[2],parse[3].toFloat()) ;
 //            this->students.insert( parse[1] , studentscore ) ;
-//*/
+*/
 //        }
 //    }
 
@@ -179,7 +179,9 @@ void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
         ofstream ofs(this->filePath.toStdString());
         Json::StyledWriter writer;
         string finalPart = writer.write(this->dataHolder);
+        ofs << this->dataHolder;
         ofs.close();
+        return;
     }
     exception exceptionReason("couldn't open file \"teacher_lessons.json\"");
     emit exceptioOccured(exceptionReason);
@@ -270,6 +272,26 @@ Class TeacherMainMenu::getLesson(lesson lesson)
             return this->classes[i];
         }
     }
+
+}
+
+QString TeacherMainMenu::lessonNameCheck(QString sentName)
+{
+    if (sentName == "physics" || sentName == "Physics" || sentName == "PHYSICS")
+        return "PHYSICS";
+    else if (sentName == "chemistry" || sentName == "Chemistry" || sentName == "CHEMISTRY")
+        return "CHEMISTRY";
+    else if (sentName == "calculus" || sentName == "Calculus" || sentName == "CALCULUS")
+        return "CALCULUS";
+    else if (sentName == "basic programming" || sentName == "Basic programming" || sentName == "basic Programming" || sentName == "Basic Programming" || sentName == "BasicProgramming" || sentName == "basicProgramming" || sentName == "Basicprogramming" || sentName == "basicrogramming" || sentName == "BASIC PROGRAMMING" || sentName == "BASICPROGRAMMING")
+        return "BP";
+    else if (sentName == "discrete" || sentName == "Discrete" || sentName == "DISCRETE")
+        return "DISCRETE";
+    else
+    {
+        throw std::exception ("The name you have entered is not valid\nPlease enter a valid lesson name.The cceptable names for lessons are :\nphysics\ncalculus\ndiscrete\nbsic programming\nchemistry");
+    }
+
 }
 
 

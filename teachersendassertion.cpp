@@ -87,14 +87,30 @@ void TeacherSendAssertion::on_pushButton_clicked()
 
 void TeacherSendAssertion::on_sendbtn_clicked()
 {
-    QString title = ui->TitleLine->text();
-    QString message = ui->messageLine->toPlainText();
-    QString lesson ;
-//    Class lessonClass = string_to_lesson(lesson);
+    try
+    {
 
-//    mainmenu->sendingNotification(title , message , lessonClass );
+        QString title = ui->TitleLine->text();
+        QString message = ui->messageLine->toPlainText();
+        QString ls = "chemistry" ;
+        QString lesson = mainmenu->lessonNameCheck(ls);
+        Class lessonClass = mainmenu->getLesson(string_to_lesson(lesson));
+//        QMap<QString , float> stList;
+//        stList.insert("1287237409" , -1);
+//        stList.insert("1287237405" , -1);
 
-
-
+//        lessonClass.setinformation(string_to_lesson("chemistry") , "talar2" , "11:00" , string_to_day("SUNDAY") , stList);
+        mainmenu->sendingNotification(title , message , lessonClass );
+//        this->close();
+    }
+    catch(std::exception e)
+    {
+        emit mainmenu->exceptioOccured(e);
+    }
+    catch(...)
+    {
+        std::exception e ("Unknown exception");
+        emit mainmenu->exceptioOccured(e);
+    }
 }
 
