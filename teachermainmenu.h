@@ -31,8 +31,8 @@ public:
     void sendingNotification(QString title , QString message , Class Class);
 
     void addNewTeacherToFile(QList<QString> lessons);
-    void addNewLessonFile( QString lesson );
-    void removeLessonFile( QString lesson );
+    void addNewLessonFile(Class new_class);
+    void removeLessonFile(Class lesson);
     int teacherIsValidFile();
 
 
@@ -47,6 +47,8 @@ private slots:
     void on_pushButton_6_clicked();
 
     void on_pushButton_4_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::TeacherMainMenu *ui;

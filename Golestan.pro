@@ -13,6 +13,7 @@ SOURCES += \
     Class.cpp \
     Enum.cpp \
     Poll.cpp \
+    UserType.cpp \
     adminaddpeople.cpp \
     adminsendassertion.cpp \
     teachersendassertion.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     Class.h \
     Enum.h \
     Poll.h \
+    UserType.h \
     adminaddpeople.h \
     adminsendassertion.h \
     teachersendassertion.h \

@@ -2,12 +2,14 @@
 #include "Filemanager.h"
 #include "TeacherWeeklyCalendar.h"
 #include "CalendarCreator.h"
+#include "studentmainmenu.h"
 #include "Poll.h"
 #include "Auth.h"
 
 #include <QApplication>
 #include <iostream>
 #include <fstream>
+#include <functional>
 
 int main(int argc, char *argv[])
 {
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
 
 
     userFile.append(Auth::formUserData(
-        "1287237408", "@mir1990",
+        "1287237409", "@mir1990",
         "Asghar", "Mamadi",
         "1273882407", "09921863951",
         "STUDENT"

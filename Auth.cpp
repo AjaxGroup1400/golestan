@@ -3,6 +3,11 @@
 #include "Filemanager.h"
 #include "Auth.h"
 
+// for hash class
+#include <functional>
+
+using std::hash;
+
 Auth::Auth()
 {
     return;
@@ -15,8 +20,10 @@ Auth::~Auth()
 
 QString Auth::formUserData(QString username, QString password, QString firstname, QString lastname, QString nationalCode, QString phoneNumber, QString role)
 {
+    hash<QString> passHasher;
+
     QString mergedData = username + '\t' +
-                         password + '\t' +
+                         QString::number(passHasher(password)) + '\t' +
                          firstname + '\t' +
                          lastname + '\t' +
                          nationalCode + '\t' +

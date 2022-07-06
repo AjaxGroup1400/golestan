@@ -22,10 +22,22 @@ public:
     explicit StudentMainMenu(QWidget *parent = nullptr); //write student file that contains username and class and maybe scores
     ~StudentMainMenu();
 
+    QList<float> getAverages();
+
     void scores(); //file can be updated
-    void registry(Class Class); //add class to student's file
+
+    // adds class at the end of term classes in file
+    void registry(Class Class);
+
+    // adds term into the list of target student in file
+    void addTerm();
+
+    // it should be called when student remove a Class or his/her teacher does
+    void unregistery(Class Class);
+
     void surveyOfTeachers(Class Class , int result);
 
+    void load();
 
 private slots:
     void on_pushButton_5_clicked();
@@ -34,45 +46,22 @@ private slots:
 
 private:
     Ui::StudentMainMenu *ui;
-    int Term;
-    int currentAverege;
 
-//    QList < QMap <Class, float> > terms;
-//    QList <float> avereges;
-
-    QMap < QList <Class> , float> terms; //Averege: float
-
-    QMap <Class,float> this_term_classes; //Score: float
-
-    QList <Class> classes;
-    QString filePath;
+    QString filePath = "../data_resources/student_term.json";
     Json::Value dataHolder;
     Json::Reader dataReader;
 
-    // checks for existance of student related file or create it (should be called in cosntructor)
-    void initFile();
-};
+    int Term;
+    int currentAverege;
 
-//List[0]:{
-//    bp:19
-//    discrete: 18.5
-//    ...
-//}
+    QList <float> avereges;
+
+//    QMap < QList <Class> , float> terms; //Averege: float
+
+    // whenever the user wants to see the details of term this method will be called
+    QList <Class> currentClasses;
+
+};
 
 
 #endif // STUDENTMAINMENU_H
-
-/* watching scores
- * registery
- * arzeshyabi ostad
-
- * weekly calender
- */
-
-
-/*proficiency of teacher
- *responsiveness of the teacher
- *management of the class
- *creativity
- *dicipline
-*/
