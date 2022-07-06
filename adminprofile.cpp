@@ -152,7 +152,7 @@ void AdminProfile::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminMainMenu* amm = new AdminMainMenu;
+        AdminMainMenu* amm = new AdminMainMenu(mainmenu->get_first_name() , mainmenu);
         amm->show();
         exit->close();
         close();
@@ -165,7 +165,7 @@ void AdminProfile::on_backToMenu_clicked()
 
 void AdminProfile::on_pushButton_4_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);

@@ -27,6 +27,7 @@ StudentProfile::StudentProfile(StudentMainMenu * member , QWidget *parent) :
     this->ui->label_20->setVisible(false);
 
     this->mainmenu = member;
+    this->ui->label_2->setText("Hi dear "  + mainmenu->get_first_name());
 
     this->ui->nameLine->setText(mainmenu->get_first_name());
     this->ui->nameLine->setDisabled(true);
@@ -86,7 +87,7 @@ void StudentProfile::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name());
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu);
         smm->show();
         exit->close();
         close();

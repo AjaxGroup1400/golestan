@@ -14,7 +14,7 @@ class AdminMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit AdminMainMenu(QString firstName = nullptr , QWidget *parent = nullptr);
+    explicit AdminMainMenu(QString firstName , AdminMainMenu * member = nullptr , QWidget *parent = nullptr);
     ~AdminMainMenu();
 
 
@@ -31,6 +31,8 @@ private slots:
 
 private:
     Ui::AdminMainMenu *ui;
+
+    AdminMainMenu * mainmenu;
 
 
 };

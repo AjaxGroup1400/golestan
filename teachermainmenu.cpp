@@ -25,7 +25,7 @@ using namespace std;
 
 
 
-TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
+TeacherMainMenu::TeacherMainMenu(QString firstname , QString username , TeacherMainMenu * member, QWidget *parent) :
 //    QWidget(parent),
     ui(new Ui::TeacherMainMenu)
 {
@@ -38,6 +38,23 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
     this->ui->pushButton_6->setStyleSheet("background-color:transparent");
     this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->label_13->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
+
+
+    this->mainmenu = member;
+    if(member!=nullptr)
+    {
+        this->set_username(mainmenu->get_username());
+        this->set_password(mainmenu->get_password());
+        this->set_last_name(mainmenu->get_last_name());
+        this->set_role(mainmenu->get_role());
+        this->set_national_code(mainmenu->get_national_code());
+        this->set_phone_number(mainmenu->get_phone_number());
+    }
+
+    this->set_username(username);
+
+    this->set_first_name(firstname);
+    this->ui->label_2->setText("Hi dear " + this->get_first_name());
 
 //    FileManager userFile;
 
@@ -60,27 +77,27 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
     initFile();
 }
 
-TeacherMainMenu::TeacherMainMenu(QString firstname , QString username):
+//TeacherMainMenu::TeacherMainMenu(QString firstname , QString username):
 
-ui(new Ui::TeacherMainMenu)
-{
-    ui->setupUi(this);
-    this->ui->pushButton->setStyleSheet("background-color:transparent");
-    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
-    this->ui->pushButton_3->setStyleSheet("background-color:transparent");
-    this->ui->pushButton_4->setStyleSheet("background-color:transparent");
-    this->ui->pushButton_5->setStyleSheet("background-color:transparent");
-    this->ui->pushButton_6->setStyleSheet("background-color:transparent");
-    this->ui->pushButton_7->setStyleSheet("background-color:transparent");
-    this->ui->label_13->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
-    this->set_username(username);
+//ui(new Ui::TeacherMainMenu)
+//{
+//    ui->setupUi(this);
+//    this->ui->pushButton->setStyleSheet("background-color:transparent");
+//    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
+//    this->ui->pushButton_3->setStyleSheet("background-color:transparent");
+//    this->ui->pushButton_4->setStyleSheet("background-color:transparent");
+//    this->ui->pushButton_5->setStyleSheet("background-color:transparent");
+//    this->ui->pushButton_6->setStyleSheet("background-color:transparent");
+//    this->ui->pushButton_7->setStyleSheet("background-color:transparent");
+//    this->ui->label_13->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
+//    this->set_username(username);
 
-    this->set_first_name(firstname);
-    this->ui->label_2->setText("Hi dear " + this->get_first_name());
-    initFile();
+//    this->set_first_name(firstname);
+//    this->ui->label_2->setText("Hi dear " + this->get_first_name());
+//    initFile();
 
 
-}
+//}
 
 TeacherMainMenu::~TeacherMainMenu()
 {
@@ -107,7 +124,7 @@ void TeacherMainMenu::on_pushButton_7_clicked()
 
 void TeacherMainMenu::on_pushButton_clicked()
 {
-    teacherProfile* tp = new teacherProfile;
+    teacherProfile* tp = new teacherProfile(this);
     tp->show();
     close();
 }
