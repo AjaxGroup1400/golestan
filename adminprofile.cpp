@@ -1,10 +1,14 @@
 #include "adminprofile.h"
 #include "ui_adminprofile.h"
-#include <QValidator>
-#include <QMessageBox>
 #include "adminmainmenu.h"
 #include "adminsendassertion.h"
 #include "adminaddpeople.h"
+#include "Auth.h"
+#include "Filemanager.h"
+#include "Md5Hash.h"
+
+#include <QMessageBox>
+#include <QValidator>
 
 AdminProfile::AdminProfile(AdminMainMenu * adminMainMenuMember, QWidget *parent) :
     QWidget(parent),
@@ -63,13 +67,69 @@ void AdminProfile::on_applyChangeNumber_clicked()
     this->ui->numberLine->setDisabled(true);
     this->ui->applyChangeNumber->setVisible(false);
     this->ui->label_20->setVisible(false);
+
+    QString newPhoneNumber = ui->numberLine->text();
+
+    int userIndex = Auth::findUser(this->mainmenu->get_username());
+
+    Auth::updateCredential(userIndex, 5, newPhoneNumber);
+
+    QMessageBox* phoneNumberChanged = new QMessageBox(QMessageBox::Icon::Information, "Phone Number Changed", "your phone number changed successfuly", QMessageBox::Button::Ok);
+
+    phoneNumberChanged->show();
+
+    connect(phoneNumberChanged , &QMessageBox::buttonClicked , phoneNumberChanged , &QMessageBox::deleteLater);
 }
-
-
 
 
 void AdminProfile::on_applyChangePass_clicked()
 {
+    FileManager userFile;
+
+    userFile.create();
+
+    userFile.loadData();
+
+    QString oldPassword = ui->oldPass->text();
+
+    QString newPassword = ui->newPass->text();
+
+    QString confirmNewPassword = ui->confirmNewPass->text();
+
+    int userIndex = Auth::findUser(this->mainmenu->get_username());
+
+    QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+    if(parsedUser.at(1) != QString::fromStdString(md5(oldPassword.toStdString())))
+    {
+        QMessageBox* wrongPassword = new QMessageBox(QMessageBox::Icon::Critical, "Wrong Password", "entered current password doesnt match.", QMessageBox::Button::Ok);
+
+        wrongPassword->show();
+
+        connect(wrongPassword , &QMessageBox::buttonClicked , wrongPassword , &QMessageBox::deleteLater);
+
+        return;
+    }
+
+    if(newPassword != confirmNewPassword)
+    {
+        QMessageBox* wrongPasswordConfirm = new QMessageBox(QMessageBox::Icon::Critical, "Passwords Doesnt Match", "new password and confirm new password doesnt match.", QMessageBox::Button::Ok);
+
+        wrongPasswordConfirm->show();
+
+        connect(wrongPasswordConfirm , &QMessageBox::buttonClicked , wrongPasswordConfirm , &QMessageBox::deleteLater);
+
+        return;
+    }
+
+    Auth::updateCredential(userIndex, 1, newPassword, true);
+
+    QMessageBox* wrongPasswordConfirm = new QMessageBox(QMessageBox::Icon::Information, "Password Changed", "your password changed successfuly.", QMessageBox::Button::Ok);
+
+    wrongPasswordConfirm->show();
+
+    connect(wrongPasswordConfirm , &QMessageBox::buttonClicked , wrongPasswordConfirm , &QMessageBox::deleteLater);
+
     this->ui->changePass->setVisible(false);
     this->ui->applyChangePass->setVisible(false);
     this->ui->label_24->setVisible(false);
