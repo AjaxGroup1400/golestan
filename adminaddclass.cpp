@@ -8,7 +8,7 @@
 #include "adminaddpeople.h"
 #include "adminmessages.h"
 
-adminAddClass::adminAddClass(QWidget *parent) :
+adminAddClass::adminAddClass(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::adminAddClass)
 {
@@ -19,6 +19,8 @@ adminAddClass::adminAddClass(QWidget *parent) :
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
     this->ui->pushButton_7->setStyleSheet("background-color: transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
+
+    this->mainmenu = member;
 }
 
 adminAddClass::~adminAddClass()
@@ -53,7 +55,7 @@ void adminAddClass::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminProfile* ap= new AdminProfile;
+        AdminProfile* ap= new AdminProfile(this->mainmenu);
         ap->show();
         exit->close();
         close();
@@ -73,7 +75,7 @@ void adminAddClass::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        adminMessages* as = new adminMessages;
+        adminMessages* as = new adminMessages(this->mainmenu);
         as->show();
         exit->close();
         close();
@@ -93,7 +95,7 @@ void adminAddClass::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminAddPeople* aap= new AdminAddPeople;
+        AdminAddPeople* aap= new AdminAddPeople(this->mainmenu);
         aap->show();
         exit->close();
         close();

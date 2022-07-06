@@ -9,7 +9,7 @@
 #include "adminwatchmessagecomplitly.h"
 
 
-adminMessages::adminMessages(QWidget *parent) :
+adminMessages::adminMessages(AdminMainMenu * reference , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::adminMessages)
 {
@@ -28,6 +28,8 @@ adminMessages::adminMessages(QWidget *parent) :
     this->ui->msgbtn6->setStyleSheet("background-color: transparent");
     this->ui->msgbtn7->setStyleSheet("background-color: transparent");
 
+    this->mainmenu = reference;
+
 }
 
 adminMessages::~adminMessages()
@@ -43,7 +45,7 @@ void adminMessages::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminProfile* ap= new AdminProfile;
+        AdminProfile* ap= new AdminProfile(mainmenu);
         ap->show();
         exit->close();
         close();
@@ -62,7 +64,7 @@ void adminMessages::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminAddPeople* aap= new AdminAddPeople;
+        AdminAddPeople* aap= new AdminAddPeople(mainmenu);
         aap->show();
         exit->close();
         close();
@@ -115,7 +117,7 @@ void adminMessages::on_backToMenu_clicked()
 
 void adminMessages::on_msgbtn1_clicked()
 {
-    adminWatchMessageComplitly* awmc = new adminWatchMessageComplitly;
+    adminWatchMessageComplitly* awmc = new adminWatchMessageComplitly(mainmenu);
     awmc->show();
     close();
 }
@@ -129,7 +131,7 @@ void adminMessages::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        adminAddClass* adc= new adminAddClass;
+        adminAddClass* adc= new adminAddClass(mainmenu);
         adc->show();
         exit->close();
         close();

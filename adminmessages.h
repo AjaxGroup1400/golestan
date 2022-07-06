@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include"adminmainmenu.h"
+
 namespace Ui {
 class adminMessages;
 }
@@ -12,7 +14,7 @@ class adminMessages : public QWidget
     Q_OBJECT
 
 public:
-    explicit adminMessages(QWidget *parent = nullptr);
+    explicit adminMessages(AdminMainMenu * reference , QWidget *parent = nullptr);
     ~adminMessages();
 
 private slots:
@@ -30,6 +32,7 @@ private slots:
 
 private:
     Ui::adminMessages *ui;
+    AdminMainMenu * mainmenu;
 };
 
 #endif // ADMINMESSAGES_H

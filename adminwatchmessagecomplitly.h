@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include"adminmainmenu.h"
+
 namespace Ui {
 class adminWatchMessageComplitly;
 }
@@ -12,7 +14,7 @@ class adminWatchMessageComplitly : public QWidget
     Q_OBJECT
 
 public:
-    explicit adminWatchMessageComplitly(QWidget *parent = nullptr);
+    explicit adminWatchMessageComplitly(AdminMainMenu * member , QWidget *parent = nullptr);
     ~adminWatchMessageComplitly();
 
 private slots:
@@ -30,6 +32,7 @@ private slots:
 
 private:
     Ui::adminWatchMessageComplitly *ui;
+    AdminMainMenu * mainMenu;
 };
 
 #endif // ADMINWATCHMESSAGECOMPLITLY_H

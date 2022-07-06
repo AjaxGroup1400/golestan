@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include"studentmainmenu.h"
+
 namespace Ui {
 class StudentWatchMessageComplitly;
 }
@@ -12,7 +14,7 @@ class StudentWatchMessageComplitly : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentWatchMessageComplitly(QWidget *parent = nullptr);
+    explicit StudentWatchMessageComplitly(StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentWatchMessageComplitly();
 
 private slots:
@@ -26,6 +28,8 @@ private slots:
 
 private:
     Ui::StudentWatchMessageComplitly *ui;
+
+    StudentMainMenu * mainmenu;
 };
 
 #endif // STUDENTWATCHMESSAGECOMPLITLY_H

@@ -7,7 +7,7 @@
 #include <QMessageBox>
 
 
-teacherWeeklySchedule::teacherWeeklySchedule(QWidget *parent) :
+teacherWeeklySchedule::teacherWeeklySchedule(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::teacherWeeklySchedule)
 {
@@ -20,6 +20,7 @@ teacherWeeklySchedule::teacherWeeklySchedule(QWidget *parent) :
     this->ui->pushButton_12->setStyleSheet("background-color: transparent");
 
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
+    this->mainmenu = member;
 }
 
 teacherWeeklySchedule::~teacherWeeklySchedule()
@@ -55,7 +56,7 @@ void teacherWeeklySchedule::on_pushButton_8_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherMessages* tm= new teacherMessages;
+        teacherMessages* tm= new teacherMessages(mainmenu);
         tm->show();
         exit->close();
         close();

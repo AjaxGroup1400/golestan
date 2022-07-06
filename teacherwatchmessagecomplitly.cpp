@@ -6,7 +6,7 @@
 #include "teacherweeklyschedule.h"
 #include <QMessageBox>
 
-teacherWatchMessageComplitly::teacherWatchMessageComplitly(QWidget *parent) :
+teacherWatchMessageComplitly::teacherWatchMessageComplitly(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::teacherWatchMessageComplitly)
 {
@@ -23,6 +23,8 @@ teacherWatchMessageComplitly::teacherWatchMessageComplitly(QWidget *parent) :
     this->ui->TitleLine->setEnabled(false);
     this->ui->SenderLine->setEnabled(false);
     this->ui->messageLine->setEnabled(false);
+
+    this->mainmenu = member;
 }
 
 teacherWatchMessageComplitly::~teacherWatchMessageComplitly()
@@ -51,7 +53,7 @@ void teacherWatchMessageComplitly::on_pushButton_7_clicked()
 
 void teacherWatchMessageComplitly::on_pushButton_8_clicked()
 {
-    teacherMessages* tm= new teacherMessages;
+    teacherMessages* tm= new teacherMessages(mainmenu);
     tm->show();
     close();
 }
@@ -78,7 +80,7 @@ void teacherWatchMessageComplitly::on_pushButton_10_clicked()
 
 void teacherWatchMessageComplitly::on_backToMenu_clicked()
 {
-    teacherMessages* tm= new teacherMessages;
+    teacherMessages* tm= new teacherMessages(mainmenu);
     tm->show();
     close();
 }
@@ -92,7 +94,7 @@ void teacherWatchMessageComplitly::on_pushButton_11_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherWeeklySchedule* tws = new teacherWeeklySchedule;
+        teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
         close();

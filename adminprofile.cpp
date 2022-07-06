@@ -6,7 +6,7 @@
 #include "adminsendassertion.h"
 #include "adminaddpeople.h"
 
-AdminProfile::AdminProfile(QString username , QString password , QString firstname , QString lastname, QString nationalcode , QString phonenumber , QString role,QWidget *parent) :
+AdminProfile::AdminProfile(AdminMainMenu * adminMainMenuMember, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminProfile)
 {
@@ -29,20 +29,20 @@ AdminProfile::AdminProfile(QString username , QString password , QString firstna
     this->ui->applyChangeNumber->setVisible(false);
     this->ui->label_20->setVisible(false);
 
+    this->mainmenu = adminMainMenuMember;
 
-
-    this->ui->nameLine->setText(firstname);
+    this->ui->nameLine->setText(mainmenu->get_first_name());
     this->ui->nameLine->setDisabled(true);
-    this->ui->lastNameLine->setText(lastname);
+    this->ui->lastNameLine->setText(mainmenu->get_last_name());
     this->ui->lastNameLine->setDisabled(true);
-    this->ui->NcodeLine->setText(nationalcode);
+    this->ui->NcodeLine->setText(mainmenu->get_national_code());
     this->ui->NcodeLine->setDisabled(true);
-    this->ui->RoleLine->setText(role);
+    this->ui->RoleLine->setText(mainmenu->get_role());
     this->ui->RoleLine->setDisabled(true);
-    this->ui->numberLine->setText(phonenumber);
+    this->ui->numberLine->setText(mainmenu->get_phone_number());
     this->ui->numberLine->setDisabled(true);
     this->ui->numberLine->setValidator(new QIntValidator(0, 100, this));
-    this->ui->label_2->setText("HI dear " + firstname);
+    this->ui->label_2->setText("HI dear " + mainmenu->get_first_name());
 }
 
 AdminProfile::~AdminProfile()
@@ -130,7 +130,7 @@ void AdminProfile::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminAddPeople* aap= new AdminAddPeople;
+        AdminAddPeople* aap= new AdminAddPeople(mainmenu);
         aap->show();
         exit->close();
         close();

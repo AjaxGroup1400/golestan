@@ -7,7 +7,7 @@
 #include "teacherwatchmessagecomplitly.h"
 #include "teacherweeklyschedule.h"
 
-teacherMessages::teacherMessages(QWidget *parent) :
+teacherMessages::teacherMessages(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::teacherMessages)
 {
@@ -26,6 +26,8 @@ teacherMessages::teacherMessages(QWidget *parent) :
     this->ui->msgbtn5->setStyleSheet("background-color: transparent");
     this->ui->msgbtn6->setStyleSheet("background-color: transparent");
     this->ui->msgbtn7->setStyleSheet("background-color: transparent");
+
+    this->mainmenu = member;
 }
 
 teacherMessages::~teacherMessages()
@@ -94,7 +96,7 @@ void teacherMessages::on_backToMenu_clicked()
 
 void teacherMessages::on_msgbtn1_clicked()
 {
-    teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly;
+    teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly(mainmenu);
     twmc->show();
     close();
 }
@@ -108,7 +110,7 @@ void teacherMessages::on_pushButton_5_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherWeeklySchedule* tws = new teacherWeeklySchedule;
+        teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
         close();

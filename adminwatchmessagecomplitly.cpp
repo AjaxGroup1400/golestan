@@ -7,7 +7,7 @@
 #include "adminmessages.h"
 #include <QMessageBox>
 
-adminWatchMessageComplitly::adminWatchMessageComplitly(QWidget *parent) :
+adminWatchMessageComplitly::adminWatchMessageComplitly(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::adminWatchMessageComplitly)
 {
@@ -22,6 +22,8 @@ adminWatchMessageComplitly::adminWatchMessageComplitly(QWidget *parent) :
     this->ui->TitleLine->setEnabled(false);
     this->ui->SenderLine->setEnabled(false);
     this->ui->messageLine->setEnabled(false);
+
+    this->mainMenu = member;
 }
 
 adminWatchMessageComplitly::~adminWatchMessageComplitly()
@@ -37,7 +39,7 @@ void adminWatchMessageComplitly::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminProfile* ap= new AdminProfile;
+        AdminProfile* ap= new AdminProfile(mainMenu);
         ap->show();
         exit->close();
         close();
@@ -50,7 +52,7 @@ void adminWatchMessageComplitly::on_pushButton_clicked()
 
 void adminWatchMessageComplitly::on_pushButton_2_clicked()
 {
-    adminMessages* as = new adminMessages;
+    adminMessages* as = new adminMessages(mainMenu);
     as->show();
     close();
 
@@ -65,7 +67,7 @@ void adminWatchMessageComplitly::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminAddPeople* aap= new AdminAddPeople;
+        AdminAddPeople* aap= new AdminAddPeople(mainMenu);
         aap->show();
         exit->close();
         close();
@@ -99,7 +101,7 @@ void adminWatchMessageComplitly::on_pushButton_4_clicked()
 
 void adminWatchMessageComplitly::on_backToMenu_clicked()
 {
-    adminMessages* as = new adminMessages;
+    adminMessages* as = new adminMessages(mainMenu);
     as->show();
     close();
 
@@ -114,7 +116,7 @@ void adminWatchMessageComplitly::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        adminAddClass* adc= new adminAddClass;
+        adminAddClass* adc= new adminAddClass(mainMenu);
         adc->show();
         exit->close();
         close();

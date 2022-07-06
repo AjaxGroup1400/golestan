@@ -4,7 +4,7 @@
 #include <QMessageBox>
 #include "studentmainmenu.h"
 
-StudentProfile::StudentProfile(QString username , QString password , QString firstname , QString lastname , QString nationlcode , QString phonenumber , QString role , QWidget *parent) :
+StudentProfile::StudentProfile(StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentProfile)
 {
@@ -26,17 +26,17 @@ StudentProfile::StudentProfile(QString username , QString password , QString fir
     this->ui->applychng->setVisible(false);
     this->ui->label_20->setVisible(false);
 
+    this->mainmenu = member;
 
-
-    this->ui->nameLine->setText(firstname);
+    this->ui->nameLine->setText(mainmenu->get_first_name());
     this->ui->nameLine->setDisabled(true);
-    this->ui->lastNameLine->setText(lastname);
+    this->ui->lastNameLine->setText(mainmenu->get_last_name());
     this->ui->lastNameLine->setDisabled(true);
-    this->ui->NcodeLine->setText(nationlcode);
+    this->ui->NcodeLine->setText(mainmenu->get_national_code());
     this->ui->NcodeLine->setDisabled(true);
-    this->ui->RoleLine->setText(role);
+    this->ui->RoleLine->setText(mainmenu->get_role());
     this->ui->RoleLine->setDisabled(true);
-    this->ui->numberLine->setText(phonenumber);
+    this->ui->numberLine->setText(mainmenu->get_phone_number());
     this->ui->numberLine->setDisabled(true);
     this->ui->numberLine->setValidator(new QIntValidator(this));
 }
@@ -86,7 +86,7 @@ void StudentProfile::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu;
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name());
         smm->show();
         exit->close();
         close();

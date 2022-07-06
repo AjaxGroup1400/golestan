@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include"teachermainmenu.h"
+
 namespace Ui {
 class teacherWeeklySchedule;
 }
@@ -12,7 +14,7 @@ class teacherWeeklySchedule : public QWidget
     Q_OBJECT
 
 public:
-    explicit teacherWeeklySchedule(QWidget *parent = nullptr);
+    explicit teacherWeeklySchedule(TeacherMainMenu * member , QWidget *parent = nullptr);
     ~teacherWeeklySchedule();
 
 private slots:
@@ -26,6 +28,8 @@ private slots:
 
 private:
     Ui::teacherWeeklySchedule *ui;
+
+    TeacherMainMenu * mainmenu ;
 };
 
 #endif // TEACHERWEEKLYSCHEDULE_H

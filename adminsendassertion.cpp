@@ -84,7 +84,7 @@ void AdminSendAssertion::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminProfile* ap= new AdminProfile(mainmenu->get_username() , mainmenu->get_password() , mainmenu->get_first_name() , mainmenu->get_last_name() , mainmenu->get_national_code() , mainmenu->get_phone_number() , mainmenu->get_role());
+        AdminProfile* ap= new AdminProfile(mainmenu);
         ap->show();
         exit->close();
         close();
@@ -103,7 +103,7 @@ void AdminSendAssertion::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminAddPeople* aap= new AdminAddPeople;
+        AdminAddPeople* aap= new AdminAddPeople(mainmenu);
         aap->show();
         exit->close();
         close();

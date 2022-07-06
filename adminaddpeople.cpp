@@ -5,7 +5,7 @@
 #include "adminsendassertion.h"
 #include <QMessageBox>
 
-AdminAddPeople::AdminAddPeople(QWidget *parent) :
+AdminAddPeople::AdminAddPeople(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminAddPeople)
 {
@@ -17,6 +17,7 @@ AdminAddPeople::AdminAddPeople(QWidget *parent) :
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
     this->ui->AddBtn->setStyleSheet("background-color: transparent");
 
+    this->mainmenu = member;
 }
 
 AdminAddPeople::~AdminAddPeople()
@@ -59,7 +60,7 @@ void AdminAddPeople::on_pushButton_clicked()
         else if(ui->student->isChecked())
             role = "Student";
 
-        AdminProfile* ap= new AdminProfile("1287237408" , "@mir1990" , ui->nameLine->text() , ui->lastNameLine->text() , ui->NcodeLine->text() , ui->numberLine->text() , role);
+        AdminProfile* ap= new AdminProfile(mainmenu);
         ap->show();
         exit->close();
         close();

@@ -60,7 +60,7 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
     initFile();
 }
 
-TeacherMainMenu::TeacherMainMenu(QString username):
+TeacherMainMenu::TeacherMainMenu(QString firstname , QString username):
 
 ui(new Ui::TeacherMainMenu)
 {
@@ -74,7 +74,11 @@ ui(new Ui::TeacherMainMenu)
     this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->label_13->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
     this->set_username(username);
+
+    this->set_first_name(firstname);
+    this->ui->label_2->setText("Hi dear " + this->get_first_name());
     initFile();
+
 
 }
 

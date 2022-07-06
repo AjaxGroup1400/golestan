@@ -14,7 +14,7 @@ class AdminMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit AdminMainMenu(QWidget *parent = nullptr);
+    explicit AdminMainMenu(QString firstName = nullptr , QWidget *parent = nullptr);
     ~AdminMainMenu();
 
 

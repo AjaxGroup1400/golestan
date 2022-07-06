@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+
+#include"adminmainmenu.h"
+
 namespace Ui {
 class AdminProfile;
 }
@@ -12,7 +15,7 @@ class AdminProfile : public QWidget
     Q_OBJECT
 
 public:
-    explicit AdminProfile(QString username , QString password , QString firstname , QString lastname , QString nationalcode , QString phonenumber , QString role , QWidget *parent = nullptr);
+    explicit AdminProfile(AdminMainMenu * adminMainMenuMember, QWidget *parent = nullptr);
     ~AdminProfile();
 
 private slots:
@@ -35,6 +38,7 @@ private slots:
 
 private:
     Ui::AdminProfile *ui;
+    AdminMainMenu * mainmenu;
 };
 
 #endif // ADMINPROFILE_H

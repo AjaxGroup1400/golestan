@@ -6,7 +6,7 @@
 #include "studentwatchmessagecomplitly.h"
 #include "studentweeklyschedule.h"
 
-studentMessages::studentMessages(QWidget *parent) :
+studentMessages::studentMessages(StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::studentMessages)
 {
@@ -24,6 +24,8 @@ studentMessages::studentMessages(QWidget *parent) :
     this->ui->msgbtn6->setStyleSheet("background-color: transparent");
     this->ui->msgbtn7->setStyleSheet("background-color: transparent");
 
+    this->mainmenu = member;
+
 }
 
 studentMessages::~studentMessages()
@@ -39,7 +41,7 @@ void studentMessages::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentProfile* sp= new StudentProfile;
+        StudentProfile* sp= new StudentProfile(mainmenu);
         sp->show();
         exit->close();
         close();
@@ -59,7 +61,7 @@ void studentMessages::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu;
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name());
         smm->show();
         exit->close();
         close();
@@ -75,7 +77,7 @@ void studentMessages::on_backToMenu_clicked()
 
 void studentMessages::on_msgbtn1_clicked()
 {
-    StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly;
+    StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly(mainmenu);
     swmc->show();
     close();
 }
@@ -89,7 +91,7 @@ void studentMessages::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentWeeklySchedule* swc = new studentWeeklySchedule;
+        studentWeeklySchedule* swc = new studentWeeklySchedule(mainmenu);
         swc->show();
         exit->close();
         close();

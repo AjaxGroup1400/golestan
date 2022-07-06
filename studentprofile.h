@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include"studentmainmenu.h"
+
 namespace Ui {
 class StudentProfile;
 }
@@ -12,7 +14,7 @@ class StudentProfile : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentProfile(QString username , QString password , QString firstname , QString lastname , QString nationlcode , QString phonenumber , QString role , QWidget *parent = nullptr);
+    explicit StudentProfile(StudentMainMenu * member, QWidget *parent = nullptr);
     ~StudentProfile();
 
 private slots:
@@ -28,6 +30,7 @@ private slots:
 
 private:
     Ui::StudentProfile *ui;
+    StudentMainMenu * mainmenu;
 };
 
 #endif // STUDENTPROFILE_H

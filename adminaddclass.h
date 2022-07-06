@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include"adminmainmenu.h"
+
 namespace Ui {
 class adminAddClass;
 }
@@ -12,7 +14,7 @@ class adminAddClass : public QWidget
     Q_OBJECT
 
 public:
-    explicit adminAddClass(QWidget *parent = nullptr);
+    explicit adminAddClass(AdminMainMenu * member , QWidget *parent = nullptr);
     ~adminAddClass();
 
 private slots:
@@ -28,6 +30,7 @@ private slots:
 
 private:
     Ui::adminAddClass *ui;
+    AdminMainMenu * mainmenu;
 };
 
 #endif // ADMINADDCLASS_H

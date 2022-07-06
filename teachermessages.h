@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include"teachermainmenu.h"
+
 namespace Ui {
 class teacherMessages;
 }
@@ -12,7 +14,7 @@ class teacherMessages : public QWidget
     Q_OBJECT
 
 public:
-    explicit teacherMessages(QWidget *parent = nullptr);
+    explicit teacherMessages(TeacherMainMenu * member , QWidget *parent = nullptr);
     ~teacherMessages();
 
 private slots:
@@ -28,6 +30,8 @@ private slots:
 
 private:
     Ui::teacherMessages *ui;
+
+    TeacherMainMenu * mainmenu;
 };
 
 #endif // TEACHERMESSAGES_H
