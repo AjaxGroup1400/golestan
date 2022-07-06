@@ -9,6 +9,7 @@
 
 #include <QMessageBox>
 #include <QValidator>
+#include <QRegularExpressionValidator>
 
 AdminProfile::AdminProfile(AdminMainMenu * adminMainMenuMember, QWidget *parent) :
     QWidget(parent),
@@ -44,8 +45,10 @@ AdminProfile::AdminProfile(AdminMainMenu * adminMainMenuMember, QWidget *parent)
     this->ui->RoleLine->setText(mainmenu->get_role());
     this->ui->RoleLine->setDisabled(true);
     this->ui->numberLine->setText(mainmenu->get_phone_number());
+
     this->ui->numberLine->setDisabled(true);
-    this->ui->numberLine->setValidator(new QIntValidator(0, 100, this));
+    this->ui->numberLine->setValidator(new QRegularExpressionValidator(QRegularExpression(R"((0|\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8})"), this));
+
     this->ui->label_2->setText("HI dear " + mainmenu->get_first_name());
 }
 
@@ -124,11 +127,11 @@ void AdminProfile::on_applyChangePass_clicked()
 
     Auth::updateCredential(userIndex, 1, newPassword, true);
 
-    QMessageBox* wrongPasswordConfirm = new QMessageBox(QMessageBox::Icon::Information, "Password Changed", "your password changed successfuly.", QMessageBox::Button::Ok);
+    QMessageBox* passwordChanged = new QMessageBox(QMessageBox::Icon::Information, "Password Changed", "your password changed successfuly.", QMessageBox::Button::Ok);
 
-    wrongPasswordConfirm->show();
+    passwordChanged->show();
 
-    connect(wrongPasswordConfirm , &QMessageBox::buttonClicked , wrongPasswordConfirm , &QMessageBox::deleteLater);
+    connect(passwordChanged , &QMessageBox::buttonClicked , passwordChanged , &QMessageBox::deleteLater);
 
     this->ui->changePass->setVisible(false);
     this->ui->applyChangePass->setVisible(false);
