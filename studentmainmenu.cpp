@@ -11,8 +11,7 @@
 #include <string>
 #include <fstream>
 
-using std::ifstream, std::string;
-using std::ofstream;
+using std::ifstream, std::string, std::ofstream;
 
 StudentMainMenu::StudentMainMenu(QWidget *parent) :
 //    QWidget(parent),

@@ -9,6 +9,14 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    adminaddclass.cpp \
+    adminmessages.cpp \
+    adminwatchmessagecomplitly.cpp \
+    teacherwatchmessagecomplitly.cpp \
+    teacherweeklyschedule.cpp \
+    studentmessages.cpp \
+    studentwatchmessagecomplitly.cpp \
+    teachermessages.cpp \
     CalendarCreator.cpp \
     Class.cpp \
     Enum.cpp \
@@ -34,9 +42,19 @@ SOURCES += \
     studentprofile.cpp \
     StudentNotification.cpp \
     teachermainmenu.cpp \
-    teacherprofile.cpp
+    teacherprofile.cpp \
 
 HEADERS += \
+    adminaddclass.h \
+    adminmessages.h \
+    adminwatchmessagecomplitly.h \
+    teacherweeklyschedule.h \
+    teacherwatchmessagecomplitly.h \
+    studentmessages.h \
+    studentwatchmessagecomplitly.h \
+    studentweeklyschedule.h \
+    studentmessages.h \
+    teachermessages.h \
     CalendarCreator.h \
     Class.h \
     Enum.h \
@@ -65,6 +83,15 @@ HEADERS += \
     teacherprofile.h
 
 FORMS += \
+    adminaddclass.ui \
+    adminmessages.ui \
+    adminwatchmessagecomplitly.ui \
+    teacherwatchmessagecomplitly.ui \
+    teacherweeklyschedule.ui \
+    studentwatchmessagecomplitly.ui \
+    studentweeklyschedule.ui \
+    studentmessages.ui \
+    teachermessages.ui \
     adminaddpeople.ui \
     adminsendassertion.ui \
     teachersendassertion.ui \
