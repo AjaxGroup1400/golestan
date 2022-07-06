@@ -26,6 +26,8 @@ public:
     static void updateCredential(int rowIndex, int itemIndex, QString newValue, bool shouldHash = false);
 
     static int findUser(QString username);
+
+    static bool isValidIranianNationalCode(const char *input);
 };
 
 

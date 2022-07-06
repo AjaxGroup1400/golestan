@@ -3,7 +3,12 @@
 #include "adminmainmenu.h"
 #include "adminprofile.h"
 #include "adminsendassertion.h"
+#include "Filemanager.h"
+#include "Auth.h"
+
 #include <QMessageBox>
+#include <QValidator>
+#include <QRegularExpression>
 
 AdminAddPeople::AdminAddPeople(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -18,7 +23,9 @@ AdminAddPeople::AdminAddPeople(AdminMainMenu * member , QWidget *parent) :
     this->ui->AddBtn->setStyleSheet("background-color: transparent");
 
     this->mainmenu = member;
-    this->ui->label_2->setText("HI dear " + mainmenu->get_first_name());
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
+    this->ui->numberLine->setValidator(new QRegularExpressionValidator(QRegularExpression(R"((0|\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8})"), this));
 }
 
 AdminAddPeople::~AdminAddPeople()
@@ -54,11 +61,11 @@ void AdminAddPeople::on_pushButton_clicked()
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
         QString role ;
-        if(ui->admin->isChecked())
+        if(ui->adminRadio->isChecked())
             role = "Admin";
-        else if (ui->teacher->isChecked())
+        else if (ui->teacherRadio->isChecked())
             role = "teacher";
-        else if(ui->student->isChecked())
+        else if(ui->studentRadio->isChecked())
             role = "Student";
 
         AdminProfile* ap= new AdminProfile(mainmenu);
@@ -89,5 +96,106 @@ void AdminAddPeople::on_pushButton_4_clicked()
     else{
         exit->close();
     }
+}
+
+
+void AdminAddPeople::on_AddBtn_clicked()
+{
+    QString firstname = ui->nameLine->text();
+
+    QString lastname = ui->lastNameLine->text();
+
+    // national code is used as username
+    QString nationalCode = ui->nationalCodeLine->text();
+
+    QString phoneNumber = ui->numberLine->text();
+
+    QString password = lastname + phoneNumber;
+
+    QString role;
+
+//    if(Auth::isValidIranianNationalCode(nationalCode.toStdString().c_str()))
+//    {
+//        QMessageBox* invalidNationalCode = new QMessageBox(QMessageBox::Icon::Critical, "Invalid National Code", "please enter a valid national code.", QMessageBox::Button::Ok);
+
+//        invalidNationalCode->show();
+
+//        connect(invalidNationalCode , &QMessageBox::buttonClicked , invalidNationalCode , &QMessageBox::deleteLater);
+
+//        return;
+//    }
+
+    if(firstname.isEmpty() || lastname.isEmpty() || nationalCode.isEmpty() || phoneNumber.isEmpty())
+    {
+        QMessageBox* emptyField = new QMessageBox(QMessageBox::Icon::Critical, "Empty Field", "one of the fields is empty.", QMessageBox::Button::Ok);
+
+        emptyField->show();
+
+        connect(emptyField , &QMessageBox::buttonClicked , emptyField , &QMessageBox::deleteLater);
+
+        return;
+    }
+
+    if(ui->adminRadio->isChecked())
+        role = "Admin";
+    else if(ui->teacherRadio->isChecked())
+        role = "Teacher";
+    else if(ui->studentRadio->isChecked())
+        role = "Student";
+    else
+    {
+        QMessageBox* noRoleSelected = new QMessageBox(QMessageBox::Icon::Critical, "No Role Selected", "you should select a role.", QMessageBox::Button::Ok);
+
+        noRoleSelected->show();
+
+        connect(noRoleSelected , &QMessageBox::buttonClicked , noRoleSelected , &QMessageBox::deleteLater);
+
+        return;
+    }
+
+    try {
+        // it throws if it doesn't find national code
+        Auth::findUser(nationalCode);
+
+        QMessageBox* noRoleSelected = new QMessageBox(QMessageBox::Icon::Critical, "Duplicate National Code(Username)", "please enter another national code(username)", QMessageBox::Button::Ok);
+
+        noRoleSelected->show();
+
+        connect(noRoleSelected , &QMessageBox::buttonClicked , noRoleSelected , &QMessageBox::deleteLater);
+
+    } catch (...) {
+
+        FileManager userFile;
+
+        userFile.create();
+
+        userFile.loadData();
+
+        QString newUserData = Auth::formUserData(
+            nationalCode, password,
+            firstname, lastname,
+            nationalCode, phoneNumber,
+            role, true
+            );
+
+        userFile.append(newUserData);
+
+        userFile.write();
+
+        QMessageBox* userCreated = new QMessageBox(QMessageBox::Icon::Information, "User Created", "user with entered info created.", QMessageBox::Button::Ok);
+
+        userCreated->show();
+
+        connect(userCreated , &QMessageBox::buttonClicked , userCreated , &QMessageBox::deleteLater);
+
+        ui->nameLine->clear();
+
+        ui->lastNameLine->clear();
+
+        ui->nationalCodeLine->clear();
+
+        ui->numberLine->clear();
+    }
+
 }
 
