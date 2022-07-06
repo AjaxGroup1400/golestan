@@ -22,6 +22,7 @@ class TeacherMainMenu : public User
 
 public:
     explicit TeacherMainMenu(QWidget *parent = nullptr);
+    TeacherMainMenu(QString username);
     ~TeacherMainMenu();
 
 //    QMap<QString, float> studentsList(QString classname);

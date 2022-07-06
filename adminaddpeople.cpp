@@ -51,7 +51,15 @@ void AdminAddPeople::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminProfile* ap= new AdminProfile;
+        QString role ;
+        if(ui->admin->isChecked())
+            role = "Admin";
+        else if (ui->teacher->isChecked())
+            role = "teacher";
+        else if(ui->student->isChecked())
+            role = "Student";
+
+        AdminProfile* ap= new AdminProfile("1287237408" , "@mir1990" , ui->nameLine->text() , ui->lastNameLine->text() , ui->NcodeLine->text() , ui->numberLine->text() , role);
         ap->show();
         exit->close();
         close();

@@ -12,7 +12,7 @@ class AdminProfile : public QWidget
     Q_OBJECT
 
 public:
-    explicit AdminProfile(QWidget *parent = nullptr);
+    explicit AdminProfile(QString username , QString password , QString firstname , QString lastname , QString nationalcode , QString phonenumber , QString role , QWidget *parent = nullptr);
     ~AdminProfile();
 
 private slots:

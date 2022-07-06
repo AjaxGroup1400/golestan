@@ -92,17 +92,29 @@ void LoginPage::on_Loginbtn_clicked()
 
     QString userType = parsedUser[parsedUser.size() - 1];
 
+
+
     if(userType == "Admin")
     {
         AdminMainMenu* amm = new AdminMainMenu;
         amm->set_username(ui->userLine->text());
+        amm->set_first_name(parsedUser[2]);
+        amm->set_last_name(parsedUser[3]);
+        amm->set_national_code(parsedUser[4]);
+        amm->set_phone_number(parsedUser[5]);
+        amm->set_role(parsedUser[6]);
         amm->set_password(ui->passLine->text());
         amm->show();
     }
     else if(userType == "Teacher")
     {
-        TeacherMainMenu* tmm = new TeacherMainMenu;
-        tmm->set_username(ui->userLine->text());
+        TeacherMainMenu* tmm = new TeacherMainMenu(ui->userLine->text());
+//        tmm->set_username(ui->userLine->text());
+        tmm->set_first_name(parsedUser[2]);
+        tmm->set_last_name(parsedUser[3]);
+        tmm->set_national_code(parsedUser[4]);
+        tmm->set_phone_number(parsedUser[5]);
+        tmm->set_role(parsedUser[6]);
         tmm->set_password(ui->passLine->text());
         tmm->show();
 
@@ -111,6 +123,11 @@ void LoginPage::on_Loginbtn_clicked()
     {
         StudentMainMenu* smm = new StudentMainMenu;
         smm->set_username(ui->userLine->text());
+        smm->set_first_name(parsedUser[2]);
+        smm->set_last_name(parsedUser[3]);
+        smm->set_national_code(parsedUser[4]);
+        smm->set_phone_number(parsedUser[5]);
+        smm->set_role(parsedUser[6]);
         smm->set_password(ui->passLine->text());
         smm->show();
     }

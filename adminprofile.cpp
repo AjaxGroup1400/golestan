@@ -6,7 +6,7 @@
 #include "adminsendassertion.h"
 #include "adminaddpeople.h"
 
-AdminProfile::AdminProfile(QWidget *parent) :
+AdminProfile::AdminProfile(QString username , QString password , QString firstname , QString lastname, QString nationalcode , QString phonenumber , QString role,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminProfile)
 {
@@ -31,15 +31,15 @@ AdminProfile::AdminProfile(QWidget *parent) :
 
 
 
-    this->ui->nameLine->setText("Shantia");
+    this->ui->nameLine->setText(firstname);
     this->ui->nameLine->setDisabled(true);
-    this->ui->lastNameLine->setText("Soltani");
+    this->ui->lastNameLine->setText(lastname);
     this->ui->lastNameLine->setDisabled(true);
-    this->ui->NcodeLine->setText("123456789");
+    this->ui->NcodeLine->setText(nationalcode);
     this->ui->NcodeLine->setDisabled(true);
-    this->ui->RoleLine->setText("Admin");
+    this->ui->RoleLine->setText(role);
     this->ui->RoleLine->setDisabled(true);
-    this->ui->numberLine->setText("0910 209 8097");
+    this->ui->numberLine->setText(phonenumber);
     this->ui->numberLine->setDisabled(true);
     this->ui->numberLine->setValidator(new QIntValidator(0, 100, this));
 }

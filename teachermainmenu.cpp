@@ -60,6 +60,24 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
     initFile();
 }
 
+TeacherMainMenu::TeacherMainMenu(QString username):
+
+ui(new Ui::TeacherMainMenu)
+{
+    ui->setupUi(this);
+    this->ui->pushButton->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_3->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_4->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_5->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_6->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_7->setStyleSheet("background-color:transparent");
+    this->ui->label_13->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
+    this->set_username(username);
+    initFile();
+
+}
+
 TeacherMainMenu::~TeacherMainMenu()
 {
     delete ui;

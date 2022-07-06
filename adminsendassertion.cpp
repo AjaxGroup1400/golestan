@@ -6,7 +6,7 @@
 #include "adminprofile.h"
 #include "adminaddpeople.h"
 
-AdminSendAssertion::AdminSendAssertion(QWidget *parent) :
+AdminSendAssertion::AdminSendAssertion(AdminMainMenu * recievedmember , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminSendAssertion)
 {
@@ -21,8 +21,11 @@ AdminSendAssertion::AdminSendAssertion(QWidget *parent) :
     this->ui->sendbtn->setStyleSheet("background-color: transparent");
 
     connect(ui->AdminBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::adminReciveState);
-    connect(ui->StudentBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::studentReciveState);
+    connect(ui->StudentBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::studentReciveState);    
     connect(ui->TeacherBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::teacherReciveState);
+
+    this->mainmenu = recievedmember;
+
 }
 
 AdminSendAssertion::~AdminSendAssertion()
@@ -81,7 +84,7 @@ void AdminSendAssertion::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminProfile* ap= new AdminProfile;
+        AdminProfile* ap= new AdminProfile(mainmenu->get_username() , mainmenu->get_password() , mainmenu->get_first_name() , mainmenu->get_last_name() , mainmenu->get_national_code() , mainmenu->get_phone_number() , mainmenu->get_role());
         ap->show();
         exit->close();
         close();

@@ -50,8 +50,8 @@ void AdminMainMenu::on_pushButton_5_clicked()
 
 
 void AdminMainMenu::on_pushButton_clicked()
-{
-    AdminProfile* ap = new AdminProfile;
+{    
+    AdminProfile* ap = new AdminProfile(this->get_username() , this->get_password() , this->get_first_name() , this->get_last_name() , this->get_national_code() , this->get_phone_number() , this->get_role());
     ap->show();
     close();
 }
@@ -59,7 +59,7 @@ void AdminMainMenu::on_pushButton_clicked()
 
 void AdminMainMenu::on_pushButton_4_clicked()
 {
-    AdminSendAssertion* asa = new AdminSendAssertion;
+    AdminSendAssertion* asa = new AdminSendAssertion(this);
     asa->show();
     close();
 }
