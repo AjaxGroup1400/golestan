@@ -40,21 +40,32 @@ QList<float> StudentMainMenu::getAverages()
     return avereges;
 }
 
-void StudentMainMenu::scores()
+void StudentMainMenu::getScores(int chosenTerm)
 {
-//    for(auto i = this->classes.begin(); i!= this->classes.end(); i++ ){
 
-//        for(auto j = i->getList().begin(); j!=i->getList().end(); i++){
+    QMap <QString, float> scores_list;
 
-//            if(j.key()==this->get_username()){
-//                float score = j.value();
+    ifstream ifs(filePath.toStdString());
 
-//                if(score!=-1){
-//                    //show...
-//                }
-//            }
-//        }
-//    }
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        for(int i = 0; i < dataHolder.size(); i++)
+        {
+            if(get_username().toStdString() == dataHolder[i]["username"].asString())
+            {
+                Json::Value chosenTermClasses = dataHolder[i]["terms"][chosenTerm]["lessons"];
+
+                for(int j = 0; j < chosenTermClasses.size(); j++)
+                {
+                    scores_list.insert(QString::fromStdString(chosenTermClasses[i]["lesson"].asString()),chosenTermClasses[i]["score"].asFloat());
+                }
+
+                ifs.close();
+                return;
+            }
+        }
+//student not found
+    }
 }
 
 
@@ -65,28 +76,28 @@ void StudentMainMenu::surveyOfTeachers(Class Class, int result)
 
 //bool StudentMainMenu:: is_equal(Class i){i.getLesson() == lesson.getLesson();}
 
-void StudentMainMenu::deleteLesson(Class lesson)
-{
-//    QMultiMap <Class, float> helper;
-//    for(auto i=this_term_classes.cbegin(); i!=this_term_classes.cend(); i++){
-//        helper.insert(i.key(),i.value());
-////        helper[i.key()]=i.value();
-//    }
-//    this_term_classes.erase(this_term_classes.begin(),this_term_classes.end());
+//void StudentMainMenu::deleteLesson(Class lesson)
+//{
+////    QMultiMap <Class, float> helper;
+////    for(auto i=this_term_classes.cbegin(); i!=this_term_classes.cend(); i++){
+////        helper.insert(i.key(),i.value());
+//////        helper[i.key()]=i.value();
+////    }
+////    this_term_classes.erase(this_term_classes.begin(),this_term_classes.end());
 
-//    for(auto j=helper.begin(); j!=helper.end(); j++){
-//        auto &class_to_delete =j.key();
-//        if(class_to_delete.getLesson() != lesson.getLesson())
-//            this->this_term_classes.insert (j,j.key(),j.value());
+////    for(auto j=helper.begin(); j!=helper.end(); j++){
+////        auto &class_to_delete =j.key();
+////        if(class_to_delete.getLesson() != lesson.getLesson())
+////            this->this_term_classes.insert (j,j.key(),j.value());
 
-//    }
+////    }
 
-//        auto &class_to_delete =i.key();
-////        this->this_term_classes.removeIf(,this_term_classes.end(),class_to_delete.getLesson() == lesson.getLesson());
-//        if(class_to_delete.getLesson() ==lesson.getLesson()){
-//            this->this_term_classes.erase(i.key()) ;
+////        auto &class_to_delete =i.key();
+//////        this->this_term_classes.removeIf(,this_term_classes.end(),class_to_delete.getLesson() == lesson.getLesson());
+////        if(class_to_delete.getLesson() ==lesson.getLesson()){
+////            this->this_term_classes.erase(i.key()) ;
 
-}
+//}
 void StudentMainMenu::registry(Class Class)
 {
     Class.addStudent(this->get_username());
@@ -164,39 +175,48 @@ void StudentMainMenu::addTerm()
 
 void StudentMainMenu::unregistery(Class Class)
 {
-    ifstream ifs(filePath.toStdString());
-
-    if(dataReader.parse(ifs, dataHolder))
+    if(Class.studentIsValid(this->get_username()))
     {
-        for(int i = 0; i < dataHolder.size(); i++)
+        Class.deleteStudent(this->get_username());
+
+        ifstream ifs(filePath.toStdString());
+
+        if(dataReader.parse(ifs, dataHolder))
         {
-            if(get_username().toStdString() == dataHolder[i]["username"].asString())
+            for(int i = 0; i < dataHolder.size(); i++)
             {
-                Json::Value classesCopy = dataHolder[i]["terms"][Term]["lessons"];
-
-                Json::Value wantedClasses;
-
-                for(int j = 0; j < classesCopy.size(); j++)
+                if(get_username().toStdString() == dataHolder[i]["username"].asString())
                 {
-                    if(classesCopy[i]["teacher"].asString() != Class.getTeacher().toStdString())
-                        wantedClasses.append(classesCopy[i]);
+                    Json::Value classesCopy = dataHolder[i]["terms"][Term]["lessons"];
+
+                    Json::Value wantedClasses;
+
+                    for(int j = 0; j < classesCopy.size(); j++)
+                    {
+                        if(classesCopy[i]["lesson"].asString() != lesson_enum_str[Class.getLesson()].toStdString())
+                            wantedClasses.append(classesCopy[i]);
+                    }
+
+                    dataHolder[i]["terms"][Term]["lessons"] = wantedClasses;
+
+                    ofstream ofs(filePath.toStdString());
+
+                    Json::StyledWriter writer;
+
+                    string serializedData = writer.write(dataHolder);
+
+                    ofs << serializedData;
+
+                    ofs.close();
+
+                    return;
                 }
-
-                dataHolder[i]["terms"][Term]["lessons"] = wantedClasses;
-
-                ofstream ofs(filePath.toStdString());
-
-                Json::StyledWriter writer;
-
-                string serializedData = writer.write(dataHolder);
-
-                ofs << serializedData;
-
-                ofs.close();
-
-                return;
             }
         }
+    }
+
+    else{
+//        student not valid
     }
 }
 

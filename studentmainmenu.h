@@ -25,7 +25,7 @@ public:
 
     QList<float> getAverages();
 
-    void scores(); //file can be updated
+    void getScores(int term); //file can be updated
 
     // adds class at the end of term classes in file
     void registry(Class Class);
@@ -39,7 +39,7 @@ public:
 //    bool is_equal(Class lesson);
 
     void surveyOfTeachers(Class Class , int result);
-    void deleteLesson(Class lesson);
+//    void deleteLesson(Class lesson);
 
     void load();
 
