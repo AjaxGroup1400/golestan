@@ -17,6 +17,7 @@ SOURCES += \
     studentmessages.cpp \
     studentwatchmessagecomplitly.cpp \
     teachermessages.cpp \
+    studentweeklyschedule.cpp \
     CalendarCreator.cpp \
     Class.cpp \
     Enum.cpp \
