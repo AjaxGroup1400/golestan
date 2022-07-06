@@ -7,6 +7,7 @@
 #include "adminprofile.h"
 #include "adminsendassertion.h"
 #include "adminaddpeople.h"
+#include "adminmessages.h"
 
 AdminMainMenu::AdminMainMenu( QString firstName , AdminMainMenu * member , QWidget *parent) :
 //    QWidget(parent),
@@ -82,6 +83,16 @@ void AdminMainMenu::on_pushButton_3_clicked()
 {
     AdminAddPeople* aap = new AdminAddPeople(this);
     aap->show();
+    close();
+}
+
+
+void AdminMainMenu::on_pushButton_2_clicked()
+{
+    adminMessages* am = new adminMessages(this);
+
+    am->show();
+
     close();
 }
 
