@@ -15,7 +15,7 @@ using namespace std;
 #include "ui_teachermainmenu.h"
 #include "loginpage.h"
 #include "teacherprofile.h"
-#include "ui_Teacher.h"
+//#include "ui_Teacher.h"
 #include "Auth.h"
 #include "Filemanager.h"
 #include "User.h"
@@ -414,5 +414,11 @@ void TeacherMainMenu::initFile()
     ofs << finalPart;
     ofs.close();
     return;
+}
+
+
+void TeacherMainMenu::on_pushButton_2_clicked()
+{
+
 }
 

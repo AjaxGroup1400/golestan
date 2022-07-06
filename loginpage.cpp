@@ -9,8 +9,12 @@
 #include "studentmainmenu.h"
 #include "adminmainmenu.h"
 #include "teachermainmenu.h"
+// for hash class
+#include <functional>
 
 #include "ui_loginpage.h"
+
+using std::hash;
 
 LoginPage::LoginPage(QWidget *parent) :
     QWidget(parent),
@@ -22,6 +26,18 @@ LoginPage::LoginPage(QWidget *parent) :
 
     ui->passLine->setEchoMode(QLineEdit::Password);
     connect(ui->showPass, SIGNAL(clicked(bool)), this, SLOT(on_showPass_clicked(bool)));
+
+    StudentMainMenu smm(this);
+
+    smm.set_username("65564");
+
+    smm.load();
+
+    smm.addTerm();
+
+    for(auto& i : smm.getAverages())
+        qDebug() << i;
+
 }
 
 LoginPage::~LoginPage()
@@ -50,8 +66,10 @@ void LoginPage::on_forgotPass_clicked(bool checked)
 
 int LoginPage::isUserValid()
 {
+    hash<QString> passHasher;
+
     QString username = ui->userLine->text();
-    QString password = ui->passLine->text();
+    QString password = QString::number(passHasher(ui->passLine->text()));
 
     return Auth::canLogin(username, password);
 }

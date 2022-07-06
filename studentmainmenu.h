@@ -23,13 +23,30 @@ public:
     //if student exists read it from file else write new student : Term = 1
     ~StudentMainMenu();
 
+<<<<<<< HEAD
+    QList<float> getAverages();
+
+    void scores(); //file can be updated
+
+    // adds class at the end of term classes in file
+    void registry(Class Class);
+
+    // adds term into the list of target student in file
+    void addTerm();
+
+    // it should be called when student remove a Class or his/her teacher does
+    void unregistery(Class Class);
+
+=======
 //    bool is_equal(Class lesson);
 
     void scores(); //file can be updated
     void registry(Class Class); //add class to student's file and term++
+>>>>>>> 6abc546ae873ad9bfa2c17b1570ef9e077f1a875
     void surveyOfTeachers(Class Class , int result);
     void deleteLesson(Class lesson);
 
+    void load();
 
 private slots:
     void on_pushButton_5_clicked();
@@ -38,46 +55,22 @@ private slots:
 
 private:
     Ui::StudentMainMenu *ui;
-    int Term;
 
-//    QList < QMap <Class, float> > terms;
-
-    QList <float> avereges;
-    int currentAverege = avereges[Term-1];
-
-//    QMap < QList <Class> , float> terms; //Averege: float
-
-    QMap <Class,float> this_term_classes; //Score: float
-
-    QList <Class> classes;
-    QString filePath;
+    QString filePath = "../data_resources/student_term.json";
     Json::Value dataHolder;
     Json::Reader dataReader;
 
-    // checks for existance of student related file or create it (should be called in cosntructor)
-    void initFile();
-};
+    int Term;
+    int currentAverege;
 
-//List[0]:{
-//    bp:19
-//    discrete: 18.5
-//    ...
-//}
+    QList <float> avereges;
+
+//    QMap < QList <Class> , float> terms; //Averege: float
+
+    // whenever the user wants to see the details of term this method will be called
+    QList <Class> currentClasses;
+
+};
 
 
 #endif // STUDENTMAINMENU_H
-
-/* watching scores
- * registery
- * arzeshyabi ostad
-
- * weekly calender
- */
-
-
-/*proficiency of teacher
- *responsiveness of the teacher
- *management of the class
- *creativity
- *dicipline
-*/

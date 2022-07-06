@@ -2,12 +2,14 @@
 #include "Filemanager.h"
 #include "TeacherWeeklyCalendar.h"
 #include "CalendarCreator.h"
+#include "studentmainmenu.h"
 #include "Poll.h"
 #include "Auth.h"
 
 #include <QApplication>
 #include <iostream>
 #include <fstream>
+#include <functional>
 
 int main(int argc, char *argv[])
 {
