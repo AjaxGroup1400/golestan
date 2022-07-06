@@ -61,7 +61,7 @@ void studentMessages::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name());
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu);
         smm->show();
         exit->close();
         close();

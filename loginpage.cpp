@@ -96,7 +96,7 @@ void LoginPage::on_Loginbtn_clicked()
 
     if(userType == "Admin")
     {
-        AdminMainMenu* amm = new AdminMainMenu;
+        AdminMainMenu* amm = new AdminMainMenu(parsedUser[2] );
         amm->set_username(ui->userLine->text());
         amm->set_first_name(parsedUser[2]);
         amm->set_last_name(parsedUser[3]);

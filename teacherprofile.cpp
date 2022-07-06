@@ -5,7 +5,7 @@
 #include "teachersendassertion.h"
 #include "teachermainmenu.h"
 
-teacherProfile::teacherProfile(QWidget *parent) :
+teacherProfile::teacherProfile(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::teacherProfile)
 {
@@ -30,17 +30,18 @@ teacherProfile::teacherProfile(QWidget *parent) :
     this->ui->applychng->setVisible(false);
     this->ui->label_20->setVisible(false);
 
+    this->mainmenu = member;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
-
-    this->ui->nameLine->setText("Shantia");
+    this->ui->nameLine->setText(mainmenu->get_first_name());
     this->ui->nameLine->setDisabled(true);
-    this->ui->lastNameLine->setText("Soltani");
+    this->ui->lastNameLine->setText(mainmenu->get_last_name());
     this->ui->lastNameLine->setDisabled(true);
-    this->ui->NcodeLine->setText("123456789");
+    this->ui->NcodeLine->setText(mainmenu->get_national_code());
     this->ui->NcodeLine->setDisabled(true);
-    this->ui->RoleLine->setText("Admin");
+    this->ui->RoleLine->setText(mainmenu->get_role());
     this->ui->RoleLine->setDisabled(true);
-    this->ui->numberLine->setText("0910 209 8097");
+    this->ui->numberLine->setText(mainmenu->get_phone_number());
     this->ui->numberLine->setDisabled(true);
     this->ui->numberLine->setValidator(new QIntValidator(this));
 }
@@ -90,7 +91,7 @@ void teacherProfile::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherMainMenu* smm = new TeacherMainMenu;
+        TeacherMainMenu* smm = new TeacherMainMenu(mainmenu->get_first_name() , mainmenu->get_username() ,  mainmenu );
         smm->show();
         exit->close();
         close();
