@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include "studentmainmenu.h"
 
-studentWeeklySchedule::studentWeeklySchedule(QWidget *parent) :
+studentWeeklySchedule::studentWeeklySchedule(StudentMainMenu * member ,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::studentWeeklySchedule)
 {
@@ -15,6 +15,8 @@ studentWeeklySchedule::studentWeeklySchedule(QWidget *parent) :
     this->ui->pushButton_3->setStyleSheet("background-color: transparent");
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
+
+    this->mainmenu = member;
 }
 
 studentWeeklySchedule::~studentWeeklySchedule()
@@ -30,7 +32,7 @@ void studentWeeklySchedule::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentProfile* sp= new StudentProfile;
+        StudentProfile* sp= new StudentProfile(mainmenu);
         sp->show();
         exit->close();
         close();
@@ -50,7 +52,7 @@ void studentWeeklySchedule::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentMessages* sm= new studentMessages;
+        studentMessages* sm= new studentMessages(mainmenu);
         sm->show();
         exit->close();
         close();
@@ -69,7 +71,7 @@ void studentWeeklySchedule::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu;
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name());
         smm->show();
         exit->close();
         close();
