@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
         "1273882407", "@mir1990",
         "Amirhossein", "Mazaheri",
         "1273882407", "09921863951",
-        "ADMIN"
+        "Admin"
     ));
 
 
@@ -32,15 +32,21 @@ int main(int argc, char *argv[])
         "1287237408", "@mir1990",
         "Mamad", "Mamadi",
         "1273882407", "09921863951",
-        "TEACHER"
+        "Teacher"
     ));
 
+    userFile.append(Auth::formUserData(
+                        "1287237406","@mir1990",
+                        "Mamad","Mamadi",
+                        "1273882407" ,"09921863951",
+                        "Teacher"
+                    ));
 
     userFile.append(Auth::formUserData(
         "1287237409", "@mir1990",
         "Asghar", "Mamadi",
         "1273882407", "09921863951",
-        "STUDENT"
+        "Student"
     ));
 
     userFile.write();

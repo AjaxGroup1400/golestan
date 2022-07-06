@@ -19,9 +19,11 @@ class StudentMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit StudentMainMenu(QWidget *parent = nullptr); //write student file that contains username and class and maybe scores
+    explicit StudentMainMenu(QWidget *parent = nullptr);
+    //if student exists read it from file else write new student : Term = 1
     ~StudentMainMenu();
 
+<<<<<<< HEAD
     QList<float> getAverages();
 
     void scores(); //file can be updated
@@ -35,7 +37,14 @@ public:
     // it should be called when student remove a Class or his/her teacher does
     void unregistery(Class Class);
 
+=======
+//    bool is_equal(Class lesson);
+
+    void scores(); //file can be updated
+    void registry(Class Class); //add class to student's file and term++
+>>>>>>> 6abc546ae873ad9bfa2c17b1570ef9e077f1a875
     void surveyOfTeachers(Class Class , int result);
+    void deleteLesson(Class lesson);
 
     void load();
 

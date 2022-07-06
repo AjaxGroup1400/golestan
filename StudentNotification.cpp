@@ -8,7 +8,19 @@ using namespace std ;
 
 StudentNotification::StudentNotification()
 {
+ifstream ifs(filePath.toStdString());
+if(dataReader.parse(ifs , dataHolder))
+{
+    return ;
+}
 
+dataHolder = Json::arrayValue;
+
+ofstream ofs(filePath.toStdString());
+Json::StyledWriter writer;
+string finalPart = writer.write(dataHolder);
+ofs << finalPart;
+ofs.close();
 
 
 
@@ -30,7 +42,7 @@ void StudentNotification::addAlert(QString title, QString description, QString s
         {
             Json::Value jsonStudent ;
             jsonStudent["username"] = student["username"].toStdString();
-            jsonStudent["is_read"] = student["isRead"].toStdString();
+            jsonStudent["is_read"] = student["is_rad"].toStdString();
             jsonAllowedStudents.append(jsonStudent);
         }
         newAlert["allowed_student"] = jsonAllowedStudents;

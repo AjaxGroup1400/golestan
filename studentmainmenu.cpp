@@ -57,9 +57,33 @@ void StudentMainMenu::scores()
 
 void StudentMainMenu::surveyOfTeachers(Class Class, int result)
 {
-//    Class.addSurveyResult(this->get_username(), result);
+    //    Class.addSurveyResult(this->get_username(), result);
 }
 
+//bool StudentMainMenu:: is_equal(Class i){i.getLesson() == lesson.getLesson();}
+
+void StudentMainMenu::deleteLesson(Class lesson)
+{
+//    QMultiMap <Class, float> helper;
+//    for(auto i=this_term_classes.cbegin(); i!=this_term_classes.cend(); i++){
+//        helper.insert(i.key(),i.value());
+////        helper[i.key()]=i.value();
+//    }
+//    this_term_classes.erase(this_term_classes.begin(),this_term_classes.end());
+
+//    for(auto j=helper.begin(); j!=helper.end(); j++){
+//        auto &class_to_delete =j.key();
+//        if(class_to_delete.getLesson() != lesson.getLesson())
+//            this->this_term_classes.insert (j,j.key(),j.value());
+
+//    }
+
+//        auto &class_to_delete =i.key();
+////        this->this_term_classes.removeIf(,this_term_classes.end(),class_to_delete.getLesson() == lesson.getLesson());
+//        if(class_to_delete.getLesson() ==lesson.getLesson()){
+//            this->this_term_classes.erase(i.key()) ;
+
+}
 void StudentMainMenu::registry(Class Class)
 {
     Class.addStudent(this->get_username());

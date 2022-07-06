@@ -49,10 +49,10 @@ TeacherMainMenu::TeacherMainMenu(QWidget *parent) :
 //        auto parse = userFile.parse(item);
 
 //        if (parse[0] == this->get_username()){
-///*            QMap <QString, float> studentscore;
+/*            QMap <QString, float> studentscore;
 //            studentscore.insert(parse[2],parse[3].toFloat()) ;
 //            this->students.insert( parse[1] , studentscore ) ;
-//*/
+*/
 //        }
 //    }
 
@@ -83,10 +83,6 @@ void TeacherMainMenu::on_pushButton_7_clicked()
     }
 }
 
-
-
-
-
 void TeacherMainMenu::on_pushButton_clicked()
 {
     teacherProfile* tp = new teacherProfile;
@@ -115,8 +111,11 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 {
 //    can be checked in Class.cpp:
 //    int index = Auth::validStudent(studentname , Class.getLesson());
+    if(Class.studentIsValid(studentname))
+    {
+        Class.deleteStudent(studentname);
 //    remove class from student's classes
-    Class.deleteStudent(studentname);
+
 
 //    if (newPass != confirmNewPass)
 //    {
@@ -125,18 +124,6 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 //        connect(confirmPassDoesntMatch , &QMessageBox::buttonClicked , confirmPassDoesntMatch, &QMessageBox::deleteLater);
 //        return;
 //    }
-
-//    FileManager userFile;
-
-//    userFile.create("teachers.txt");
-
-//    userFile.loadData();
-
-
-//    userFile.deleteRecord(index);
-
-
-//    userFile.write();
 
 
     QMessageBox * studentdeleted = new QMessageBox(QMessageBox::Icon::Information, "Student deleted", "the student was deleted succesfuly", QMessageBox::Button::Ok);
@@ -151,6 +138,10 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 //    connect(studentdeleted, &QMessageBox::buttonClicked, lg, &LoginPage::show);
 
     //    connect(studentdeleted, &QMessageBox::buttonClicked, this, &EntereNewPass::close);
+    }
+    else{
+//        student not valid
+    }
 }
 
 
@@ -174,20 +165,26 @@ void TeacherMainMenu::sendingNotification(QString title , QString message , Clas
 void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
 {
     ifstream ifs(this->filePath.toStdString());
-    this->dataReader.parse(ifs , this->dataHolder);
-    Json::Value teacherInformation ;
-    teacherInformation["teacher"] = this->get_username().toStdString();
-    for(auto &i : lessons)
+    if(this->dataReader.parse(ifs , this->dataHolder))
     {
-        teacherInformation["lessons"].append(i.toStdString());
+        Json::Value teacherInformation ;
+        teacherInformation["teacher"] = this->get_username().toStdString();
+        for(auto &i : lessons)
+        {
+            teacherInformation["lessons"].append(i.toStdString());
+        }
+        this->dataHolder.append(teacherInformation);
+
+
+        ofstream ofs(this->filePath.toStdString());
+        Json::StyledWriter writer;
+        string finalPart = writer.write(this->dataHolder);
+        ofs << this->dataHolder;
+        ofs.close();
+        return;
     }
-    this->dataHolder.append(teacherInformation);
-
-
-    ofstream ofs(this->filePath.toStdString());
-    Json::StyledWriter writer;
-    string finalPart = writer.write(this->dataHolder);
-    ofs.close();
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
 }
 
 void TeacherMainMenu::addNewLessonFile(Class new_class)
@@ -211,9 +208,11 @@ void TeacherMainMenu::addNewLessonFile(Class new_class)
         ofs << finalPart;
         ofs.close();
     }
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
 }
 
-void TeacherMainMenu::removeLessonFile(Class lesson)
+void TeacherMainMenu::removeLessonFile(Class lesson) //delete all lessons? delete all class json files?
 {
     for(auto i=0; i<classes.size(); i++){
 
@@ -245,6 +244,8 @@ void TeacherMainMenu::removeLessonFile(Class lesson)
             ofs.close();
         }
     }
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
 }
 
 int TeacherMainMenu::teacherIsValidFile()
@@ -259,6 +260,61 @@ int TeacherMainMenu::teacherIsValidFile()
         }
         return -1 ;
     }
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
+    return -1;
+}
+
+bool TeacherMainMenu::lessonIsValid(QString lesson)
+{
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(auto i : this->dataHolder)
+        {
+            if(QString::fromStdString(i["teacher"].asString()) == this->get_username())
+            {
+                for (auto j : i["lessons"])
+                {
+                    if (QString::fromStdString(j.asString()) == lesson)
+                        return true ;
+                }
+                return false;
+            }
+        }
+        return false ;
+    }
+    exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
+    emit exceptioOccured(exceptionReason);
+}
+
+Class TeacherMainMenu::getLesson(lesson lesson)
+{
+    for(int i=0; i<classes.size(); i++){
+        if(classes[i].getLesson()==lesson){
+            return this->classes[i];
+        }
+    }
+
+}
+
+QString TeacherMainMenu::lessonNameCheck(QString sentName)
+{
+    if (sentName == "physics" || sentName == "Physics" || sentName == "PHYSICS")
+        return "PHYSICS";
+    else if (sentName == "chemistry" || sentName == "Chemistry" || sentName == "CHEMISTRY")
+        return "CHEMISTRY";
+    else if (sentName == "calculus" || sentName == "Calculus" || sentName == "CALCULUS")
+        return "CALCULUS";
+    else if (sentName == "basic programming" || sentName == "Basic programming" || sentName == "basic Programming" || sentName == "Basic Programming" || sentName == "BasicProgramming" || sentName == "basicProgramming" || sentName == "Basicprogramming" || sentName == "basicrogramming" || sentName == "BASIC PROGRAMMING" || sentName == "BASICPROGRAMMING")
+        return "BP";
+    else if (sentName == "discrete" || sentName == "Discrete" || sentName == "DISCRETE")
+        return "DISCRETE";
+    else
+    {
+        throw std::exception ("The name you have entered is not valid\nPlease enter a valid lesson name.The cceptable names for lessons are :\nphysics\ncalculus\ndiscrete\nbsic programming\nchemistry");
+    }
+
 }
 
 
@@ -329,6 +385,7 @@ void TeacherMainMenu::initFile()
         }
         return;
     }
+
 
     ofstream ofs(filePath.toStdString());
     Json::StyledWriter writer;
