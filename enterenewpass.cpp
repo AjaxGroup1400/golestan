@@ -37,26 +37,28 @@ void EntereNewPass::on_Confirmbtn_clicked()
         return;
     }
 
-    FileManager userFile;
+//    FileManager userFile;
 
-    userFile.create();
+//    userFile.create();
 
-    userFile.loadData();
+//    userFile.loadData();
 
-    QVector<QString> parsedUserInfo = userFile.parse(userFile.getRecord(index));
+//    QVector<QString> parsedUserInfo = userFile.parse(userFile.getRecord(index));
 
-    parsedUserInfo[1] = newPass;
+//    parsedUserInfo[1] = newPass;
 
-    QString modifiedUserInfo = Auth::formUserData(
-        parsedUserInfo[0], parsedUserInfo[1],
-        parsedUserInfo[2], parsedUserInfo[3],
-        parsedUserInfo[4], parsedUserInfo[5],
-        parsedUserInfo[6]
-    );
+//    QString modifiedUserInfo = Auth::formUserData(
+//        parsedUserInfo[0], parsedUserInfo[1],
+//        parsedUserInfo[2], parsedUserInfo[3],
+//        parsedUserInfo[4], parsedUserInfo[5],
+//        parsedUserInfo[6]
+//    );
 
-    userFile.update(index, modifiedUserInfo);
+//    userFile.update(index, modifiedUserInfo);
 
-    userFile.write();
+//    userFile.write();
+
+    Auth::updateCredential(index, 1, newPass, true);
 
     QMessageBox * passwordChanged = new QMessageBox(QMessageBox::Icon::Information, "Password Changed", "your password changed successfuly", QMessageBox::Button::Ok);
     passwordChanged->setParent(this);

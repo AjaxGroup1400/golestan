@@ -3,10 +3,12 @@
 #include "Filemanager.h"
 #include "Auth.h"
 
-// for hash class
-#include <functional>
+// for hashing
+#include "Md5Hash.h"
 
-using std::hash;
+#include <exception>
+
+using std::hash, std::string, std::exception;
 
 Auth::Auth()
 {
@@ -18,12 +20,11 @@ Auth::~Auth()
     return;
 }
 
-QString Auth::formUserData(QString username, QString password, QString firstname, QString lastname, QString nationalCode, QString phoneNumber, QString role)
+QString Auth::formUserData(QString username, QString password, QString firstname, QString lastname, QString nationalCode, QString phoneNumber, QString role, bool hashPass)
 {
-    hash<QString> passHasher;
-
+    // just used ternary operator for more simplicity
     QString mergedData = username + '\t' +
-                         QString::number(passHasher(password)) + '\t' +
+                         (hashPass ? QString::fromStdString(md5(password.toStdString())) : password) + '\t' +
                          firstname + '\t' +
                          lastname + '\t' +
                          nationalCode + '\t' +
@@ -72,13 +73,11 @@ int Auth::canLogin(QString username, QString password)
 
     auto& dataCopy = usersFile.getData();
 
-    hash<QString> passHasher;
-
     for(int i = 0; i < dataCopy.size(); i++)
     {
         QVector<QString> parsedUser = usersFile.parse(dataCopy.at(i));
 
-        if(parsedUser.at(0) == username && parsedUser.at(1) == QString::number(passHasher(password)))
+        if(parsedUser.at(0) == username && parsedUser.at(1) == QString::fromStdString(md5(password.toStdString())) )
             return i;
     }
 
@@ -105,6 +104,44 @@ int Auth::isHintValid(QString username, QString phoneNumber)
     }
 
     return -1;
+}
+
+void Auth::updateCredential(int rowIndex, int itemIndex, QString newValue, bool shouldHash)
+{
+    FileManager userFile;
+
+    userFile.create();
+
+    userFile.loadData();
+
+    QVector<QString> parsedUserInfo = userFile.parse(userFile.getRecord(rowIndex));
+
+    parsedUserInfo[itemIndex] = shouldHash ? QString::fromStdString(md5(newValue.toStdString())) : newValue;
+
+    QString modifiedUserInfo = Auth::formUserData(
+        parsedUserInfo[0], parsedUserInfo[1],
+        parsedUserInfo[2], parsedUserInfo[3],
+        parsedUserInfo[4], parsedUserInfo[5],
+        parsedUserInfo[6], false
+        );
+
+    userFile.update(rowIndex, modifiedUserInfo);
+
+    userFile.write();
+}
+
+int Auth::findUser(QString username)
+{
+    FileManager userFile;
+
+    userFile.create();
+
+    userFile.loadData();
+
+    for(int i = 0; i < userFile.getData().size(); i++)
+        return i;
+
+    throw exception("No user found");
 }
 
 
