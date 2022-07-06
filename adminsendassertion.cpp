@@ -5,6 +5,7 @@
 #include <QCheckBox>
 #include "adminprofile.h"
 #include "adminaddpeople.h"
+#include"StudentNotification.h"
 
 AdminSendAssertion::AdminSendAssertion(AdminMainMenu * recievedmember , QWidget *parent) :
     QWidget(parent),
@@ -25,6 +26,9 @@ AdminSendAssertion::AdminSendAssertion(AdminMainMenu * recievedmember , QWidget 
     connect(ui->TeacherBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::teacherReciveState);
 
     this->mainmenu = recievedmember;
+
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name() );
+
 
 }
 
@@ -65,7 +69,7 @@ void AdminSendAssertion::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminMainMenu* amm = new AdminMainMenu;
+        AdminMainMenu* amm = new AdminMainMenu(mainmenu->get_first_name() ,mainmenu);
         amm->show();
         exit->close();
         close();
@@ -97,7 +101,7 @@ void AdminSendAssertion::on_pushButton_clicked()
 
 void AdminSendAssertion::on_pushButton_3_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add people","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add people","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -116,6 +120,26 @@ void AdminSendAssertion::on_pushButton_3_clicked()
 
 void AdminSendAssertion::on_sendbtn_clicked()
 {
+    int teacherChosen = this->ui->TeacherBox->isChecked();
+    int studentChosen = this->ui->StudentBox->isChecked();
+    QString title = ui->TitleLine->text();
+    QString message = ui->messageLine->toPlainText();
+
+    if(teacherChosen == 0 && studentChosen == 0)
+    {
+        QMessageBox * choosesth = new QMessageBox(QMessageBox::Icon::Critical , "Error" , "Choose the reciever first" , QMessageBox::Button::Ok);
+        choosesth->show();
+        connect(choosesth , &QMessageBox::buttonClicked ,  choosesth , &QMessageBox::deleteLater ) ;
+        return ;
+    }
+
+    StudentNotification alert;
+    if(studentChosen == 1)
+        alert.addAlert(title , message , mainmenu->get_username());
+    if(teacherChosen == 1)
+    {
+        alert.addAlert(  title , message , mainmenu->get_username() , "#") ;
+    }
 
 }
 

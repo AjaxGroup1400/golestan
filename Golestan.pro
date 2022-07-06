@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Md5Hash.cpp \
     adminaddclass.cpp \
     adminmessages.cpp \
     adminwatchmessagecomplitly.cpp \
@@ -46,6 +47,7 @@ SOURCES += \
     teacherprofile.cpp \
 
 HEADERS += \
+    Md5Hash.h \
     adminaddclass.h \
     adminmessages.h \
     adminwatchmessagecomplitly.h \

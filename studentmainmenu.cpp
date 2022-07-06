@@ -13,7 +13,7 @@
 
 using std::ifstream, std::string, std::ofstream;
 
-StudentMainMenu::StudentMainMenu(QString firstname , QWidget *parent) :
+StudentMainMenu::StudentMainMenu(QString firstname , StudentMainMenu * member ,  QWidget *parent) :
 //    QWidget(parent),
     ui(new Ui::StudentMainMenu)
 {
@@ -24,6 +24,18 @@ StudentMainMenu::StudentMainMenu(QString firstname , QWidget *parent) :
     this->ui->pushButton_4->setStyleSheet("background-color:transparent");
     this->ui->pushButton_5->setStyleSheet("background-color:transparent");
     this->ui->label_8->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");    
+
+    this->mainmenu = member;
+    if (member!=nullptr)
+    {
+        this->set_username(mainmenu->get_username());
+        this->set_password(mainmenu->get_password());
+        this->set_last_name(mainmenu->get_last_name());
+        this->set_role(mainmenu->get_role());
+        this->set_national_code(mainmenu->get_national_code());
+        this->set_phone_number(mainmenu->get_phone_number());
+    }
+
     this->set_first_name(firstname);
     this->ui->label_2->setText("Hi dear " + firstname);
 

@@ -541,7 +541,7 @@ font: 9pt &quot;Montserrat&quot;;</string>
       </widget>
      </item>
      <item row="4" column="2">
-      <widget class="QRadioButton" name="student">
+      <widget class="QRadioButton" name="studentRadio">
        <property name="text">
         <string>Student</string>
        </property>
@@ -581,14 +581,14 @@ font: 9pt &quot;Montserrat&quot;;</string>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QRadioButton" name="admin">
+      <widget class="QRadioButton" name="adminRadio">
        <property name="text">
         <string>Admin</string>
        </property>
       </widget>
      </item>
      <item row="4" column="3">
-      <widget class="QRadioButton" name="teacher">
+      <widget class="QRadioButton" name="teacherRadio">
        <property name="text">
         <string>Teacher</string>
        </property>
@@ -598,7 +598,7 @@ font: 9pt &quot;Montserrat&quot;;</string>
       <widget class="QLineEdit" name="numberLine"/>
      </item>
      <item row="2" column="1" colspan="3">
-      <widget class="QLineEdit" name="NcodeLine"/>
+      <widget class="QLineEdit" name="nationalCodeLine"/>
      </item>
      <item row="1" column="1" colspan="3">
       <widget class="QLineEdit" name="lastNameLine"/>
@@ -656,9 +656,9 @@ font: 9pt &quot;Montserrat&quot;;</string>
   <zorder>AddBtn</zorder>
  </widget>
  <resources>
-  <include location="pictures.qrc"/>
-  <include location="icon.qrc"/>
   <include location="arrowIcon.qrc"/>
+  <include location="icon.qrc"/>
+  <include location="pictures.qrc"/>
  </resources>
  <connections/>
 </ui>

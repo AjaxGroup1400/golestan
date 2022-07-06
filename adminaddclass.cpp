@@ -36,7 +36,7 @@ void adminAddClass::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminMainMenu* amm = new AdminMainMenu;
+        AdminMainMenu* amm = new AdminMainMenu(mainmenu->get_first_name() ,mainmenu);
         amm->show();
         exit->close();
         close();

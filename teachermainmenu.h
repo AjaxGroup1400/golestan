@@ -21,8 +21,8 @@ class TeacherMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit TeacherMainMenu(QWidget *parent = nullptr);
-    TeacherMainMenu(QString firstname , QString username);
+    explicit TeacherMainMenu(QString firstname , QString username ,  TeacherMainMenu * member = nullptr ,QWidget *parent = nullptr);
+//    TeacherMainMenu(QString firstname , QString username);
     ~TeacherMainMenu();
 
 //    QMap<QString, float> studentsList(QString classname);
@@ -59,6 +59,7 @@ private:
 
     QList <Class> classes;
 
+    TeacherMainMenu * mainmenu;
 //    QList<QString> lessons;
     void initFile();
     Json::Reader dataReader;

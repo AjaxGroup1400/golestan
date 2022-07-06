@@ -43,7 +43,7 @@ void teacherMessages::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherProfile* tp= new teacherProfile;
+        teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
         close();
@@ -83,7 +83,7 @@ void teacherMessages::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherMainMenu* smm = new TeacherMainMenu;
+        TeacherMainMenu* smm = new TeacherMainMenu(mainmenu->get_first_name(), mainmenu->get_username() , mainmenu );
         smm->show();
         exit->close();
         close();

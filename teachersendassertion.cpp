@@ -27,6 +27,8 @@ TeacherSendAssertion::TeacherSendAssertion(TeacherMainMenu * tm ,  QWidget *pare
     connect(ui->StudentBox,&QCheckBox::stateChanged,this,&TeacherSendAssertion::studentReciveState);
     connect(ui->TeacherBox,&QCheckBox::stateChanged,this,&TeacherSendAssertion::teacherReciveState);
 
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
 
 }
 
@@ -49,13 +51,13 @@ void TeacherSendAssertion::teacherReciveState(int state)
 
 void TeacherSendAssertion::on_backToMenu_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherMainMenu* tmm = new TeacherMainMenu;
+        TeacherMainMenu* tmm = new TeacherMainMenu(mainmenu->get_first_name(), mainmenu->get_username() , mainmenu );
         tmm->show();
         exit->close();
         close();
@@ -74,7 +76,7 @@ void TeacherSendAssertion::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherProfile* tp= new teacherProfile;
+        teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
         close();

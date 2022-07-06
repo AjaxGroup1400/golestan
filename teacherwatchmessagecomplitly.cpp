@@ -40,7 +40,7 @@ void teacherWatchMessageComplitly::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherProfile* tp= new teacherProfile;
+        teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
         close();
