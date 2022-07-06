@@ -8,22 +8,16 @@ using namespace std ;
 
 StudentNotification::StudentNotification()
 {
-ifstream ifs(filePath.toStdString());
-if(dataReader.parse(ifs , dataHolder))
-{
-    return ;
-}
+    ifstream ifs(filePath.toStdString());
+    if(dataReader.parse(ifs , dataHolder))
+        return ;
+    dataHolder = Json::arrayValue;
 
-dataHolder = Json::arrayValue;
-
-ofstream ofs(filePath.toStdString());
-Json::StyledWriter writer;
-string finalPart = writer.write(dataHolder);
-ofs << finalPart;
-ofs.close();
-
-
-
+    ofstream ofs(filePath.toStdString());
+    Json::StyledWriter writer;
+    string finalPart = writer.write(dataHolder);
+    ofs << finalPart;
+    ofs.close();
 }
 
 void StudentNotification::addAlert(QString title, QString description, QString sender, QList<QMap<QString, QString> > allowedStudent)
@@ -88,3 +82,39 @@ QList<QMap<QString, QString>> StudentNotification::getNotifications(QString stud
 //    throw exception ("coulden't open the file \"../data_resources/studentnotification.json\"");
 
 }
+
+void StudentNotification::addAlert(QString title, QString description, QString sender, QString students)
+{
+    ifstream ifs(filePath.toStdString());
+    if(dataReader.parse(ifs , dataHolder))
+    {
+
+        Json::Value newAlert ;
+        newAlert["title"] = title.toStdString();
+        newAlert["description"] = description.toStdString() ;
+        newAlert["sender"] = sender.toStdString() ;
+
+
+        Json::Value jsonAllowedStudents ;
+
+
+        Json::Value jsonStudent ;
+        jsonStudent["username"] = students.toStdString();
+        jsonStudent["is_read"] = "false";
+        jsonAllowedStudents.append(jsonStudent);
+
+        newAlert["allowed_student"] = jsonAllowedStudents;
+        dataHolder.append(newAlert);
+
+        Json::StyledWriter writer ;
+        ofstream ofwriter(filePath.toStdString());
+        string finalPart = writer.write(dataHolder);
+        ofwriter << finalPart;
+        ofwriter.close();
+
+
+        QMessageBox * done = new QMessageBox(QMessageBox::Icon::Information , "Sending assertion" , "The assertion was sent succesfuly" , QMessageBox::Button::Ok);
+        done->show();
+        QObject::connect(done , &QMessageBox::buttonClicked , done , &QMessageBox::deleteLater );
+    }
+    return ;}
