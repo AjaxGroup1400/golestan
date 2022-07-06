@@ -217,7 +217,7 @@ void StudentMainMenu::on_pushButton_5_clicked()
 
 void StudentMainMenu::on_pushButton_clicked()
 {
-    StudentProfile* sp = new StudentProfile;
+    StudentProfile* sp = new StudentProfile(this->get_username() , this->get_password() , this->get_first_name() , this->get_last_name() , this->get_national_code() , this->get_phone_number() , this->get_role());
     sp->show();
     close();
 }

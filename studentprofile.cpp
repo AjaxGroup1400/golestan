@@ -4,7 +4,7 @@
 #include <QMessageBox>
 #include "studentmainmenu.h"
 
-StudentProfile::StudentProfile(QWidget *parent) :
+StudentProfile::StudentProfile(QString username , QString password , QString firstname , QString lastname , QString nationlcode , QString phonenumber , QString role , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentProfile)
 {
@@ -28,15 +28,15 @@ StudentProfile::StudentProfile(QWidget *parent) :
 
 
 
-    this->ui->nameLine->setText("Shantia");
+    this->ui->nameLine->setText(firstname);
     this->ui->nameLine->setDisabled(true);
-    this->ui->lastNameLine->setText("Soltani");
+    this->ui->lastNameLine->setText(lastname);
     this->ui->lastNameLine->setDisabled(true);
-    this->ui->NcodeLine->setText("123456789");
+    this->ui->NcodeLine->setText(nationlcode);
     this->ui->NcodeLine->setDisabled(true);
-    this->ui->RoleLine->setText("Admin");
+    this->ui->RoleLine->setText(role);
     this->ui->RoleLine->setDisabled(true);
-    this->ui->numberLine->setText("0910 209 8097");
+    this->ui->numberLine->setText(phonenumber);
     this->ui->numberLine->setDisabled(true);
     this->ui->numberLine->setValidator(new QIntValidator(this));
 }
@@ -80,7 +80,7 @@ void StudentProfile::on_applychng_2_clicked()
 
 void StudentProfile::on_backToMenu_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);

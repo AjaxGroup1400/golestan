@@ -19,6 +19,7 @@ AdminMainMenu::AdminMainMenu(QWidget *parent) :
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
     this->ui->label_14->setStyleSheet("background-color: #f0f0f0; border-radius: 20px");
     this->ui->pushButton_5->setStyleSheet("background-color: transparent");
+    this->ui->label_2->setText("Hi dear " + this->get_first_name());
 }
 
 AdminMainMenu::~AdminMainMenu()

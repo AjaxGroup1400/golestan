@@ -12,7 +12,7 @@ class StudentProfile : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentProfile(QWidget *parent = nullptr);
+    explicit StudentProfile(QString username , QString password , QString firstname , QString lastname , QString nationlcode , QString phonenumber , QString role , QWidget *parent = nullptr);
     ~StudentProfile();
 
 private slots:

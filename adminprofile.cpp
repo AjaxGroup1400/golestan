@@ -42,6 +42,7 @@ AdminProfile::AdminProfile(QString username , QString password , QString firstna
     this->ui->numberLine->setText(phonenumber);
     this->ui->numberLine->setDisabled(true);
     this->ui->numberLine->setValidator(new QIntValidator(0, 100, this));
+    this->ui->label_2->setText("HI dear " + firstname);
 }
 
 AdminProfile::~AdminProfile()
