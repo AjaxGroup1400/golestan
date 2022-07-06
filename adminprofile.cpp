@@ -47,9 +47,11 @@ AdminProfile::AdminProfile(AdminMainMenu * adminMainMenuMember, QWidget *parent)
     this->ui->numberLine->setText(mainmenu->get_phone_number());
 
     this->ui->numberLine->setDisabled(true);
+
+    // added Iranian phone number validator with help of regex :)
     this->ui->numberLine->setValidator(new QRegularExpressionValidator(QRegularExpression(R"((0|\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8})"), this));
 
-    this->ui->label_2->setText("HI dear " + mainmenu->get_first_name());
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 }
 
 AdminProfile::~AdminProfile()

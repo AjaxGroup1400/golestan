@@ -96,10 +96,10 @@ int Auth::isHintValid(QString username, QString phoneNumber)
 
     for(int i = 0; i < dataCopy.size(); i++)
     {
-        QVector<QString> parsedUser = usersFile.parse(dataCopy.at(i));
+        QVector<QString> parsedUserInfo = usersFile.parse(dataCopy.at(i));
 
         // last element in parsed user is hint
-        if(parsedUser.at(0) == username && parsedUser.at(5) == phoneNumber)
+        if(parsedUserInfo.at(0) == username && parsedUserInfo.at(5) == phoneNumber)
             return i;
     }
 
@@ -139,10 +139,24 @@ int Auth::findUser(QString username)
     userFile.loadData();
 
     for(int i = 0; i < userFile.getData().size(); i++)
-        return i;
+    {
+        QVector<QString> parsedUserInfo = userFile.parse(userFile.getRecord(i));
+
+        if(parsedUserInfo.at(0) == username)
+            return i;
+    }
 
     throw exception("No user found");
 }
 
-
+bool Auth::isValidIranianNationalCode(const char *input)
+{
+    for (unsigned i = 0; i < 10; ++i) if (input[i] < '0' || input[i] > '9') return false;
+    if (input[10]) return false;
+    unsigned check = input[9] - '0';
+    unsigned sum = 0;
+    for (unsigned i = 0; i < 9; ++i) sum += (int)(input[i] - '0') * (10 - i);
+    sum %= 11;
+    return sum < 2 ? check == sum : check + sum == 11;
+}
 
