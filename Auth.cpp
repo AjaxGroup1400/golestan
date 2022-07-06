@@ -72,11 +72,13 @@ int Auth::canLogin(QString username, QString password)
 
     auto& dataCopy = usersFile.getData();
 
+    hash<QString> passHasher;
+
     for(int i = 0; i < dataCopy.size(); i++)
     {
         QVector<QString> parsedUser = usersFile.parse(dataCopy.at(i));
 
-        if(parsedUser.at(0) == username && parsedUser.at(1) == password)
+        if(parsedUser.at(0) == username && parsedUser.at(1) == QString::number(passHasher(password)))
             return i;
     }
 
