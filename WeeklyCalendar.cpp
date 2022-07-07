@@ -34,11 +34,9 @@ WeeklyCalendar::WeeklyCalendar()
     Json::Value baseData;
 
     // an empty list for each role(teachers, admins, students)
-    Json::Value baseUserList = Json::arrayValue;
-
-    baseData["teachers"] = baseUserList;
-    baseData["students"] = baseUserList;
-    baseData["admins"] = baseUserList;
+    baseData["teachers"] = Json::arrayValue;
+    baseData["students"] = Json::arrayValue;
+    baseData["admins"] = Json::arrayValue;
 
     Json::StyledWriter writer;
 

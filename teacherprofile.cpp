@@ -1,9 +1,14 @@
 #include "teacherprofile.h"
-#include <QValidator>
 #include "ui_teacherprofile.h"
-#include <QMessageBox>
 #include "teachersendassertion.h"
 #include "teachermainmenu.h"
+#include "Auth.h"
+#include "Filemanager.h"
+#include "Md5Hash.h"
+
+#include <QValidator>
+#include <QRegularExpression>
+#include <QMessageBox>
 
 teacherProfile::teacherProfile(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -37,13 +42,16 @@ teacherProfile::teacherProfile(TeacherMainMenu * member , QWidget *parent) :
     this->ui->nameLine->setDisabled(true);
     this->ui->lastNameLine->setText(mainmenu->get_last_name());
     this->ui->lastNameLine->setDisabled(true);
-    this->ui->NcodeLine->setText(mainmenu->get_national_code());
-    this->ui->NcodeLine->setDisabled(true);
-    this->ui->RoleLine->setText(mainmenu->get_role());
-    this->ui->RoleLine->setDisabled(true);
+    this->ui->nationalCodeLine->setText(mainmenu->get_national_code());
+    this->ui->nationalCodeLine->setDisabled(true);
+    this->ui->roleLine->setText(mainmenu->get_role());
+    this->ui->roleLine->setDisabled(true);
     this->ui->numberLine->setText(mainmenu->get_phone_number());
     this->ui->numberLine->setDisabled(true);
-    this->ui->numberLine->setValidator(new QIntValidator(this));
+
+
+    // added Iranian phone number validator with help of regex :)
+    this->ui->numberLine->setValidator(new QRegularExpressionValidator(QRegularExpression(R"((0|\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8})"), this));
 }
 
 teacherProfile::~teacherProfile()
@@ -56,6 +64,19 @@ void teacherProfile::on_applychng_clicked()
     this->ui->applychng->setVisible(false);
     this->ui->label_20->setVisible(false);
     this->ui->numberLine->setDisabled(true);
+
+    QString newPhoneNumber = ui->numberLine->text();
+
+    int userIndex = Auth::findUser(this->mainmenu->get_username());
+
+    Auth::updateCredential(userIndex, 5, newPhoneNumber);
+
+    QMessageBox* phoneNumberChanged = new QMessageBox(QMessageBox::Icon::Information, "Phone Number Changed", "your phone number changed successfuly", QMessageBox::Button::Ok);
+
+    phoneNumberChanged->show();
+
+    connect(phoneNumberChanged , &QMessageBox::buttonClicked , phoneNumberChanged , &QMessageBox::deleteLater);
+
 }
 
 
@@ -77,6 +98,53 @@ void teacherProfile::on_chngPass_clicked()
 
 void teacherProfile::on_applychng_2_clicked()
 {
+    FileManager userFile;
+
+    userFile.create();
+
+    userFile.loadData();
+
+    QString oldPassword = ui->oldPass->text();
+
+    QString newPassword = ui->newPass->text();
+
+    QString confirmNewPassword = ui->confirmNewPass->text();
+
+    int userIndex = Auth::findUser(this->mainmenu->get_username());
+
+    QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+    if(parsedUser.at(1) != QString::fromStdString(md5(oldPassword.toStdString())))
+    {
+        QMessageBox* wrongPassword = new QMessageBox(QMessageBox::Icon::Critical, "Wrong Password", "entered current password doesnt match.", QMessageBox::Button::Ok);
+
+        wrongPassword->show();
+
+        connect(wrongPassword , &QMessageBox::buttonClicked , wrongPassword , &QMessageBox::deleteLater);
+
+        return;
+    }
+
+    if(newPassword != confirmNewPassword)
+    {
+        QMessageBox* wrongPasswordConfirm = new QMessageBox(QMessageBox::Icon::Critical, "Passwords Doesnt Match", "new password and confirm new password doesnt match.", QMessageBox::Button::Ok);
+
+        wrongPasswordConfirm->show();
+
+        connect(wrongPasswordConfirm , &QMessageBox::buttonClicked , wrongPasswordConfirm , &QMessageBox::deleteLater);
+
+        return;
+    }
+
+    Auth::updateCredential(userIndex, 1, newPassword, true);
+
+    QMessageBox* passwordChanged = new QMessageBox(QMessageBox::Icon::Information, "Password Changed", "your password changed successfuly.", QMessageBox::Button::Ok);
+
+    passwordChanged->show();
+
+    connect(passwordChanged , &QMessageBox::buttonClicked , passwordChanged , &QMessageBox::deleteLater);
+
+
     this->ui->applychng_2->setVisible(false);
     this->ui->label_24->setVisible(false);
     this->ui->changePass->setVisible(false);
