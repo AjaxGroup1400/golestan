@@ -227,7 +227,7 @@ void TeacherMainMenu::setScores(Class Class)
 
 
 
-    Class.setScore(studentname, score);
+//    Class.setScore(studentname, score);
 
 }
 

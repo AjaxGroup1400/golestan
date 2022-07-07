@@ -164,7 +164,7 @@ void Class::deleteStudent(QString student_username)
 
 }
 
-void setStudentScore(QString studentname,lesson lesson ,float newscore){
+void Class:: setStudentScore(QString studentname,enum lesson lesson ,float newscore){
 
     Json::Value SdataHolder;
     Json::Reader SdataReader;
@@ -189,6 +189,22 @@ void setStudentScore(QString studentname,lesson lesson ,float newscore){
 
 
                 SdataHolder[i]["terms"][Term]["lessons"] = classesCopy;
+                if (SdataHolder[i]["terms"][Term]["average"].asFloat()==-1){
+                    SdataHolder[i]["terms"][Term]["average"]=newscore;
+                }
+                else{
+//                    SdataHolder[i]["terms"][Term]["average"]=(SdataHolder[i]["terms"][Term]["average"].asFloat()+newscore)/2;
+                    int lsnCnt = 0;
+                    float sum = 0;
+                    for(int l = 0; l < (SdataHolder[i]["terms"][Term]["lessons"].size()); l++){
+                        if (SdataHolder[i]["terms"][Term]["lessons"][l]["score"].asFloat()!=-1){
+                            sum += SdataHolder[i]["terms"][Term]["lessons"][l]["score"].asFloat();
+                            lsnCnt ++;
+                        }
+                    }
+                    SdataHolder[i]["terms"][Term]["average"]= sum/lsnCnt;
+
+                }
 
                 ofstream ofs("../data_resources/student_term.json");
 
