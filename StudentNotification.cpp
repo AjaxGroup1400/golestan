@@ -8,19 +8,19 @@ using namespace std ;
 
 StudentNotification::StudentNotification()
 {
-ifstream ifs(filePath.toStdString());
-if(dataReader.parse(ifs , dataHolder))
-{
-    return ;
-}
+    ifstream ifs(filePath.toStdString());
+    if(dataReader.parse(ifs , dataHolder))
+    {
+        return ;
+    }
 
-dataHolder = Json::arrayValue;
+    dataHolder = Json::arrayValue;
 
-ofstream ofs(filePath.toStdString());
-Json::StyledWriter writer;
-string finalPart = writer.write(dataHolder);
-ofs << finalPart;
-ofs.close();
+    ofstream ofs(filePath.toStdString());
+    Json::StyledWriter writer;
+    string finalPart = writer.write(dataHolder);
+    ofs << finalPart;
+    ofs.close();
 
 
 

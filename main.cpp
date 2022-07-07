@@ -5,6 +5,7 @@
 #include "studentmainmenu.h"
 #include "Poll.h"
 #include "Auth.h"
+#include "Md5Hash.h"
 
 #include <QApplication>
 #include <iostream>
@@ -62,6 +63,8 @@ int main(int argc, char *argv[])
     class01.append("General", "Wensday", "11:00");
 
     cal.addUser(class01.exportJson());
+
+    qDebug() << QString::fromStdString(md5("grape"));
 
     QApplication a(argc, argv);
     LoginPage w;
