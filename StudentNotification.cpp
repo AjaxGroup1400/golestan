@@ -39,7 +39,7 @@ void StudentNotification::addAlert(QString title, QString description, QString s
         {
             Json::Value jsonStudent ;
             jsonStudent["username"] = student["username"].toStdString();
-            jsonStudent["is_read"] = student["is_rad"].toStdString();
+            jsonStudent["is_read"] = student["is_read"].toStdString();
             jsonAllowedStudents.append(jsonStudent);
         }
         newAlert["allowed_student"] = jsonAllowedStudents;
@@ -82,8 +82,10 @@ QList<QMap<QString, QString>> StudentNotification::getNotifications(QString stud
         ifs.close();
         return relatedAlerts;
     }
-//    throw exception ("coulden't open the file \"../data_resources/studentnotification.json\"");
 
+    QMessageBox * errormessage = new QMessageBox(QMessageBox::Icon::Critical , "Error" , "coulden't open file \"../data_resources/studentnotification.json\"" , QMessageBox::Button::Ok);
+    errormessage->show();
+    QObject::connect(errormessage , &QMessageBox::buttonClicked , errormessage , &QMessageBox::deleteLater);
 }
 
 void StudentNotification::addAlert(QString title, QString description, QString sender, QString students)
