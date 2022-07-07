@@ -1,4 +1,5 @@
 #include "WeeklyCalendar.h"
+#include "Enum.h"
 
 #include <iostream>
 #include <fstream>
@@ -99,7 +100,7 @@ void WeeklyCalendar::appendClass(Json::Value newClass, QString username, QString
     }
 }
 
-void WeeklyCalendar::deleteClass(QString name, QString username, QString role)
+void WeeklyCalendar::deleteClass(Class Class, QString username, QString role)
 {
     ifstream ifs(filePath.toStdString());
 
@@ -117,7 +118,7 @@ void WeeklyCalendar::deleteClass(QString name, QString username, QString role)
 
                 for(int j = 0; j < wantedUsernameClasses.size(); j++)
                 {
-                    if(wantedUsernameClasses[j]["name"] != name.toStdString())
+                    if(wantedUsernameClasses[j]["name"] != lesson_enum_str[Class.getLesson()].toStdString())
                     {
                         classesCopy.append(wantedUsernameClasses[j]);
                     }
@@ -138,6 +139,13 @@ void WeeklyCalendar::deleteClass(QString name, QString username, QString role)
         }
     }
 
+}
+
+QList<QList<QString>> WeeklyCalendar::getCalendarDayByDay(QString role)
+{
+    QList<QList<QString>> seperatedDays;
+
+    return seperatedDays;
 }
 
 

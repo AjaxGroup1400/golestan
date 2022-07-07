@@ -27,6 +27,8 @@ public:
 
     static int findUser(QString username);
 
+    static QString getUserRole(QString username);
+
     static bool isValidIranianNationalCode(const char *input);
 };
 

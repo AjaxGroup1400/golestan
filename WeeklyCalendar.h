@@ -2,6 +2,7 @@
 #define WEEKLYCALENDAR_H
 
 #include "dist/json/json.h"
+#include "Class.h"
 
 #include <QString>
 #include <QList>
@@ -36,7 +37,9 @@ public:
     void appendClass(Json::Value newClass, QString username, QString role);
 
     // deletes class from target user based on class name
-    void deleteClass(QString name, QString username, QString role);
+    void deleteClass(Class Class, QString username, QString role);
+
+    QList<QList<QString>> getCalendarDayByDay(QString role);
 };
 
 #endif // WEEKLYCALENDAR_H
