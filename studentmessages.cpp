@@ -33,63 +33,63 @@ studentMessages::studentMessages(StudentMainMenu * member , QWidget *parent) :
     this->mainmenu = member;
     this->ui->label_2->setText(("Hi dear " + mainmenu->get_first_name()));
 
-    ifstream ifs(this->filePath.toStdString());
-    if(this->dataReader.parse(ifs , this->dataHolder))
-    {
-        for (auto i : this->dataHolder)
-        {
-            if(QString::fromStdString(i["allowed_student"][0]["username"].asString()) == "*")
-            {
-                if(i["allowed_student"][0]["is_read"] == false)
-                {
-                    this->unReadsender.push_back(QString::fromStdString(i["sender"].asString()));
-                    this->unreadMessages.push_back(QString::fromStdString(i["description"].asString()));
-                    this->unReadsender.push_back(QString::fromStdString(i["title"].asString()));
-                }
-                else if (i["allowed_student"][0]["is_read"] == true)
-                {
-                    this->Readsender.push_back(QString::fromStdString(i["sender"].asString()));
-                    this->readMessages.push_back(QString::fromStdString(i["description"].asString()));
-                    this->Readsender.push_back(QString::fromStdString(i["title"].asString()));
+//    ifstream ifs(this->filePath.toStdString());
+//    if(this->dataReader.parse(ifs , this->dataHolder))
+//    {
+//        for (auto i : this->dataHolder)
+//        {
+//            if(QString::fromStdString(i["allowed_student"][0]["username"].asString()) == "*")
+//            {
+//                if(i["allowed_student"][0]["is_read"] == false)
+//                {
+//                    this->unReadsender.push_back(QString::fromStdString(i["sender"].asString()));
+//                    this->unreadMessages.push_back(QString::fromStdString(i["description"].asString()));
+//                    this->unReadsender.push_back(QString::fromStdString(i["title"].asString()));
+//                }
+//                else if (i["allowed_student"][0]["is_read"] == true)
+//                {
+//                    this->Readsender.push_back(QString::fromStdString(i["sender"].asString()));
+//                    this->readMessages.push_back(QString::fromStdString(i["description"].asString()));
+//                    this->Readsender.push_back(QString::fromStdString(i["title"].asString()));
 
-                }
-                else
-                {
-                    exception e("\"is_read\" in file\"../data_resources/studentnotification\" doesen't contain acceptable parameters");
-                    emit mainmenu->exceptioOccured(e);
-                }
-            }
-            else
-            {
-                for (auto j : i["allowed_student"])
-                {
-                    if(QString::fromStdString(j["username"].asString()) == mainmenu->get_username())
-                    {
-                        if(j["is_read"].asString() == "false" )
-                        {
-                            this->unReadsender.push_back( QString::fromStdString(i["sender"].asString()));
-                            this->unreadMessages.push_back(QString::fromStdString(i["description"].asString()));
-                            this->unreadTitle.push_back(QString::fromStdString(i["title"].asString()));
-                        }
-                        else if (j["is_read"].asString() == "true")
-                        {
-                            this->Readsender.push_back( QString::fromStdString(i["sender"].asString()));
-                            this->readMessages.push_back(QString::fromStdString(i["description"].asString()));
-                            this->readTitle.push_back(QString::fromStdString(i["title"].asString()));
+//                }
+//                else
+//                {
+//                    exception e("\"is_read\" in file\"../data_resources/studentnotification\" doesen't contain acceptable parameters");
+//                    emit mainmenu->exceptioOccured(e);
+//                }
+//            }
+//            else
+//            {
+//                for (auto j : i["allowed_student"])
+//                {
+//                    if(QString::fromStdString(j["username"].asString()) == mainmenu->get_username())
+//                    {
+//                        if(j["is_read"].asString() == "false" )
+//                        {
+//                            this->unReadsender.push_back( QString::fromStdString(i["sender"].asString()));
+//                            this->unreadMessages.push_back(QString::fromStdString(i["description"].asString()));
+//                            this->unreadTitle.push_back(QString::fromStdString(i["title"].asString()));
+//                        }
+//                        else if (j["is_read"].asString() == "true")
+//                        {
+//                            this->Readsender.push_back( QString::fromStdString(i["sender"].asString()));
+//                            this->readMessages.push_back(QString::fromStdString(i["description"].asString()));
+//                            this->readTitle.push_back(QString::fromStdString(i["title"].asString()));
 
-                        }
-                        else
-                        {
-                            exception e("\"is_read\" in file\"../data_resources/studentnotification\" doesen't contain acceptable parameters");
-                            emit mainmenu->exceptioOccured(e);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-        ifs.close();
-    }
+//                        }
+//                        else
+//                        {
+//                            exception e("\"is_read\" in file\"../data_resources/studentnotification\" doesen't contain acceptable parameters");
+//                            emit mainmenu->exceptioOccured(e);
+//                        }
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        ifs.close();
+//    }
 
 
 
