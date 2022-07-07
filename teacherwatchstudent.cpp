@@ -9,7 +9,10 @@
 #include "teachersendassertion.h"
 #include "teachermessages.h"
 #include "teacherweeklyschedule.h"
-TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member , QWidget *parent) :
+#include "Auth.h"
+#include "Filemanager.h"
+
+TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member ,Class thisClass , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherWatchStudent)
 {
@@ -26,8 +29,18 @@ TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member , QWidget *par
     this->mainmenu = member ;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
-    for (int i = 0 ; i<10;i++){
-        ui->verticalLayout_2->addWidget(students());
+    QList<QString> usernameList = thisClass.getList().keys();
+    for (int i = 0 ; i<thisClass.getStudentNum();i++){
+
+        int userIndex = Auth::findUser(usernameList[i]);
+
+        FileManager userFile;
+        userFile.create();
+        userFile.loadData();
+
+        QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+        ui->verticalLayout_2->addWidget(students(parsedUser[2],parsedUser[3],usernameList[i]));
 
     }
 }
@@ -156,7 +169,7 @@ void TeacherWatchStudent::on_pushButton_clicked()
 
 }
 
-QGroupBox *TeacherWatchStudent::students()
+QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QString studentusername)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -169,33 +182,33 @@ QGroupBox *TeacherWatchStudent::students()
     QLabel * Name = new QLabel;
     Name->setMaximumWidth(81);
     Name->setMaximumHeight(20);
-    Name->setText("Class Name");
+    Name->setText(firstname);
     Name->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * lastName = new QLabel;
     lastName->setMaximumWidth(81);
     lastName->setMaximumHeight(20);
-    lastName->setText("Teacher Name");
+    lastName->setText(lastname);
     lastName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * studentNumber = new QLabel;
     studentNumber->setMaximumWidth(81);
     studentNumber->setMaximumHeight(20);
-    studentNumber->setText("Student Number");
+    studentNumber->setText(studentusername);
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
-    QLabel * field = new QLabel;
-    field->setMaximumWidth(81);
-    field->setMaximumHeight(20);
-    field->setText("Field");
-    field->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
+//    QLabel * field = new QLabel;
+//    field->setMaximumWidth(81);
+//    field->setMaximumHeight(20);
+//    field->setText("Field");
+//    field->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
     grid->addWidget(Name,0,0);
     grid->addWidget(lastName,0,1);
     grid->addWidget(studentNumber,0,2);
-    grid->addWidget(field,0,3);
+//    grid->addWidget(field,0,3);
 
     gBox->setLayout(grid);
     return gBox;

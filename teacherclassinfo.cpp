@@ -67,8 +67,8 @@ QGroupBox *TeacherClassInfo::watchClass(Class classToShow)
 
 
     QPushButton* watchBtn = new QPushButton;
-    QString Name;
-    connect(watchBtn,&QPushButton::clicked,[this, Name] { goToClassInfo(Name);});
+//    QString Name;
+    connect(watchBtn,&QPushButton::clicked,[this, classToShow] { goToClassInfo(classToShow);});
     watchBtn->setMaximumWidth(101);
     watchBtn->setMaximumHeight(26);
     watchBtn->setText("Watch More");
@@ -181,9 +181,9 @@ void TeacherClassInfo::on_backToMenu_clicked()
     }
 }
 
-void TeacherClassInfo::goToClassInfo(QString className)
+void TeacherClassInfo::goToClassInfo(Class thisClass)
 {
-    TeacherWatchStudent* tws = new TeacherWatchStudent(mainmenu);
+    TeacherWatchStudent* tws = new TeacherWatchStudent(mainmenu, thisClass);
     tws->show();
     close();
 

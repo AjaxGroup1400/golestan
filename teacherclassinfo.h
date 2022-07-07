@@ -33,7 +33,7 @@ private slots:
 
 private:
     Ui::TeacherClassInfo *ui;
-    void goToClassInfo(QString className);
+    void goToClassInfo(Class thisClass);
 
     TeacherMainMenu * mainmenu;
 };
