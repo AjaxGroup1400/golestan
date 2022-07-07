@@ -19,11 +19,9 @@ using namespace std;
 #include "Auth.h"
 #include "Filemanager.h"
 #include "User.h"
-#include"StudentNotification.h"
+#include"Notification.h"
+#include "teachermessages.h"
 #include"dist/json/json.h"
-
-
-
 
 TeacherMainMenu::TeacherMainMenu(QString firstname , QString username , TeacherMainMenu * member, QWidget *parent) :
 //    QWidget(parent),
@@ -56,48 +54,9 @@ TeacherMainMenu::TeacherMainMenu(QString firstname , QString username , TeacherM
     this->set_first_name(firstname);
     this->ui->label_2->setText("Hi dear " + this->get_first_name());
 
-//    FileManager userFile;
-
-//    userFile.create("teachers.txt");
-
-//    userFile.loadData();
-
-//    for(const QString& item: userFile.getData()){
-//        auto parse = userFile.parse(item);
-
-//        if (parse[0] == this->get_username()){
-/*            QMap <QString, float> studentscore;
-//            studentscore.insert(parse[2],parse[3].toFloat()) ;
-//            this->students.insert( parse[1] , studentscore ) ;
-*/
-//        }
-//    }
-
-//working with file fot teacher class
+    //working with file fot teacher class
     initFile();
 }
-
-//TeacherMainMenu::TeacherMainMenu(QString firstname , QString username):
-
-//ui(new Ui::TeacherMainMenu)
-//{
-//    ui->setupUi(this);
-//    this->ui->pushButton->setStyleSheet("background-color:transparent");
-//    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
-//    this->ui->pushButton_3->setStyleSheet("background-color:transparent");
-//    this->ui->pushButton_4->setStyleSheet("background-color:transparent");
-//    this->ui->pushButton_5->setStyleSheet("background-color:transparent");
-//    this->ui->pushButton_6->setStyleSheet("background-color:transparent");
-//    this->ui->pushButton_7->setStyleSheet("background-color:transparent");
-//    this->ui->label_13->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
-//    this->set_username(username);
-
-//    this->set_first_name(firstname);
-//    this->ui->label_2->setText("Hi dear " + this->get_first_name());
-//    initFile();
-
-
-//}
 
 TeacherMainMenu::~TeacherMainMenu()
 {
@@ -128,22 +87,6 @@ void TeacherMainMenu::on_pushButton_clicked()
     tp->show();
     close();
 }
-
-//QMap<QString, float> TeacherMainMenu::studentsList(QString classname)
-//{
-//    QMap <QString, float> classlist;
-
-//for (auto i=this->students.begin(); i!=this->students.end(); i++){
-//    auto j = i.value().begin();
-
-//    if (j.key() == classname){
-
-//        classlist.insert( i.key(), j.value() );
-//    }
-//}
-//    return classlist;
-
-//}
 
 void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 
@@ -236,7 +179,7 @@ void TeacherMainMenu::sendingNotification(QString title , QString message , Clas
 {
     QList <QString> list = Class.getList().keys();
 
-    StudentNotification member;
+    Notification member;
     QList<QMap<QString , QString>> studentUsernameList ;
 
     for (int i = 0 ;  i < list.size() ; i++)
@@ -246,7 +189,7 @@ void TeacherMainMenu::sendingNotification(QString title , QString message , Clas
         member["is_read"] = "false";
         studentUsernameList.push_back(member)  ;
     }
-    member.addAlert(title , message , this->get_username() , studentUsernameList ) ;
+    member.addNotif(title , message , this->get_username() , studentUsernameList ) ;
 }
 
 void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
@@ -405,6 +348,11 @@ QString TeacherMainMenu::lessonNameCheck(QString sentName)
 
 }
 
+QList<Class> TeacherMainMenu::getClasses()
+{
+return this->classes;
+}
+
 
 
 
@@ -420,13 +368,19 @@ void TeacherMainMenu::on_pushButton_3_clicked()
     QMap<QString , float> calculus = this->studentsList("calculus");
     QMap<QString , float> discrete = this->studentsList("discrete");
     */
-    for(auto i = this->classes.begin(); i!=classes.end(); i++){
+//    for(auto i = this->classes.begin(); i!=classes.end(); i++){
 
-    }
+//    }
 
 //  new page(chemistry , chemistry.size , ...)
 //  class name , number of students , students' names , class location
 
+
+    teacherMessages* tm = new teacherMessages(mainmenu, this);
+
+    tm->show();
+
+    close();
 }
 
 
@@ -489,6 +443,10 @@ void TeacherMainMenu::initFile()
 
 void TeacherMainMenu::on_pushButton_2_clicked()
 {
+    teacherMessages* tm = new teacherMessages(this);
 
+    close();
+
+    tm->show();
 }
 

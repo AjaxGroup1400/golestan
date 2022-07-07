@@ -18,7 +18,7 @@ public:
     explicit TeacherClassInfo(TeacherMainMenu * member , QWidget *parent = nullptr);
     ~TeacherClassInfo();
 public slots:
-    QGroupBox* watchClass();
+    QGroupBox* watchClass(Class classToShow);
 
 private slots:
     void on_pushButton_clicked();

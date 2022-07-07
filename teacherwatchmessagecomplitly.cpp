@@ -14,7 +14,7 @@ using namespace std;
 #include "teacherweeklyschedule.h"
 
 
-teacherWatchMessageComplitly::teacherWatchMessageComplitly(QString title , QString message , QString sender ,  bool isread , TeacherMainMenu * member , QWidget *parent) :
+teacherWatchMessageComplitly::teacherWatchMessageComplitly(QString title , QString message, TeacherMainMenu * member, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::teacherWatchMessageComplitly)
 {
@@ -35,49 +35,47 @@ teacherWatchMessageComplitly::teacherWatchMessageComplitly(QString title , QStri
     this->mainmenu = member;
     this->ui->label_9->setText("Hi dear " + mainmenu->get_first_name());
 
-    this->ui->SenderLine->setText(sender);
+//    this->ui->SenderLine->setText(sender);
     this->ui->TitleLine->setText(title);
     this->ui->messageLine->setText(message);
 
-    if(isread == false)
-    {
-        ifstream ifs(this->filePath.toStdString());
-        if(this->dataReader.parse(ifs , this->dataHolder))
-        {
-            Json::Value members;
-            for(auto i: this->dataHolder  )
-            {
-                if(QString::fromStdString(i["allowed_student"][0]["username"].asString()) != "#")
-                    members.append(i);
-                else
-                {
-                    if(QString::fromStdString(i["allowed_student"][0]["is_read"].asString()) == "true")
-                        members.append(i);
-                    else
-                    {
-                        Json::Value appended;
-                        appended["is_read"] = "true";
-                        appended["username"] = "#";
-                        Json::Value changedMember;
-                        changedMember["allowed_student"].append(appended);
-                        changedMember["description"] = i["description"];
-                        changedMember["sender"] = i["sender"];
-                        changedMember["title"] = i["title"];
-                        members.append(changedMember);
-                    }
-                }
-            }
-            this->dataHolder = members ;
-            ofstream ofs(this->filePath.toStdString());
-            Json::StyledWriter writer;
-            string finalPart = writer.write(this->dataHolder);
-            ofs << finalPart;
-            ofs.close();
-        }
+//    if(isread == false)
+//    {
+//        ifstream ifs(this->filePath.toStdString());
+//        if(this->dataReader.parse(ifs , this->dataHolder))
+//        {
+//            Json::Value members;
+//            for(auto i: this->dataHolder  )
+//            {
+//                if(QString::fromStdString(i["allowed_student"][0]["username"].asString()) != "#")
+//                    members.append(i);
+//                else
+//                {
+//                    if(QString::fromStdString(i["allowed_student"][0]["is_read"].asString()) == "true")
+//                        members.append(i);
+//                    else
+//                    {
+//                        Json::Value appended;
+//                        appended["is_read"] = "true";
+//                        appended["username"] = "#";
+//                        Json::Value changedMember;
+//                        changedMember["allowed_student"].append(appended);
+//                        changedMember["description"] = i["description"];
+//                        changedMember["sender"] = i["sender"];
+//                        changedMember["title"] = i["title"];
+//                        members.append(changedMember);
+//                    }
+//                }
+//            }
+//            this->dataHolder = members ;
+//            ofstream ofs(this->filePath.toStdString());
+//            Json::StyledWriter writer;
+//            string finalPart = writer.write(this->dataHolder);
+//            ofs << finalPart;
+//            ofs.close();
+//        }
 
-    }
-
-
+//    }
 }
 
 teacherWatchMessageComplitly::~teacherWatchMessageComplitly()
@@ -103,14 +101,12 @@ void teacherWatchMessageComplitly::on_pushButton_7_clicked()
     }
 }
 
-
 void teacherWatchMessageComplitly::on_pushButton_8_clicked()
 {
     teacherMessages* tm= new teacherMessages(mainmenu);
     tm->show();
     close();
 }
-
 
 void teacherWatchMessageComplitly::on_pushButton_10_clicked()
 {
@@ -130,14 +126,12 @@ void teacherWatchMessageComplitly::on_pushButton_10_clicked()
     }
 }
 
-
 void teacherWatchMessageComplitly::on_backToMenu_clicked()
 {
     teacherMessages* tm= new teacherMessages(mainmenu);
     tm->show();
     close();
 }
-
 
 void teacherWatchMessageComplitly::on_pushButton_11_clicked()
 {

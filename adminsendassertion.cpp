@@ -5,7 +5,7 @@
 #include <QCheckBox>
 #include "adminprofile.h"
 #include "adminaddpeople.h"
-#include"StudentNotification.h"
+#include"Notification.h"
 
 AdminSendAssertion::AdminSendAssertion(AdminMainMenu * recievedmember , QWidget *parent) :
     QWidget(parent),
@@ -133,12 +133,12 @@ void AdminSendAssertion::on_sendbtn_clicked()
         return ;
     }
 
-    StudentNotification alert;
+    Notification alert;
     if(studentChosen == 1)
-        alert.addAlert(title , message , mainmenu->get_username());
+        alert.addNotif(title , message , mainmenu->get_username());
     if(teacherChosen == 1)
     {
-        alert.addAlert(  title , message , mainmenu->get_username() , "#") ;
+        alert.addNotif(  title , message , mainmenu->get_username() , "#") ;
     }
 
 }

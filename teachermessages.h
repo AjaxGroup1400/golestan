@@ -2,14 +2,18 @@
 #define TEACHERMESSAGES_H
 
 #include <QWidget>
-
+#include <QGroupBox>
+#include <memory>
 
 #include"dist/json/json.h"
 #include"teachermainmenu.h"
+#include "Notification.h"
 
 namespace Ui {
 class teacherMessages;
 }
+
+using std::unique_ptr, std::make_unique;
 
 class teacherMessages : public QWidget
 {
@@ -26,7 +30,7 @@ private slots:
 
     void on_backToMenu_clicked();
 
-    void on_msgbtn1_clicked();
+    void on_msgBtn_clicked(QString title, QString description);
 
     void on_pushButton_5_clicked();
 
@@ -42,10 +46,15 @@ private:
     QList<QString>    readTitle;
     QList<QString>    Readsender;
 
+    unique_ptr<Notification> notification;
 
-    Json::Value dataHolder;
-    Json::Reader dataReader;
-    QString filePath = "../data_resources/studentnotification" ;
+    void showMeassages();
+
+    QGroupBox* createMessageBox(QString messageTitle, QString messageDescription, int id);
+
+//    Json::Value dataHolder;
+//    Json::Reader dataReader;
+//    QString filePath = "../data_resources/notifications.json";
 };
 
 #endif // TEACHERMESSAGES_H

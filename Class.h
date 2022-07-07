@@ -17,6 +17,7 @@ public:
     QString getLocation();
     QString getTime();
     day getDay();
+    int getStudentNum();
     QMap < QString , float > getList();
 //    QMap < QString , int > getSurveyResult();
 
@@ -45,7 +46,7 @@ private:
 
     QMap < QString , float > studentslist;
 //    QMap < QString , int > surveyresult;
+    void setStudentScore(QString studentname,enum lesson lesson ,float newscore);
 
 };
-void setStudentScore(QString studentname,lesson lesson ,float newscore);
 #endif // CLASS_H
