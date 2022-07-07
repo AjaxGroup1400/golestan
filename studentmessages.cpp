@@ -38,7 +38,7 @@ studentMessages::studentMessages(StudentMainMenu * member , QWidget *parent) :
     {
         for (auto i : this->dataHolder)
         {
-            if(QString::fromStdString(i["allowed_student"][0]["username"].asString()) == "#")
+            if(QString::fromStdString(i["allowed_student"][0]["username"].asString()) == "*")
             {
                 if(i["allowed_student"][0]["is_read"] == false)
                 {
@@ -57,6 +57,34 @@ studentMessages::studentMessages(StudentMainMenu * member , QWidget *parent) :
                 {
                     exception e("\"is_read\" in file\"../data_resources/studentnotification\" doesen't contain acceptable parameters");
                     emit mainmenu->exceptioOccured(e);
+                }
+            }
+            else
+            {
+                for (auto j : i["allowed_student"])
+                {
+                    if(QString::fromStdString(j["username"].asString()) == mainmenu->get_username())
+                    {
+                        if(j["is_read"].asString() == "false" )
+                        {
+                            this->unReadsender.push_back( QString::fromStdString(i["sender"].asString()));
+                            this->unreadMessages.push_back(QString::fromStdString(i["description"].asString()));
+                            this->unreadTitle.push_back(QString::fromStdString(i["title"].asString()));
+                        }
+                        else if (j["is_read"].asString() == "true")
+                        {
+                            this->Readsender.push_back( QString::fromStdString(i["sender"].asString()));
+                            this->readMessages.push_back(QString::fromStdString(i["description"].asString()));
+                            this->readTitle.push_back(QString::fromStdString(i["title"].asString()));
+
+                        }
+                        else
+                        {
+                            exception e("\"is_read\" in file\"../data_resources/studentnotification\" doesen't contain acceptable parameters");
+                            emit mainmenu->exceptioOccured(e);
+                        }
+                        break;
+                    }
                 }
             }
         }
@@ -116,9 +144,43 @@ void studentMessages::on_backToMenu_clicked()
 
 void studentMessages::on_msgbtn1_clicked()
 {
-    StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly(mainmenu);
-    swmc->show();
-    close();
+    bool isread;
+    QString sender = nullptr;
+    for(int i = 0 ; i < unreadTitle.size() ; i++)
+    {
+        if(unreadTitle[i] == this->ui->msgtitle1->text() && this->ui->msg1->text() == unreadMessages[i])
+        {
+            sender = unReadsender[i];
+            isread = false;
+            break;
+        }
+    }
+    if(sender == nullptr)
+    {
+        for(int i = 0 ; i < readTitle.size() ; i++)
+        {
+            if(readTitle[i] == this->ui->msgtitle1->text() && this->ui->msg1->text() == readMessages[i])
+            {
+                sender = Readsender[i];
+                isread = true;
+                break;
+            }
+
+        }
+    }
+
+    if(sender!=nullptr)
+    {
+        StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly(this->ui->msgtitle1->text() , this->ui->msg1->text() , sender , isread , mainmenu );
+        swmc->show();
+        close();
+    }
+    else
+    {
+        exception e("coulden't find the message");
+        emit mainmenu->exceptioOccured(e);
+    }
+
 }
 
 
