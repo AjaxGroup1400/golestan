@@ -10,7 +10,10 @@ StudentNotification::StudentNotification()
 {
     ifstream ifs(filePath.toStdString());
     if(dataReader.parse(ifs , dataHolder))
+    {
         return ;
+    }
+
     dataHolder = Json::arrayValue;
 
     ofstream ofs(filePath.toStdString());

@@ -164,6 +164,49 @@ void Class::deleteStudent(QString student_username)
 
 }
 
+void setStudentScore(QString studentname,lesson lesson ,float newscore){
+
+    Json::Value SdataHolder;
+    Json::Reader SdataReader;
+    ifstream ifs("../data_resources/student_term.json");
+
+    if(SdataReader.parse(ifs, SdataHolder))
+    {
+        for(int i = 0; i < SdataHolder.size(); i++)
+        {
+            if(studentname.toStdString() == SdataHolder[i]["username"].asString())
+            {
+                int Term = SdataHolder[i]["count_of_terms"].asInt()-1;
+
+                Json::Value classesCopy = SdataHolder[i]["terms"][Term]["lessons"];
+
+                for(int j = 0; j < classesCopy.size(); j++)
+                {
+                    if(classesCopy[i]["lesson"].asString() !=lesson_enum_str[lesson].toStdString())
+                       classesCopy[i]["score"]=newscore;
+
+                }
+
+
+                SdataHolder[i]["terms"][Term]["lessons"] = classesCopy;
+
+                ofstream ofs("../data_resources/student_term.json");
+
+                Json::StyledWriter writer;
+
+                string serializedData = writer.write(SdataHolder);
+
+                ofs << serializedData;
+
+                ofs.close();
+
+                return;
+            }
+        }
+    }
+}
+
+
 void Class::setScore(QString student_username, float score)
 {
     for(auto i = this->studentslist.begin() ; i != this->studentslist.end(); i++){
@@ -188,6 +231,7 @@ void Class::setScore(QString student_username, float score)
         ofs.close();
     }
 
+    setStudentScore(student_username,this->getLesson(), score);
 }
 
 bool Class::studentIsValid(QString studentUsername)
