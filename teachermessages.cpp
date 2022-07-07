@@ -1,11 +1,20 @@
+#include <QMessageBox>
+#include<fstream>
+#include<QString>
+
+#include<iostream>
+using namespace std;
+
+
 #include "teachermessages.h"
 #include "ui_teachermessages.h"
 #include "teachersendassertion.h"
-#include <QMessageBox>
 #include "teachermainmenu.h"
 #include "teacherprofile.h"
 #include "teacherwatchmessagecomplitly.h"
 #include "teacherweeklyschedule.h"
+
+
 
 teacherMessages::teacherMessages(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -28,6 +37,44 @@ teacherMessages::teacherMessages(TeacherMainMenu * member , QWidget *parent) :
     this->ui->msgbtn7->setStyleSheet("background-color: transparent");
 
     this->mainmenu = member;
+
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for (auto i : this->dataHolder)
+        {
+            if(QString::fromStdString(i["allowed_student"][0]["username"].asString()) == "#")
+            {
+                if(i["allowed_student"][0]["is_read"] == false)
+                {
+                    this->unReadsender.push_back(QString::fromStdString(i["sender"].asString()));
+                    this->unreadMessages.push_back(QString::fromStdString(i["description"].asString()));
+                    this->unReadsender.push_back(QString::fromStdString(i["title"].asString()));
+                }
+                else if (i["allowed_student"][0]["is_read"] == true)
+                {
+                    this->Readsender.push_back(QString::fromStdString(i["sender"].asString()));
+                    this->readMessages.push_back(QString::fromStdString(i["description"].asString()));
+                    this->Readsender.push_back(QString::fromStdString(i["title"].asString()));
+
+                }
+                else
+                {
+                    exception e("\"is_read\" in file\"../data_resources/studentnotification\" doesen't contain acceptable parameters");
+                    emit mainmenu->exceptioOccured(e);
+                }
+            }
+        }
+        ifs.close();
+    }
+    else
+    {
+        exception e("coulden't open file \"../data_resources/studentnotification\"");
+        emit mainmenu->exceptioOccured(e);
+    }
+
+
+
 }
 
 teacherMessages::~teacherMessages()
@@ -77,7 +124,7 @@ void teacherMessages::on_pushButton_4_clicked()
 
 void teacherMessages::on_backToMenu_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -95,10 +142,45 @@ void teacherMessages::on_backToMenu_clicked()
 
 
 void teacherMessages::on_msgbtn1_clicked()
-{
-    teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly(mainmenu);
-    twmc->show();
-    close();
+{        
+    bool isread;
+    QString sender = nullptr;
+    for(int i = 0 ; i < unreadTitle.size() ; i++)
+    {
+        if(unreadTitle[i] == this->ui->msgtitle1->text() && this->ui->msg1->text() == unreadMessages[i])
+        {
+            sender = unReadsender[i];
+            isread = false;
+            break;
+        }
+    }
+    if(sender == nullptr)
+    {
+        for(int i = 0 ; i < readTitle.size() ; i++)
+        {
+            if(readTitle[i] == this->ui->msgtitle1->text() && this->ui->msg1->text() == readMessages[i])
+            {
+                sender = Readsender[i];
+                isread = true;
+                break;
+            }
+
+        }
+    }
+
+    if(sender!=nullptr)
+    {
+        teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly(this->ui->msgtitle1->text() , this->ui->msg1->text() , sender ,  isread , mainmenu);
+        twmc->show();
+        close();
+    }
+    else
+    {
+        exception e("coulden't find the message");
+        emit mainmenu->exceptioOccured(e);
+    }
+
+
 }
 
 

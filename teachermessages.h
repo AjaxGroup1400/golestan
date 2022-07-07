@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+
+#include"dist/json/json.h"
 #include"teachermainmenu.h"
 
 namespace Ui {
@@ -32,6 +34,18 @@ private:
     Ui::teacherMessages *ui;
 
     TeacherMainMenu * mainmenu;
+
+    QList<QString>    unreadMessages;
+    QList<QString>    unreadTitle;
+    QList<QString>    unReadsender;
+    QList<QString>    readMessages;
+    QList<QString>    readTitle;
+    QList<QString>    Readsender;
+
+
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+    QString filePath = "../data_resources/studentnotification" ;
 };
 
 #endif // TEACHERMESSAGES_H
