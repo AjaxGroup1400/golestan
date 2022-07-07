@@ -3,13 +3,13 @@
 #include <QMessageBox>
 
 
-#include"StudentNotification.h"
+#include"Notification.h"
 #include "teachermainmenu.h"
 #include "teacherprofile.h"
 #include"Enum.h"
 #include"Class.h"
 
-TeacherSendAssertion::TeacherSendAssertion(TeacherMainMenu * tm ,  QWidget *parent) :
+TeacherSendAssertion::TeacherSendAssertion(TeacherMainMenu * tm,  QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherSendAssertion)
 
@@ -92,7 +92,6 @@ void TeacherSendAssertion::on_sendbtn_clicked()
 {
     try
     {
-
         QString title = ui->TitleLine->text();
         QString message = ui->messageLine->toPlainText();
         QString ls = "chemistry" ;

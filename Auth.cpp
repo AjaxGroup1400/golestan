@@ -149,6 +149,21 @@ int Auth::findUser(QString username)
     throw exception("No user found");
 }
 
+QString Auth::getUserRole(QString username)
+{
+    FileManager userFile;
+
+    userFile.create();
+
+    userFile.loadData();
+
+    int userIndex = Auth::findUser(username);
+
+    auto parsedUserInfo = userFile.parse(userFile.getRecord(userIndex));
+
+    return parsedUserInfo.at(parsedUserInfo.size() - 1);
+}
+
 bool Auth::isValidIranianNationalCode(const char *input)
 {
     for (unsigned i = 0; i < 10; ++i) if (input[i] < '0' || input[i] > '9') return false;

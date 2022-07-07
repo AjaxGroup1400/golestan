@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Notification.cpp \
     adminclassinfo.cpp \
     adminwatchstudent.cpp \
     teacherclassinfo.cpp \
@@ -46,11 +47,11 @@ SOURCES += \
     dist/jsoncpp.cpp \
     studentmainmenu.cpp \
     studentprofile.cpp \
-    StudentNotification.cpp \
     teachermainmenu.cpp \
     teacherprofile.cpp \
 
 HEADERS += \
+    Notification.h \
     adminclassinfo.h \
     adminwatchstudent.h \
     teacherclassinfo.h \
@@ -89,7 +90,6 @@ HEADERS += \
     dist/json/json-forwards.h \
     studentmainmenu.h \
     studentprofile.h \
-    StudentNotification.h \
     teachermainmenu.h \
     teacherprofile.h
 
