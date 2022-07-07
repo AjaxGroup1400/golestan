@@ -38,6 +38,7 @@ public:
     bool lessonIsValid(QString lesson);
     Class getLesson(lesson lesson);
     QString lessonNameCheck(QString sentName);
+    QList<Class> getClasses();
 
 
 

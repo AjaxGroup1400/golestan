@@ -17,6 +17,7 @@ public:
     QString getLocation();
     QString getTime();
     day getDay();
+    int getStudentNum();
     QMap < QString , float > getList();
 //    QMap < QString , int > getSurveyResult();
 

@@ -326,6 +326,11 @@ day Class::getDay()
     return this-> day;
 }
 
+int Class::getStudentNum()
+{
+    return this->number_of_students;
+}
+
 QMap<QString, float> Class::getList()
 {
     return this->studentslist;

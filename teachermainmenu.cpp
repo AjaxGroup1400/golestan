@@ -405,6 +405,11 @@ QString TeacherMainMenu::lessonNameCheck(QString sentName)
 
 }
 
+QList<Class> TeacherMainMenu::getClasses()
+{
+return this->classes;
+}
+
 
 
 
