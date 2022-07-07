@@ -15,7 +15,7 @@ class TeacherWatchStudent : public QWidget
     Q_OBJECT
 
 public:
-    explicit TeacherWatchStudent(TeacherMainMenu * member , QWidget *parent = nullptr);
+    explicit TeacherWatchStudent(TeacherMainMenu * member ,Class thisClass,  QWidget *parent = nullptr);
     ~TeacherWatchStudent();
 
 private slots:
@@ -34,7 +34,7 @@ private slots:
 private:
     Ui::TeacherWatchStudent *ui;
 
-    QGroupBox* students();
+    QGroupBox* students(QString firstname,QString lastname,QString studentusername);
 
     TeacherMainMenu * mainmenu ;
 };
