@@ -11,7 +11,7 @@
 #include "adminwatchstudent.h"
 
 
-AdminClassInfo::AdminClassInfo(QWidget *parent) :
+AdminClassInfo::AdminClassInfo(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminClassInfo)
 {
@@ -23,6 +23,8 @@ AdminClassInfo::AdminClassInfo(QWidget *parent) :
     this->ui->pushButton_7->setStyleSheet("background-color: transparent");
     this->ui->pushButton_6->setStyleSheet("background-color: transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
+
+    this->mainmenu = member;
 
     for (int i = 0 ; i<10;i++){
         ui->verticalLayout_2->addWidget(watchClass());
@@ -85,7 +87,7 @@ QGroupBox *AdminClassInfo::watchClass()
 
 void AdminClassInfo::goToClassInfo(QString className)
 {
-    AdminWatchStudent* aws = new AdminWatchStudent;
+    AdminWatchStudent* aws = new AdminWatchStudent(mainmenu);
     aws->show();
     close();
 
@@ -99,7 +101,7 @@ void AdminClassInfo::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminMainMenu* amm = new AdminMainMenu;
+        AdminMainMenu* amm = new AdminMainMenu(mainmenu->get_first_name() , mainmenu);
         amm->show();
         exit->close();
         close();
@@ -118,7 +120,7 @@ void AdminClassInfo::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminProfile* ap= new AdminProfile;
+        AdminProfile* ap= new AdminProfile(mainmenu);
         ap->show();
         exit->close();
         close();
@@ -139,7 +141,7 @@ void AdminClassInfo::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        adminMessages* as = new adminMessages;
+        adminMessages* as = new adminMessages(mainmenu);
         as->show();
         exit->close();
         close();
@@ -158,7 +160,7 @@ void AdminClassInfo::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminAddPeople* aap= new AdminAddPeople;
+        AdminAddPeople* aap= new AdminAddPeople(mainmenu);
         aap->show();
         exit->close();
         close();
@@ -198,7 +200,7 @@ void AdminClassInfo::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        adminAddClass* adc= new adminAddClass;
+        adminAddClass* adc= new adminAddClass(mainmenu);
         adc->show();
         exit->close();
         close();

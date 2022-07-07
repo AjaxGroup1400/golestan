@@ -9,7 +9,7 @@
 #include "teachersendassertion.h"
 #include "teachermessages.h"
 #include "teacherweeklyschedule.h"
-TeacherWatchStudent::TeacherWatchStudent(QWidget *parent) :
+TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherWatchStudent)
 {
@@ -22,6 +22,8 @@ TeacherWatchStudent::TeacherWatchStudent(QWidget *parent) :
     this->ui->pushButton_5->setStyleSheet("background-color:transparent");
     this->ui->pushButton_6->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color:transparent");
+
+    this->mainmenu = member ;
 
     for (int i = 0 ; i<10;i++){
         ui->verticalLayout_2->addWidget(students());
@@ -42,7 +44,7 @@ void TeacherWatchStudent::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherClassInfo* tci = new TeacherClassInfo;
+        TeacherClassInfo* tci = new TeacherClassInfo(mainmenu);
         tci->show();
         exit->close();
         close();
@@ -62,7 +64,7 @@ void TeacherWatchStudent::on_pushButton_5_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherWeeklySchedule* tws = new teacherWeeklySchedule;
+        teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
         close();
@@ -102,7 +104,7 @@ void TeacherWatchStudent::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherClassInfo* tci = new TeacherClassInfo;
+        TeacherClassInfo* tci = new TeacherClassInfo(mainmenu);
         tci->show();
         exit->close();
         close();
@@ -122,7 +124,7 @@ void TeacherWatchStudent::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherMessages* tm= new teacherMessages;
+        teacherMessages* tm= new teacherMessages(mainmenu);
         tm->show();
         exit->close();
         close();
@@ -142,7 +144,7 @@ void TeacherWatchStudent::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherProfile* tp= new teacherProfile;
+        teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
         close();

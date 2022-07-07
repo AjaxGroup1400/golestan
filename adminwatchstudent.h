@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGroupBox>
 
+#include"adminmainmenu.h"
+
 namespace Ui {
 class AdminWatchStudent;
 }
@@ -13,7 +15,7 @@ class AdminWatchStudent : public QWidget
     Q_OBJECT
 
 public:
-    explicit AdminWatchStudent(QWidget *parent = nullptr);
+    explicit AdminWatchStudent(AdminMainMenu * member , QWidget *parent = nullptr);
     ~AdminWatchStudent();
 
 private slots:
@@ -34,6 +36,8 @@ private slots:
 private:
     Ui::AdminWatchStudent *ui;
     QGroupBox* students();
+
+    AdminMainMenu * mainmenu ;
 };
 
 #endif // ADMINWATCHSTUDENT_H

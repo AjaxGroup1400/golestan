@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGroupBox>
 
+
+#include"teachermainmenu.h"
 namespace Ui {
 class TeacherClassInfo;
 }
@@ -13,7 +15,7 @@ class TeacherClassInfo : public QWidget
     Q_OBJECT
 
 public:
-    explicit TeacherClassInfo(QWidget *parent = nullptr);
+    explicit TeacherClassInfo(TeacherMainMenu * member , QWidget *parent = nullptr);
     ~TeacherClassInfo();
 public slots:
     QGroupBox* watchClass();
@@ -32,6 +34,8 @@ private slots:
 private:
     Ui::TeacherClassInfo *ui;
     void goToClassInfo(QString className);
+
+    TeacherMainMenu * mainmenu;
 };
 
 #endif // TEACHERCLASSINFO_H

@@ -10,7 +10,7 @@
 #include "teacherweeklyschedule.h"
 #include "teacherwatchstudent.h"
 
-TeacherClassInfo::TeacherClassInfo(QWidget *parent) :
+TeacherClassInfo::TeacherClassInfo(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherClassInfo)
 {
@@ -22,6 +22,8 @@ TeacherClassInfo::TeacherClassInfo(QWidget *parent) :
     this->ui->pushButton_5->setStyleSheet("background-color:transparent");
     this->ui->pushButton_6->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color:transparent");
+
+    this->mainmenu = member ;
 
     for (int i = 0 ; i<10;i++){
         ui->verticalLayout_2->addWidget(watchClass());
@@ -89,7 +91,7 @@ void TeacherClassInfo::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherProfile* tp= new teacherProfile;
+        teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
         close();
@@ -109,7 +111,7 @@ void TeacherClassInfo::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherMessages* tm= new teacherMessages;
+        teacherMessages* tm= new teacherMessages(mainmenu);
         tm->show();
         exit->close();
         close();
@@ -148,7 +150,7 @@ void TeacherClassInfo::on_pushButton_5_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherWeeklySchedule* tws = new teacherWeeklySchedule;
+        teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
         close();
@@ -168,7 +170,7 @@ void TeacherClassInfo::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherMainMenu* smm = new TeacherMainMenu;
+        TeacherMainMenu* smm = new TeacherMainMenu(mainmenu->get_first_name() , mainmenu->get_username() , mainmenu);
         smm->show();
         exit->close();
         close();
@@ -180,7 +182,7 @@ void TeacherClassInfo::on_backToMenu_clicked()
 
 void TeacherClassInfo::goToClassInfo(QString className)
 {
-    TeacherWatchStudent* tws = new TeacherWatchStudent;
+    TeacherWatchStudent* tws = new TeacherWatchStudent(mainmenu);
     tws->show();
     close();
 

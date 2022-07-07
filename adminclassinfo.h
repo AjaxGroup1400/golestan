@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGroupBox>
 
+#include"adminmainmenu.h"
+
 namespace Ui {
 class AdminClassInfo;
 }
@@ -13,7 +15,7 @@ class AdminClassInfo : public QWidget
     Q_OBJECT
 
 public:
-    explicit AdminClassInfo(QWidget *parent = nullptr);
+    explicit AdminClassInfo(AdminMainMenu * member , QWidget *parent = nullptr);
     ~AdminClassInfo();
 
 public slots:
@@ -35,6 +37,8 @@ private:
     Ui::AdminClassInfo *ui;
 
     void goToClassInfo(QString className);
+
+    AdminMainMenu * mainmenu;
 };
 
 #endif // ADMINCLASSINFO_H
