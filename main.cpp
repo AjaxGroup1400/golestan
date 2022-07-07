@@ -5,6 +5,7 @@
 #include "studentmainmenu.h"
 #include "Poll.h"
 #include "Auth.h"
+#include "Md5Hash.h"
 
 #include <QApplication>
 #include <iostream>
@@ -35,6 +36,9 @@ int main(int argc, char *argv[])
         "Teacher"
     ));
 
+
+
+
     userFile.append(Auth::formUserData(
                         "1287237406","@mir1990",
                         "Mamad","Mamadi",
@@ -49,6 +53,8 @@ int main(int argc, char *argv[])
         "Student"
     ));
 
+
+
     userFile.write();
 
     TeacherWeeklycalendar cal;
@@ -62,6 +68,13 @@ int main(int argc, char *argv[])
     class01.append("General", "Wensday", "11:00");
 
     cal.addUser(class01.exportJson());
+
+    qDebug() << QString::fromStdString(md5("grape"));
+
+
+
+
+
 
     QApplication a(argc, argv);
     LoginPage w;

@@ -373,6 +373,7 @@ bool TeacherMainMenu::lessonIsValid(QString lesson)
     }
     exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
     emit exceptioOccured(exceptionReason);
+    return false;
 }
 
 Class TeacherMainMenu::getLesson(lesson lesson)

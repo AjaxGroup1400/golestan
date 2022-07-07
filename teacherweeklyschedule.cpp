@@ -21,6 +21,9 @@ teacherWeeklySchedule::teacherWeeklySchedule(TeacherMainMenu * member , QWidget 
 
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
     this->mainmenu = member;
+
+    this->ui->label_10->setText("Hi dear " + mainmenu->get_first_name());
+
 }
 
 teacherWeeklySchedule::~teacherWeeklySchedule()

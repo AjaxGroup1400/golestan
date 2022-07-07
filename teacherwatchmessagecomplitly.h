@@ -2,7 +2,9 @@
 #define TEACHERWATCHMESSAGECOMPLITLY_H
 
 #include <QWidget>
+#include<QString>
 
+#include"dist/json/json.h"
 #include"teachermainmenu.h"
 
 namespace Ui {
@@ -14,7 +16,7 @@ class teacherWatchMessageComplitly : public QWidget
     Q_OBJECT
 
 public:
-    explicit teacherWatchMessageComplitly(TeacherMainMenu * member , QWidget *parent = nullptr);
+    explicit teacherWatchMessageComplitly(QString title , QString message , QString sender ,  bool isread , TeacherMainMenu * member , QWidget *parent = nullptr);
     ~teacherWatchMessageComplitly();
 
 private slots:
@@ -32,6 +34,11 @@ private:
     Ui::teacherWatchMessageComplitly *ui;
 
     TeacherMainMenu * mainmenu;
+
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+    QString filePath = "../data_resources/studentnotification" ;
+
 };
 
 #endif // TEACHERWATCHMESSAGECOMPLITLY_H
