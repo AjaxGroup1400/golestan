@@ -30,6 +30,17 @@ private:
     Ui::studentMessages *ui;
 
     StudentMainMenu * mainmenu;
+
+    QList<QString>    unreadMessages;
+    QList<QString>    unreadTitle;
+    QList<QString>    unReadsender;
+    QList<QString>    readMessages;
+    QList<QString>    readTitle;
+    QList<QString>    Readsender;
+
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+    QString filePath = "../data_resources/studentnotification" ;
 };
 
 #endif // STUDENTMESSAGES_H

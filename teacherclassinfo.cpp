@@ -9,7 +9,7 @@
 #include "teachermessages.h"
 #include "teacherweeklyschedule.h"
 #include "teacherwatchstudent.h"
-
+using namespace std;
 TeacherClassInfo::TeacherClassInfo(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherClassInfo)
@@ -24,9 +24,10 @@ TeacherClassInfo::TeacherClassInfo(TeacherMainMenu * member , QWidget *parent) :
     this->ui->backToMenu->setStyleSheet("background-color:transparent");
 
     this->mainmenu = member ;
+    QList<Class> classes = member->getClasses();
 
-    for (int i = 0 ; i<10;i++){
-        ui->verticalLayout_2->addWidget(watchClass());
+    for (int i = 0 ; i<classes.size();i++){
+        ui->verticalLayout_2->addWidget(watchClass(classes[i]));
 
     }
 }
@@ -36,7 +37,7 @@ TeacherClassInfo::~TeacherClassInfo()
     delete ui;
 }
 
-QGroupBox *TeacherClassInfo::watchClass()
+QGroupBox *TeacherClassInfo::watchClass(Class classToShow)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -49,19 +50,19 @@ QGroupBox *TeacherClassInfo::watchClass()
     QLabel * className = new QLabel;
     className->setMaximumWidth(210);
     className->setMaximumHeight(20);
-    className->setText("Class Name");
+    className->setText(lesson_enum_str[classToShow.getLesson()]);
     className->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * teacherName = new QLabel;
     teacherName->setMaximumWidth(210);
     teacherName->setMaximumHeight(20);
-    teacherName->setText("Teacher Name");
+    teacherName->setText(classToShow.getTeacher());
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * studentNumber = new QLabel;
     studentNumber->setMaximumWidth(81);
     studentNumber->setMaximumHeight(20);
-    studentNumber->setText("Student Number");
+    studentNumber->setText(QString::fromStdString(to_string(classToShow.getStudentNum())));
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 

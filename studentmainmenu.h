@@ -25,7 +25,7 @@ public:
 
     QList<float> getAverages();
 
-    void getScores(int term); //file can be updated
+    void getScores(int chosenTerm);
 
     // adds class at the end of term classes in file
     void registry(Class Class);

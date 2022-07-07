@@ -36,6 +36,9 @@ int main(int argc, char *argv[])
         "Teacher"
     ));
 
+
+
+
     userFile.append(Auth::formUserData(
                         "1287237406","@mir1990",
                         "Mamad","Mamadi",
@@ -49,6 +52,8 @@ int main(int argc, char *argv[])
         "1273882407", "09921863951",
         "Student"
     ));
+
+
 
     userFile.write();
 
@@ -65,6 +70,11 @@ int main(int argc, char *argv[])
     cal.addUser(class01.exportJson());
 
     qDebug() << QString::fromStdString(md5("grape"));
+
+
+
+
+
 
     QApplication a(argc, argv);
     LoginPage w;

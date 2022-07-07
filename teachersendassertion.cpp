@@ -11,8 +11,8 @@
 
 TeacherSendAssertion::TeacherSendAssertion(TeacherMainMenu * tm,  QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TeacherSendAssertion),
-    mainmenu(tm)
+    ui(new Ui::TeacherSendAssertion)
+
 {
     ui->setupUi(this);
     this->ui->pushButton->setStyleSheet("background-color:transparent");
@@ -27,6 +27,7 @@ TeacherSendAssertion::TeacherSendAssertion(TeacherMainMenu * tm,  QWidget *paren
     connect(ui->StudentBox,&QCheckBox::stateChanged,this,&TeacherSendAssertion::studentReciveState);
     connect(ui->TeacherBox,&QCheckBox::stateChanged,this,&TeacherSendAssertion::teacherReciveState);
 
+    this->mainmenu = tm ;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
 
@@ -94,6 +95,14 @@ void TeacherSendAssertion::on_sendbtn_clicked()
         QString title = ui->TitleLine->text();
         QString message = ui->messageLine->toPlainText();
         QString ls = "chemistry" ;
+
+
+//        QList<QString> lessons;
+//        lessons.push_back("chemistry");
+//        lessons.push_back("math");
+//        mainmenu->addNewTeacherToFile(lessons);
+
+
         if(mainmenu->lessonIsValid(ls))
         {
             QString lesson = mainmenu->lessonNameCheck(ls);

@@ -24,6 +24,7 @@ TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member , QWidget *par
     this->ui->backToMenu->setStyleSheet("background-color:transparent");
 
     this->mainmenu = member ;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
     for (int i = 0 ; i<10;i++){
         ui->verticalLayout_2->addWidget(students());
