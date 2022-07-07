@@ -153,6 +153,45 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
     if(Class.studentIsValid(studentname))
     {
         Class.deleteStudent(studentname);
+
+        Json::Value SdataHolder;
+        Json::Reader SdataReader;
+        ifstream ifs("../data_resources/student_term.json");
+
+        if(SdataReader.parse(ifs, SdataHolder))
+        {
+            for(int i = 0; i < SdataHolder.size(); i++)
+            {
+                if(studentname.toStdString() == SdataHolder[i]["username"].asString())
+                {
+                    int Term = SdataHolder[i]["count_of_terms"].asInt()-1;
+
+                    Json::Value classesCopy = SdataHolder[i]["terms"][Term]["lessons"];
+
+                    Json::Value wantedClasses;
+
+                    for(int j = 0; j < classesCopy.size(); j++)
+                    {
+                        if(classesCopy[i]["lesson"].asString() != lesson_enum_str[Class.getLesson()].toStdString() )
+                            wantedClasses.append(classesCopy[i]);
+                    }
+
+                    SdataHolder[i]["terms"][Term]["lessons"] = wantedClasses;
+
+                    ofstream ofs("../data_resources/student_term.json");
+
+                    Json::StyledWriter writer;
+
+                    string serializedData = writer.write(SdataHolder);
+
+                    ofs << serializedData;
+
+                    ofs.close();
+
+                    return;
+                }
+            }
+        }
 //    remove class from student's classes
 
 
@@ -181,6 +220,15 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
     else{
 //        student not valid
     }
+}
+
+void TeacherMainMenu::setScores(Class Class)
+{
+
+
+
+    Class.setScore(studentname, score);
+
 }
 
 
@@ -223,7 +271,7 @@ void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
         return;
     }
     exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
-    emit exceptioOccured(exceptionReason);
+        emit exceptioOccured(exceptionReason);
 }
 
 void TeacherMainMenu::addNewLessonFile(Class new_class)

@@ -47,5 +47,5 @@ private:
 //    QMap < QString , int > surveyresult;
 
 };
-
+void setStudentScore(QString studentname,lesson lesson ,float newscore);
 #endif // CLASS_H

@@ -16,6 +16,7 @@ public:
 
     void addAlert(QString title , QString description , QString sender , QList<QMap<QString , QString>> allowedStudent);
     QList<QMap<QString , QString>> getNotifications(QString studentUsername);
+    void addAlert(QString title , QString description , QString sender , QString students = "*");
 
 
 
