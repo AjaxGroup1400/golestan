@@ -144,14 +144,14 @@ void teacherMessages::showMeassages()
         this->ui->verticalLayout_2->addWidget(
             createMessageBox(notif["title"], notif["description"], notif["id"].toInt())
         );
-    }
+    }    
 }
 
 void teacherMessages::on_msgBtn_clicked(QString title, QString description)
 {
     teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly(title, description, mainmenu);
     twmc->show();
-    close();
+    close();    
 }
 
 void teacherMessages::on_pushButton_4_clicked()
@@ -222,7 +222,7 @@ void teacherMessages::on_backToMenu_clicked()
 
 //    if(sender!=nullptr)
 //    {
-////        teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly(this->ui->msgtitle1->text() , this->ui->msg1->text() , sender ,  isread , mainmenu);
+//        teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly(this->ui->msgtitle1->text() , this->ui->msg1->text() , sender ,  isread , mainmenu);
 //        twmc->show();
 //        close();
 //    }

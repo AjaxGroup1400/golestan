@@ -142,46 +142,46 @@ void studentMessages::on_backToMenu_clicked()
 
 
 
-void studentMessages::on_msgbtn1_clicked()
-{
-    bool isread;
-    QString sender = nullptr;
-    for(int i = 0 ; i < unreadTitle.size() ; i++)
-    {
-        if(unreadTitle[i] == this->ui->msgtitle1->text() && this->ui->msg1->text() == unreadMessages[i])
-        {
-            sender = unReadsender[i];
-            isread = false;
-            break;
-        }
-    }
-    if(sender == nullptr)
-    {
-        for(int i = 0 ; i < readTitle.size() ; i++)
-        {
-            if(readTitle[i] == this->ui->msgtitle1->text() && this->ui->msg1->text() == readMessages[i])
-            {
-                sender = Readsender[i];
-                isread = true;
-                break;
-            }
+//void studentMessages::on_msgbtn1_clicked()
+//{
+//    bool isread;
+//    QString sender = nullptr;
+//    for(int i = 0 ; i < unreadTitle.size() ; i++)
+//    {
+//        if(unreadTitle[i] == this->ui->msgtitle1->text() && this->ui->msg1->text() == unreadMessages[i])
+//        {
+//            sender = unReadsender[i];
+//            isread = false;
+//            break;
+//        }
+//    }
+//    if(sender == nullptr)
+//    {
+//        for(int i = 0 ; i < readTitle.size() ; i++)
+//        {
+//            if(readTitle[i] == this->ui->msgtitle1->text() && this->ui->msg1->text() == readMessages[i])
+//            {
+//                sender = Readsender[i];
+//                isread = true;
+//                break;
+//            }
 
-        }
-    }
+//        }
+//    }
 
-    if(sender!=nullptr)
-    {
-        StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly(this->ui->msgtitle1->text() , this->ui->msg1->text() , sender , isread , mainmenu );
-        swmc->show();
-        close();
-    }
-    else
-    {
-        exception e("coulden't find the message");
-        emit mainmenu->exceptioOccured(e);
-    }
+//    if(sender!=nullptr)
+//    {
+//        StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly(this->ui->msgtitle1->text() , this->ui->msg1->text() , sender , isread , mainmenu );
+//        swmc->show();
+//        close();
+//    }
+//    else
+//    {
+//        exception e("coulden't find the message");
+//        emit mainmenu->exceptioOccured(e);
+//    }
 
-}
+//}
 
 
 void studentMessages::on_pushButton_3_clicked()
@@ -202,4 +202,6 @@ void studentMessages::on_pushButton_3_clicked()
     }
 
 }
+
+
 
