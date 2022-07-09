@@ -15,6 +15,9 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
 {
     ifstream ifs(filePath.toStdString());
 
+    // clear(empty) calendar before filling it with new data
+    calendar.clear();
+
     if(dataReader.parse(ifs, dataHolder))
     {
         Json::Value teacherClasses = dataHolder["teachers"];
@@ -24,9 +27,6 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
             if(teacherClasses[i]["username"].asString() == username.toStdString())
             {
                 Json::Value wantedTeacherClasses = teacherClasses[i]["classes"];
-
-                // clear(empty) calendar before filling it with new data
-                calendar.clear();
 
                 for(int j = 0; j < wantedTeacherClasses.size(); j++)
                 {
@@ -67,46 +67,46 @@ void TeacherWeeklycalendar::addUser(Json::Value data)
     }
 }
 
-//void WeeklyCalendar::getCalendarDayByDay()
-//{
-//    QList<QList<QMap<QString, QString>>> seperatedDays;
+void TeacherWeeklycalendar::getCalendarDayByDay()
+{
+    QList<QList<QMap<QString, QString>>> seperatedDays;
 
-//    QList<QMap<QString, QString>> Saturday;
-//    QList<QMap<QString, QString>> Sunday;
-//    QList<QMap<QString, QString>> Monday;
-//    QList<QMap<QString, QString>> Tuesday;
-//    QList<QMap<QString, QString>> Wednsday;
-//    QList<QMap<QString, QString>> Thursday;
-//    QList<QMap<QString, QString>> Friday;
+    QList<QMap<QString, QString>> Saturday;
+    QList<QMap<QString, QString>> Sunday;
+    QList<QMap<QString, QString>> Monday;
+    QList<QMap<QString, QString>> Tuesday;
+    QList<QMap<QString, QString>> Wednsday;
+    QList<QMap<QString, QString>> Thursday;
+    QList<QMap<QString, QString>> Friday;
 
-//    for(auto calendarItem : calendar)
-//    {
-//        if(calendarItem["day"] == "Saturday")
-//            Saturday.push_back(calendarItem);
-//        else if(calendarItem["day"] == "Sunday")
-//            Sunday.push_back(calendarItem);
-//        else if(calendarItem["day"] == "Monday")
-//            Monday.push_back(calendarItem);
-//        else if(calendarItem["day"] == "Tuesday")
-//            Tuesday.push_back(calendarItem);
-//        else if(calendarItem["day"] == "Wednsday")
-//            Wednsday.push_back(calendarItem);
-//        else if(calendarItem["day"] == "Thursday")
-//            Thursday.push_back(calendarItem);
-//        else
-//            Friday.push_back(calendarItem);
-//    }
+    for(auto calendarItem : calendar)
+    {
+        if(calendarItem["day"] == "Saturday")
+            Saturday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Sunday")
+            Sunday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Monday")
+            Monday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Tuesday")
+            Tuesday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Wednsday")
+            Wednsday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Thursday")
+            Thursday.push_back(calendarItem);
+        else
+            Friday.push_back(calendarItem);
+    }
 
-//    seperatedDays.push_back(Saturday);
-//    seperatedDays.push_back(Sunday);
-//    seperatedDays.push_back(Monday);
-//    seperatedDays.push_back(Tuesday);
-//    seperatedDays.push_back(Wednsday);
-//    seperatedDays.push_back(Thursday);
-//    seperatedDays.push_back(Friday);
+    seperatedDays.push_back(Saturday);
+    seperatedDays.push_back(Sunday);
+    seperatedDays.push_back(Monday);
+    seperatedDays.push_back(Tuesday);
+    seperatedDays.push_back(Wednsday);
+    seperatedDays.push_back(Thursday);
+    seperatedDays.push_back(Friday);
 
-//    this->seperatedCalendar = seperatedDays;
-//}
+    this->seperatedCalendar = seperatedDays;
+}
 
 
 

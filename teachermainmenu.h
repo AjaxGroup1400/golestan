@@ -21,7 +21,7 @@ class TeacherMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit TeacherMainMenu(QString firstname , QString username ,  TeacherMainMenu * member = nullptr ,QWidget *parent = nullptr);
+    explicit TeacherMainMenu(QString firstname, QString username, TeacherMainMenu * member = nullptr, QWidget *parent = nullptr);
 //    TeacherMainMenu(QString firstname , QString username);
     ~TeacherMainMenu();
 
@@ -57,6 +57,8 @@ private slots:
     void on_pushButton_4_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_5_clicked();
 
 private:
     Ui::TeacherMainMenu *ui;

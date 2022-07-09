@@ -67,22 +67,25 @@ private:
     Ui::StudentMainMenu *ui;
 
     QString filePath = "../data_resources/student_term.json";
+
     Json::Value dataHolder;
+
     Json::Reader dataReader;
+
     StudentMainMenu * mainmenu;
 
     int Term;
+
     float currentAverege;
 
     QList <float> avereges;
+
+    QList<QMap<QString, QString>> classes;
 
 //    QMap < QList <Class> , float> terms; //Averege: float
 
     // whenever the user wants to see the details of term this method will be called
     QList <Class> currentClasses;
-
-    QList<QMap<QString , QString>> classes;
-
 };
 
 
