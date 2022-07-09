@@ -34,8 +34,10 @@ public:
     void addNewTeacherToFile(QList<QString> lessons);
     static void addNewTeacherToFile(QString teacherUsername);
     void addNewLessonFile(Class new_class);
+    static void addNewLessonFile(QString username , Class new_class);
     void removeLessonFile(Class lesson);
     int teacherIsValidFile();
+    static int teacherIsValidFile(QString teacherUsername);
     bool lessonIsValid(QString lesson);
     Class getLesson(lesson lesson);
     QString lessonNameCheck(QString sentName);

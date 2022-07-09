@@ -331,6 +331,34 @@ void StudentMainMenu::load()
     ofs.close();
 }
 
+QList<QMap<QString, QString>> StudentMainMenu::getClasses(int chosenTerm)
+{
+    QList<QMap<QString, QString>> wantedInformation ;
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(auto i : this->dataHolder)
+        {
+            if(i["username"] == this->get_username().toStdString())
+            {
+                for(auto j : i["username"][chosenTerm]["lessons"])
+                {
+                    QMap<QString , QString> holder;
+                    holder["teacher"] = QString::fromStdString(j["teacher"].asString());
+                    holder["score"] = QString::fromStdString(j["score"].asString());
+                    holder["lesson"] = QString::fromStdString(j["lesson"].asString());
+                    wantedInformation.push_back(holder);
+                }
+                return wantedInformation;
+            }
+        }
+
+
+    }
+
+
+}
+
 int StudentMainMenu::getTerm()
 {
     return this->Term;
