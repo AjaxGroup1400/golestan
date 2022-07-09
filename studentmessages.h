@@ -21,7 +21,7 @@ class studentMessages : public QWidget
     Q_OBJECT
 
 public:
-    explicit studentMessages(StudentMainMenu * memeber , QWidget *parent = nullptr);
+    explicit studentMessages(StudentMainMenu * memeber, QWidget *parent = nullptr);
     ~studentMessages();
 
 private:

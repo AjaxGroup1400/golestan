@@ -26,7 +26,9 @@ StudentMainMenu::StudentMainMenu(QString firstname , StudentMainMenu * member , 
     this->ui->pushButton_3->setStyleSheet("background-color:transparent");
     this->ui->pushButton_4->setStyleSheet("background-color:transparent");
     this->ui->pushButton_5->setStyleSheet("background-color:transparent");
-    this->ui->label_8->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");    
+    this->ui->pushButton_6->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_7->setStyleSheet("background-color:transparent");
+    this->ui->label_8->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
 
     this->mainmenu = member;
     if (member!=nullptr)
