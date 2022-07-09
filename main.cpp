@@ -59,21 +59,35 @@ int main(int argc, char *argv[])
 
     TeacherWeeklycalendar cal;
 
-    CalendarCreator class01;
+//    CalendarCreator class01;
 
-    class01.setUsername("1253982608");
+//    class01.setUsername("1253982608");
 
-    class01.append("Descrete Math", "Monday", "9:00");
-    class01.append("Calculos", "Thursday", "8:00");
-    class01.append("General", "Wensday", "11:00");
+//    class01.append("Descrete Math", "Monday", "9:00");
+//    class01.append("Calculos", "Thursday", "8:00");
+//    class01.append("General", "Wensday", "11:00");
 
-    cal.addUser(class01.exportJson());
+//    cal.addUser(class01.exportJson());
 
     qDebug() << QString::fromStdString(md5("grape"));
 
 
 
+//    cal.loadCalendar("1253982608");
 
+//    auto sep = cal.getCalendarDayByDay();
+
+//    qDebug() << cal.getCalendar();
+
+//    for(auto& days: sep)
+//    {
+//        for(auto& day: days)
+//        {
+//            std::cout << day["day"].toStdString() << "\t" << day["name"].toStdString() << "\t" << day["time"].toStdString() << std::endl;
+//        }
+
+//        std::cout << "//////////\\\\\\\\\\" << std::endl;
+//    }
 
 
     QApplication a(argc, argv);

@@ -2,6 +2,7 @@
 
 #include <fstream>
 
+
 using namespace std;
 
 TeacherWeeklycalendar::TeacherWeeklycalendar()
@@ -20,7 +21,7 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
 
         for(int i = 0; i < teacherClasses.size(); i++)
         {
-            if(teacherClasses[i]["username"] == username.toStdString())
+            if(teacherClasses[i]["username"].asString() == username.toStdString())
             {
                 Json::Value wantedTeacherClasses = teacherClasses[i]["classes"];
 
@@ -64,6 +65,47 @@ void TeacherWeeklycalendar::addUser(Json::Value data)
 
         jsonWriter.close();
     }
+}
+
+QList<QList<QMap<QString, QString>>> WeeklyCalendar::getCalendarDayByDay()
+{
+    QList<QList<QMap<QString, QString>>> seperatedDays;
+
+    QList<QMap<QString, QString>> Saturday;
+    QList<QMap<QString, QString>> Sunday;
+    QList<QMap<QString, QString>> Monday;
+    QList<QMap<QString, QString>> Tuesday;
+    QList<QMap<QString, QString>> Wednsday;
+    QList<QMap<QString, QString>> Thursday;
+    QList<QMap<QString, QString>> Friday;
+
+    for(auto calendarItem : calendar)
+    {
+        if(calendarItem["day"] == "Saturday")
+            Saturday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Sunday")
+            Sunday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Monday")
+            Monday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Tuesday")
+            Tuesday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Wednsday")
+            Wednsday.push_back(calendarItem);
+        else if(calendarItem["day"] == "Thursday")
+            Thursday.push_back(calendarItem);
+        else
+            Friday.push_back(calendarItem);
+    }
+
+    seperatedDays.push_back(Saturday);
+    seperatedDays.push_back(Sunday);
+    seperatedDays.push_back(Monday);
+    seperatedDays.push_back(Tuesday);
+    seperatedDays.push_back(Wednsday);
+    seperatedDays.push_back(Thursday);
+    seperatedDays.push_back(Friday);
+
+    return seperatedDays;
 }
 
 

@@ -140,13 +140,3 @@ void WeeklyCalendar::deleteClass(Class Class, QString username, QString role)
     }
 
 }
-
-QList<QList<QString>> WeeklyCalendar::getCalendarDayByDay(QString role)
-{
-    QList<QList<QString>> seperatedDays;
-
-    return seperatedDays;
-}
-
-
-
