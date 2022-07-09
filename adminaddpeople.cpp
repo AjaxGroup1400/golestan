@@ -3,6 +3,8 @@
 #include "adminmainmenu.h"
 #include "adminprofile.h"
 #include "adminsendassertion.h"
+#include "adminaddclass.h"
+#include "adminclassinfo.h"
 #include "Filemanager.h"
 #include "Auth.h"
 
@@ -16,9 +18,10 @@ AdminAddPeople::AdminAddPeople(AdminMainMenu * member , QWidget *parent) :
 {
     ui->setupUi(this);
     this->ui->pushButton->setStyleSheet("background-color: transparent");
-    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
     this->ui->pushButton_3->setStyleSheet("background-color: transparent");
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_7->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_6->setStyleSheet("background-color: transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
     this->ui->AddBtn->setStyleSheet("background-color: transparent");
 
@@ -197,5 +200,43 @@ void AdminAddPeople::on_AddBtn_clicked()
         ui->numberLine->clear();
     }
 
+}
+
+
+void AdminAddPeople::on_pushButton_7_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add class","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        adminAddClass* adc= new adminAddClass(mainmenu);
+        adc->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void AdminAddPeople::on_pushButton_6_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to class info","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        AdminClassInfo* aci= new AdminClassInfo(mainmenu);
+        aci->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
 }
 

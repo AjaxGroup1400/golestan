@@ -26,6 +26,10 @@ private slots:
 
     void on_AddBtn_clicked();
 
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::AdminAddPeople *ui;
     AdminMainMenu * mainmenu;

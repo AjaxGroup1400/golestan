@@ -7,6 +7,8 @@
 #include "adminprofile.h"
 #include "adminsendassertion.h"
 #include "adminaddpeople.h"
+#include "adminaddclass.h"
+#include "adminclassinfo.h"
 #include "adminmessages.h"
 
 AdminMainMenu::AdminMainMenu( QString firstName , AdminMainMenu * member , QWidget *parent) :
@@ -15,11 +17,12 @@ AdminMainMenu::AdminMainMenu( QString firstName , AdminMainMenu * member , QWidg
 {
     ui->setupUi(this);
     this->ui->pushButton->setStyleSheet("background-color: transparent");
-    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
     this->ui->pushButton_3->setStyleSheet("background-color: transparent");
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_7->setStyleSheet("background-color: transparent");
     this->ui->label_14->setStyleSheet("background-color: #f0f0f0; border-radius: 20px");
     this->ui->pushButton_5->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_6->setStyleSheet("background-color: transparent");
 
     this->mainmenu = member;
     if(member!=nullptr)
@@ -93,6 +96,22 @@ void AdminMainMenu::on_pushButton_2_clicked()
 
     am->show();
 
+    close();
+}
+
+
+void AdminMainMenu::on_pushButton_7_clicked()
+{
+    adminAddClass* adc = new adminAddClass(mainmenu);
+    adc->show();
+    close();
+}
+
+
+void AdminMainMenu::on_pushButton_6_clicked()
+{
+    AdminClassInfo* aci = new AdminClassInfo(mainmenu);
+    aci->show();
     close();
 }
 

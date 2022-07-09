@@ -4,8 +4,12 @@
 #include "studentmessages.h"
 #include <QMessageBox>
 #include "studentmainmenu.h"
+#include "studentteachersurvey.h"
+#include "studentterms.h"
+#include "studenttermscores.h"
+#include "studentenrolment.h"
 
-studentWeeklySchedule::studentWeeklySchedule(StudentMainMenu * member ,QWidget *parent) :
+studentWeeklySchedule::studentWeeklySchedule(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::studentWeeklySchedule)
 {
@@ -14,9 +18,9 @@ studentWeeklySchedule::studentWeeklySchedule(StudentMainMenu * member ,QWidget *
     this->ui->pushButton_2->setStyleSheet("background-color: transparent");
     this->ui->pushButton_3->setStyleSheet("background-color: transparent");
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_6->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
-
-    this->mainmenu = member;
 }
 
 studentWeeklySchedule::~studentWeeklySchedule()
@@ -32,7 +36,7 @@ void studentWeeklySchedule::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentProfile* sp= new StudentProfile(mainmenu);
+        StudentProfile* sp= new StudentProfile;
         sp->show();
         exit->close();
         close();
@@ -52,7 +56,7 @@ void studentWeeklySchedule::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentMessages* sm= new studentMessages(mainmenu);
+        studentMessages* sm= new studentMessages;
         sm->show();
         exit->close();
         close();
@@ -71,7 +75,7 @@ void studentWeeklySchedule::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() ,mainmenu);
+        StudentMainMenu* smm = new StudentMainMenu;
         smm->show();
         exit->close();
         close();
@@ -80,5 +84,63 @@ void studentWeeklySchedule::on_backToMenu_clicked()
         exit->close();
     }
 
+}
+
+
+void studentWeeklySchedule::on_pushButton_7_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher survey","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        StudentTeacherSurvey* sts = new StudentTeacherSurvey;
+        sts->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void studentWeeklySchedule::on_pushButton_6_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to view scores","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        StudentTerms* st = new StudentTerms;
+        st->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+
+}
+
+
+void studentWeeklySchedule::on_pushButton_4_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to enrolment","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        StudentEnrolment* se = new StudentEnrolment;
+        se->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
 }
 

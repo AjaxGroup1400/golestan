@@ -351,32 +351,12 @@ QString TeacherMainMenu::lessonNameCheck(QString sentName)
 
 QList<Class> TeacherMainMenu::getClasses()
 {
-return this->classes;
+    return this->classes;
 }
-
-
-
-
-
 
 
 void TeacherMainMenu::on_pushButton_3_clicked()
 {
-    /*
-    QMap<QString , float> chemistry = this->studentsList("chemistry");
-    QMap<QString , float> physics = this->studentsList("physics");
-    QMap<QString , float> bp = this->studentsList("bp");
-    QMap<QString , float> calculus = this->studentsList("calculus");
-    QMap<QString , float> discrete = this->studentsList("discrete");
-    */
-//    for(auto i = this->classes.begin(); i!=classes.end(); i++){
-
-//    }
-
-//  new page(chemistry , chemistry.size , ...)
-//  class name , number of students , students' names , class location
-
-
     TeacherClassInfo* tm = new TeacherClassInfo(this);
 
     tm->show();

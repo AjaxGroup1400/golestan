@@ -14,14 +14,14 @@ AdminSendAssertion::AdminSendAssertion(AdminMainMenu * recievedmember , QWidget 
     ui->setupUi(this);
 
     this->ui->pushButton->setStyleSheet("background-color: transparent");
-    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
+//    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
     this->ui->pushButton_3->setStyleSheet("background-color: transparent");
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
     this->ui->sendbtn->setStyleSheet("background-color: transparent");
 
-    connect(ui->AdminBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::adminReciveState);
+//    connect(ui->AdminBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::adminReciveState);
     connect(ui->StudentBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::studentReciveState);    
     connect(ui->TeacherBox,&QCheckBox::stateChanged,this,&AdminSendAssertion::teacherReciveState);
 

@@ -9,6 +9,11 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    studentenrolment.cpp \
+    studentteachersurvey.cpp \
+    studentterms.cpp \
+    studenttermscores.cpp \
+    studentwatchsurvey.cpp \
     Notification.cpp \
     adminclassinfo.cpp \
     adminwatchstudent.cpp \
@@ -51,6 +56,11 @@ SOURCES += \
     teacherprofile.cpp \
 
 HEADERS += \
+    studentenrolment.h \
+    studentteachersurvey.h \
+    studentterms.h \
+    studenttermscores.h \
+    studentwatchsurvey.h \
     Notification.h \
     adminclassinfo.h \
     adminwatchstudent.h \
@@ -94,6 +104,11 @@ HEADERS += \
     teacherprofile.h
 
 FORMS += \
+    studentenrolment.ui \
+    studentteachersurvey.ui \
+    studentterms.ui \
+    studenttermscores.ui \
+    studentwatchsurvey.ui \
     adminclassinfo.ui \
     adminwatchstudent.ui \
     teacherclassinfo.ui \
@@ -127,9 +142,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     arrowIcon.qrc \
+    classIcon.qrc \
     icon.qrc \
     pictures.qrc \
     second-icon.qrc \
+    term-management-icon.qrc \
     third-icon-group.qrc
 
 DISTFILES += \

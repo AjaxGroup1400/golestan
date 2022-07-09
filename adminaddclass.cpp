@@ -15,10 +15,13 @@ adminAddClass::adminAddClass(AdminMainMenu * member , QWidget *parent) :
 {
     ui->setupUi(this);
     this->ui->pushButton->setStyleSheet("background-color: transparent");
-    this->ui->pushButton_2->setStyleSheet("background-color:transparent");
     this->ui->pushButton_3->setStyleSheet("background-color: transparent");
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_5->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_6->setStyleSheet("background-color: transparent");
     this->ui->pushButton_7->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_8->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_9->setStyleSheet("background-color: transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
     this->mainmenu = member;

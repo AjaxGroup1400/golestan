@@ -14,11 +14,11 @@
 #include "QString"
 
 using namespace std;
+
 TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member ,Class thisClass , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherWatchStudent)
 {
-    ui->setupUi(this);
     ui->setupUi(this);
     this->ui->pushButton->setStyleSheet("background-color:transparent");
     this->ui->pushButton_2->setStyleSheet("background-color:transparent");
@@ -58,6 +58,7 @@ TeacherWatchStudent::~TeacherWatchStudent()
 
 void TeacherWatchStudent::on_backToMenu_clicked()
 {
+
     QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to class info","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);

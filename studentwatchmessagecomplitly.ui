@@ -333,7 +333,7 @@ border-color: rgb(178, 8, 55);</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="icon.qrc">:/icon/manage.png</pixmap>
+      <pixmap resource="term-management-icon.qrc">:/icons/icons8-web-64.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -426,13 +426,125 @@ color: rgb(240, 240, 240);</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QFrame" name="frame_9">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>41</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(178, 8, 55);
+border-color: rgb(178, 8, 55);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>2</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="term-management-icon.qrc">:/icons/icons8-survey-50.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_7">
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>280</y>
+      <y>400</y>
       <width>161</width>
-      <height>30</height>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 11pt &quot;Montserrat&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>340</y>
+      <width>161</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 11pt &quot;Montserrat&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_8">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>340</y>
+      <width>41</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(178, 8, 55);
+border-color: rgb(178, 8, 55);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>2</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="term-management-icon.qrc">:/icons/icons8-view-headline-50.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>95</x>
+      <y>290</y>
+      <width>111</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -440,10 +552,41 @@ color: rgb(240, 240, 240);</string>
 color: rgb(240, 240, 240);</string>
     </property>
     <property name="text">
-     <string>Term Managment</string>
+     <string>Enrollment</string>
     </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>350</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 11pt &quot;Montserrat&quot;;
+color: rgb(240, 240, 240);</string>
+    </property>
+    <property name="text">
+     <string>View Scores</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>410</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 11pt &quot;Montserrat&quot;;
+color: rgb(240, 240, 240);</string>
+    </property>
+    <property name="text">
+     <string>Teacher Survey</string>
     </property>
    </widget>
    <zorder>frame_5</zorder>
@@ -453,11 +596,17 @@ color: rgb(240, 240, 240);</string>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
    <zorder>label_5</zorder>
-   <zorder>label_6</zorder>
    <zorder>frame_3</zorder>
    <zorder>pushButton</zorder>
    <zorder>pushButton_2</zorder>
    <zorder>pushButton_3</zorder>
+   <zorder>frame_9</zorder>
+   <zorder>frame_8</zorder>
+   <zorder>label_6</zorder>
+   <zorder>label_17</zorder>
+   <zorder>label_18</zorder>
+   <zorder>pushButton_7</zorder>
+   <zorder>pushButton_6</zorder>
    <zorder>pushButton_4</zorder>
   </widget>
   <widget class="QGroupBox" name="groupBox">
@@ -600,6 +749,7 @@ color: rgb(41, 39, 40);</string>
  </widget>
  <resources>
   <include location="pictures.qrc"/>
+  <include location="term-management-icon.qrc"/>
   <include location="arrowIcon.qrc"/>
   <include location="icon.qrc"/>
  </resources>
