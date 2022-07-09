@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGroupBox>
 
+
+#include"studentmainmenu.h"
 namespace Ui {
 class StudentEnrolment;
 }
@@ -13,7 +15,7 @@ class StudentEnrolment : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentEnrolment(QWidget *parent = nullptr);
+    explicit StudentEnrolment(StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentEnrolment();
 
 private slots:
@@ -32,6 +34,7 @@ public slots:
     QGroupBox* showLessons();
 private:
     Ui::StudentEnrolment *ui;
+    StudentMainMenu * mainmenu ;
 };
 
 #endif // STUDENTENROLMENT_H

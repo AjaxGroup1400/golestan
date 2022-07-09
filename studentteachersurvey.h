@@ -2,15 +2,19 @@
 #define STUDENTTEACHERSURVEY_H
 
 #include <QWidget>
-#include "studentmainmenu.h"
 #include <QMessageBox>
 #include <QAbstractButton>
 #include <QPushButton>
 #include <QGroupBox>
+
 #include "loginpage.h"
 #include "studentprofile.h"
 #include "studentmessages.h"
 #include "studentweeklyschedule.h"
+#include "studentmainmenu.h"
+
+
+
 
 namespace Ui {
 class StudentTeacherSurvey;
@@ -21,7 +25,7 @@ class StudentTeacherSurvey : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentTeacherSurvey(QWidget *parent = nullptr);
+    explicit StudentTeacherSurvey(StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentTeacherSurvey();
 private slots:
     void on_surveyBtn_clicked(QString nameOfClass);
@@ -42,6 +46,7 @@ public slots:
     QGroupBox* showTeachers();
 private:
     Ui::StudentTeacherSurvey *ui;
+    StudentMainMenu * mainmenu;
 };
 
 #endif // STUDENTTEACHERSURVEY_H

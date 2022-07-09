@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+
+#include"studentmainmenu.h"
 namespace Ui {
 class StudentWatchSurvey;
 }
@@ -12,7 +14,7 @@ class StudentWatchSurvey : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentWatchSurvey(QWidget *parent = nullptr);
+    explicit StudentWatchSurvey(StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentWatchSurvey();
 
 private slots:
@@ -32,6 +34,9 @@ private slots:
 
 private:
     Ui::StudentWatchSurvey *ui;
+
+    StudentMainMenu * mainmenu ;
+
 };
 
 #endif // STUDENTWATCHSURVEY_H

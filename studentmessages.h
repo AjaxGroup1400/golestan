@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGroupBox>
 
+#include"studentmainmenu.h"
+
 namespace Ui {
 class studentMessages;
 }
@@ -13,7 +15,7 @@ class studentMessages : public QWidget
     Q_OBJECT
 
 public:
-    explicit studentMessages(QWidget *parent = nullptr);
+    explicit studentMessages(StudentMainMenu * memeber , QWidget *parent = nullptr);
     ~studentMessages();
 
 private:
@@ -37,6 +39,8 @@ private slots:
 
 private:
     Ui::studentMessages *ui;
+
+    StudentMainMenu * mainmenu ;
 };
 
 #endif // STUDENTMESSAGES_H

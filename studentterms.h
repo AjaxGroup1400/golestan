@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGroupBox>
 
+
+#include"studentmainmenu.h"
 namespace Ui {
 class StudentTerms;
 }
@@ -13,7 +15,7 @@ class StudentTerms : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentTerms(QWidget *parent = nullptr);
+    explicit StudentTerms(StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentTerms();
 public slots:
     QGroupBox* showTerms();
@@ -34,6 +36,8 @@ private:
     Ui::StudentTerms *ui;
 
     void goToScores(QString nameOfTerm);
+
+    StudentMainMenu * mainmenu;
 };
 
 #endif // STUDENTTERMS_H

@@ -8,7 +8,7 @@
 #include "studenttermscores.h"
 #include "studentenrolment.h"
 
-StudentTerms::StudentTerms(QWidget *parent) :
+StudentTerms::StudentTerms(StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentTerms)
 {
@@ -20,6 +20,9 @@ StudentTerms::StudentTerms(QWidget *parent) :
     this->ui->pushButton_6->setStyleSheet("background-color:transparent");
     this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
+
+    this->mainmenu = member ;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
     for (int terms = 0 ; terms<10;terms++){
         ui->verticalLayout_2->addWidget(showTerms());
@@ -74,7 +77,7 @@ void StudentTerms::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentProfile* sp= new StudentProfile;
+        StudentProfile* sp= new StudentProfile(mainmenu);
         sp->show();
         exit->close();
         close();
@@ -94,7 +97,7 @@ void StudentTerms::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentMessages* sm= new studentMessages;
+        studentMessages* sm= new studentMessages(mainmenu);
         sm->show();
         exit->close();
         close();
@@ -114,7 +117,7 @@ void StudentTerms::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentWeeklySchedule* swc = new studentWeeklySchedule;
+        studentWeeklySchedule* swc = new studentWeeklySchedule(mainmenu);
         swc->show();
         exit->close();
         close();
@@ -134,7 +137,7 @@ void StudentTerms::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentTeacherSurvey* sts = new StudentTeacherSurvey;
+        StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
         sts->show();
         exit->close();
         close();
@@ -154,7 +157,7 @@ void StudentTerms::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu;
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu);
         smm->show();
         exit->close();
         close();
@@ -167,7 +170,7 @@ void StudentTerms::on_backToMenu_clicked()
 
 void StudentTerms::goToScores(QString nameOfTerm)
 {
-    StudentTermScores* sts = new StudentTermScores;
+    StudentTermScores* sts = new StudentTermScores(mainmenu);
     sts->show();
     close();
 }
@@ -181,7 +184,7 @@ void StudentTerms::on_pushButton_4_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentEnrolment* se = new StudentEnrolment;
+        StudentEnrolment* se = new StudentEnrolment(mainmenu);
         se->show();
         exit->close();
         close();
