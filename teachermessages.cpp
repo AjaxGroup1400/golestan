@@ -101,8 +101,7 @@ QGroupBox *teacherMessages::createMessageBox(QString messageTitle, QString messa
     msg->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
-    QPushButton* watchBtn = new QPushButton;
-    QString title;
+    QPushButton* watchBtn = new QPushButton;   
 
     connect(watchBtn,&QPushButton::clicked,[this, messageTitle, messageDescription] { on_msgBtn_clicked(messageTitle, messageDescription);});
 

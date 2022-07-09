@@ -1,15 +1,18 @@
-#include "studentmainmenu.h"
-#include "ui_studentmainmenu.h"
-#include "loginpage.h"
-#include "studentprofile.h"
-#include "Enum.h"
-
 #include <QMessageBox>
 #include <QAbstractButton>
 #include <QPushButton>
 #include <iterator>
 #include <string>
 #include <fstream>
+
+#include"studentmessages.h"
+#include "studentmainmenu.h"
+#include "ui_studentmainmenu.h"
+#include "loginpage.h"
+#include "studentprofile.h"
+#include "Enum.h"
+#include"studentweeklyschedule.h"
+
 
 using std::ifstream, std::string, std::ofstream;
 
@@ -364,4 +367,18 @@ void StudentMainMenu::load()
 //        ]
 //}
 
+
+
+void StudentMainMenu::on_pushButton_2_clicked()
+{
+    studentMessages * stm = new studentMessages(this) ;
+    stm->show();
+    close();
+}
+
+
+void StudentMainMenu::on_pushButton_3_clicked()
+{
+    studentWeeklySchedule * sws = new studentWeeklySchedule(this);
+}
 
