@@ -43,6 +43,8 @@ public:
 
     void load();
 
+    QList<QMap<QString , QString>> getClasses();
+
 private slots:
     void on_pushButton_5_clicked();
 
@@ -75,6 +77,8 @@ private:
 
     // whenever the user wants to see the details of term this method will be called
     QList <Class> currentClasses;
+
+    QList<QMap<QString , QString>> classes;
 
 };
 

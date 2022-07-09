@@ -28,7 +28,7 @@ public:
     explicit StudentTeacherSurvey(StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentTeacherSurvey();
 private slots:
-    void on_surveyBtn_clicked(QString nameOfClass);
+    void on_surveyBtn_clicked(QString nameOfClass , QString teacherUsername , QString lesson);
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
@@ -43,7 +43,7 @@ private slots:
     void on_pushButton_4_clicked();
 
 public slots:
-    QGroupBox* showTeachers();
+    QGroupBox* showTeachers(QString teacherUsername , QString lesson);
 private:
     Ui::StudentTeacherSurvey *ui;
     StudentMainMenu * mainmenu;
