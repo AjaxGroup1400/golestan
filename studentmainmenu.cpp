@@ -16,6 +16,15 @@
 #include <string>
 #include <fstream>
 
+#include"studentmessages.h"
+#include "studentmainmenu.h"
+#include "ui_studentmainmenu.h"
+#include "loginpage.h"
+#include "studentprofile.h"
+#include "Enum.h"
+#include"studentweeklyschedule.h"
+
+
 using std::ifstream, std::string, std::ofstream;
 
 StudentMainMenu::StudentMainMenu(QString firstname , StudentMainMenu * member ,  QWidget *parent) :
