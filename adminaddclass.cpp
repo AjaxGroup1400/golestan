@@ -26,6 +26,7 @@ adminAddClass::adminAddClass(AdminMainMenu * member , QWidget *parent) :
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
     this->mainmenu = member;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 }
 
 adminAddClass::~adminAddClass()

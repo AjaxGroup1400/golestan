@@ -1,3 +1,9 @@
+#include <QMessageBox>
+#include <QValidator>
+#include <QRegularExpression>
+
+
+
 #include "adminaddpeople.h"
 #include "ui_adminaddpeople.h"
 #include "adminmainmenu.h"
@@ -7,10 +13,7 @@
 #include "adminclassinfo.h"
 #include "Filemanager.h"
 #include "Auth.h"
-
-#include <QMessageBox>
-#include <QValidator>
-#include <QRegularExpression>
+#include"teachermainmenu.h"
 
 AdminAddPeople::AdminAddPeople(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -180,6 +183,11 @@ void AdminAddPeople::on_AddBtn_clicked()
             nationalCode, phoneNumber,
             role, true
             );
+        if(role == "Teacher")
+        {
+            TeacherMainMenu::addNewTeacherToFile(ui->nationalCodeLine->text());
+        }
+
 
         userFile.append(newUserData);
 
