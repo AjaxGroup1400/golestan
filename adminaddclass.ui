@@ -751,6 +751,36 @@ font: 9pt &quot;Montserrat&quot;;</string>
      <string notr="true">color: rgb(41, 39, 40);
 font: 9pt &quot;Montserrat&quot;;</string>
     </property>
+    <item>
+     <property name="text">
+      <string>Class01</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Class02</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Class03</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Class04</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Class05</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Class06</string>
+     </property>
+    </item>
    </widget>
    <widget class="QTimeEdit" name="timeEdit_2">
     <property name="geometry">
@@ -957,6 +987,31 @@ color: rgb(178, 8, 55);</string>
       <height>28</height>
      </rect>
     </property>
+    <item>
+     <property name="text">
+      <string>CHEMISTRY</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>BP</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>DISCRETE</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>CALCULUS</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>PHYSICS</string>
+     </property>
+    </item>
    </widget>
    <zorder>label_17</zorder>
    <zorder>timeEdit</zorder>
@@ -990,10 +1045,10 @@ color: rgb(178, 8, 55);</string>
   <zorder>groupBox</zorder>
  </widget>
  <resources>
-  <include location="arrowIcon.qrc"/>
   <include location="classIcon.qrc"/>
-  <include location="icon.qrc"/>
+  <include location="arrowIcon.qrc"/>
   <include location="pictures.qrc"/>
+  <include location="icon.qrc"/>
  </resources>
  <connections/>
 </ui>
