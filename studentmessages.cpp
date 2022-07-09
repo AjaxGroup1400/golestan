@@ -36,7 +36,6 @@ studentMessages::studentMessages(StudentMainMenu * member , QWidget *parent) :
 
     for (int i = 0 ; i<10;i++){
         ui->verticalLayout_2->addWidget(showMessages(i));
-
     }
 
 

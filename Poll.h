@@ -16,7 +16,7 @@ public:
     Poll();
 
     void addScore(int score, QString studentUsername, QString lessonName, QString teacherUsername);
-    float getScore(QString lessonName , QString teacherUsername );
+    float getScore(QString lessonName , QString teacherUsername);
 
 
 };

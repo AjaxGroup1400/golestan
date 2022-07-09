@@ -15,7 +15,7 @@ class studentMessages : public QWidget
     Q_OBJECT
 
 public:
-    explicit studentMessages(StudentMainMenu * memeber , QWidget *parent = nullptr);
+    explicit studentMessages(StudentMainMenu * memeber, QWidget *parent = nullptr);
     ~studentMessages();
 
 private:
@@ -40,7 +40,7 @@ private slots:
 private:
     Ui::studentMessages *ui;
 
-    StudentMainMenu * mainmenu ;
+    StudentMainMenu * mainmenu;
 };
 
 #endif // STUDENTMESSAGES_H
