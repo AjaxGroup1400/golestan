@@ -39,8 +39,6 @@ private:
     Ui::AdminMainMenu *ui;
 
     AdminMainMenu * mainmenu;
-
-
 };
 
 #endif // ADMINMAINMENU_H

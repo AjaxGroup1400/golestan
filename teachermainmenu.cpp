@@ -23,6 +23,7 @@ using namespace std;
 #include "teachermessages.h"
 #include"dist/json/json.h"
 #include"teacherclassinfo.h"
+#include "teacherclasssetscore.h"
 
 TeacherMainMenu::TeacherMainMenu(QString firstname , QString username , TeacherMainMenu * member, QWidget *parent) :
 //    QWidget(parent),
@@ -367,18 +368,9 @@ void TeacherMainMenu::on_pushButton_3_clicked()
 
 void TeacherMainMenu::on_pushButton_6_clicked()
 {
-    /*
-    QMap<QString , float> chemistry = this->studentsList("chemistry");
-    QMap<QString , float> physics = this->studentsList("physics");
-    QMap<QString , float> bp = this->studentsList("bp");
-    QMap<QString , float> calculus = this->studentsList("calculus");
-    QMap<QString , float> discrete = this->studentsList("discrete");
-    */
-    for(auto i = this->classes.begin(); i!=classes.end(); i++){
-
-    }
-
-
+    TeacherClassSetScore* tcss = new TeacherClassSetScore;
+    tcss->show();
+    close();
 }
 
 

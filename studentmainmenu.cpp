@@ -421,8 +421,4 @@ void StudentMainMenu::on_pushButton_7_clicked()
     close();
 }
 
-void StudentMainMenu::on_pushButton_4_clicked()
-{
-
-}
 
