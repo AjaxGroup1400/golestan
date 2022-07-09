@@ -2,10 +2,14 @@
 #define USER_H
 
 #include <QWidget>
-#include<QString>
+#include <QString>
+#include <memory>
 
-#include"dist/json/json.h"
 
+#include "dist/json/json.h"
+#include "WeeklyCalendar.h"
+
+using std::shared_ptr, std::make_shared;
 
 class User : public QWidget
 {
@@ -31,6 +35,8 @@ public:
     QString get_username();
     QString get_password();
 
+    const shared_ptr<WeeklyCalendar> &getWeeklyCalendar() const;
+
 signals:
     std::exception  exceptioOccured(std::exception e);
 
@@ -39,14 +45,18 @@ public slots:
 
 
 private:
-    QString first_name ;
-    QString last_name ;
-    QString national_code ;
-    QString phone_number ;
-    QString role ;
-    QString hint ;
-    QString username ;
-    QString password ;
+    QString first_name;
+    QString last_name;
+    QString national_code;
+    QString phone_number;
+    QString role;
+    QString hint;
+    QString username;
+    QString password;
+
+    shared_ptr<WeeklyCalendar> weeklyCalendar = make_shared<WeeklyCalendar>();
+
+protected:
 };
 
 

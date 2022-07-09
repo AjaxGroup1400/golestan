@@ -21,7 +21,7 @@
 
 using std::ifstream, std::string, std::ofstream;
 
-StudentMainMenu::StudentMainMenu(QString firstname , StudentMainMenu * member ,  QWidget *parent) :
+StudentMainMenu::StudentMainMenu(QString firstname, StudentMainMenu * member, QWidget *parent) :
 //    QWidget(parent),
     ui(new Ui::StudentMainMenu)
 {
@@ -329,11 +329,6 @@ void StudentMainMenu::load()
     ofs << serializedData;
 
     ofs.close();
-}
-
-QList<QMap<QString, QString> > StudentMainMenu::getClasses()
-{
-    return this.classes;
 }
 
 // json sturcture of each student

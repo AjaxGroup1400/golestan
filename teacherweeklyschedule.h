@@ -30,6 +30,8 @@ private:
     Ui::teacherWeeklySchedule *ui;
 
     TeacherMainMenu * mainmenu ;
+
+    void loadSchedule();
 };
 
 #endif // TEACHERWEEKLYSCHEDULE_H

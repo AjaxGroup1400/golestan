@@ -19,6 +19,11 @@ bool WeeklyCalendar::isClassExist(Json::Value classData)
     return false;
 }
 
+const QList<QList<QMap<QString, QString> > > &WeeklyCalendar::getSeperatedCalendar() const
+{
+    return seperatedCalendar;
+}
+
 WeeklyCalendar::WeeklyCalendar()
 {
     // these few line(to the if statement) checks wether file exists or not if it exists construcor won't init data

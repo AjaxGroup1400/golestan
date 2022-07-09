@@ -15,7 +15,7 @@ public:
 
     virtual void addUser(Json::Value data);
 
-//    virtual void getCalendarDayByDay();
+    virtual void getCalendarDayByDay();
 };
 
 #endif // TEACHERWEEKLYCALENDAR_H

@@ -9,6 +9,7 @@
 #include "studentmainmenu.h"
 #include "adminmainmenu.h"
 #include "teachermainmenu.h"
+#include "TeacherWeeklyCalendar.h"
 
 #include "ui_loginpage.h"
 
@@ -96,7 +97,7 @@ void LoginPage::on_Loginbtn_clicked()
 
     if(userType == "Admin")
     {
-        AdminMainMenu* amm = new AdminMainMenu(parsedUser[2] );
+        AdminMainMenu* amm = new AdminMainMenu(parsedUser[2]);
         amm->set_username(ui->userLine->text());
         amm->set_first_name(parsedUser[2]);
         amm->set_last_name(parsedUser[3]);
@@ -108,7 +109,7 @@ void LoginPage::on_Loginbtn_clicked()
     }
     else if(userType == "Teacher")
     {
-        TeacherMainMenu* tmm = new TeacherMainMenu( parsedUser[2] , ui->userLine->text());
+        TeacherMainMenu* tmm = new TeacherMainMenu(parsedUser[2] , ui->userLine->text());
 //        tmm->set_username(ui->userLine->text());
         tmm->set_first_name(parsedUser[2]);
         tmm->set_last_name(parsedUser[3]);
