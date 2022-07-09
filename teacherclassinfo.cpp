@@ -56,7 +56,7 @@ QGroupBox *TeacherClassInfo::watchClass(Class classToShow)
     QLabel * teacherName = new QLabel;
     teacherName->setMaximumWidth(210);
     teacherName->setMaximumHeight(20);
-    teacherName->setText(classToShow.getTeacher());
+    teacherName->setText(mainmenu->get_first_name()+ " " + mainmenu->get_last_name());
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * studentNumber = new QLabel;

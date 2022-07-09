@@ -11,7 +11,9 @@
 #include "teacherweeklyschedule.h"
 #include "Auth.h"
 #include "Filemanager.h"
+#include "QString"
 
+using namespace std;
 TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member ,Class thisClass , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherWatchStudent)
@@ -28,6 +30,10 @@ TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member ,Class thisCla
 
     this->mainmenu = member ;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
+    this->ui->teacherName->setText(mainmenu->get_first_name()+ " " + mainmenu->get_last_name());
+    this->ui->NumberOfStudent->setText(QString::fromStdString(to_string(thisClass.getStudentNum())));
+    this->ui->ClassName->setText(lesson_enum_str[thisClass.getLesson()]);
 
     QList<QString> usernameList = thisClass.getList().keys();
     for (int i = 0 ; i<thisClass.getStudentNum();i++){
