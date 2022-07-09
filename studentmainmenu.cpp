@@ -331,6 +331,11 @@ void StudentMainMenu::load()
     ofs.close();
 }
 
+QList<QMap<QString, QString> > StudentMainMenu::getClasses()
+{
+    return this.classes;
+}
+
 // json sturcture of each student
 //
 //{

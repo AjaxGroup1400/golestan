@@ -43,6 +43,8 @@ public:
 
     void load();
 
+    QList<QMap<QString, QString>> getClasses();
+
 private slots:
     void on_pushButton_5_clicked();
 
@@ -62,14 +64,20 @@ private:
     Ui::StudentMainMenu *ui;
 
     QString filePath = "../data_resources/student_term.json";
+
     Json::Value dataHolder;
+
     Json::Reader dataReader;
+
     StudentMainMenu * mainmenu;
 
     int Term;
+
     int currentAverege;
 
     QList <float> avereges;
+
+    QList<QMap<QString, QString>> classes;
 
 //    QMap < QList <Class> , float> terms; //Averege: float
 
