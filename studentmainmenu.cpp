@@ -394,3 +394,8 @@ void StudentMainMenu::on_pushButton_6_clicked()
 
 }
 
+void StudentMainMenu::on_pushButton_7_clicked()
+{
+
+}
+
