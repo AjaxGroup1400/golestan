@@ -1,11 +1,12 @@
 #ifndef STUDENTMAINMENU_H
 #define STUDENTMAINMENU_H
 
-#include "dist/json/json.h"
 #include <QWidget>
 #include <QMap>
 #include <QString>
 #include <QList>
+
+#include "dist/json/json.h"
 #include "Class.h"
 #include "User.h"
 
@@ -25,7 +26,7 @@ public:
 
     QList<float> getAverages();
 
-    void getScores(int chosenTerm);
+    QMap <QString, float> getScores(int chosenTerm);
 
     // adds class at the end of term classes in file
     void registry(Class Class);
@@ -43,7 +44,9 @@ public:
 
     void load();
 
-    QList<QMap<QString , QString>> getClasses();
+    QList<QMap<QString , QString>> getClasses(int chosenTerm );
+
+    int getTerm ();
 
 private slots:
     void on_pushButton_5_clicked();
@@ -69,7 +72,7 @@ private:
     StudentMainMenu * mainmenu;
 
     int Term;
-    int currentAverege;
+    float currentAverege;
 
     QList <float> avereges;
 

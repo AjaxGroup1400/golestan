@@ -38,7 +38,7 @@ StudentTeacherSurvey::StudentTeacherSurvey(StudentMainMenu * member , QWidget *p
 
 
 
-    QList<QMap<QString , QString>> lessons = mainmenu->getClasses();
+    QList<QMap<QString , QString>> lessons = mainmenu->getClasses(mainmenu->getTerm());
 
     for (int i = 0 ; i<lessons.size();i++){
         ui->verticalLayout_2->addWidget(showTeachers(lessons[i]["teacher"] , lessons[i]["lesson"]));

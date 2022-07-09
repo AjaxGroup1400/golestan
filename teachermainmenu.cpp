@@ -216,7 +216,27 @@ void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
         return;
     }
     exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
-        emit exceptioOccured(exceptionReason);
+    emit exceptioOccured(exceptionReason);
+}
+
+void TeacherMainMenu::addNewTeacherToFile(QString teacherUsername)
+{
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+    ifstream ifs("../data_resources/teacher_lessons.json");
+    if(dataReader.parse(ifs , dataHolder))
+    {
+        Json::Value teacherInformation ;
+        teacherInformation["teacher"] = teacherUsername.toStdString();
+        teacherInformation["lessons"] = Json::arrayValue;
+
+        ofstream ofs("../data_resources/teacher_lessons.json");
+        Json::StyledWriter writer;
+        string finalPart = writer.write(dataHolder);
+        ofs << dataHolder;
+        ofs.close();
+        return;
+    }
 }
 
 void TeacherMainMenu::addNewLessonFile(Class new_class)
