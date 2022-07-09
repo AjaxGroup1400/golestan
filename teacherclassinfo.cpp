@@ -25,6 +25,8 @@ TeacherClassInfo::TeacherClassInfo(TeacherMainMenu * member , QWidget *parent) :
 
     this->mainmenu = member ;
     QList<Class> classes = member->getClasses();
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
 
     for (int i = 0 ; i<classes.size();i++){
         ui->verticalLayout_2->addWidget(watchClass(classes[i]));
@@ -56,7 +58,7 @@ QGroupBox *TeacherClassInfo::watchClass(Class classToShow)
     QLabel * teacherName = new QLabel;
     teacherName->setMaximumWidth(210);
     teacherName->setMaximumHeight(20);
-    teacherName->setText(classToShow.getTeacher());
+    teacherName->setText(mainmenu->get_first_name()+ " " + mainmenu->get_last_name());
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * studentNumber = new QLabel;
@@ -67,8 +69,8 @@ QGroupBox *TeacherClassInfo::watchClass(Class classToShow)
 
 
     QPushButton* watchBtn = new QPushButton;
-    QString Name;
-    connect(watchBtn,&QPushButton::clicked,[this, Name] { goToClassInfo(Name);});
+//    QString Name;
+    connect(watchBtn,&QPushButton::clicked,[this, classToShow] { goToClassInfo(classToShow);});
     watchBtn->setMaximumWidth(101);
     watchBtn->setMaximumHeight(26);
     watchBtn->setText("Watch More");
@@ -181,9 +183,9 @@ void TeacherClassInfo::on_backToMenu_clicked()
     }
 }
 
-void TeacherClassInfo::goToClassInfo(QString className)
+void TeacherClassInfo::goToClassInfo(Class thisClass)
 {
-    TeacherWatchStudent* tws = new TeacherWatchStudent(mainmenu);
+    TeacherWatchStudent* tws = new TeacherWatchStudent(mainmenu, thisClass);
     tws->show();
     close();
 

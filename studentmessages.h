@@ -2,12 +2,17 @@
 #define STUDENTMESSAGES_H
 
 #include <QWidget>
+#include <QGroupBox>
+#include <memory>
 
 #include"studentmainmenu.h"
+#include "Notification.h"
 
 namespace Ui {
 class studentMessages;
 }
+
+using std::unique_ptr, std::make_unique;
 
 class studentMessages : public QWidget
 {
@@ -41,6 +46,15 @@ private:
     Json::Value dataHolder;
     Json::Reader dataReader;
     QString filePath = "../data_resources/studentnotification" ;
+
+    unique_ptr<Notification> notification;
+
+    void showMeassages();
+
+    QGroupBox *createMessageBox(QString messageTitle, QString messageDescription, int id);
+
+
+
 };
 
 #endif // STUDENTMESSAGES_H

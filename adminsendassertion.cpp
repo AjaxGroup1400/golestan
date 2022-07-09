@@ -121,7 +121,8 @@ void AdminSendAssertion::on_pushButton_3_clicked()
 void AdminSendAssertion::on_sendbtn_clicked()
 {
     int teacherChosen = this->ui->TeacherBox->isChecked();
-    int studentChosen = this->ui->StudentBox->isChecked();
+    int studentChosen = this->ui->StudentBox->isChecked();   
+
     QString title = ui->TitleLine->text();
     QString message = ui->messageLine->toPlainText();
 
@@ -134,12 +135,13 @@ void AdminSendAssertion::on_sendbtn_clicked()
     }
 
     Notification alert;
-    if(studentChosen == 1)
+    if (studentChosen == 1 && teacherChosen == 1)
         alert.addNotif(title , message , mainmenu->get_username());
-    if(teacherChosen == 1)
-    {
-        alert.addNotif(  title , message , mainmenu->get_username() , "#") ;
-    }
+    else if(studentChosen == 1)
+        alert.addNotif(title , message , mainmenu->get_username() , "S");
+    else if(teacherChosen == 1)
+        alert.addNotif(  title , message , mainmenu->get_username() , "T") ;
+
 
 }
 

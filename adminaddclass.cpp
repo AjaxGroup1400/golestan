@@ -7,6 +7,7 @@
 #include "adminsendassertion.h"
 #include "adminaddpeople.h"
 #include "adminmessages.h"
+#include "Class.h"
 
 adminAddClass::adminAddClass(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -115,7 +116,7 @@ void adminAddClass::on_pushButton_4_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        AdminSendAssertion* asa= new AdminSendAssertion;
+        AdminSendAssertion* asa= new AdminSendAssertion(this->mainmenu);
         asa->show();
         exit->close();
         close();
@@ -123,5 +124,18 @@ void adminAddClass::on_pushButton_4_clicked()
     else{
         exit->close();
     }
+}
+
+
+void adminAddClass::on_pushButton_5_clicked()
+{
+
+    lesson newlesson;
+    QString newteacher;
+    Class newClass (newlesson, newteacher);
+
+    QMessageBox* classAdded = new QMessageBox(QMessageBox::Icon::Information, "class Added", "Class with entered info created.", QMessageBox::Button::Ok);
+    classAdded->show();
+
 }
 

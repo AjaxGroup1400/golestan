@@ -1,11 +1,17 @@
+#include <QMessageBox>
+#include<fstream>
+#include<iostream>
+using namespace std ;
+
+#include"dist/json/json.h"
 #include "studentwatchmessagecomplitly.h"
 #include "ui_studentwatchmessagecomplitly.h"
 #include "studentmessages.h"
 #include "studentprofile.h"
-#include <QMessageBox>
+
 #include "studentweeklyschedule.h"
 
-StudentWatchMessageComplitly::StudentWatchMessageComplitly(StudentMainMenu * member , QWidget *parent) :
+StudentWatchMessageComplitly::StudentWatchMessageComplitly(QString title , QString message , QString sender , bool isread , StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentWatchMessageComplitly)
 {
@@ -21,7 +27,59 @@ StudentWatchMessageComplitly::StudentWatchMessageComplitly(StudentMainMenu * mem
     this->ui->SenderLine->setEnabled(false);
     this->ui->messageLine->setEnabled(false);
 
+
+
     this->mainmenu = member ;
+
+
+    if(isread == false)
+    {
+        ifstream ifs(this->filePath.toStdString());
+        if(this->dataReader.parse(ifs , this->dataHolder))
+        {
+            Json::Value members;
+            for(auto i: this->dataHolder  )
+            {
+                if(QString::fromStdString(i["allowed_student"][0]["username"].asString()) == "#")
+                    members.append(i);
+                else if (QString::fromStdString(i["sender"].asString()) != sender || QString::fromStdString(i["description"].asString()) != message || QString::fromStdString(i["title"].asString()) != title)
+                    members.append(i);
+
+                else
+                {
+                    Json::Value appended ;
+                    appended["sender"] = i["sender"];
+                    appended["description"] = i["description"];
+                    appended["title"] = i["title"];
+                    for (auto j : i["allowed_student"])
+                    {
+                        if((QString::fromStdString(j["username"].asString()) == mainmenu->get_username() && j["is_read"].asString() == "false") ||  (QString::fromStdString(j["username"].asString()) == "*" && j["is_read"] == false))
+                        {
+                            Json::Value wantedmember;
+                            wantedmember["username"] = j["username"];
+                            wantedmember["is_read"] = "true";
+                            appended["allowed_student"].append(wantedmember);
+                        }
+                        else
+                        {
+                            appended["allowed_student"].append(j) ;
+                        }
+                    }
+                    members.append(appended);
+                }
+            }
+            this->dataHolder = members ;
+            ofstream ofs(this->filePath.toStdString());
+            Json::StyledWriter writer;
+            string finalPart = writer.write(this->dataHolder);
+            ofs << finalPart;
+            ofs.close();
+        }
+
+    }
+
+
+
 }
 
 StudentWatchMessageComplitly::~StudentWatchMessageComplitly()
@@ -68,7 +126,7 @@ void StudentWatchMessageComplitly::on_backToMenu_clicked()
 
 void StudentWatchMessageComplitly::on_pushButton_3_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);

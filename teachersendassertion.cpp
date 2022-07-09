@@ -107,12 +107,14 @@ void TeacherSendAssertion::on_sendbtn_clicked()
         {
             QString lesson = mainmenu->lessonNameCheck(ls);
             Class lessonClass = mainmenu->getLesson(string_to_lesson(lesson));
+
 //            QMap<QString , float> stList;
 //            stList.insert("1287237409" , -1);
 //            stList.insert("1287237405" , -1);
-
 //            lessonClass.setinformation(string_to_lesson("chemistry") , "talar2" , "11:00" , string_to_day("SUNDAY") , stList);
+
             mainmenu->sendingNotification(title , message , lessonClass );
+
 //            this->close();
         }
         else
