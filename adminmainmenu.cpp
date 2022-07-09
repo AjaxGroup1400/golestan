@@ -102,7 +102,7 @@ void AdminMainMenu::on_pushButton_2_clicked()
 
 void AdminMainMenu::on_pushButton_7_clicked()
 {
-    adminAddClass* adc = new adminAddClass(mainmenu);
+    adminAddClass* adc = new adminAddClass(this);
     adc->show();
     close();
 }
@@ -110,7 +110,7 @@ void AdminMainMenu::on_pushButton_7_clicked()
 
 void AdminMainMenu::on_pushButton_6_clicked()
 {
-    AdminClassInfo* aci = new AdminClassInfo(mainmenu);
+    AdminClassInfo* aci = new AdminClassInfo(this);
     aci->show();
     close();
 }
