@@ -3,12 +3,18 @@
 
 #include <QWidget>
 #include <QGroupBox>
+#include <memory>
 
+#include"dist/json/json.h"
+#include "Notification.h"
 #include"studentmainmenu.h"
 
 namespace Ui {
 class studentMessages;
 }
+
+using std::unique_ptr, std::make_unique;
+
 
 class studentMessages : public QWidget
 {
@@ -30,7 +36,7 @@ private slots:
 
     void on_pushButton_3_clicked();
 
-    void on_msgBtn_clicked(QString title);
+    void on_msgBtn_clicked(QString title, QString description);
     void on_pushButton_7_clicked();
 
     void on_pushButton_6_clicked();
@@ -40,7 +46,16 @@ private slots:
 private:
     Ui::studentMessages *ui;
 
-    StudentMainMenu * mainmenu;
+    StudentMainMenu * mainmenu ;
+
+
+    unique_ptr<Notification> notification;
+
+    void showMeassages();
+
+    QGroupBox *createMessageBox(QString messageTitle, QString messageDescription, int id);
+
+
 };
 
 #endif // STUDENTMESSAGES_H

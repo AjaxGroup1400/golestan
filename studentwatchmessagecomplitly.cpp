@@ -1,14 +1,19 @@
-#include "studentwatchmessagecomplitly.h"
+#include <QMessageBox>
+#include<QString>
+
 #include "ui_studentwatchmessagecomplitly.h"
+#include "studentwatchmessagecomplitly.h"
 #include "studentmessages.h"
 #include "studentprofile.h"
-#include <QMessageBox>
 #include "studentweeklyschedule.h"
 #include "studentteachersurvey.h"
 #include "studentterms.h"
 #include "studenttermscores.h"
 #include "studentenrolment.h"
-StudentWatchMessageComplitly::StudentWatchMessageComplitly(StudentMainMenu * member , QWidget *parent) :
+
+
+
+StudentWatchMessageComplitly::StudentWatchMessageComplitly(QString title  , QString message , StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentWatchMessageComplitly)
 {
@@ -28,6 +33,10 @@ StudentWatchMessageComplitly::StudentWatchMessageComplitly(StudentMainMenu * mem
 
     this->mainmenu = member ;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
+    this->ui->TitleLine->setText(title);
+    this->ui->messageLine->setText(message);
+
 
 }
 

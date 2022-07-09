@@ -133,12 +133,31 @@ void adminAddClass::on_pushButton_4_clicked()
 void adminAddClass::on_pushButton_5_clicked()
 {
 
-    lesson newlesson;
-    QString newteacher;
-    Class newClass (newlesson, newteacher);
-
+    Class newClass (string_to_lesson(lesson_enum_str[this->lesson]), this->teacherusername);
+    newClass.setLocation(this->location);
+    newClass.setTime(this->time);
+    newClass.setDay(string_to_day(day_enum_str[this->day]));
     QMessageBox* classAdded = new QMessageBox(QMessageBox::Icon::Information, "class Added", "Class with entered info created.", QMessageBox::Button::Ok);
     classAdded->show();
 
+}
+
+
+void adminAddClass::on_comboBox_4_currentIndexChanged(int index)
+{
+    this->lesson = index;
+}
+
+
+void adminAddClass::on_comboBox_3_currentIndexChanged(int index)
+{
+    this->day = index;
+
+}
+
+
+void adminAddClass::on_comboBox_2_currentTextChanged(const QString &arg1)
+{
+    this->location = arg1;
 }
 
