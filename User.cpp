@@ -91,12 +91,6 @@ void User::exceptionHandling(std::exception e)
     connect(errorMessage , &QMessageBox::buttonClicked , errorMessage , &QMessageBox::deleteLater);
 }
 
-const shared_ptr<WeeklyCalendar> &User::getWeeklyCalendar() const
-{
-    return weeklyCalendar;
-}
-
-
 QString User::get_first_name()
 {
     return this->first_name ;

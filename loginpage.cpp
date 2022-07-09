@@ -9,7 +9,6 @@
 #include "studentmainmenu.h"
 #include "adminmainmenu.h"
 #include "teachermainmenu.h"
-#include "TeacherWeeklyCalendar.h"
 
 #include "ui_loginpage.h"
 

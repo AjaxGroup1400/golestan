@@ -35,8 +35,6 @@ public:
     QString get_username();
     QString get_password();
 
-    const shared_ptr<WeeklyCalendar> &getWeeklyCalendar() const;
-
 signals:
     std::exception  exceptioOccured(std::exception e);
 
@@ -53,10 +51,6 @@ private:
     QString hint;
     QString username;
     QString password;
-
-    shared_ptr<WeeklyCalendar> weeklyCalendar = make_shared<WeeklyCalendar>();
-
-protected:
 };
 
 

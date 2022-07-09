@@ -75,12 +75,8 @@ private:
     StudentMainMenu * mainmenu;
 
     int Term;
-<<<<<<< HEAD
 
-    int currentAverege;
-=======
     float currentAverege;
->>>>>>> 4a005b7841b5b7d4f8f340864ffd2a76ff6300f9
 
     QList <float> avereges;
 
@@ -90,9 +86,6 @@ private:
 
     // whenever the user wants to see the details of term this method will be called
     QList <Class> currentClasses;
-
-    QList<QMap<QString , QString>> classes;
-
 };
 
 

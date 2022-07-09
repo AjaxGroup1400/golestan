@@ -24,6 +24,7 @@ using namespace std;
 #include"dist/json/json.h"
 #include"teacherclassinfo.h"
 #include "teacherclasssetscore.h"
+#include "teacherweeklyschedule.h"
 
 TeacherMainMenu::TeacherMainMenu(QString firstname , QString username , TeacherMainMenu * member, QWidget *parent) :
 //    QWidget(parent),
@@ -429,7 +430,7 @@ void TeacherMainMenu::on_pushButton_3_clicked()
 
 void TeacherMainMenu::on_pushButton_6_clicked()
 {
-    TeacherClassSetScore* tcss = new TeacherClassSetScore(mainmenu);
+    TeacherClassSetScore* tcss = new TeacherClassSetScore(this);
     tcss->show();
     close();
 }
@@ -482,5 +483,13 @@ void TeacherMainMenu::on_pushButton_2_clicked()
     close();
 
     tm->show();
+}
+
+
+void TeacherMainMenu::on_pushButton_5_clicked()
+{
+    teacherWeeklySchedule* tws = new teacherWeeklySchedule(this);
+    tws->show();
+    close();
 }
 

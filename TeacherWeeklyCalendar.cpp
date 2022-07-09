@@ -15,6 +15,9 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
 {
     ifstream ifs(filePath.toStdString());
 
+    // clear(empty) calendar before filling it with new data
+    calendar.clear();
+
     if(dataReader.parse(ifs, dataHolder))
     {
         Json::Value teacherClasses = dataHolder["teachers"];
@@ -24,9 +27,6 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
             if(teacherClasses[i]["username"].asString() == username.toStdString())
             {
                 Json::Value wantedTeacherClasses = teacherClasses[i]["classes"];
-
-                // clear(empty) calendar before filling it with new data
-                calendar.clear();
 
                 for(int j = 0; j < wantedTeacherClasses.size(); j++)
                 {

@@ -4,10 +4,13 @@
 #include <QWidget>
 
 #include"teachermainmenu.h"
+#include "WeeklyCalendar.h"
 
 namespace Ui {
 class teacherWeeklySchedule;
 }
+
+using std::unique_ptr, std::make_unique;
 
 class teacherWeeklySchedule : public QWidget
 {
@@ -29,9 +32,11 @@ private slots:
 private:
     Ui::teacherWeeklySchedule *ui;
 
-    TeacherMainMenu * mainmenu ;
+    TeacherMainMenu * mainmenu;
 
     void loadSchedule();
+
+    unique_ptr<WeeklyCalendar> weeklyCalendar;
 };
 
 #endif // TEACHERWEEKLYSCHEDULE_H

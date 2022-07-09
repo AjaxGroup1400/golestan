@@ -4,6 +4,7 @@
 #include "teachersendassertion.h"
 #include "teachermessages.h"
 #include "teachermainmenu.h"
+#include "TeacherWeeklyCalendar.h"
 
 #include <QMessageBox>
 
@@ -19,8 +20,13 @@ teacherWeeklySchedule::teacherWeeklySchedule(TeacherMainMenu * member , QWidget 
     this->ui->pushButton_11->setStyleSheet("background-color: transparent");
     this->ui->pushButton_12->setStyleSheet("background-color: transparent");
 
-    this->ui->backToMenu->setStyleSheet("background-color: transparent");
     this->mainmenu = member;
+
+    this->weeklyCalendar.reset(new TeacherWeeklycalendar);
+
+    this->loadSchedule();
+
+    this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
     this->ui->label_10->setText("Hi dear " + mainmenu->get_first_name());
 
@@ -150,21 +156,30 @@ void teacherWeeklySchedule::on_backToMenu_clicked()
 
 void teacherWeeklySchedule::loadSchedule()
 {
-    auto calendar = mainmenu->getWeeklyCalendar();
+    weeklyCalendar->loadCalendar(mainmenu->get_username());
 
-    calendar->getCalendarDayByDay();
+    weeklyCalendar->getCalendarDayByDay();
 
-    auto dayByDayCalendar = calendar->getSeperatedCalendar();
+    auto dayByDayCalendar = weeklyCalendar->getSeperatedCalendar();
 
     for(int i = 0; i < dayByDayCalendar.size(); i++)
     {
-        for(int j = 0; j < 6; j++)
+        if(dayByDayCalendar.empty())
+        {
+            continue;
+        }
+
+        for(int j = 0; j < dayByDayCalendar.at(i).size(); j++)
         {
             QString wantedDayCellName = 'r' + QString::number(i) + 'c' + QString::number(j);
 
             auto wantedDay = this->findChild<QLabel *>(wantedDayCellName);
 
-            wantedDay->setText(dayByDayCalendar[i][j]["name"] + " - " + dayByDayCalendar[i][j]["day"] + " - " + dayByDayCalendar[i][j]["time"]);
+            auto currentDay = dayByDayCalendar.at(i).at(j);
+
+            wantedDay->setText(currentDay["name"] + "\n" + currentDay["day"] + "\n" + currentDay["time"]);
+
+            wantedDay->setStyleSheet("text-align: center;");
         }
     }
 }
