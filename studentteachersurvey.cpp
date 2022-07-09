@@ -32,6 +32,21 @@ StudentTeacherSurvey::StudentTeacherSurvey(StudentMainMenu * member , QWidget *p
     this->mainmenu = member;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
+
+
+//    int userIndex = Auth::findUser("teacher username");
+
+//            FileManager userFile;
+//            userFile.create();
+//            userFile.loadData();
+
+//            QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+//            parseduser[2] = fname
+
+//            parseduser[3] = lname
+
+
+
     for (int i = 0 ; i<10;i++){
         ui->verticalLayout_2->addWidget(showTeachers());
 
