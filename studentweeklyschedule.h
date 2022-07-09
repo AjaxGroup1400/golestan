@@ -9,6 +9,8 @@ namespace Ui {
 class studentWeeklySchedule;
 }
 
+using std::unique_ptr;
+
 class studentWeeklySchedule : public QWidget
 {
     Q_OBJECT
@@ -30,9 +32,16 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_refreshButton_clicked();
+
 private:
     Ui::studentWeeklySchedule *ui;
-    StudentMainMenu * mainmenu ;
+
+    StudentMainMenu * mainmenu;
+
+    void loadSchedule();
+
+    unique_ptr<WeeklyCalendar> weeklyCalendar;
 };
 
 #endif // STUDENTWEEKLYSCHEDULE_H

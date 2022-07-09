@@ -29,6 +29,8 @@ private slots:
 
     void on_backToMenu_clicked();
 
+    void on_refreshButton_clicked();
+
 private:
     Ui::teacherWeeklySchedule *ui;
 

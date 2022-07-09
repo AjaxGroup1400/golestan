@@ -1845,6 +1845,19 @@ color: rgb(240, 240, 240);</string>
    <zorder>pushButton_12</zorder>
    <zorder>pushButton_10</zorder>
   </widget>
+  <widget class="QPushButton" name="refreshButton">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>70</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </widget>
   <zorder>r4c1</zorder>
   <zorder>r2c1</zorder>
   <zorder>r6c3</zorder>
@@ -1919,6 +1932,7 @@ color: rgb(240, 240, 240);</string>
   <zorder>label_9</zorder>
   <zorder>backToMenu</zorder>
   <zorder>frame_2</zorder>
+  <zorder>refreshButton</zorder>
  </widget>
  <resources>
   <include location="pictures.qrc"/>

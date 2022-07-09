@@ -2,12 +2,14 @@
 #include "ui_studentweeklyschedule.h"
 #include "studentprofile.h"
 #include "studentmessages.h"
-#include <QMessageBox>
 #include "studentmainmenu.h"
 #include "studentteachersurvey.h"
 #include "studentterms.h"
 #include "studenttermscores.h"
 #include "studentenrolment.h"
+#include "StudentWeeklyCalendar.h"
+
+#include <QMessageBox>
 
 studentWeeklySchedule::studentWeeklySchedule(StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -23,6 +25,13 @@ studentWeeklySchedule::studentWeeklySchedule(StudentMainMenu * member , QWidget 
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
     this->mainmenu = member;
+
+    ui->refreshButton->setStyleSheet("border: none; outline: none; background-color: #36454F; color: white; border-radius: 3px;");
+
+    this->weeklyCalendar.reset(new StudentWeeklyCalendar);
+
+    this->loadSchedule();
+
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
 }
@@ -146,5 +155,54 @@ void studentWeeklySchedule::on_pushButton_4_clicked()
     else{
         exit->close();
     }
+}
+
+
+void studentWeeklySchedule::loadSchedule()
+{
+    weeklyCalendar->loadCalendar(mainmenu->get_username());
+
+    weeklyCalendar->getCalendarDayByDay();
+
+    auto dayByDayCalendar = weeklyCalendar->getSeperatedCalendar();
+
+    if(weeklyCalendar->getCalendar().empty())
+    {
+        QMessageBox* emptyCalendar = new QMessageBox(QMessageBox::Warning,"Empty Schedule","No schedule found for you.");
+
+        emptyCalendar->show();
+
+        connect(emptyCalendar, &QMessageBox::buttonClicked, emptyCalendar, &QMessageBox::deleteLater);
+
+        return;
+    }
+
+    for(int i = 0; i < dayByDayCalendar.size(); i++)
+    {
+        if(dayByDayCalendar.empty())
+        {
+            continue;
+        }
+
+        for(int j = 0; j < dayByDayCalendar.at(i).size(); j++)
+        {
+            QString wantedDayCellName = 'r' + QString::number(i) + 'c' + QString::number(j);
+
+            auto wantedDay = this->findChild<QLabel *>(wantedDayCellName);
+
+            auto currentDay = dayByDayCalendar.at(i).at(j);
+
+            wantedDay->setText(currentDay["name"] + "\n" + currentDay["day"] + " - " + currentDay["time"]);
+
+            wantedDay->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+
+            wantedDay->setStyleSheet("text-align: center; font-size: 9px; min-width: fit-content;");
+        }
+    }
+}
+
+void studentWeeklySchedule::on_refreshButton_clicked()
+{
+    this->loadSchedule();
 }
 

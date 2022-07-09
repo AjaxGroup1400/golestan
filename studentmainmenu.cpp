@@ -420,6 +420,10 @@ void StudentMainMenu::on_pushButton_2_clicked()
 void StudentMainMenu::on_pushButton_3_clicked()
 {
     studentWeeklySchedule * sws = new studentWeeklySchedule(this);
+
+    sws->show();
+
+    close();
 }
 
 void StudentMainMenu::on_pushButton_4_clicked()

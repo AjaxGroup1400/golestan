@@ -43,6 +43,7 @@ public:
 
     // deletes class from target user based on class name
     void deleteClass(Class Class, QString username, QString role);
+
     const QList<QList<QMap<QString, QString> > > &getSeperatedCalendar() const;
 };
 

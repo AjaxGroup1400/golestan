@@ -20,6 +20,8 @@ teacherWeeklySchedule::teacherWeeklySchedule(TeacherMainMenu * member , QWidget 
     this->ui->pushButton_11->setStyleSheet("background-color: transparent");
     this->ui->pushButton_12->setStyleSheet("background-color: transparent");
 
+    ui->refreshButton->setStyleSheet("border: none; outline: none; background-color: #36454F; color: white; border-radius: 3px;");
+
     this->mainmenu = member;
 
     this->weeklyCalendar.reset(new TeacherWeeklycalendar);
@@ -162,6 +164,17 @@ void teacherWeeklySchedule::loadSchedule()
 
     auto dayByDayCalendar = weeklyCalendar->getSeperatedCalendar();
 
+    if(weeklyCalendar->getCalendar().empty())
+    {
+        QMessageBox* emptyCalendar = new QMessageBox(QMessageBox::Warning,"Empty Schedule","No schedule found for you.");
+
+        emptyCalendar->show();
+
+        connect(emptyCalendar, &QMessageBox::buttonClicked, emptyCalendar, &QMessageBox::deleteLater);
+
+        return;
+    }
+
     for(int i = 0; i < dayByDayCalendar.size(); i++)
     {
         if(dayByDayCalendar.empty())
@@ -177,13 +190,21 @@ void teacherWeeklySchedule::loadSchedule()
 
             auto currentDay = dayByDayCalendar.at(i).at(j);
 
-            wantedDay->setText(currentDay["name"] + "\n" + currentDay["day"] + "\n" + currentDay["time"]);
+            wantedDay->setText(currentDay["name"] + "\n" + currentDay["day"] + " - " + currentDay["time"]);
 
-            wantedDay->setStyleSheet("text-align: center;");
+            wantedDay->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+
+            wantedDay->setStyleSheet("text-align: center; font-size: 9px; min-width: fit-content;");
         }
     }
 }
 
 
 
+
+
+void teacherWeeklySchedule::on_refreshButton_clicked()
+{
+    this->loadSchedule();
+}
 
