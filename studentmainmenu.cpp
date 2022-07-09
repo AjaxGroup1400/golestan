@@ -12,6 +12,11 @@
 #include "studentprofile.h"
 #include "Enum.h"
 #include"studentweeklyschedule.h"
+#include "studentmessages.h"
+#include "studentenrolment.h"
+#include "studentteachersurvey.h"
+#include "studentterms.h"
+#include "studentteachersurvey.h"
 
 
 using std::ifstream, std::string, std::ofstream;
@@ -44,27 +49,27 @@ StudentMainMenu::StudentMainMenu(QString firstname , StudentMainMenu * member , 
     this->set_first_name(firstname);
     this->ui->label_2->setText("Hi dear " + firstname);
 
-    QString filePath = "../data_resources/student_term.json";
-    ifstream ifs(filePath.toStdString());
+//    QString filePath = "../data_resources/student_term.json";
+//    ifstream ifs(filePath.toStdString());
 
-    if(dataReader.parse(ifs, dataHolder))
-    {
-        for(int i = 0; i < dataHolder.size(); i++)
-        {
-            if(get_username().toStdString() == dataHolder[i]["username"].asString())
-            {
-                this->Term = dataHolder[i]["count_of_terms"].asInt();
+//    if(dataReader.parse(ifs, dataHolder))
+//    {
+//        for(int i = 0; i < dataHolder.size(); i++)
+//        {
+//            if(get_username().toStdString() == dataHolder[i]["username"].asString())
+//            {
+//                this->Term = dataHolder[i]["count_of_terms"].asInt();
 
-                for( int j=0; j < dataHolder[i]["terms"].size(); j++ ){
-                    avereges.push_back(dataHolder[i]["terms"][j]["average"].asFloat());
-                }
-                this->currentAverege = avereges[Term-1];
-                ifs.close();
-                return;
-            }
-        }
-//student not found
-    }
+//                for( int j=0; j < dataHolder[i]["terms"].size(); j++ ){
+//                    avereges.push_back(dataHolder[i]["terms"][j]["average"].asFloat());
+//                }
+//                this->currentAverege = avereges[Term-1];
+//                ifs.close();
+//                return;
+//            }
+//        }
+////student not found
+//    }
 
 }
 

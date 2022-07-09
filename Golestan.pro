@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    teacherstudentsetscore.cpp \
     teacherclasssetscore.cpp \
     studentenrolment.cpp \
     studentteachersurvey.cpp \
@@ -57,6 +58,7 @@ SOURCES += \
     teacherprofile.cpp \
 
 HEADERS += \
+    teacherstudentsetscore.h \
     teacherclasssetscore.h \
     studentenrolment.h \
     studentteachersurvey.h \
@@ -106,6 +108,7 @@ HEADERS += \
     teacherprofile.h
 
 FORMS += \
+    teacherstudentsetscore.ui \
     teacherclasssetscore.ui \
     studentenrolment.ui \
     studentteachersurvey.ui \
