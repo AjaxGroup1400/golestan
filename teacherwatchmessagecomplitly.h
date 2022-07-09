@@ -37,7 +37,7 @@ private:
 
     Json::Value dataHolder;
     Json::Reader dataReader;
-    QString filePath = "../data_resources/studentnotification" ;
+    QString filePath = "../data_resources/notifications" ;
 
 };
 
