@@ -142,8 +142,8 @@ void studentMessages::on_backToMenu_clicked()
 
 
 
-//void studentMessages::on_msgbtn1_clicked()
-//{
+void studentMessages::on_msgbtn1_clicked()
+{
 //    bool isread;
 //    QString sender = nullptr;
 //    for(int i = 0 ; i < unreadTitle.size() ; i++)
@@ -181,7 +181,7 @@ void studentMessages::on_backToMenu_clicked()
 //        emit mainmenu->exceptioOccured(e);
 //    }
 
-//}
+}
 
 
 void studentMessages::on_pushButton_3_clicked()

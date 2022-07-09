@@ -178,7 +178,7 @@ void teacherProfile::on_pushButton_4_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherSendAssertion* tsa= new TeacherSendAssertion;
+        TeacherSendAssertion* tsa= new TeacherSendAssertion(mainmenu);
         tsa->show();
         exit->close();
         close();

@@ -25,6 +25,8 @@ TeacherClassInfo::TeacherClassInfo(TeacherMainMenu * member , QWidget *parent) :
 
     this->mainmenu = member ;
     QList<Class> classes = member->getClasses();
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
 
     for (int i = 0 ; i<classes.size();i++){
         ui->verticalLayout_2->addWidget(watchClass(classes[i]));

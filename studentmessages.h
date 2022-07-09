@@ -51,7 +51,7 @@ private:
 
     void showMeassages();
 
-    QGroupBox* createMessageBox(QString messageTitle, QString messageDescription, int id);
+    QGroupBox *createMessageBox(QString messageTitle, QString messageDescription, int id);
 
 
 

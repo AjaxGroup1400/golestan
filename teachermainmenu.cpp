@@ -22,6 +22,7 @@ using namespace std;
 #include"Notification.h"
 #include "teachermessages.h"
 #include"dist/json/json.h"
+#include"teacherclassinfo.h"
 
 TeacherMainMenu::TeacherMainMenu(QString firstname , QString username , TeacherMainMenu * member, QWidget *parent) :
 //    QWidget(parent),
@@ -376,7 +377,7 @@ void TeacherMainMenu::on_pushButton_3_clicked()
 //  class name , number of students , students' names , class location
 
 
-    teacherMessages* tm = new teacherMessages(mainmenu, this);
+    TeacherClassInfo* tm = new TeacherClassInfo(this);
 
     tm->show();
 

@@ -29,6 +29,10 @@ teacherMessages::teacherMessages(TeacherMainMenu * member , QWidget *parent) :
     this->ui->pushButton_6->setStyleSheet("background-color: transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
+
+    this->mainmenu = member;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
     this->notification.reset(new Notification);
 
     this->showMeassages();
