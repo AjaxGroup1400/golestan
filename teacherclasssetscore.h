@@ -18,7 +18,8 @@ public:
     explicit TeacherClassSetScore(TeacherMainMenu * member , QWidget *parent = nullptr);
     ~TeacherClassSetScore();
 public slots:
-    QGroupBox* watchClass();
+    QGroupBox* watchClass(Class classToShow);
+
 private slots:
     void on_pushButton_clicked();
 
@@ -34,7 +35,7 @@ private slots:
 
 private:
     Ui::TeacherClassSetScore *ui;
-    void goToClassInfo(QString className);
+    void goToClassInfo(Class thisClass);
 
     TeacherMainMenu * mainmenu;
 };
