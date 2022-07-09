@@ -13,7 +13,7 @@
 #include "studenttermscores.h"
 #include "QCheckBox"
 
-StudentEnrolment::StudentEnrolment(QWidget *parent) :
+StudentEnrolment::StudentEnrolment(StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentEnrolment)
 {
@@ -26,6 +26,9 @@ StudentEnrolment::StudentEnrolment(QWidget *parent) :
     this->ui->pushButton_6->setStyleSheet("background-color:transparent");
     this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
+
+    this->mainmenu = member;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
 
     for (int terms = 0 ; terms<10;terms++){
@@ -47,7 +50,7 @@ void StudentEnrolment::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentProfile* sp= new StudentProfile;
+        StudentProfile* sp= new StudentProfile(mainmenu);
         sp->show();
         exit->close();
         close();
@@ -66,7 +69,7 @@ void StudentEnrolment::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentMessages* sm= new studentMessages;
+        studentMessages* sm= new studentMessages(mainmenu);
         sm->show();
         exit->close();
         close();
@@ -87,7 +90,7 @@ void StudentEnrolment::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentWeeklySchedule* swc = new studentWeeklySchedule;
+        studentWeeklySchedule* swc = new studentWeeklySchedule(mainmenu);
         swc->show();
         exit->close();
         close();
@@ -107,7 +110,7 @@ void StudentEnrolment::on_pushButton_6_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentTerms* st = new StudentTerms;
+        StudentTerms* st = new StudentTerms(mainmenu);
         st->show();
         exit->close();
         close();
@@ -127,7 +130,7 @@ void StudentEnrolment::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentTeacherSurvey* sts = new StudentTeacherSurvey;
+        StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
         sts->show();
         exit->close();
         close();
@@ -147,7 +150,7 @@ void StudentEnrolment::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu;
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu);
         smm->show();
         exit->close();
         close();

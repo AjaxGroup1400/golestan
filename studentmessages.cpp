@@ -18,7 +18,7 @@
 #include "studenttermscores.h"
 #include "studentenrolment.h"
 
-studentMessages::studentMessages(QWidget *parent) :
+studentMessages::studentMessages(StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::studentMessages)
 {
@@ -31,10 +31,12 @@ studentMessages::studentMessages(QWidget *parent) :
     this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
-    for (int i = 0 ; i<10;i++){
-        ui->verticalLayout_2->addWidget(showMessages(i));
+    this->mainmenu = member;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
-    }
+    this->notification.reset(new Notification);
+    this->showMeassages();
+
 
 
 }
@@ -44,47 +46,8 @@ studentMessages::~studentMessages()
     delete ui;
 }
 
-QGroupBox* studentMessages::showMessages(int i)
-{
-
-    QWidget* widget = new QWidget;
-    QGridLayout* grid = new QGridLayout(widget);
-
-    QGroupBox* gBox = new QGroupBox;
-    gBox->setMaximumWidth(741);
-    gBox->setMaximumHeight(61);
-    gBox->setTitle("");
-
-    QLabel * msgTitle = new QLabel;
-    msgTitle->setMaximumWidth(81);
-    msgTitle->setMaximumHeight(20);
-    msgTitle->setText("Title");
-    msgTitle->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
-
-    QLabel * msg = new QLabel;
-    msg->setMaximumWidth(421);
-    msg->setMaximumHeight(20);
-    msg->setText("Message");
-    msg->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
-    QPushButton* watchBtn = new QPushButton;
-    QString title;
-    connect(watchBtn,&QPushButton::clicked,[this, title] { on_msgBtn_clicked(title);});
-    watchBtn->setMaximumWidth(101);
-    watchBtn->setMaximumHeight(26);
-    watchBtn->setText("Watch More");
-    watchBtn->setStyleSheet("background-color: transparent;color:rgb(178, 8, 55);");
-
-
-    grid->addWidget(msgTitle,0,0);
-    grid->addWidget(msg,0,1);
-    grid->addWidget(watchBtn,0,2);
-
-    gBox->setLayout(grid);
-    return gBox;
-
-}
 
 void studentMessages::on_pushButton_clicked()
 {
@@ -94,7 +57,7 @@ void studentMessages::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentProfile* sp= new StudentProfile;
+        StudentProfile* sp= new StudentProfile(mainmenu);
         sp->show();
         exit->close();
         close();
@@ -114,7 +77,7 @@ void studentMessages::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu;
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() ,mainmenu);
         smm->show();
         exit->close();
         close();
@@ -134,7 +97,7 @@ void studentMessages::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentWeeklySchedule* swc = new studentWeeklySchedule;
+        studentWeeklySchedule* swc = new studentWeeklySchedule(mainmenu);
         swc->show();
         exit->close();
         close();
@@ -145,10 +108,10 @@ void studentMessages::on_pushButton_3_clicked()
 
 }
 
-void studentMessages::on_msgBtn_clicked(QString title)
+void studentMessages::on_msgBtn_clicked(QString title , QString description)
 {
 
-    StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly;
+    StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly(title, description, mainmenu);
     swmc->show();
     close();
 }
@@ -162,7 +125,7 @@ void studentMessages::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentTeacherSurvey* sts = new StudentTeacherSurvey;
+        StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
         sts->show();
         exit->close();
         close();
@@ -182,7 +145,7 @@ void studentMessages::on_pushButton_6_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentTerms* st = new StudentTerms;
+        StudentTerms* st = new StudentTerms(mainmenu);
         st->show();
         exit->close();
         close();
@@ -202,7 +165,7 @@ void studentMessages::on_pushButton_4_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentEnrolment* se = new StudentEnrolment;
+        StudentEnrolment* se = new StudentEnrolment(mainmenu);
         se->show();
         exit->close();
         close();
@@ -210,5 +173,60 @@ void studentMessages::on_pushButton_4_clicked()
     else{
         exit->close();
     }
+}
+
+void studentMessages::showMeassages()
+{
+    auto notifs = notification->getNotifs(mainmenu->get_username());
+
+    for(auto notif : notifs)
+    {
+        this->ui->verticalLayout_2->addWidget(
+            createMessageBox(notif["title"], notif["description"], notif["id"].toInt())
+        );
+    }
+
+}
+
+QGroupBox *studentMessages::createMessageBox(QString messageTitle, QString messageDescription, int id)
+{
+    QWidget* widget = new QWidget;
+    QGridLayout* grid = new QGridLayout(widget);
+
+    QGroupBox* gBox = new QGroupBox;
+    gBox->setMaximumWidth(741);
+    gBox->setMaximumHeight(61);
+    gBox->setTitle("");
+
+    QLabel * msgTitle = new QLabel;
+    msgTitle->setMaximumWidth(81);
+    msgTitle->setMaximumHeight(20);
+    msgTitle->setText(messageTitle);
+    msgTitle->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
+
+    QLabel * msg = new QLabel;
+    msg->setMaximumWidth(421);
+    msg->setMaximumHeight(20);
+    msg->setText(messageDescription);
+    msg->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
+
+
+    QPushButton* watchBtn = new QPushButton;
+    QString title;
+
+    connect(watchBtn,&QPushButton::clicked,[this, messageTitle, messageDescription] { on_msgBtn_clicked(messageTitle, messageDescription);});
+
+    watchBtn->setMaximumWidth(101);
+    watchBtn->setMaximumHeight(26);
+    watchBtn->setText("More Details");
+    watchBtn->setStyleSheet("background-color: transparent;color:rgb(178, 8, 55);");
+
+    grid->addWidget(msgTitle,0,0);
+    grid->addWidget(msg,0,1);
+    grid->addWidget(watchBtn,0,2);
+
+    gBox->setLayout(grid);
+    return gBox;
+
 }
 

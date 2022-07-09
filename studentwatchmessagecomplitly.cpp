@@ -1,14 +1,19 @@
-#include "studentwatchmessagecomplitly.h"
+#include <QMessageBox>
+#include<QString>
+
 #include "ui_studentwatchmessagecomplitly.h"
+#include "studentwatchmessagecomplitly.h"
 #include "studentmessages.h"
 #include "studentprofile.h"
-#include <QMessageBox>
 #include "studentweeklyschedule.h"
 #include "studentteachersurvey.h"
 #include "studentterms.h"
 #include "studenttermscores.h"
 #include "studentenrolment.h"
-StudentWatchMessageComplitly::StudentWatchMessageComplitly(QWidget *parent) :
+
+
+
+StudentWatchMessageComplitly::StudentWatchMessageComplitly(QString title  , QString message , StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentWatchMessageComplitly)
 {
@@ -25,6 +30,14 @@ StudentWatchMessageComplitly::StudentWatchMessageComplitly(QWidget *parent) :
     this->ui->TitleLine->setEnabled(false);
     this->ui->SenderLine->setEnabled(false);
     this->ui->messageLine->setEnabled(false);
+
+    this->mainmenu = member ;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
+    this->ui->TitleLine->setText(title);
+    this->ui->messageLine->setText(message);
+
+
 }
 
 StudentWatchMessageComplitly::~StudentWatchMessageComplitly()
@@ -40,7 +53,7 @@ void StudentWatchMessageComplitly::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentProfile* sp= new StudentProfile;
+        StudentProfile* sp= new StudentProfile(mainmenu);
         sp->show();
         exit->close();
         close();
@@ -54,7 +67,7 @@ void StudentWatchMessageComplitly::on_pushButton_clicked()
 
 void StudentWatchMessageComplitly::on_pushButton_2_clicked()
 {
-    studentMessages* sm= new studentMessages;
+    studentMessages* sm= new studentMessages(mainmenu);
     sm->show();
     close();
 }
@@ -62,7 +75,7 @@ void StudentWatchMessageComplitly::on_pushButton_2_clicked()
 
 void StudentWatchMessageComplitly::on_backToMenu_clicked()
 {
-    studentMessages* sm= new studentMessages;
+    studentMessages* sm= new studentMessages(mainmenu);
     sm->show();
     close();
 
@@ -77,7 +90,7 @@ void StudentWatchMessageComplitly::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        studentWeeklySchedule* swc = new studentWeeklySchedule;
+        studentWeeklySchedule* swc = new studentWeeklySchedule(mainmenu);
         swc->show();
         exit->close();
         close();
@@ -96,7 +109,7 @@ void StudentWatchMessageComplitly::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentTeacherSurvey* sts = new StudentTeacherSurvey;
+        StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
         sts->show();
         exit->close();
         close();
@@ -115,7 +128,7 @@ void StudentWatchMessageComplitly::on_pushButton_6_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentTerms* st = new StudentTerms;
+        StudentTerms* st = new StudentTerms(mainmenu);
         st->show();
         exit->close();
         close();
@@ -135,7 +148,7 @@ void StudentWatchMessageComplitly::on_pushButton_4_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentEnrolment* se = new StudentEnrolment;
+        StudentEnrolment* se = new StudentEnrolment(mainmenu);
         se->show();
         exit->close();
         close();
