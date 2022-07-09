@@ -28,6 +28,8 @@ private slots:
 
     void on_backToMenu_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::StudentProfile *ui;
     StudentMainMenu * mainmenu;
