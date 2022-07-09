@@ -19,7 +19,6 @@ TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member ,Class thisCla
     ui(new Ui::TeacherWatchStudent)
 {
     ui->setupUi(this);
-    ui->setupUi(this);
     this->ui->pushButton->setStyleSheet("background-color:transparent");
     this->ui->pushButton_2->setStyleSheet("background-color:transparent");
     this->ui->pushButton_3->setStyleSheet("background-color:transparent");
