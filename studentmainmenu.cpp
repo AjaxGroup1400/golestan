@@ -384,3 +384,8 @@ void StudentMainMenu::on_pushButton_3_clicked()
     studentWeeklySchedule * sws = new studentWeeklySchedule(this);
 }
 
+void StudentMainMenu::on_pushButton_4_clicked()
+{
+
+}
+
