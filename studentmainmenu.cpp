@@ -1,3 +1,14 @@
+#include "studentmainmenu.h"
+#include "ui_studentmainmenu.h"
+#include "loginpage.h"
+#include "studentprofile.h"
+#include "Enum.h"
+#include "studentmessages.h"
+#include "studentenrolment.h"
+#include "studentteachersurvey.h"
+#include "studentterms.h"
+#include "studentteachersurvey.h"
+
 #include <QMessageBox>
 #include <QAbstractButton>
 #include <QPushButton>
@@ -373,15 +384,41 @@ void StudentMainMenu::load()
 
 void StudentMainMenu::on_pushButton_2_clicked()
 {
-    studentMessages * stm = new studentMessages(this) ;
-    stm->show();
+    studentMessages* sm = new studentMessages(mainmenu);
+    sm->show();
     close();
 }
 
 
 void StudentMainMenu::on_pushButton_3_clicked()
 {
-    studentWeeklySchedule * sws = new studentWeeklySchedule(this);
+    studentWeeklySchedule* swc = new studentWeeklySchedule(mainmenu);
+    swc->show();
+    close();
+}
+
+
+void StudentMainMenu::on_pushButton_4_clicked()
+{
+    StudentEnrolment* se = new StudentEnrolment(mainmenu);
+    se->show();
+    close();
+}
+
+
+void StudentMainMenu::on_pushButton_6_clicked()
+{
+    StudentTerms* st = new StudentTerms(mainmenu);
+    st->show();
+    close();
+}
+
+
+void StudentMainMenu::on_pushButton_7_clicked()
+{
+    StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
+    sts->show();
+    close();
 }
 
 void StudentMainMenu::on_pushButton_4_clicked()
