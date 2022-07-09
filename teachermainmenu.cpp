@@ -216,7 +216,27 @@ void TeacherMainMenu::addNewTeacherToFile(QList<QString> lessons)
         return;
     }
     exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
-        emit exceptioOccured(exceptionReason);
+    emit exceptioOccured(exceptionReason);
+}
+
+void TeacherMainMenu::addNewTeacherToFile(QString teacherUsername)
+{
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+    ifstream ifs("../data_resources/teacher_lessons.json");
+    if(dataReader.parse(ifs , dataHolder))
+    {
+        Json::Value teacherInformation ;
+        teacherInformation["teacher"] = teacherUsername.toStdString();
+        teacherInformation["lessons"] = Json::arrayValue;
+
+        ofstream ofs("../data_resources/teacher_lessons.json");
+        Json::StyledWriter writer;
+        string finalPart = writer.write(dataHolder);
+        ofs << dataHolder;
+        ofs.close();
+        return;
+    }
 }
 
 void TeacherMainMenu::addNewLessonFile(Class new_class)
@@ -242,6 +262,30 @@ void TeacherMainMenu::addNewLessonFile(Class new_class)
     }
     exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
     emit exceptioOccured(exceptionReason);
+}
+
+void TeacherMainMenu::addNewLessonFile(QString username, Class new_class)
+{
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+
+    ifstream ifs("../data_resources/teacher_lessons.json");
+    if(dataReader.parse(ifs , dataHolder))
+    {
+        for(auto &members : dataHolder)
+        {
+            if(QString::fromStdString(members["teacher"].asString()) == username)
+            {
+                members["lessons"].append(lesson_enum_str[new_class.getLesson()].toStdString());
+                break;
+            }
+        }
+        ofstream ofs("../data_resources/teacher_lessons.json");
+        Json::StyledWriter writer ;
+        string finalPart = writer.write(dataHolder);
+        ofs << finalPart;
+        ofs.close();
+    }
 }
 
 void TeacherMainMenu::removeLessonFile(Class lesson) //delete all lessons? delete all class json files?
@@ -295,6 +339,23 @@ int TeacherMainMenu::teacherIsValidFile()
     exception exceptionReason("couldn't open file \"../data_resources/teacher_lessons.json\"");
     emit exceptioOccured(exceptionReason);
     return -1;
+}
+
+int TeacherMainMenu::teacherIsValidFile(QString teacherUsername)
+{
+    Json::Value dataHolder;
+    Json::Reader dataReader;
+    ifstream ifs("../data_resources/teacher_lessons.json");
+    if(dataReader.parse(ifs , dataHolder))
+    {
+        for(int teacherIndex = 0 ; teacherIndex < dataHolder.size() ; teacherIndex ++)
+        {
+            if(QString::fromStdString(dataHolder[teacherIndex]["teacher"].asString()) == teacherUsername)
+                return teacherIndex;
+        }
+        return -1 ;
+    }
+    return -2;
 }
 
 bool TeacherMainMenu::lessonIsValid(QString lesson)
@@ -368,7 +429,7 @@ void TeacherMainMenu::on_pushButton_3_clicked()
 
 void TeacherMainMenu::on_pushButton_6_clicked()
 {
-    TeacherClassSetScore* tcss = new TeacherClassSetScore;
+    TeacherClassSetScore* tcss = new TeacherClassSetScore(mainmenu);
     tcss->show();
     close();
 }

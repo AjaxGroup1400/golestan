@@ -15,6 +15,8 @@
 #include "studentterms.h"
 #include "studenttermscores.h"
 #include "studentenrolment.h"
+#include"Auth.h"
+#include"Filemanager.h"
 
 StudentTeacherSurvey::StudentTeacherSurvey(StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -32,8 +34,14 @@ StudentTeacherSurvey::StudentTeacherSurvey(StudentMainMenu * member , QWidget *p
     this->mainmenu = member;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
-    for (int i = 0 ; i<10;i++){
-        ui->verticalLayout_2->addWidget(showTeachers());
+
+
+
+
+    QList<QMap<QString , QString>> lessons = mainmenu->getClasses(mainmenu->getTerm());
+
+    for (int i = 0 ; i<lessons.size();i++){
+        ui->verticalLayout_2->addWidget(showTeachers(lessons[i]["teacher"] , lessons[i]["lesson"]));
 
     }
 }
@@ -43,15 +51,24 @@ StudentTeacherSurvey::~StudentTeacherSurvey()
     delete ui;
 }
 
-void StudentTeacherSurvey::on_surveyBtn_clicked(QString nameOfClass)
+void StudentTeacherSurvey::on_surveyBtn_clicked(QString nameOfClassing , QString teacherUsername , QString lesson)
 {
-    StudentWatchSurvey* sws = new StudentWatchSurvey(mainmenu);
+    StudentWatchSurvey* sws = new StudentWatchSurvey(teacherUsername , lesson , mainmenu);
     sws->show();
     close();
 }
 
-QGroupBox *StudentTeacherSurvey::showTeachers()
+QGroupBox *StudentTeacherSurvey::showTeachers(QString teacherUsername , QString lesson)
 {
+
+    int userIndex = Auth::findUser(teacherUsername);
+    FileManager userFile;
+    userFile.create();
+    userFile.loadData();
+    QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+
+
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
 
@@ -63,20 +80,20 @@ QGroupBox *StudentTeacherSurvey::showTeachers()
     QLabel * Name = new QLabel;
     Name->setMaximumWidth(81);
     Name->setMaximumHeight(20);
-    Name->setText("First Name");
+    Name->setText(parsedUser[2]);
     Name->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * lastName = new QLabel;
     lastName->setMaximumWidth(81);
     lastName->setMaximumHeight(20);
-    lastName->setText("Last Name");
+    lastName->setText(parsedUser[3]);
     lastName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * ClassName = new QLabel;
     QString nameOfClass;
     ClassName->setMaximumWidth(81);
     ClassName->setMaximumHeight(20);
-    ClassName->setText("ClassName");
+    ClassName->setText(lesson);
     ClassName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
@@ -85,7 +102,7 @@ QGroupBox *StudentTeacherSurvey::showTeachers()
     survey->setMaximumHeight(20);
     survey->setText("Watch Survey");
     survey->setStyleSheet("font:Montesrat 9px; color: rgb(178, 8, 55);background-color: transparent");
-    connect(survey,&QPushButton::clicked,[this, nameOfClass] { on_surveyBtn_clicked(nameOfClass);});
+    connect(survey,&QPushButton::clicked,[this, nameOfClass , teacherUsername , lesson] { on_surveyBtn_clicked(nameOfClass , teacherUsername , lesson);});
 
 
     grid->addWidget(Name,0,0);

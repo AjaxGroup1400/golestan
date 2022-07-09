@@ -13,8 +13,10 @@
 #include "teacherweeklyschedule.h"
 #include "QLineEdit"
 #include <QDoubleValidator>
+#include "Auth.h"
+#include "Filemanager.h"
 
-TeacherStudentSetScore::TeacherStudentSetScore(QWidget *parent) :
+TeacherStudentSetScore::TeacherStudentSetScore(TeacherMainMenu * member , Class thisClass, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherStudentSetScore)
 {
@@ -28,10 +30,26 @@ TeacherStudentSetScore::TeacherStudentSetScore(QWidget *parent) :
     this->ui->backToMenu->setStyleSheet("background-color:transparent");
     this->ui->SetScore->setStyleSheet("background-color:transparent");
 
-    for (int i = 0 ; i<10;i++){
-        ui->verticalLayout_2->addWidget(showStudent());
+    this->mainmenu = member;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
+    QList<QString> usernameList = thisClass.getList().keys();
+
+
+    for (int i = 0 ; i<thisClass.getStudentNum();i++){
+
+        int userIndex = Auth::findUser(usernameList[i]);
+        FileManager userFile;
+        userFile.create();
+        userFile.loadData();
+        QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+        ui->verticalLayout_2->addWidget(showStudent(parsedUser[2],parsedUser[3],usernameList[i], thisClass));
+
 
     }
+
+
 }
 
 TeacherStudentSetScore::~TeacherStudentSetScore()
@@ -39,7 +57,7 @@ TeacherStudentSetScore::~TeacherStudentSetScore()
     delete ui;
 }
 
-QGroupBox *TeacherStudentSetScore::showStudent()
+QGroupBox *TeacherStudentSetScore::showStudent(QString firstname,QString lastname,QString studentusername, Class thisClass)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -52,27 +70,27 @@ QGroupBox *TeacherStudentSetScore::showStudent()
     QLabel * Name = new QLabel;
     Name->setMaximumWidth(80);
     Name->setMaximumHeight(20);
-    Name->setText("Firs Name");
+    Name->setText(firstname);
     Name->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * lastName = new QLabel;
     lastName->setMaximumWidth(80);
     lastName->setMaximumHeight(20);
-    lastName->setText("Last Name");
+    lastName->setText(lastname);
     lastName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * studentNumber = new QLabel;
     studentNumber->setMaximumWidth(80);
     studentNumber->setMaximumHeight(20);
-    studentNumber->setText("Student Number");
+    studentNumber->setText(studentusername);
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
-    QLabel * field = new QLabel;
-    field->setMaximumWidth(80);
-    field->setMaximumHeight(20);
-    field->setText("Field");
-    field->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
+//    QLabel * field = new QLabel;
+//    field->setMaximumWidth(80);
+//    field->setMaximumHeight(20);
+//    field->setText("Field");
+//    field->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLineEdit* score = new QLineEdit;
     score->setMaximumWidth(50);
@@ -81,12 +99,19 @@ QGroupBox *TeacherStudentSetScore::showStudent()
     auto dv = new QDoubleValidator(0.00, 20.00, 3);
     score->setValidator(dv);
 
+    QPushButton* setScore = new QPushButton;
+    setScore->setText("set score");
+
+    connect (setScore, &QPushButton::clicked, [this,thisClass,studentusername] {SetScore_clicked(thisClass,studentusername);});
+
 
     grid->addWidget(Name,0,0);
     grid->addWidget(lastName,0,1);
     grid->addWidget(studentNumber,0,2);
-    grid->addWidget(field,0,3);
-    grid->addWidget(score,0,4);
+//    grid->addWidget(field,0,3);
+    grid->addWidget(score,0,3);
+    grid->addWidget(setScore,0,4);
+
 
     gBox->setLayout(grid);
     return gBox;
@@ -101,7 +126,7 @@ void TeacherStudentSetScore::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherProfile* tp= new teacherProfile;
+        teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
         close();
@@ -121,7 +146,7 @@ void TeacherStudentSetScore::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherMessages* tm= new teacherMessages;
+        teacherMessages* tm= new teacherMessages(mainmenu);
         tm->show();
         exit->close();
         close();
@@ -141,7 +166,7 @@ void TeacherStudentSetScore::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherClassInfo* tci = new TeacherClassInfo;
+        TeacherClassInfo* tci = new TeacherClassInfo(mainmenu);
         tci->show();
         exit->close();
         close();
@@ -181,7 +206,7 @@ void TeacherStudentSetScore::on_pushButton_5_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherWeeklySchedule* tws = new teacherWeeklySchedule;
+        teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
         close();
@@ -201,7 +226,7 @@ void TeacherStudentSetScore::on_pushButton_6_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherClassSetScore* tcss = new TeacherClassSetScore;
+        TeacherClassSetScore* tcss = new TeacherClassSetScore(mainmenu);
         tcss->show();
         exit->close();
         close();
@@ -221,7 +246,7 @@ void TeacherStudentSetScore::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherClassSetScore* tcss = new TeacherClassSetScore;
+        TeacherClassSetScore* tcss = new TeacherClassSetScore(mainmenu);
         tcss->show();
         exit->close();
         close();
@@ -234,8 +259,10 @@ void TeacherStudentSetScore::on_backToMenu_clicked()
 
 
 
-void TeacherStudentSetScore::on_SetScore_clicked()
+void TeacherStudentSetScore::SetScore_clicked(Class studentClass, QString S_username)
+
 {
 
+    studentClass.setScore(S_username, this->score);
 }
 

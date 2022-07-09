@@ -15,10 +15,10 @@ class StudentTermScores : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentTermScores(StudentMainMenu * member , QWidget *parent = nullptr);
+    explicit StudentTermScores(int term , StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentTermScores();
 public slots:
-    QGroupBox* showScores();
+    QGroupBox* showScores(int lessonNumber , int term);
 private slots:
     void on_pushButton_clicked();
 

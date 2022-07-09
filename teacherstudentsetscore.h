@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGroupBox>
 
+#include"teachermainmenu.h"
+
 namespace Ui {
 class TeacherStudentSetScore;
 }
@@ -13,10 +15,10 @@ class TeacherStudentSetScore : public QWidget
     Q_OBJECT
 
 public:
-    explicit TeacherStudentSetScore(QWidget *parent = nullptr);
+    explicit TeacherStudentSetScore(TeacherMainMenu * member, Class thisClass , QWidget *parent = nullptr);
     ~TeacherStudentSetScore();
 public slots:
-    QGroupBox* showStudent();
+    QGroupBox* showStudent(QString firstname,QString lastname,QString studentusername, Class thisClass);
 private slots:
     void on_pushButton_clicked();
 
@@ -32,17 +34,17 @@ private slots:
 
     void on_backToMenu_clicked();
 
-    void on_SetScore_clicked();
+    void SetScore_clicked(Class studentClass, QString S_username);
 
 private:
-
+    float score;
     float* scores;
     int numberOfStudents;
     Ui::TeacherStudentSetScore *ui;
 
     void setScore(int numberOfStudents, float score);
 
-
+    TeacherMainMenu * mainmenu;
 };
 
 #endif // TEACHERSTUDENTSETSCORE_H

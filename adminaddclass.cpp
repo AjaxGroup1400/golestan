@@ -8,6 +8,7 @@
 #include "adminaddpeople.h"
 #include "adminmessages.h"
 #include "Class.h"
+#include"teachermainmenu.h"
 
 adminAddClass::adminAddClass(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -133,10 +134,14 @@ void adminAddClass::on_pushButton_4_clicked()
 void adminAddClass::on_pushButton_5_clicked()
 {
 
+
+
+
     Class newClass (string_to_lesson(lesson_enum_str[this->lesson]), this->teacherusername);
     newClass.setLocation(this->location);
     newClass.setTime(this->time);
     newClass.setDay(string_to_day(day_enum_str[this->day]));
+    TeacherMainMenu::addNewLessonFile(this->teacherusername , newClass);
     QMessageBox* classAdded = new QMessageBox(QMessageBox::Icon::Information, "class Added", "Class with entered info created.", QMessageBox::Button::Ok);
     classAdded->show();
 

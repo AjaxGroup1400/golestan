@@ -6,8 +6,10 @@
 #include "studentweeklyschedule.h"
 #include "studentteachersurvey.h"
 #include "studentenrolment.h"
+#include"Auth.h"
+#include"Filemanager.h"
 
-StudentTermScores::StudentTermScores(StudentMainMenu * member , QWidget *parent) :
+StudentTermScores::StudentTermScores(int term , StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentTermScores)
 {
@@ -23,8 +25,8 @@ StudentTermScores::StudentTermScores(StudentMainMenu * member , QWidget *parent)
     this->mainmenu = member;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
-    for (int lesson = 0 ; lesson<10;lesson++){
-        ui->verticalLayout_2->addWidget(showScores());
+    for (int lesson = 0 ; lesson< mainmenu->getClasses(term).size() ; lesson++){
+        ui->verticalLayout_2->addWidget(showScores(lesson , term));
 
     }
 }
@@ -34,8 +36,16 @@ StudentTermScores::~StudentTermScores()
     delete ui;
 }
 
-QGroupBox* StudentTermScores::showScores()
+QGroupBox* StudentTermScores::showScores(int lessonNumber , int term)
 {
+    QList<QMap<QString , QString>> lesson = mainmenu->getClasses(term);
+    int userIndex = Auth::findUser(lesson[lessonNumber]["teacher"]);
+    FileManager userFile;
+    userFile.create();
+    userFile.loadData();
+
+    QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
 
@@ -47,20 +57,20 @@ QGroupBox* StudentTermScores::showScores()
     QLabel * className = new QLabel;
     className->setMaximumWidth(81);
     className->setMaximumHeight(20);
-    className->setText("Class Name");
+    className->setText(lesson[lessonNumber]["lesson"]);
     className->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * teacherName = new QLabel;
     teacherName->setMaximumWidth(81);
     teacherName->setMaximumHeight(20);
-    teacherName->setText("Teacher Name");
+    teacherName->setText(parsedUser[2] + " " + parsedUser[3]);
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
     QLabel * showScore = new QLabel;
     showScore->setMaximumWidth(81);
     showScore->setMaximumHeight(20);
-    showScore->setText("20");
+    showScore->setText(lesson[lessonNumber]["score"]);
     showScore->setStyleSheet("font:Montesrat 9px; color: rgb(178, 8, 55);background-color: transparent");
 
 

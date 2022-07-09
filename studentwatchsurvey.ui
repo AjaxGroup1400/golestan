@@ -903,77 +903,6 @@ font: 9pt &quot;Montserrat&quot;;</string>
        </item>
       </widget>
      </item>
-     <item>
-      <widget class="QComboBox" name="comboBox_6">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>1</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>2</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>3</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>4</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>5</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBox_7">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(41, 39, 40);
-font: 9pt &quot;Montserrat&quot;;</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>1</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>2</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>3</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>4</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>5</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
-      </widget>
-     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -1054,31 +983,21 @@ font: 9pt &quot;Montserrat&quot;;</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="label_17">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_18">
-       <property name="styleSheet">
-        <string notr="true">color: rgb(41, 39, 40);</string>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="setScore">
+   <property name="geometry">
+    <rect>
+     <x>582</x>
+     <y>590</y>
+     <width>121</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>set the scores</string>
+   </property>
   </widget>
   <zorder>label</zorder>
   <zorder>frame</zorder>
@@ -1091,12 +1010,13 @@ font: 9pt &quot;Montserrat&quot;;</string>
   <zorder>classname</zorder>
   <zorder>teachername</zorder>
   <zorder>groupBox</zorder>
+  <zorder>setScore</zorder>
  </widget>
  <resources>
+  <include location="arrowIcon.qrc"/>
   <include location="term-management-icon.qrc"/>
   <include location="icon.qrc"/>
   <include location="pictures.qrc"/>
-  <include location="arrowIcon.qrc"/>
  </resources>
  <connections/>
 </ui>
