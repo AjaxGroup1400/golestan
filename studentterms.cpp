@@ -60,14 +60,14 @@ QGroupBox *StudentTerms::showTerms(int term)
     QLabel * termName = new QLabel;
     termName->setMaximumWidth(81);
     termName->setMaximumHeight(20);
-    termName->setText("Term Number");
+    termName->setText(QString::number(term + 1 ));
     termName->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * termAverage = new QLabel;
-    termName->setMaximumWidth(81);
-    termName->setMaximumHeight(20);
-    termName->setText(average);
-    termName->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
+    termAverage->setMaximumWidth(95);
+    termAverage->setMaximumHeight(20);
+    termAverage->setText(average);
+    termAverage->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QPushButton * showScore = new QPushButton;
     QString nameOfTerm;
@@ -79,8 +79,8 @@ QGroupBox *StudentTerms::showTerms(int term)
 
 
     grid->addWidget(termName,0,0);
-    grid->addWidget(showScore,0,1);
-    grid->addWidget(termAverage,0,2);
+    grid->addWidget(termAverage,0,1);
+    grid->addWidget(showScore,0,2);
 
     gBox->setLayout(grid);
     return gBox;
@@ -176,7 +176,7 @@ void StudentTerms::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu);
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu->get_username() , mainmenu);
         smm->show();
         exit->close();
         close();

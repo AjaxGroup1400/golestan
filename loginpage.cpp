@@ -121,7 +121,7 @@ void LoginPage::on_Loginbtn_clicked()
     }
     else if (userType == "Student")
     {
-        StudentMainMenu* smm = new StudentMainMenu(parsedUser[2]);
+        StudentMainMenu* smm = new StudentMainMenu(parsedUser[2] , parsedUser[0]);
         smm->set_username(ui->userLine->text());
         smm->set_first_name(parsedUser[2]);
         smm->set_last_name(parsedUser[3]);

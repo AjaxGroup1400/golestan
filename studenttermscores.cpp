@@ -55,20 +55,20 @@ QGroupBox* StudentTermScores::showScores(int lessonNumber , int term)
     gBox->setTitle("");
 
     QLabel * className = new QLabel;
-    className->setMaximumWidth(81);
+    className->setMaximumWidth(95);
     className->setMaximumHeight(20);
     className->setText(lesson[lessonNumber]["lesson"]);
     className->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * teacherName = new QLabel;
-    teacherName->setMaximumWidth(81);
+    teacherName->setMaximumWidth(95);
     teacherName->setMaximumHeight(20);
     teacherName->setText(parsedUser[2] + " " + parsedUser[3]);
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
     QLabel * showScore = new QLabel;
-    showScore->setMaximumWidth(81);
+    showScore->setMaximumWidth(95);
     showScore->setMaximumHeight(20);
     showScore->setText(lesson[lessonNumber]["score"]);
     showScore->setStyleSheet("font:Montesrat 9px; color: rgb(178, 8, 55);background-color: transparent");

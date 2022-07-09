@@ -21,7 +21,7 @@
 
 using std::ifstream, std::string, std::ofstream;
 
-StudentMainMenu::StudentMainMenu(QString firstname, StudentMainMenu * member, QWidget *parent) :
+StudentMainMenu::StudentMainMenu(QString firstname , QString username , StudentMainMenu * member ,  QWidget *parent) :
 //    QWidget(parent),
     ui(new Ui::StudentMainMenu)
 {
@@ -47,6 +47,7 @@ StudentMainMenu::StudentMainMenu(QString firstname, StudentMainMenu * member, QW
     }
 
     this->set_first_name(firstname);
+    this->set_username(username);
     this->ui->label_2->setText("Hi dear " + firstname);
 
     QString filePath = "../data_resources/student_term.json";
@@ -341,7 +342,7 @@ QList<QMap<QString, QString>> StudentMainMenu::getClasses(int chosenTerm)
         {
             if(i["username"] == this->get_username().toStdString())
             {
-                for(auto j : i["username"][chosenTerm]["lessons"])
+                for(auto j : i["terms"][chosenTerm]["lessons"])
                 {
                     QMap<QString , QString> holder;
                     holder["teacher"] = QString::fromStdString(j["teacher"].asString());
@@ -433,7 +434,7 @@ void StudentMainMenu::on_pushButton_4_clicked()
 
 void StudentMainMenu::on_pushButton_6_clicked()
 {
-    StudentTerms* st = new StudentTerms(mainmenu);
+    StudentTerms* st = new StudentTerms(this);
     st->show();
     close();
 }
@@ -445,7 +446,7 @@ void StudentMainMenu::on_pushButton_6_clicked()
 
 void StudentMainMenu::on_pushButton_7_clicked()
 {
-    StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
+    StudentTeacherSurvey* sts = new StudentTeacherSurvey(this);
     sts->show();
     close();
 }

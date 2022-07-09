@@ -676,7 +676,7 @@ color: rgb(178, 8, 55);</string>
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>430</x>
      <y>160</y>
      <width>63</width>
      <height>20</height>
@@ -693,7 +693,7 @@ color: rgb(41, 39, 40);</string>
   <widget class="QLabel" name="label_13">
    <property name="geometry">
     <rect>
-     <x>780</x>
+     <x>850</x>
      <y>160</y>
      <width>111</width>
      <height>20</height>
@@ -707,6 +707,19 @@ color: rgb(178, 8, 55);</string>
     <string>Watch Score</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>618</x>
+     <y>160</y>
+     <width>131</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Average of term</string>
+   </property>
+  </widget>
   <zorder>frame_2</zorder>
   <zorder>frame</zorder>
   <zorder>label</zorder>
@@ -716,12 +729,13 @@ color: rgb(178, 8, 55);</string>
   <zorder>backToMenu</zorder>
   <zorder>label_8</zorder>
   <zorder>label_13</zorder>
+  <zorder>label_12</zorder>
  </widget>
  <resources>
+  <include location="arrowIcon.qrc"/>
   <include location="term-management-icon.qrc"/>
   <include location="icon.qrc"/>
   <include location="pictures.qrc"/>
-  <include location="arrowIcon.qrc"/>
  </resources>
  <connections/>
 </ui>

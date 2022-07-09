@@ -20,7 +20,7 @@ class StudentMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit StudentMainMenu(QString firstname, StudentMainMenu * member = nullptr , QWidget *parent = nullptr);
+    explicit StudentMainMenu(QString firstname , QString username , StudentMainMenu * member = nullptr , QWidget *parent = nullptr);
     //if student exists read it from file else write new student : Term = 1
     ~StudentMainMenu();
 

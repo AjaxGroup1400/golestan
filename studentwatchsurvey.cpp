@@ -190,6 +190,9 @@ void StudentWatchSurvey::on_setScore_clicked()
    score=ui->comboBox->currentText().toInt() + ui->comboBox_2->currentText().toInt() + ui->comboBox_3->currentText().toInt() + ui->comboBox_4->currentText().toInt() + ui->comboBox_5->currentText().toInt() ;
    Poll settingScore;
    settingScore.addScore(score , mainmenu->get_username() , lesson , teacherUsername);
+   QMessageBox * succesmessage = new QMessageBox(QMessageBox::Icon::Information , "score added" , "the score was saved succesfuly" , QMessageBox::Button::Ok);
+   connect(succesmessage , &QMessageBox::buttonClicked , succesmessage , &QMessageBox::deleteLater);
+   succesmessage->show();
 
 
 }
