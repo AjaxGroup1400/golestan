@@ -90,11 +90,19 @@ void TeacherSendAssertion::on_pushButton_clicked()
 
 void TeacherSendAssertion::on_sendbtn_clicked()
 {
+    /*
+     * 0 = PHYSICS
+     * 1 = CHEMISTRY
+     * 2 = BP
+     * 3 = CALCULUS
+     * 4 = DISCRETE
+     * */
     try
     {
         QString title = ui->TitleLine->text();
-        QString message = ui->messageLine->toPlainText();
-        QString ls = "chemistry" ;
+        QString message = ui->messageLine->toPlainText();        
+        QString ls ;
+
 
 
 //        QList<QString> lessons;
@@ -114,8 +122,9 @@ void TeacherSendAssertion::on_sendbtn_clicked()
 //            lessonClass.setinformation(string_to_lesson("chemistry") , "talar2" , "11:00" , string_to_day("SUNDAY") , stList);
 
             mainmenu->sendingNotification(title , message , lessonClass );
+            ui->TitleLine->clear();
+            ui->messageLine->clear();
 
-//            this->close();
         }
         else
             throw std::exception("you don't have this lesson");

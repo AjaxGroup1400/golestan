@@ -170,3 +170,9 @@ void StudentProfile::on_backToMenu_clicked()
     }
 }
 
+
+void StudentProfile::on_pushButton_clicked()
+{
+
+}
+
