@@ -11,7 +11,7 @@
 #include "teachermessages.h"
 #include "teacherweeklyschedule.h"
 #include "teacherstudentsetscore.h"
-
+using namespace std;
 TeacherClassSetScore::TeacherClassSetScore(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherClassSetScore)
@@ -26,9 +26,11 @@ TeacherClassSetScore::TeacherClassSetScore(TeacherMainMenu * member , QWidget *p
     this->ui->backToMenu->setStyleSheet("background-color:transparent");
 
     this->mainmenu = member;
+    QList<Class> classes = member->getClasses();
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
-    for (int i = 0 ; i<10;i++){
-        ui->verticalLayout_2->addWidget(watchClass());
+
+    for (int i = 0 ; i<classes.size();i++){
+        ui->verticalLayout_2->addWidget(watchClass(classes[i]));
 
     }
 }
@@ -38,7 +40,7 @@ TeacherClassSetScore::~TeacherClassSetScore()
     delete ui;
 }
 
-QGroupBox *TeacherClassSetScore::watchClass()
+QGroupBox *TeacherClassSetScore::watchClass(Class classToShow)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -51,25 +53,25 @@ QGroupBox *TeacherClassSetScore::watchClass()
     QLabel * className = new QLabel;
     className->setMaximumWidth(200);
     className->setMaximumHeight(20);
-    className->setText("Class Name");
+    className->setText(lesson_enum_str[classToShow.getLesson()]);
     className->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * teacherName = new QLabel;
     teacherName->setMaximumWidth(200);
     teacherName->setMaximumHeight(20);
-    teacherName->setText("Teacher Name");
+    teacherName->setText(mainmenu->get_first_name()+ " " + mainmenu->get_last_name());
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * studentNumber = new QLabel;
     studentNumber->setMaximumWidth(90);
     studentNumber->setMaximumHeight(20);
-    studentNumber->setText("Student Number");
+    studentNumber->setText(QString::fromStdString(to_string(classToShow.getStudentNum())));
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
     QPushButton* watchBtn = new QPushButton;
     QString Name;
-    connect(watchBtn,&QPushButton::clicked,[this, Name] { goToClassInfo(Name);});
+    connect(watchBtn,&QPushButton::clicked,[this, classToShow] { goToClassInfo(classToShow);});
     watchBtn->setMaximumWidth(100);
     watchBtn->setMaximumHeight(26);
     watchBtn->setText("Set Score");
@@ -203,10 +205,10 @@ void TeacherClassSetScore::on_backToMenu_clicked()
     }
 }
 
-void TeacherClassSetScore::goToClassInfo(QString className)
+void TeacherClassSetScore::goToClassInfo(Class thisClass)
 {
 
-    TeacherStudentSetScore* tsss = new TeacherStudentSetScore(mainmenu);
+    TeacherStudentSetScore* tsss = new TeacherStudentSetScore(mainmenu, thisClass);
     tsss->show();
     close();
 }
