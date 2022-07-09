@@ -14,7 +14,7 @@ class StudentWatchSurvey : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentWatchSurvey(StudentMainMenu * member , QWidget *parent = nullptr);
+    explicit StudentWatchSurvey(QString tUsername , QString ls , StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentWatchSurvey();
 
 private slots:
@@ -32,10 +32,15 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_setScore_clicked();
+
 private:
     Ui::StudentWatchSurvey *ui;
 
     StudentMainMenu * mainmenu ;
+    QString teacherUsername ;
+    QString lesson ;
+    int score ;
 
 };
 

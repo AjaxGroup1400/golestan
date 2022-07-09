@@ -1,6 +1,9 @@
+#include <QMessageBox>
+#include<QString>
+
+
 #include "studentwatchsurvey.h"
 #include "ui_studentwatchsurvey.h"
-#include <QMessageBox>
 #include "studentmessages.h"
 #include "studentprofile.h"
 #include "studentweeklyschedule.h"
@@ -8,8 +11,9 @@
 #include "studentterms.h"
 #include "studenttermscores.h"
 #include "studentenrolment.h"
+#include"Poll.h"
 
-StudentWatchSurvey::StudentWatchSurvey(StudentMainMenu * member , QWidget *parent) :
+StudentWatchSurvey::StudentWatchSurvey(QString tUsername , QString ls , StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentWatchSurvey)
 {
@@ -22,8 +26,20 @@ StudentWatchSurvey::StudentWatchSurvey(StudentMainMenu * member , QWidget *paren
     this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
-    this->mainmenu = member ;
+    this->mainmenu = member ;    
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
+
+    this->teacherUsername = tUsername;
+    this->lesson = ls ;
+
+    this->ui->label_8->setText("The teacher's ability to convey the concept");
+    this->ui->label_12->setText("General knowledge of the teacher in the field of study");
+    this->ui->label_13->setText("Student participation in lesson topics");
+    this->ui->label_15->setText("Use of appropriate student evaluation methods according to course objectives");
+    this->ui->label_16->setText("The possibility of communication (in person or not) with the teacher outside the class");
+
+
+
 }
 
 StudentWatchSurvey::~StudentWatchSurvey()
@@ -99,7 +115,7 @@ void StudentWatchSurvey::on_pushButton_7_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentWatchSurvey* sws = new StudentWatchSurvey(mainmenu);
+        StudentWatchSurvey* sws = new StudentWatchSurvey(teacherUsername , lesson , mainmenu);
         sws->show();
         exit->close();
         close();
@@ -166,5 +182,15 @@ void StudentWatchSurvey::on_pushButton_4_clicked()
     else{
         exit->close();
     }
+}
+
+
+void StudentWatchSurvey::on_setScore_clicked()
+{
+   score=ui->comboBox->currentText().toInt() + ui->comboBox_2->currentText().toInt() + ui->comboBox_3->currentText().toInt() + ui->comboBox_4->currentText().toInt() + ui->comboBox_5->currentText().toInt() ;
+   Poll settingScore;
+   settingScore.addScore(score , mainmenu->get_username() , lesson , teacherUsername);
+
+
 }
 
