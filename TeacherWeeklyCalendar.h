@@ -15,7 +15,7 @@ public:
 
     virtual void addUser(Json::Value data);
 
-    virtual QList<QList<QMap<QString, QString>>> getCalendarDayByDay();
+//    virtual void getCalendarDayByDay();
 };
 
 #endif // TEACHERWEEKLYCALENDAR_H

@@ -18,6 +18,8 @@ protected:
     Json::Reader dataReader;
     QList<QMap<QString, QString>> calendar;
 
+    QList<QList<QMap<QString, QString>>> seperatedCalendar;
+
     QString filePath = "../data_resources/weeklycalendar.json";
 
 public:
@@ -27,6 +29,9 @@ public:
 
     // initialize data for calendar
     virtual void addUser(Json::Value data) = 0;
+
+    // get calendar for each day and put it in seperate list
+//    virtual void getCalendarDayByDay() = 0;
 
     const QList<QMap<QString, QString> > &getCalendar() const;
 
@@ -38,8 +43,6 @@ public:
 
     // deletes class from target user based on class name
     void deleteClass(Class Class, QString username, QString role);
-
-    virtual QList<QList<QMap<QString, QString>>> getCalendarDayByDay() = 0;
 };
 
 #endif // WEEKLYCALENDAR_H
