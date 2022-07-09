@@ -402,11 +402,16 @@ void StudentMainMenu::on_pushButton_6_clicked()
 }
 
 
+
+
+
+
 void StudentMainMenu::on_pushButton_7_clicked()
 {
     StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
     sts->show();
     close();
 }
+
 
 
