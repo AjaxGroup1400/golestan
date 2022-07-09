@@ -391,11 +391,22 @@ void StudentMainMenu::on_pushButton_4_clicked()
 
 void StudentMainMenu::on_pushButton_6_clicked()
 {
-
+    StudentTerms* st = new StudentTerms(mainmenu);
+    st->show();
+    close();
 }
+
+
+
+
+
 
 void StudentMainMenu::on_pushButton_7_clicked()
 {
-
+    StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
+    sts->show();
+    close();
 }
+
+
 
