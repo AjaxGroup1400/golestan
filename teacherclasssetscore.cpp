@@ -12,7 +12,7 @@
 #include "teacherweeklyschedule.h"
 #include "teacherstudentsetscore.h"
 
-TeacherClassSetScore::TeacherClassSetScore(QWidget *parent) :
+TeacherClassSetScore::TeacherClassSetScore(TeacherMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeacherClassSetScore)
 {
@@ -25,6 +25,8 @@ TeacherClassSetScore::TeacherClassSetScore(QWidget *parent) :
     this->ui->pushButton_6->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color:transparent");
 
+    this->mainmenu = member;
+    this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
     for (int i = 0 ; i<10;i++){
         ui->verticalLayout_2->addWidget(watchClass());
 
@@ -91,7 +93,7 @@ void TeacherClassSetScore::on_pushButton_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherProfile* tp= new teacherProfile;
+        teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
         close();
@@ -111,7 +113,7 @@ void TeacherClassSetScore::on_pushButton_2_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherMessages* tm= new teacherMessages;
+        teacherMessages* tm= new teacherMessages(mainmenu);
         tm->show();
         exit->close();
         close();
@@ -131,7 +133,7 @@ void TeacherClassSetScore::on_pushButton_3_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherClassInfo* tci = new TeacherClassInfo;
+        TeacherClassInfo* tci = new TeacherClassInfo(mainmenu);
         tci->show();
         exit->close();
         close();
@@ -151,7 +153,7 @@ void TeacherClassSetScore::on_pushButton_4_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherSendAssertion* tsa= new TeacherSendAssertion;
+        TeacherSendAssertion* tsa= new TeacherSendAssertion(mainmenu);
         tsa->show();
         exit->close();
         close();
@@ -171,7 +173,7 @@ void TeacherClassSetScore::on_pushButton_5_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        teacherWeeklySchedule* tws = new teacherWeeklySchedule;
+        teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
         close();
@@ -191,7 +193,7 @@ void TeacherClassSetScore::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        TeacherMainMenu* smm = new TeacherMainMenu;
+        TeacherMainMenu* smm = new TeacherMainMenu(mainmenu->get_first_name() , mainmenu->get_username() , mainmenu);
         smm->show();
         exit->close();
         close();
@@ -204,7 +206,7 @@ void TeacherClassSetScore::on_backToMenu_clicked()
 void TeacherClassSetScore::goToClassInfo(QString className)
 {
 
-    TeacherStudentSetScore* tsss = new TeacherStudentSetScore;
+    TeacherStudentSetScore* tsss = new TeacherStudentSetScore(mainmenu);
     tsss->show();
     close();
 }

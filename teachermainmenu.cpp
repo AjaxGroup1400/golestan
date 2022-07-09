@@ -368,7 +368,7 @@ void TeacherMainMenu::on_pushButton_3_clicked()
 
 void TeacherMainMenu::on_pushButton_6_clicked()
 {
-    TeacherClassSetScore* tcss = new TeacherClassSetScore;
+    TeacherClassSetScore* tcss = new TeacherClassSetScore(mainmenu);
     tcss->show();
     close();
 }
