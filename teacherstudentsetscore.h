@@ -38,8 +38,9 @@ private slots:
 
 private:
     float score;
-    float* scores;
+
     int numberOfStudents;
+
     Ui::TeacherStudentSetScore *ui;
 
     void setScore(int numberOfStudents, float score);

@@ -210,6 +210,29 @@ void AdminMainMenu::on_pushButton_8_clicked()
 
             ofs.close();
         }
+
+        QString path2 = "../data_resources/weeklycalendar.json";
+
+        ifstream ifs2(path2.toStdString());
+
+        if(dataReader.parse(ifs2, dataHolder))
+        {
+            Json::Value resetWeeklyCalendar;
+
+            resetWeeklyCalendar["students"] = Json::arrayValue;
+            resetWeeklyCalendar["teachers"] = Json::arrayValue;
+            resetWeeklyCalendar["admins"] = Json::arrayValue;
+
+            ofstream ofs(path2.toStdString());
+
+            Json::StyledWriter writer;
+
+            string serializedData = writer.write(resetWeeklyCalendar);
+
+            ofs << serializedData;
+
+            ofs.close();
+        }
     }
     else{
         exit->close();

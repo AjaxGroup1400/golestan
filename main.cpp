@@ -29,33 +29,6 @@ int main(int argc, char *argv[])
         "Admin"
     ));
 
-
-    userFile.append(Auth::formUserData(
-        "1287237408", "@mir1990",
-        "Mamad", "Mamadi",
-        "1273882407", "09921863951",
-        "Teacher"
-    ));
-
-
-
-
-    userFile.append(Auth::formUserData(
-                        "1287237406","@mir1990",
-                        "Mamad","Mamadi",
-                        "1273882407" ,"09921863951",
-                        "Teacher"
-                    ));
-
-    userFile.append(Auth::formUserData(
-        "1287237409", "@mir1990",
-        "Asghar", "Mamadi",
-        "1273882407", "09921863951",
-        "Student"
-    ));
-
-
-
     userFile.write();
 
     QApplication a(argc, argv);

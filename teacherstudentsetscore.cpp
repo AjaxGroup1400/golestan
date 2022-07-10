@@ -102,6 +102,8 @@ QGroupBox *TeacherStudentSetScore::showStudent(QString firstname,QString lastnam
     QPushButton* setScore = new QPushButton;
     setScore->setText("set score");
 
+    this->score = score->text().toFloat();
+
     connect (setScore, &QPushButton::clicked, [this,thisClass,studentusername] {SetScore_clicked(thisClass,studentusername);});
 
 
