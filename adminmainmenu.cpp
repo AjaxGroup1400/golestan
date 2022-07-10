@@ -10,6 +10,7 @@
 #include "adminaddclass.h"
 #include "adminclassinfo.h"
 #include "adminmessages.h"
+#include"teachermainmenu.h"
 
 AdminMainMenu::AdminMainMenu( QString firstName , AdminMainMenu * member , QWidget *parent) :
 //    QWidget(parent),
@@ -59,6 +60,18 @@ AdminMainMenu::AdminMainMenu( QString firstName , AdminMainMenu * member , QWidg
 AdminMainMenu::~AdminMainMenu()
 {
     delete ui;
+}
+
+void AdminMainMenu::ending_term()
+{
+    TeacherMainMenu::cleantecher_lessons();
+
+
+
+
+    QMessageBox * succed = new QMessageBox(QMessageBox::Icon::Information , "Term ended" , "The term ended succesfuly" , QMessageBox::Button::Ok) ;
+    succed->show();
+    connect(succed , &QMessageBox::buttonClicked , succed , &QMessageBox::deleteLater);
 }
 
 
@@ -163,7 +176,8 @@ void AdminMainMenu::on_pushButton_8_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-
+        ending_term();
+        exit->close();
     }
     else{
         exit->close();

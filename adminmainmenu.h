@@ -18,6 +18,10 @@ public:
     ~AdminMainMenu();
 
 
+public slots:
+    void ending_term();
+
+
 
 private slots:
     void on_pushButton_5_clicked();
