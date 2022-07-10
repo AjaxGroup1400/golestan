@@ -59,11 +59,14 @@ void teacherWeeklySchedule::on_pushButton_7_clicked()
 
         exit->close();
 
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
         close();
     }
     else
     {
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -88,12 +91,14 @@ void teacherWeeklySchedule::on_pushButton_8_clicked()
         tm->show();
 
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
 
         close();
     }
     else
     {
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -117,12 +122,14 @@ void teacherWeeklySchedule::on_pushButton_10_clicked()
         tsa->show();
 
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
 
         close();
     }
     else
     {
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -146,12 +153,14 @@ void teacherWeeklySchedule::on_backToMenu_clicked()
         smm->show();
 
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
 
         close();
     }
     else
     {
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 

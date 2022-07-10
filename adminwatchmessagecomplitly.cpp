@@ -42,10 +42,12 @@ void adminWatchMessageComplitly::on_pushButton_clicked()
         AdminProfile* ap= new AdminProfile(mainMenu);
         ap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -70,10 +72,12 @@ void adminWatchMessageComplitly::on_pushButton_3_clicked()
         AdminAddPeople* aap= new AdminAddPeople(mainMenu);
         aap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -90,10 +94,12 @@ void adminWatchMessageComplitly::on_pushButton_4_clicked()
         AdminSendAssertion* asa= new AdminSendAssertion;
         asa->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -119,10 +125,12 @@ void adminWatchMessageComplitly::on_pushButton_7_clicked()
         adminAddClass* adc= new adminAddClass(mainMenu);
         adc->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 

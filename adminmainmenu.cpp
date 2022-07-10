@@ -56,10 +56,14 @@ void AdminMainMenu::on_pushButton_5_clicked()
         LoginPage* lg = new LoginPage;
         lg->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
     }
 
 }
