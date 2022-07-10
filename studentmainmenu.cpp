@@ -330,6 +330,10 @@ void StudentMainMenu::load()
     baseStudent["is_registering"] = false;
     baseStudent["count_of_terms"] = 0;
 
+    this->Term = 0;
+
+    this->currentAverege = -1;
+
     baseData.append(baseStudent);
 
     string serializedData = writer.write(baseData);
