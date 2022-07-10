@@ -15,7 +15,7 @@ class AdminWatchStudent : public QWidget
     Q_OBJECT
 
 public:
-    explicit AdminWatchStudent(AdminMainMenu * member , QWidget *parent = nullptr);
+    explicit AdminWatchStudent(AdminMainMenu * member , Class classToShow, QWidget *parent = nullptr);
     ~AdminWatchStudent();
 
 private slots:
@@ -35,7 +35,8 @@ private slots:
 
 private:
     Ui::AdminWatchStudent *ui;
-    QGroupBox* students();
+
+    QGroupBox* students(QString firstname,QString lastname,QString studentusername);
 
     AdminMainMenu * mainmenu ;
 };
