@@ -30,7 +30,7 @@ StudentEnrolment::StudentEnrolment(StudentMainMenu * member , QWidget *parent) :
     this->ui->pushButton_2->setStyleSheet("background-color:transparent");
     this->ui->pushButton_3->setStyleSheet("background-color: transparent");
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
-    this->ui->pushButton_5->setStyleSheet("background-color: transparent");
+//    this->ui->pushButton_5->setStyleSheet("background-color: transparent");
     this->ui->pushButton_6->setStyleSheet("background-color:transparent");
     this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
