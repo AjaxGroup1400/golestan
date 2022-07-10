@@ -155,7 +155,8 @@ RESOURCES += \
     pictures.qrc \
     second-icon.qrc \
     term-management-icon.qrc \
-    third-icon-group.qrc
+    third-icon-group.qrc \
+    endIcon.qrc
 
 DISTFILES += \
     scorecard.png
