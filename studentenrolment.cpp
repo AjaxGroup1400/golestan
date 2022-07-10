@@ -255,6 +255,8 @@ void StudentEnrolment::registeryStatus(Class classToShow, QCheckBox *selection)
 {
     StudentWeeklyCalendar swc;
 
+    mainmenu->finalizeRegistering();
+
     if (selection->isChecked()){
 
         swc.addClass(mainmenu->get_username(), classToShow);
@@ -281,3 +283,5 @@ void StudentEnrolment::registeryStatus(Class classToShow, QCheckBox *selection)
         connect(unregistred , &QMessageBox::buttonClicked , unregistred , &QMessageBox::deleteLater);
     }
 }
+
+

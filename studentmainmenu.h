@@ -44,7 +44,13 @@ public:
 
     void load();
 
-    QList<QMap<QString , QString>> getClasses(int chosenTerm );
+    bool createUserRecord();
+
+    void finalizeRegistering();
+
+    bool canRegister();
+
+    QList<QMap<QString , QString>> getClasses(int chosenTerm);
 
     int getTerm ();
 

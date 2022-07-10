@@ -51,26 +51,28 @@ StudentMainMenu::StudentMainMenu(QString firstname , QString username , StudentM
     this->ui->label_2->setText("Hi dear " + firstname);
 
     QString filePath = "../data_resources/student_term.json";
-    ifstream ifs(filePath.toStdString());
 
-    if(dataReader.parse(ifs, dataHolder))
-    {
-        for(int i = 0; i < dataHolder.size(); i++)
-        {
-            if(get_username().toStdString() == dataHolder[i]["username"].asString())
-            {
-                this->Term = dataHolder[i]["count_of_terms"].asInt();
+    load();
 
-                for( int j=0; j < dataHolder[i]["terms"].size(); j++ ){
-                    avereges.push_back(dataHolder[i]["terms"][j]["average"].asFloat());
-                }
-                this->currentAverege = avereges[Term-1];
-                ifs.close();
-                return;
-            }
-        }
-//student not found
-    }
+//    ifstream ifs(filePath.toStdString());
+
+//    if(dataReader.parse(ifs, dataHolder))
+//    {
+//        for(int i = 0; i < dataHolder.size(); i++)
+//        {
+//            if(get_username().toStdString() == dataHolder[i]["username"].asString())
+//            {
+//                this->Term = dataHolder[i]["count_of_terms"].asInt();
+
+//                for( int j=0; j < dataHolder[i]["terms"].size(); j++ ){
+//                    avereges.push_back(dataHolder[i]["terms"][j]["average"].asFloat());
+//                }
+//                this->currentAverege = avereges[Term-1];
+//                ifs.close();
+//                return;
+//            }
+//        }
+//    }
 
 }
 
@@ -155,7 +157,7 @@ void StudentMainMenu::registry(Class Class)
         {
             if(get_username().toStdString() == dataHolder[i]["username"].asString())
             {
-                Json::Value studentLessonsCopy = dataHolder[i]["terms"][Term]["lessons"];
+                Json::Value studentLessonsCopy = dataHolder[i]["terms"][Term - 1]["lessons"];
 
                 Json::Value newLesson;
 
@@ -165,7 +167,7 @@ void StudentMainMenu::registry(Class Class)
 
                 studentLessonsCopy.append(newLesson);
 
-                dataHolder[i]["terms"][Term]["lessons"] = studentLessonsCopy;
+                dataHolder[i]["terms"][Term - 1]["lessons"] = studentLessonsCopy;
 
                 ofstream ofs(filePath.toStdString());
 
@@ -232,7 +234,7 @@ void StudentMainMenu::unregistery(Class Class)
             {
                 if(get_username().toStdString() == dataHolder[i]["username"].asString())
                 {
-                    Json::Value classesCopy = dataHolder[i]["terms"][Term]["lessons"];
+                    Json::Value classesCopy = dataHolder[i]["terms"][Term - 1]["lessons"];
 
                     Json::Value wantedClasses;
 
@@ -242,7 +244,7 @@ void StudentMainMenu::unregistery(Class Class)
                             wantedClasses.append(classesCopy[i]);
                     }
 
-                    dataHolder[i]["terms"][Term]["lessons"] = wantedClasses;
+                    dataHolder[i]["terms"][Term - 1]["lessons"] = wantedClasses;
 
                     ofstream ofs(filePath.toStdString());
 
@@ -258,10 +260,6 @@ void StudentMainMenu::unregistery(Class Class)
                 }
             }
         }
-    }
-
-    else{
-//        student not valid
     }
 }
 
@@ -298,10 +296,16 @@ void StudentMainMenu::load()
 
     if(dataReader.parse(ifs, dataHolder))
     {
+        if(!createUserRecord()) return;
+
         for(auto& student : dataHolder)
         {
             if(get_username().toStdString() == student["username"].asString())
             {
+                this->Term = student["count_of_terms"].asInt();
+
+                this->currentAverege = student["terms"][Term - 1]["average"].asInt();
+
                 for(auto& term : student["terms"])
                 {
                     this->avereges.push_back(term["average"].asFloat());
@@ -323,6 +327,7 @@ void StudentMainMenu::load()
 
     baseStudent["username"] = get_username().toStdString();
     baseStudent["terms"] = Json::arrayValue;
+    baseStudent["is_registering"] = false;
     baseStudent["count_of_terms"] = 0;
 
     baseData.append(baseStudent);
@@ -332,6 +337,85 @@ void StudentMainMenu::load()
     ofs << serializedData;
 
     ofs.close();
+}
+
+bool StudentMainMenu::createUserRecord()
+{
+    for(int i = 0; i < dataHolder.size(); i++)
+    {
+        if(get_username().toStdString() == dataHolder[i]["username"].asString())
+            return true;
+    }
+
+    Json::Value newStudentRecord;
+
+    newStudentRecord["username"] = get_username().toStdString();
+    newStudentRecord["terms"] = Json::arrayValue;
+    newStudentRecord["count_of_terms"] = 0;
+    newStudentRecord["is_registering"] = false;
+
+    this->Term = 0;
+
+    this->currentAverege = -1;
+
+    dataHolder.append(newStudentRecord);
+
+    ofstream ofs(filePath.toStdString());
+
+    Json::StyledWriter writer;
+
+    string serializedData = writer.write(dataHolder);
+
+    ofs << serializedData;
+
+    ofs.close();
+
+    return false;
+}
+
+
+void StudentMainMenu::finalizeRegistering()
+{
+    ifstream ifs(filePath.toStdString());
+
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        for(int i = 0; i < dataHolder.size(); i++)
+        {
+            if(get_username().toStdString() == dataHolder[i]["username"].asString())
+            {
+                dataHolder[i]["is_registering"] = false;
+
+                ofstream ofs(filePath.toStdString());
+
+                Json::StyledWriter writer;
+
+                string serializedData = writer.write(dataHolder);
+
+                ofs << serializedData;
+
+                ofs.close();
+            }
+        }
+    }
+}
+
+bool StudentMainMenu::canRegister()
+{
+    ifstream ifs(filePath.toStdString());
+
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        for(auto& student : dataHolder)
+        {
+            if(get_username().toStdString() == student["username"].asString())
+            {
+                return student["is_registering"].asBool();
+            }
+        }
+    }
+
+    return false;
 }
 
 QList<QMap<QString, QString>> StudentMainMenu::getClasses(int chosenTerm)
@@ -431,8 +515,29 @@ void StudentMainMenu::on_pushButton_3_clicked()
 
 void StudentMainMenu::on_pushButton_4_clicked()
 {
+    bool canRegister = this->canRegister();
+
+    if(!canRegister)
+    {
+        QMessageBox* alreadyRegistered = new QMessageBox(
+            QMessageBox::Warning,
+            "Already Registered",
+            "you finalized registering for term."
+        );
+
+        alreadyRegistered->show();
+
+        connect(alreadyRegistered, &QMessageBox::buttonClicked, alreadyRegistered, &QMessageBox::deleteLater);
+
+        return;
+    }
+
+    this->addTerm();
+
     StudentEnrolment * sem = new StudentEnrolment(this);
+
     sem->show();
+
     this->close();
 }
 
@@ -442,9 +547,6 @@ void StudentMainMenu::on_pushButton_6_clicked()
     st->show();
     close();
 }
-
-
-
 
 
 
