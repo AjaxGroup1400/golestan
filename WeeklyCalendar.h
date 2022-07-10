@@ -31,7 +31,7 @@ public:
     virtual void addUser(Json::Value data) = 0;
 
     // get calendar for each day and put it in seperate list
-//    virtual void getCalendarDayByDay() = 0;
+    virtual void getCalendarDayByDay() = 0;
 
     const QList<QMap<QString, QString> > &getCalendar() const;
 
@@ -43,6 +43,8 @@ public:
 
     // deletes class from target user based on class name
     void deleteClass(Class Class, QString username, QString role);
+
+    const QList<QList<QMap<QString, QString> > > &getSeperatedCalendar() const;
 };
 
 #endif // WEEKLYCALENDAR_H

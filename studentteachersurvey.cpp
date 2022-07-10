@@ -38,7 +38,7 @@ StudentTeacherSurvey::StudentTeacherSurvey(StudentMainMenu * member , QWidget *p
 
 
 
-    QList<QMap<QString , QString>> lessons = mainmenu->getClasses();
+    QList<QMap<QString , QString>> lessons = mainmenu->getClasses(mainmenu->getTerm()-1);
 
     for (int i = 0 ; i<lessons.size();i++){
         ui->verticalLayout_2->addWidget(showTeachers(lessons[i]["teacher"] , lessons[i]["lesson"]));
@@ -184,7 +184,7 @@ void StudentTeacherSurvey::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu);
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name(), mainmenu->get_username() , mainmenu);
         smm->show();
         exit->close();
         close();

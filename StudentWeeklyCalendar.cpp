@@ -1,17 +1,17 @@
-#include "TeacherWeeklyCalendar.h"
+#include "StudentWeeklyCalendar.h"
 
 #include <fstream>
 
 
 using namespace std;
 
-TeacherWeeklycalendar::TeacherWeeklycalendar()
+StudentWeeklyCalendar::StudentWeeklyCalendar()
     : WeeklyCalendar()
 {
     return;
 }
 
-void TeacherWeeklycalendar::loadCalendar(QString username)
+void StudentWeeklyCalendar::loadCalendar(QString username)
 {
     ifstream ifs(filePath.toStdString());
 
@@ -20,7 +20,7 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
 
     if(dataReader.parse(ifs, dataHolder))
     {
-        Json::Value teacherClasses = dataHolder["teachers"];
+        Json::Value teacherClasses = dataHolder["students"];
 
         for(int i = 0; i < teacherClasses.size(); i++)
         {
@@ -43,17 +43,17 @@ void TeacherWeeklycalendar::loadCalendar(QString username)
     }
 }
 
-void TeacherWeeklycalendar::addUser(Json::Value data)
+void StudentWeeklyCalendar::addUser(Json::Value data)
 {
     ifstream ifs(filePath.toStdString());
 
     if(dataReader.parse(ifs, dataHolder))
     {
-        Json::Value dataHolderCopy = dataHolder["teachers"];
+        Json::Value dataHolderCopy = dataHolder["students"];
 
         dataHolderCopy.append(data);
 
-        dataHolder["teachers"] = dataHolderCopy;
+        dataHolder["students"] = dataHolderCopy;
 
         Json::StyledWriter writer;
 
@@ -67,7 +67,7 @@ void TeacherWeeklycalendar::addUser(Json::Value data)
     }
 }
 
-void TeacherWeeklycalendar::getCalendarDayByDay()
+void StudentWeeklyCalendar::getCalendarDayByDay()
 {
     QList<QList<QMap<QString, QString>>> seperatedDays;
 

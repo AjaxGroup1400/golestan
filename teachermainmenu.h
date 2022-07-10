@@ -21,7 +21,7 @@ class TeacherMainMenu : public User
     Q_OBJECT
 
 public:
-    explicit TeacherMainMenu(QString firstname , QString username ,  TeacherMainMenu * member = nullptr ,QWidget *parent = nullptr);
+    explicit TeacherMainMenu(QString firstname, QString username, TeacherMainMenu * member = nullptr, QWidget *parent = nullptr);
 //    TeacherMainMenu(QString firstname , QString username);
     ~TeacherMainMenu();
 
@@ -32,9 +32,12 @@ public:
     void sendingNotification(QString title , QString message , Class Class);
 
     void addNewTeacherToFile(QList<QString> lessons);
+    static void addNewTeacherToFile(QString teacherUsername);
     void addNewLessonFile(Class new_class);
+    static void addNewLessonFile(QString username , Class new_class);
     void removeLessonFile(Class lesson);
     int teacherIsValidFile();
+    static int teacherIsValidFile(QString teacherUsername);
     bool lessonIsValid(QString lesson);
     Class getLesson(lesson lesson);
     QString lessonNameCheck(QString sentName);
@@ -54,6 +57,8 @@ private slots:
     void on_pushButton_4_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_5_clicked();
 
 private:
     Ui::TeacherMainMenu *ui;

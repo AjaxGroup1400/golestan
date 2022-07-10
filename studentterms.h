@@ -18,7 +18,7 @@ public:
     explicit StudentTerms(StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentTerms();
 public slots:
-    QGroupBox* showTerms();
+    QGroupBox* showTerms(int term);
 private slots:
     void on_pushButton_clicked();
 
@@ -35,7 +35,7 @@ private slots:
 private:
     Ui::StudentTerms *ui;
 
-    void goToScores(QString nameOfTerm);
+    void goToScores(int term);
 
     StudentMainMenu * mainmenu;
 };

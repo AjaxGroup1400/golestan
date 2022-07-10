@@ -24,8 +24,8 @@ StudentTerms::StudentTerms(StudentMainMenu * member , QWidget *parent) :
     this->mainmenu = member ;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
-    for (int terms = 0 ; terms<10;terms++){
-        ui->verticalLayout_2->addWidget(showTerms());
+    for (int terms = 0 ; terms<mainmenu->getTerm();terms++){
+        ui->verticalLayout_2->addWidget(showTerms(terms));
 
     }
 }
@@ -35,8 +35,20 @@ StudentTerms::~StudentTerms()
     delete ui;
 }
 
-QGroupBox *StudentTerms::showTerms()
+QGroupBox *StudentTerms::showTerms(int term)
 {
+    QList<float> averages = mainmenu->getAverages();
+    if(averages.size() < 1)
+    {
+        mainmenu->load();
+        averages = mainmenu->getAverages();
+    }
+    QString average = QString::number(averages[term]);
+    if(static_cast<int>(averages[term]) == -1)
+        average = "not registered yet" ;
+
+
+
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
 
@@ -48,8 +60,14 @@ QGroupBox *StudentTerms::showTerms()
     QLabel * termName = new QLabel;
     termName->setMaximumWidth(81);
     termName->setMaximumHeight(20);
-    termName->setText("Term Number");
+    termName->setText(QString::number(term + 1 ));
     termName->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
+
+    QLabel * termAverage = new QLabel;
+    termAverage->setMaximumWidth(95);
+    termAverage->setMaximumHeight(20);
+    termAverage->setText(average);
+    termAverage->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QPushButton * showScore = new QPushButton;
     QString nameOfTerm;
@@ -57,11 +75,12 @@ QGroupBox *StudentTerms::showTerms()
     showScore->setMaximumHeight(20);
     showScore->setText("Watch Scores");
     showScore->setStyleSheet("font:Montesrat 9px; color: rgb(178, 8, 55);background-color: transparent");
-    connect(showScore,&QPushButton::clicked,[this, nameOfTerm] { goToScores(nameOfTerm);});
+    connect(showScore,&QPushButton::clicked,[this, term] { goToScores(term);});
 
 
     grid->addWidget(termName,0,0);
-    grid->addWidget(showScore,0,1);
+    grid->addWidget(termAverage,0,1);
+    grid->addWidget(showScore,0,2);
 
     gBox->setLayout(grid);
     return gBox;
@@ -157,7 +176,7 @@ void StudentTerms::on_backToMenu_clicked()
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
     if(exit->exec() == QMessageBox::Yes){
-        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu);
+        StudentMainMenu* smm = new StudentMainMenu(mainmenu->get_first_name() , mainmenu->get_username() , mainmenu);
         smm->show();
         exit->close();
         close();
@@ -168,9 +187,9 @@ void StudentTerms::on_backToMenu_clicked()
 
 }
 
-void StudentTerms::goToScores(QString nameOfTerm)
+void StudentTerms::goToScores(int term)
 {
-    StudentTermScores* sts = new StudentTermScores(mainmenu);
+    StudentTermScores* sts = new StudentTermScores(term , mainmenu);
     sts->show();
     close();
 }

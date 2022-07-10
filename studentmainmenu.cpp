@@ -21,7 +21,7 @@
 
 using std::ifstream, std::string, std::ofstream;
 
-StudentMainMenu::StudentMainMenu(QString firstname , StudentMainMenu * member ,  QWidget *parent) :
+StudentMainMenu::StudentMainMenu(QString firstname , QString username , StudentMainMenu * member ,  QWidget *parent) :
 //    QWidget(parent),
     ui(new Ui::StudentMainMenu)
 {
@@ -47,29 +47,30 @@ StudentMainMenu::StudentMainMenu(QString firstname , StudentMainMenu * member , 
     }
 
     this->set_first_name(firstname);
+    this->set_username(username);
     this->ui->label_2->setText("Hi dear " + firstname);
 
-//    QString filePath = "../data_resources/student_term.json";
-//    ifstream ifs(filePath.toStdString());
+    QString filePath = "../data_resources/student_term.json";
+    ifstream ifs(filePath.toStdString());
 
-//    if(dataReader.parse(ifs, dataHolder))
-//    {
-//        for(int i = 0; i < dataHolder.size(); i++)
-//        {
-//            if(get_username().toStdString() == dataHolder[i]["username"].asString())
-//            {
-//                this->Term = dataHolder[i]["count_of_terms"].asInt();
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        for(int i = 0; i < dataHolder.size(); i++)
+        {
+            if(get_username().toStdString() == dataHolder[i]["username"].asString())
+            {
+                this->Term = dataHolder[i]["count_of_terms"].asInt();
 
-//                for( int j=0; j < dataHolder[i]["terms"].size(); j++ ){
-//                    avereges.push_back(dataHolder[i]["terms"][j]["average"].asFloat());
-//                }
-//                this->currentAverege = avereges[Term-1];
-//                ifs.close();
-//                return;
-//            }
-//        }
-////student not found
-//    }
+                for( int j=0; j < dataHolder[i]["terms"].size(); j++ ){
+                    avereges.push_back(dataHolder[i]["terms"][j]["average"].asFloat());
+                }
+                this->currentAverege = avereges[Term-1];
+                ifs.close();
+                return;
+            }
+        }
+//student not found
+    }
 
 }
 
@@ -84,7 +85,7 @@ QList<float> StudentMainMenu::getAverages()
     return avereges;
 }
 
-void StudentMainMenu::getScores(int chosenTerm)
+QMap <QString, float> StudentMainMenu::getScores(int chosenTerm)
 {
 
     QMap <QString, float> scores_list;
@@ -105,7 +106,7 @@ void StudentMainMenu::getScores(int chosenTerm)
                 }
 
                 ifs.close();
-                return;
+                return scores_list;
             }
         }
 //student not found
@@ -331,6 +332,39 @@ void StudentMainMenu::load()
     ofs.close();
 }
 
+QList<QMap<QString, QString>> StudentMainMenu::getClasses(int chosenTerm)
+{
+    QList<QMap<QString, QString>> wantedInformation ;
+    ifstream ifs(this->filePath.toStdString());
+    if(this->dataReader.parse(ifs , this->dataHolder))
+    {
+        for(auto i : this->dataHolder)
+        {
+            if(i["username"] == this->get_username().toStdString())
+            {
+                for(auto j : i["terms"][chosenTerm]["lessons"])
+                {
+                    QMap<QString , QString> holder;
+                    holder["teacher"] = QString::fromStdString(j["teacher"].asString());
+                    holder["score"] = QString::fromStdString(j["score"].asString());
+                    holder["lesson"] = QString::fromStdString(j["lesson"].asString());
+                    wantedInformation.push_back(holder);
+                }
+                return wantedInformation;
+            }
+        }
+
+
+    }
+
+
+}
+
+int StudentMainMenu::getTerm()
+{
+    return this->Term;
+}
+
 // json sturcture of each student
 //
 //{
@@ -387,6 +421,10 @@ void StudentMainMenu::on_pushButton_2_clicked()
 void StudentMainMenu::on_pushButton_3_clicked()
 {
     studentWeeklySchedule * sws = new studentWeeklySchedule(this);
+
+    sws->show();
+
+    close();
 }
 
 void StudentMainMenu::on_pushButton_4_clicked()
@@ -396,7 +434,7 @@ void StudentMainMenu::on_pushButton_4_clicked()
 
 void StudentMainMenu::on_pushButton_6_clicked()
 {
-    StudentTerms* st = new StudentTerms(mainmenu);
+    StudentTerms* st = new StudentTerms(this);
     st->show();
     close();
 }
@@ -408,7 +446,7 @@ void StudentMainMenu::on_pushButton_6_clicked()
 
 void StudentMainMenu::on_pushButton_7_clicked()
 {
-    StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
+    StudentTeacherSurvey* sts = new StudentTeacherSurvey(this);
     sts->show();
     close();
 }
