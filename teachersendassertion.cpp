@@ -24,8 +24,8 @@ TeacherSendAssertion::TeacherSendAssertion(TeacherMainMenu * tm,  QWidget *paren
     this->ui->sendbtn->setStyleSheet("background-color:transparent");
     this->ui->backToMenu->setStyleSheet("background-color:transparent");
 
-    connect(ui->StudentBox,&QCheckBox::stateChanged,this,&TeacherSendAssertion::studentReciveState);
-    connect(ui->TeacherBox,&QCheckBox::stateChanged,this,&TeacherSendAssertion::teacherReciveState);
+//    connect(ui->StudentBox,&QCheckBox::stateChanged,this,&TeacherSendAssertion::studentReciveState);
+//    connect(ui->TeacherBox,&QCheckBox::stateChanged,this,&TeacherSendAssertion::teacherReciveState);
 
     this->mainmenu = tm ;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
@@ -105,7 +105,7 @@ void TeacherSendAssertion::on_sendbtn_clicked()
     {
         QString title = ui->TitleLine->text();
         QString message = ui->messageLine->toPlainText();        
-        QString ls ;
+        QString ls = this->ui->comboBox->currentText();
 
 
 

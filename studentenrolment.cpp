@@ -205,13 +205,13 @@ QGroupBox *StudentEnrolment::showLessons(Class classToShow)
     gBox->setTitle("");
 
     QLabel * CLassName = new QLabel;
-    CLassName->setMaximumWidth(81);
+    CLassName->setMaximumWidth(95);
     CLassName->setMaximumHeight(20);
     CLassName->setText(lesson_enum_str[classToShow.getLesson()]);
     CLassName->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * teacherName = new QLabel;
-    teacherName->setMaximumWidth(81);
+    teacherName->setMaximumWidth(95);
     teacherName->setMaximumHeight(20);
 
     int userIndex = Auth::findUser(classToShow.getTeacher());
@@ -224,13 +224,13 @@ QGroupBox *StudentEnrolment::showLessons(Class classToShow)
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * Time = new QLabel;
-    Time->setMaximumWidth(81);
+    Time->setMaximumWidth(95);
     Time->setMaximumHeight(20);
     Time->setText(classToShow.getTime());
     Time->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
-    QCheckBox * selection = new QCheckBox;
+    QCheckBox * selection = new QCheckBox();
     QString nameOfTerm;
     selection->setMaximumWidth(40);
     selection->setMaximumHeight(20);

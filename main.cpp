@@ -73,6 +73,17 @@ int main(int argc, char *argv[])
     qDebug() << QString::fromStdString(md5("grape"));
 
 
+    QString test = "BP";
+
+    QString test2 = "Bp";
+
+    QString test3 = "bp";
+
+
+    qDebug() << (test.toUpper() == test2.toUpper());
+
+    qDebug() << (test3.toLower() == test.toLower());
+
 
 //    cal.loadCalendar("1253982608");
 

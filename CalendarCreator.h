@@ -2,6 +2,7 @@
 #define CALENDARCREATOR_H
 
 #include "dist/json/json.h"
+#include "Class.h"
 
 #include <QString>
 #include <QList>
@@ -16,9 +17,11 @@ private:
 public:
     CalendarCreator();
 
+    CalendarCreator(Json::Value userData);
+
     void setUsername(QString username);
 
-    void append(QString name, QString day, QString time);
+    void append(Class Class);
 
     const Json::Value exportJson() const;
 };

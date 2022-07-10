@@ -431,7 +431,9 @@ void StudentMainMenu::on_pushButton_3_clicked()
 
 void StudentMainMenu::on_pushButton_4_clicked()
 {
-
+    StudentEnrolment * sem = new StudentEnrolment(this);
+    sem->show();
+    this->close();
 }
 
 void StudentMainMenu::on_pushButton_6_clicked()

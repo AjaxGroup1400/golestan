@@ -675,7 +675,7 @@ color: rgb(41, 39, 40);</string>
 color: rgb(41, 39, 40);</string>
     </property>
     <property name="text">
-     <string>Title</string>
+     <string>Title:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_16">
@@ -711,23 +711,6 @@ color: rgb(178, 8, 55);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="TeacherBox">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>50</y>
-      <width>101</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 9pt &quot;Montserrat&quot;;
-color: rgb(41, 39, 40);</string>
-    </property>
-    <property name="text">
-     <string>Teachers</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
@@ -742,7 +725,7 @@ color: rgb(41, 39, 40);</string>
 color: rgb(41, 39, 40);</string>
     </property>
     <property name="text">
-     <string>Message</string>
+     <string>Message:</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="TitleLine">
@@ -755,22 +738,40 @@ color: rgb(41, 39, 40);</string>
      </rect>
     </property>
    </widget>
-   <widget class="QCheckBox" name="StudentBox">
+   <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
       <x>180</x>
       <y>50</y>
-      <width>93</width>
-      <height>26</height>
+      <width>341</width>
+      <height>28</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">font: 9pt &quot;Montserrat&quot;;
-color: rgb(41, 39, 40);</string>
-    </property>
-    <property name="text">
-     <string>Students</string>
-    </property>
+    <item>
+     <property name="text">
+      <string>PHYSICS</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>CHEMISTRY</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>CALCULUS</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>DISCRETE</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>BASIC PROGRAMMING</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QPushButton" name="backToMenu">
@@ -814,10 +815,10 @@ color: rgb(41, 39, 40);</string>
   <zorder>backToMenu</zorder>
  </widget>
  <resources>
-  <include location="arrowIcon.qrc"/>
   <include location="icon.qrc"/>
-  <include location="second-icon.qrc"/>
   <include location="pictures.qrc"/>
+  <include location="second-icon.qrc"/>
+  <include location="arrowIcon.qrc"/>
  </resources>
  <connections/>
 </ui>

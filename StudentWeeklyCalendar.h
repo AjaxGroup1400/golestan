@@ -14,6 +14,10 @@ public:
     virtual void addUser(Json::Value data);
 
     virtual void getCalendarDayByDay();
+
+    virtual int isUserValid(QString username);
+
+    virtual void addClass(QString username, Class Class);
 };
 
 #endif // STUDENTWEEKLYCALENDAR_H

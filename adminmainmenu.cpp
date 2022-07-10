@@ -38,10 +38,12 @@ AdminMainMenu::AdminMainMenu( QString firstName , AdminMainMenu * member , QWidg
     this->ui->label_2->setText("Hi dear " + this->get_first_name());
 }
 
+
 AdminMainMenu::~AdminMainMenu()
 {
     delete ui;
 }
+
 
 void AdminMainMenu::on_pushButton_5_clicked()
 {
@@ -65,9 +67,6 @@ void AdminMainMenu::on_pushButton_5_clicked()
     }
 
 }
-
-
-
 
 
 void AdminMainMenu::on_pushButton_clicked()

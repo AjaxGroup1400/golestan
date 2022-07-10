@@ -397,15 +397,15 @@ Class TeacherMainMenu::getLesson(lesson lesson)
 
 QString TeacherMainMenu::lessonNameCheck(QString sentName)
 {
-    if (sentName == "physics" || sentName == "Physics" || sentName == "PHYSICS")
+    if (sentName.toLower() == "physics")
         return "PHYSICS";
-    else if (sentName == "chemistry" || sentName == "Chemistry" || sentName == "CHEMISTRY")
+    else if (sentName.toLower() == "chemistry")
         return "CHEMISTRY";
-    else if (sentName == "calculus" || sentName == "Calculus" || sentName == "CALCULUS")
+    else if (sentName.toLower() == "calculus")
         return "CALCULUS";
-    else if (sentName == "basic programming" || sentName == "Basic programming" || sentName == "basic Programming" || sentName == "Basic Programming" || sentName == "BasicProgramming" || sentName == "basicProgramming" || sentName == "Basicprogramming" || sentName == "basicrogramming" || sentName == "BASIC PROGRAMMING" || sentName == "BASICPROGRAMMING")
+    else if (sentName.toLower() == "basic programming" || sentName.toLower() == "bp")
         return "BP";
-    else if (sentName == "discrete" || sentName == "Discrete" || sentName == "DISCRETE")
+    else if (sentName.toLower() == "discrete")
         return "DISCRETE";
     else
     {

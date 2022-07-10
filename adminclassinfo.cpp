@@ -1,6 +1,11 @@
+#include <QGridLayout>
+#include<QString>
+#include<fstream>
+#include<iostream>
+using namespace std ;
+
 #include "adminclassinfo.h"
 #include "ui_adminclassinfo.h"
-#include <QGridLayout>
 #include "adminprofile.h"
 #include "adminsendassertion.h"
 #include "adminaddpeople.h"
@@ -9,6 +14,11 @@
 #include "QMessageBox"
 #include "adminaddclass.h"
 #include "adminwatchstudent.h"
+#include"dist/json/json.h"
+#include"Auth.h"
+#include"Filemanager.h"
+
+
 
 
 AdminClassInfo::AdminClassInfo(AdminMainMenu * member , QWidget *parent) :
@@ -26,8 +36,21 @@ AdminClassInfo::AdminClassInfo(AdminMainMenu * member , QWidget *parent) :
 
     this->mainmenu = member;
 
-    for (int i = 0 ; i<10;i++){
-        ui->verticalLayout_2->addWidget(watchClass());
+    Json::Reader dataReader;
+    Json::Value dataHolder ;
+    ifstream ifs("../data_resources/teacher_lessons.json");
+    if(dataReader.parse(ifs , dataHolder))
+    {
+        for (int i = 0 ; i<dataHolder.size();i++)
+        {
+            for(auto j : dataHolder[i]["lessons"])
+            {
+                ui->verticalLayout_2->addWidget(watchClass(QString::fromStdString(dataHolder[i]["teacher"].asString()) , QString::fromStdString(j.asString())));
+            }
+        }
+
+
+
 
     }
 }
@@ -37,8 +60,17 @@ AdminClassInfo::~AdminClassInfo()
     delete ui;
 }
 
-QGroupBox *AdminClassInfo::watchClass()
+QGroupBox *AdminClassInfo::watchClass(QString teacherUsername , QString lesson)
 {
+    int userIndex = Auth::findUser(teacherUsername);
+
+    FileManager userFile;
+    userFile.create();
+    userFile.loadData();
+
+    QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
 
@@ -50,17 +82,17 @@ QGroupBox *AdminClassInfo::watchClass()
     QLabel * className = new QLabel;
     className->setMaximumWidth(210);
     className->setMaximumHeight(20);
-    className->setText("Class Name");
+    className->setText(lesson);
     className->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * teacherName = new QLabel;
     teacherName->setMaximumWidth(210);
     teacherName->setMaximumHeight(20);
-    teacherName->setText("Teacher Name");
+    teacherName->setText(parsedUser[2] + " " + parsedUser[3]);
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * studentNumber = new QLabel;
-    studentNumber->setMaximumWidth(81);
+    studentNumber->setMaximumWidth(95);
     studentNumber->setMaximumHeight(20);
     studentNumber->setText("Student Number");
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");

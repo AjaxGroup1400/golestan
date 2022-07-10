@@ -108,5 +108,108 @@ void TeacherWeeklycalendar::getCalendarDayByDay()
     this->seperatedCalendar = seperatedDays;
 }
 
+int TeacherWeeklycalendar::isUserValid(QString username)
+{
+    ifstream ifs(filePath.toStdString());
+
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        Json::Value teachers = dataHolder["teachers"];
+
+        for(int i = 0; i < teachers.size(); i++)
+        {
+            if(username.toStdString() == teachers[i]["username"].asString())
+                return i;
+        }
+    }
+
+    return -1;
+}
+
+void TeacherWeeklycalendar::addClass(QString username, Class Class)
+{
+    ifstream ifs(filePath.toStdString());
+
+    unique_ptr<CalendarCreator> calendarCreator;
+
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        int userIndex = isUserValid(username);
+
+        if(userIndex == -1)
+        {
+            calendarCreator.reset(new CalendarCreator);
+
+            calendarCreator.get()->append(Class);
+
+            calendarCreator.get()->setUsername(username);
+
+            dataHolder["teachers"].append(calendarCreator.get()->exportJson());
+        }
+        else
+        {
+            calendarCreator.reset(new CalendarCreator(dataHolder["teachers"][userIndex]));
+
+            calendarCreator.get()->append(Class);
+
+            dataHolder["teachers"][userIndex] = calendarCreator.get()->exportJson();
+
+        }
+
+        ofstream ofs(filePath.toStdString());
+
+        Json::StyledWriter writer;
+
+        string serializedData = writer.write(dataHolder);
+
+        ofs << serializedData;
+
+        ofs.close();
+    }
+
+}
+
+void TeacherWeeklycalendar::createClass(QString username, Class Class)
+{
+    ifstream ifs(filePath.toStdString());
+
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        Json::Value teachers = dataHolder["teachers"];
+
+        for(int i = 0; i < teachers.size(); i++)
+        {
+            Json::Value teacher = teachers[i];
+
+            if(username.toStdString() == teacher["username"].asString())
+            {
+                Json::Value classes = teacher["classes"];
+
+                Json::Value newClass;
+
+                newClass["day"] = lesson_enum_str[Class.getDay()].toStdString();
+
+                newClass["time"] = Class.getTime().toStdString();
+
+                newClass["name"] = day_enum_str[Class.getLesson()].toStdString();
+
+                classes.append(newClass);
+
+                dataHolder["teachers"][i]["classes"] = classes;
+
+                ofstream ofs(filePath.toStdString());
+
+                Json::StyledWriter writer;
+
+                string serializedData = writer.write(dataHolder);
+
+                ofs << serializedData;
+
+                ofs.close();
+            }
+        }
+    }
+}
+
 
 
