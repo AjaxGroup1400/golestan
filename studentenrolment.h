@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QGroupBox>
-
+#include <QCheckBox>
 
 #include"studentmainmenu.h"
 namespace Ui {
@@ -30,8 +30,11 @@ private slots:
     void on_pushButton_7_clicked();
 
     void on_backToMenu_clicked();
+
+    void registeryStatus(Class classToShow, QCheckBox * selection);
+
 public slots:
-    QGroupBox* showLessons();
+    QGroupBox* showLessons(Class classToShow);
 private:
     Ui::StudentEnrolment *ui;
     StudentMainMenu * mainmenu ;
