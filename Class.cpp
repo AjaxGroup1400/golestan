@@ -43,14 +43,17 @@ Class::Class(enum lesson lesson, QString teacher)
 
 Class::Class(const Class &other)
 {
+
     this->lesson = other.lesson;
     this->teacher = other.teacher;
     this->number_of_students = other.number_of_students;
     this->location = other.location;
     this->time = other.time;
     this->day = other.day;
+    this->filePath = other.filePath;
     for(auto i = other.studentslist.begin();i!= other.studentslist.end(); i++){
         this->studentslist.insert(i.key(), i.value());
+
     }
 }
 
@@ -114,7 +117,6 @@ void Class::addStudent(QString student_username)
 {
     this->studentslist.insert(student_username, -1);
     this->number_of_students ++;
-
     ifstream ifs(this->filePath.toStdString());
     if (this->dataReader.parse(ifs , this->dataHolder))
     {

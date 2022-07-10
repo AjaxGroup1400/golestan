@@ -12,6 +12,11 @@
 #include "studentterms.h"
 #include "studenttermscores.h"
 #include "QCheckBox"
+#include "Auth.h"
+#include "Filemanager.h"
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 StudentEnrolment::StudentEnrolment(StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -30,11 +35,26 @@ StudentEnrolment::StudentEnrolment(StudentMainMenu * member , QWidget *parent) :
     this->mainmenu = member;
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 
+    Json::Value TdataHolder;
+    Json::Reader TdataReader;
+    ifstream ifs("../data_resources/teacher_lessons.json");
+    if(TdataReader.parse(ifs , TdataHolder))
+    {
+        for(auto teacher : TdataHolder)
+        {
+            QString teacherUsr =QString::fromStdString( teacher["teacher"].asString());
 
-    for (int terms = 0 ; terms<10;terms++){
-        ui->verticalLayout_2->addWidget(showLessons());
+            for(auto &lesson : teacher["lessons"])
+            {
+                enum lesson this_lesson = string_to_lesson(QString::fromStdString(lesson.asString()));
+                Class classToShow(this_lesson, teacherUsr);
 
+                ui->verticalLayout_2->addWidget(showLessons(classToShow));
+//                this->mainmenu->registry(classToShow);
+            }
+        }
     }
+    ifs.close();
 }
 
 StudentEnrolment::~StudentEnrolment()
@@ -161,7 +181,8 @@ void StudentEnrolment::on_backToMenu_clicked()
 
 }
 
-QGroupBox *StudentEnrolment::showLessons()
+
+QGroupBox *StudentEnrolment::showLessons(Class classToShow)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -172,28 +193,36 @@ QGroupBox *StudentEnrolment::showLessons()
     gBox->setTitle("");
 
     QLabel * CLassName = new QLabel;
-    CLassName->setMaximumWidth(81);
+    CLassName->setMaximumWidth(95);
     CLassName->setMaximumHeight(20);
-    CLassName->setText("Class Name");
+    CLassName->setText(lesson_enum_str[classToShow.getLesson()]);
     CLassName->setStyleSheet("font:Montesrat 9px; color:rgb(41, 39, 40);");
 
     QLabel * teacherName = new QLabel;
-    teacherName->setMaximumWidth(81);
+    teacherName->setMaximumWidth(95);
     teacherName->setMaximumHeight(20);
-    teacherName->setText("Teacher Name");
+
+    int userIndex = Auth::findUser(classToShow.getTeacher());
+    FileManager userFile;
+    userFile.create();
+    userFile.loadData();
+    QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+    teacherName->setText(parsedUser[2] + ' ' + parsedUser[3]);
     teacherName->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QLabel * Time = new QLabel;
-    Time->setMaximumWidth(81);
+    Time->setMaximumWidth(95);
     Time->setMaximumHeight(20);
-    Time->setText("8-10 AM");
+    Time->setText(classToShow.getTime());
     Time->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
-    QCheckBox * selection = new QCheckBox;
+    QCheckBox * selection = new QCheckBox();
     QString nameOfTerm;
     selection->setMaximumWidth(40);
     selection->setMaximumHeight(20);
+    connect(selection , &QCheckBox:: stateChanged ,[this, classToShow, selection] { registeryStatus(classToShow, selection); } );
     //connect(showScore,&QPushButton::clicked,[this, nameOfTerm] { goToScores(nameOfTerm);});
 
 
@@ -206,3 +235,24 @@ QGroupBox *StudentEnrolment::showLessons()
     return gBox;
 }
 
+void StudentEnrolment::registeryStatus(Class classToShow, QCheckBox *selection)
+{
+    if (selection->isChecked()){
+        this->mainmenu->registry(classToShow);
+        QMessageBox* registred = new QMessageBox(QMessageBox::Icon::Information, "registred", "The lesson has been added successfully!", QMessageBox::Button::Ok);
+
+        registred->show();
+
+        connect(registred , &QMessageBox::buttonClicked , registred , &QMessageBox::deleteLater);
+    }
+
+    else{
+        this->mainmenu->unregistery(classToShow);
+
+        QMessageBox* unregistred = new QMessageBox(QMessageBox::Icon::Information, "unregistred", "The lesson has been deleted successfully!", QMessageBox::Button::Ok);
+
+        unregistred->show();
+
+        connect(unregistred , &QMessageBox::buttonClicked , unregistred , &QMessageBox::deleteLater);
+    }
+}

@@ -6,6 +6,7 @@
 #include "Poll.h"
 #include "Auth.h"
 #include "Md5Hash.h"
+#include"teachermainmenu.h"
 
 #include <QApplication>
 #include <iostream>
@@ -88,6 +89,7 @@ int main(int argc, char *argv[])
 
 //        std::cout << "//////////\\\\\\\\\\" << std::endl;
 //    }
+
 
 
     QApplication a(argc, argv);
