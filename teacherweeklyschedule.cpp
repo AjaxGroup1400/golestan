@@ -41,7 +41,7 @@ teacherWeeklySchedule::~teacherWeeklySchedule()
 
 void teacherWeeklySchedule::on_pushButton_7_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","Do you want to leave?");
 
     exit->setStandardButtons(QMessageBox::Yes);
 
@@ -74,7 +74,7 @@ void teacherWeeklySchedule::on_pushButton_7_clicked()
 
 void teacherWeeklySchedule::on_pushButton_8_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","Do you want to leave?");
 
     exit->setStandardButtons(QMessageBox::Yes);
 
@@ -105,7 +105,7 @@ void teacherWeeklySchedule::on_pushButton_8_clicked()
 
 void teacherWeeklySchedule::on_pushButton_10_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","Do you want to leave?");
 
     exit->setStandardButtons(QMessageBox::Yes);
 
@@ -137,7 +137,7 @@ void teacherWeeklySchedule::on_pushButton_10_clicked()
 
 void teacherWeeklySchedule::on_backToMenu_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
 
     exit->addButton(QMessageBox::No);
