@@ -101,7 +101,7 @@ void TeacherSendAssertion::on_sendbtn_clicked()
     {
         QString title = ui->TitleLine->text();
         QString message = ui->messageLine->toPlainText();        
-        QString ls ;
+        QString ls = this->ui->comboBox->currentText();
 
 
 
