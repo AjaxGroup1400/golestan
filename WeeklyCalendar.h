@@ -3,6 +3,7 @@
 
 #include "dist/json/json.h"
 #include "Class.h"
+#include "CalendarCreator.h"
 
 #include <QString>
 #include <QList>
@@ -32,6 +33,10 @@ public:
 
     // get calendar for each day and put it in seperate list
     virtual void getCalendarDayByDay() = 0;
+
+    virtual int isUserValid(QString username) = 0;
+
+    virtual void addClass(QString username, Class Class) = 0;
 
     const QList<QMap<QString, QString> > &getCalendar() const;
 

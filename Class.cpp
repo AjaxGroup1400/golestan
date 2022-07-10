@@ -35,6 +35,7 @@ Class::Class(enum lesson lesson, QString teacher)
     Json::Value baseData;
     baseData["teacher"] = teacher.toStdString();
     baseData["lesson"] = lesson_enum_str[lesson].toStdString();
+    baseData["student_list"] = Json::arrayValue;
 
     string serializedData = writer.write(baseData);
     ofs << serializedData;

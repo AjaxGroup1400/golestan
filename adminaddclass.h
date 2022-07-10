@@ -41,6 +41,10 @@ private slots:
 
     void on_teacherCombo_currentTextChanged(const QString &arg1);
 
+    void on_startingTime_userTimeChanged(const QTime &time);
+
+    void on_endingTime_userTimeChanged(const QTime &time);
+
 private:
     Ui::adminAddClass *ui;
 
@@ -48,11 +52,15 @@ private:
 
     int lesson = 0;
 
+    int day = 0;
+
     QString teacherusername;
 
     QString location;
 
-    QList<QMap<QString, QString>> times;
+    QString startingTime;
+
+    QString endingTime;
 
     void loadTeacherList();
 };

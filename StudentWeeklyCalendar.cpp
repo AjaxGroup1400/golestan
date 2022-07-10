@@ -108,5 +108,15 @@ void StudentWeeklyCalendar::getCalendarDayByDay()
     this->seperatedCalendar = seperatedDays;
 }
 
+int StudentWeeklyCalendar::isUserValid(QString username)
+{
+    return -1;
+}
+
+void StudentWeeklyCalendar::addClass(QString username, Class Class)
+{
+
+}
+
 
 

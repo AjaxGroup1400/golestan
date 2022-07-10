@@ -13,6 +13,13 @@ CalendarCreator::CalendarCreator()
     return;
 }
 
+CalendarCreator::CalendarCreator(Json::Value userData)
+{
+    jsonCalendar = userData;
+
+    return;
+}
+
 void CalendarCreator::setUsername(QString username)
 {
     jsonCalendar["username"] = username.toStdString();
@@ -20,15 +27,17 @@ void CalendarCreator::setUsername(QString username)
     return;
 }
 
-void CalendarCreator::append(QString name, QString day, QString time)
+void CalendarCreator::append(Class Class)
 {
     Json::Value modifiedClasses = jsonCalendar["classes"];
 
     Json::Value classData;
 
-    classData["name"] = name.toStdString();
-    classData["day"] = day.toStdString();
-    classData["time"] = time.toStdString();
+    classData["day"] = lesson_enum_str[Class.getDay()].toStdString();
+
+    classData["time"] = Class.getTime().toStdString();
+
+    classData["name"] = day_enum_str[Class.getLesson()].toStdString();
 
     modifiedClasses.append(classData);
 
