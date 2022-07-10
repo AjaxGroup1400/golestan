@@ -17,7 +17,7 @@ using namespace std ;
 #include"dist/json/json.h"
 #include"Auth.h"
 #include"Filemanager.h"
-
+using namespace std;
 
 
 
@@ -70,6 +70,7 @@ QGroupBox *AdminClassInfo::watchClass(QString teacherUsername , QString lesson)
 
     QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
 
+    Class thisClass(string_to_lesson(lesson),teacherUsername);
 
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -94,13 +95,13 @@ QGroupBox *AdminClassInfo::watchClass(QString teacherUsername , QString lesson)
     QLabel * studentNumber = new QLabel;
     studentNumber->setMaximumWidth(95);
     studentNumber->setMaximumHeight(20);
-    studentNumber->setText("Student Number");
+    studentNumber->setText(QString:: fromStdString(to_string(thisClass.getStudentNum())));
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
     QPushButton* watchBtn = new QPushButton;
     QString Name;
-    connect(watchBtn,&QPushButton::clicked,[this, Name] { goToClassInfo(Name);});
+    connect(watchBtn,&QPushButton::clicked,[this, thisClass] { goToClassInfo(thisClass);});
     watchBtn->setMaximumWidth(101);
     watchBtn->setMaximumHeight(26);
     watchBtn->setText("Watch More");
@@ -117,9 +118,9 @@ QGroupBox *AdminClassInfo::watchClass(QString teacherUsername , QString lesson)
 
 }
 
-void AdminClassInfo::goToClassInfo(QString className)
+void AdminClassInfo::goToClassInfo(Class classToShow)
 {
-    AdminWatchStudent* aws = new AdminWatchStudent(mainmenu);
+    AdminWatchStudent* aws = new AdminWatchStudent(mainmenu, classToShow);
     aws->show();
     close();
 
