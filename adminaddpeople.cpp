@@ -3,7 +3,7 @@
 #include <QRegularExpression>
 
 
-
+#include <fstream>
 #include "adminaddpeople.h"
 #include "ui_adminaddpeople.h"
 #include "adminmainmenu.h"
@@ -14,6 +14,8 @@
 #include "Filemanager.h"
 #include "Auth.h"
 #include"teachermainmenu.h"
+
+using namespace std;
 
 AdminAddPeople::AdminAddPeople(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -152,10 +154,86 @@ void AdminAddPeople::on_AddBtn_clicked()
 
     if(ui->adminRadio->isChecked())
         role = "Admin";
-    else if(ui->teacherRadio->isChecked())
+    else if(ui->teacherRadio->isChecked()){
         role = "Teacher";
-    else if(ui->studentRadio->isChecked())
+
+        ofstream ofs("../data_resources/teacher_lessons.json");
+        Json::StyledWriter writer;
+
+        ifstream ifs("../data_resources/teacher_lessons.json");
+        Json::Value dataHolder;
+        Json::Reader dataReader;
+        if(dataReader.parse(ifs, dataHolder)){
+
+            Json::Value baseTeacher;
+
+            baseTeacher["teacher"] = nationalCode.toStdString();
+            baseTeacher["lessons"] =  Json::arrayValue;
+            dataHolder.append(baseTeacher);
+            string serializedData = writer.write(dataHolder);
+            ofs << serializedData;
+            ofs.close();
+        }
+
+        else{
+        Json::Value baseData;
+
+        Json::Value baseTeacher;
+
+        baseTeacher["teacher"] = nationalCode.toStdString();
+        baseTeacher["lessons"] =  Json::arrayValue;
+        baseData.append(baseTeacher);
+
+        string finalPart = writer.write(baseData);
+        ofs << finalPart;
+        ofs.close();}
+    }
+    else if(ui->studentRadio->isChecked()){
+
         role = "Student";
+
+        ofstream ofs("../data_resources/student_term.json");
+        Json::StyledWriter writer;
+        ifstream ifs("../data_resources/student_term.json");
+        Json::Value dataHolder;
+        Json::Reader dataReader;
+        if(dataReader.parse(ifs, dataHolder)){
+
+            Json::Value baseStudent;
+            baseStudent["username"] = nationalCode.toStdString();
+            baseStudent["terms"] = Json::arrayValue;
+            baseStudent["is_registering"] = false;
+            baseStudent["count_of_terms"] = 0;
+
+            dataHolder.append(baseStudent);
+
+            string serializedData = writer.write(dataHolder);
+
+            ofs << serializedData;
+
+            ofs.close();
+
+        }
+        else{
+
+        Json::Value baseData;
+
+        Json::Value baseStudent;
+
+        baseStudent["username"] = nationalCode.toStdString();
+        baseStudent["terms"] = Json::arrayValue;
+        baseStudent["is_registering"] = false;
+        baseStudent["count_of_terms"] = 0;
+
+        baseData.append(baseStudent);
+
+        string serializedData = writer.write(baseData);
+
+        ofs << serializedData;
+
+        ofs.close();
+        }
+    }
     else
     {
         QMessageBox* noRoleSelected = new QMessageBox(QMessageBox::Icon::Critical, "No Role Selected", "you should select a role.", QMessageBox::Button::Ok);

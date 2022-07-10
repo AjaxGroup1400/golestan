@@ -481,7 +481,15 @@ void TeacherMainMenu::initFile()
     Json::StyledWriter writer;
 //    this->dataHolder[0]["teacher"] = this->get_username().toStdString();
 //    this->dataHolder[0]["lessons"] = Json::arrayValue;
-    Json::Value baseData = Json::arrayValue;
+    Json::Value baseData;
+
+    Json::Value baseTeacher;
+
+    baseTeacher["teacher"] = get_username().toStdString();
+    baseTeacher["lessons"] =  Json::arrayValue;
+    baseData.append(baseTeacher);
+
+    string serializedData = writer.write(baseData);
     string finalPart = writer.write(baseData);
     ofs << finalPart;
     ofs.close();
