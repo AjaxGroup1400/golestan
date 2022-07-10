@@ -185,7 +185,8 @@ void AdminAddPeople::on_AddBtn_clicked()
             );
         if(role == "Teacher")
         {
-            TeacherMainMenu::addNewTeacherToFile(ui->nationalCodeLine->text());
+            if(TeacherMainMenu::teacherIsValidFile(ui->nationalCodeLine->text()) == -1);
+                TeacherMainMenu::addNewTeacherToFile(ui->nationalCodeLine->text());
         }
 
 
