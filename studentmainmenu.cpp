@@ -50,9 +50,9 @@ StudentMainMenu::StudentMainMenu(QString firstname , QString username , StudentM
     this->set_username(username);
     this->ui->label_2->setText("Hi dear " + firstname);
 
-    QString filePath = "../data_resources/student_term.json";
-
     load();
+
+//    QString filePath = "../data_resources/student_term.json";
 
 //    ifstream ifs(filePath.toStdString());
 
@@ -329,6 +329,10 @@ void StudentMainMenu::load()
     baseStudent["terms"] = Json::arrayValue;
     baseStudent["is_registering"] = false;
     baseStudent["count_of_terms"] = 0;
+
+    this->Term = 0;
+
+    this->currentAverege = -1;
 
     baseData.append(baseStudent);
 

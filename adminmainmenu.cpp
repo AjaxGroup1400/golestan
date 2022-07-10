@@ -1,8 +1,5 @@
 #include "adminmainmenu.h"
 #include "ui_adminmainmenu.h"
-#include <QMessageBox>
-#include <QAbstractButton>
-#include <QPushButton>
 #include "loginpage.h"
 #include "adminprofile.h"
 #include "adminsendassertion.h"
@@ -11,6 +8,13 @@
 #include "adminclassinfo.h"
 #include "adminmessages.h"
 #include"teachermainmenu.h"
+
+#include <QMessageBox>
+#include <QAbstractButton>
+#include <QPushButton>
+#include <fstream>
+
+using namespace std;
 
 AdminMainMenu::AdminMainMenu( QString firstName , AdminMainMenu * member , QWidget *parent) :
 //    QWidget(parent),
@@ -175,9 +179,36 @@ void AdminMainMenu::on_pushButton_8_clicked()
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
-    if(exit->exec() == QMessageBox::Yes){
+    if(exit->exec() == QMessageBox::Yes){  
         ending_term();
+
         exit->close();
+
+        QString path = "../data_resources/student_term.json";
+
+        ifstream ifs(path.toStdString());
+
+        Json::Value dataHolder;
+
+        Json::Reader dataReader;
+
+        if(dataReader.parse(ifs, dataHolder))
+        {
+            for(int i = 0; i < dataHolder.size(); i++)
+            {
+                dataHolder[i]["is_registering"] = true;
+            }
+
+            ofstream ofs(path.toStdString());
+
+            Json::StyledWriter writer;
+
+            string serializedData = writer.write(dataHolder);
+
+            ofs << serializedData;
+
+            ofs.close();
+        }
     }
     else{
         exit->close();
