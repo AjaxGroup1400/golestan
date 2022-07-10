@@ -419,6 +419,17 @@ QList<Class> TeacherMainMenu::getClasses()
     return this->classes;
 }
 
+void TeacherMainMenu::cleantecher_lessons()
+{
+    Json::Value dataHolder;
+    ofstream ofs ("../data_resources/teacher_lessons.json");
+    dataHolder = Json::arrayValue;
+    Json::StyledWriter writer;
+    string finalPart = writer.write(dataHolder);
+    ofs << finalPart;
+    ofs.close();
+}
+
 
 void TeacherMainMenu::on_pushButton_3_clicked()
 {

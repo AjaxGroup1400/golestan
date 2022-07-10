@@ -10,10 +10,12 @@
 #include "studentterms.h"
 #include "studenttermscores.h"
 #include "studentenrolment.h"
+#include"Auth.h"
+#include"Filemanager.h"
 
 
 
-StudentWatchMessageComplitly::StudentWatchMessageComplitly(QString title  , QString message , StudentMainMenu * member , QWidget *parent) :
+StudentWatchMessageComplitly::StudentWatchMessageComplitly(QString title  , QString message , QString senderUsername , StudentMainMenu * member , QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentWatchMessageComplitly)
 {
@@ -37,6 +39,14 @@ StudentWatchMessageComplitly::StudentWatchMessageComplitly(QString title  , QStr
     this->ui->TitleLine->setText(title);
     this->ui->messageLine->setText(message);
 
+    int userIndex = Auth::findUser(senderUsername);
+    FileManager userFile;
+    userFile.create();
+    userFile.loadData();
+
+    QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+    this->ui->SenderLine->setText(parsedUser[2] + " " + parsedUser[3]);
 
 }
 
