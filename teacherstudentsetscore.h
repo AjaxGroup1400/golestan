@@ -34,7 +34,7 @@ private slots:
 
     void on_backToMenu_clicked();
 
-    void SetScore_clicked(Class studentClass, QString S_username);
+    void SetScore_clicked(Class studentClass, QString S_username, float score);
 
 private:
     float score;

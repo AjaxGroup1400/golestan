@@ -36,7 +36,7 @@ TeacherStudentSetScore::TeacherStudentSetScore(TeacherMainMenu * member , Class 
     QList<QString> usernameList = thisClass.getList().keys();
 
 
-    for (int i = 0 ; i<thisClass.getStudentNum();i++){
+    for (int i = 0 ; i < thisClass.getStudentNum(); i++){
 
         int userIndex = Auth::findUser(usernameList[i]);
         FileManager userFile;
@@ -102,9 +102,11 @@ QGroupBox *TeacherStudentSetScore::showStudent(QString firstname,QString lastnam
     QPushButton* setScore = new QPushButton;
     setScore->setText("set score");
 
-    this->score = score->text().toFloat();
+    float newScore = score->text().toFloat();
 
-    connect (setScore, &QPushButton::clicked, [this,thisClass,studentusername] {SetScore_clicked(thisClass,studentusername);});
+    connect(score, &QLineEdit::textChanged, [this, score] { this->score = score->text().toFloat(); });
+
+    connect (setScore, &QPushButton::clicked, [this,thisClass,studentusername, newScore] {SetScore_clicked(thisClass,studentusername, newScore);});
 
 
     grid->addWidget(Name,0,0);
@@ -273,7 +275,7 @@ void TeacherStudentSetScore::on_backToMenu_clicked()
 
 
 
-void TeacherStudentSetScore::SetScore_clicked(Class studentClass, QString S_username)
+void TeacherStudentSetScore::SetScore_clicked(Class studentClass, QString S_username, float score)
 
 {
 

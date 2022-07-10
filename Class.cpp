@@ -10,8 +10,10 @@ Class::Class(enum lesson lesson, QString teacher)
     this->number_of_students = 0;
     this->lesson = lesson;
     this->teacher = teacher;
-    this->filePath = "../data_resources/" + lesson_enum_str[lesson] + '-' + teacher +".json" ;
+    this->filePath = "../data_resources/" + lesson_enum_str[lesson] + '-' + teacher +".json";
+
     ifstream ifs(filePath.toStdString());
+
     if(this->dataReader.parse(ifs,this->dataHolder))
     {
         this->lesson = lesson;
@@ -21,9 +23,13 @@ Class::Class(enum lesson lesson, QString teacher)
         this->time = QString::fromStdString( this->dataHolder["time"].asString());
         this->day = string_to_day(QString::fromStdString( this->dataHolder["day"].asString()));
 
-        for(int i=0; i < dataHolder["student_list"].size(); i++){
-            this->studentslist.insert(QString::fromStdString(this->dataHolder["student_list"][i]["username"].asString()),this->dataHolder["student_list"][i]["score"].asFloat());
+        for(int i = 0; i < dataHolder["student_list"].size(); i++){
+            this->studentslist.insert(
+                 QString::fromStdString(this->dataHolder["student_list"][i]["username"].asString()),
+                 this->dataHolder["student_list"][i]["score"].asFloat()
+            );
         }
+
     ifs.close();
     return;
     }
@@ -52,9 +58,9 @@ Class::Class(const Class &other)
     this->time = other.time;
     this->day = other.day;
     this->filePath = other.filePath;
+
     for(auto i = other.studentslist.begin();i!= other.studentslist.end(); i++){
         this->studentslist.insert(i.key(), i.value());
-
     }
 }
 
@@ -185,8 +191,8 @@ void Class:: setStudentScore(QString studentname,enum lesson lesson ,float newsc
 
                 for(int j = 0; j < classesCopy.size(); j++)
                 {
-                    if(classesCopy[i]["lesson"].asString() !=lesson_enum_str[lesson].toStdString())
-                       classesCopy[i]["score"]=newscore;
+                    if(classesCopy[j]["lesson"].asString() == lesson_enum_str[lesson].toStdString())
+                       classesCopy[j]["score"]=newscore;
 
                 }
 
@@ -235,6 +241,7 @@ void Class::setScore(QString student_username, float score)
     }
 
     ifstream ifs (this->filePath.toStdString());
+
     if(this->dataReader.parse(ifs , this->dataHolder))
     {
         for(int i = 0 ; i < this->dataHolder["student_list"].size() ; i++)
@@ -245,7 +252,9 @@ void Class::setScore(QString student_username, float score)
 
         ofstream ofs(this->filePath.toStdString());
         Json::StyledWriter wrieter;
+
         string finalPart = wrieter.write(this->dataHolder);
+
         ofs << finalPart;
         ofs.close();
     }
