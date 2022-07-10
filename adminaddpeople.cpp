@@ -130,17 +130,6 @@ void AdminAddPeople::on_AddBtn_clicked()
 
     QString role;
 
-//    if(Auth::isValidIranianNationalCode(nationalCode.toStdString().c_str()))
-//    {
-//        QMessageBox* invalidNationalCode = new QMessageBox(QMessageBox::Icon::Critical, "Invalid National Code", "please enter a valid national code.", QMessageBox::Button::Ok);
-
-//        invalidNationalCode->show();
-
-//        connect(invalidNationalCode , &QMessageBox::buttonClicked , invalidNationalCode , &QMessageBox::deleteLater);
-
-//        return;
-//    }
-
     if(firstname.isEmpty() || lastname.isEmpty() || nationalCode.isEmpty() || phoneNumber.isEmpty())
     {
         QMessageBox* emptyField = new QMessageBox(QMessageBox::Icon::Critical, "Empty Field", "one of the fields is empty.", QMessageBox::Button::Ok);
@@ -158,35 +147,44 @@ void AdminAddPeople::on_AddBtn_clicked()
         role = "Teacher";
 
         ofstream ofs("../data_resources/teacher_lessons.json");
+
         Json::StyledWriter writer;
 
         ifstream ifs("../data_resources/teacher_lessons.json");
+
         Json::Value dataHolder;
+
         Json::Reader dataReader;
+
         if(dataReader.parse(ifs, dataHolder)){
 
             Json::Value baseTeacher;
 
             baseTeacher["teacher"] = nationalCode.toStdString();
+
             baseTeacher["lessons"] =  Json::arrayValue;
+
             dataHolder.append(baseTeacher);
+
             string serializedData = writer.write(dataHolder);
             ofs << serializedData;
             ofs.close();
         }
+        else
+        {
+            Json::Value baseData;
 
-        else{
-        Json::Value baseData;
+            Json::Value baseTeacher;
 
-        Json::Value baseTeacher;
+            baseTeacher["teacher"] = nationalCode.toStdString();
+            baseTeacher["lessons"] =  Json::arrayValue;
+            baseData.append(baseTeacher);
 
-        baseTeacher["teacher"] = nationalCode.toStdString();
-        baseTeacher["lessons"] =  Json::arrayValue;
-        baseData.append(baseTeacher);
+            string finalPart = writer.write(baseData);
+            ofs << finalPart;
+            ofs.close();
+        }
 
-        string finalPart = writer.write(baseData);
-        ofs << finalPart;
-        ofs.close();}
     }
     else if(ui->studentRadio->isChecked()){
 
@@ -269,12 +267,6 @@ void AdminAddPeople::on_AddBtn_clicked()
             nationalCode, phoneNumber,
             role, true
             );
-        if(role == "Teacher")
-        {
-            if(TeacherMainMenu::teacherIsValidFile(ui->nationalCodeLine->text()) == -1);
-                TeacherMainMenu::addNewTeacherToFile(ui->nationalCodeLine->text());
-        }
-
 
         userFile.append(newUserData);
 

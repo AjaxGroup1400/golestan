@@ -304,7 +304,14 @@ void StudentMainMenu::load()
             {
                 this->Term = student["count_of_terms"].asInt();
 
-                this->currentAverege = student["terms"][Term - 1]["average"].asInt();
+                if(!student["terms"].empty())
+                {
+                    this->currentAverege = student["terms"][Term - 1]["average"].asInt();
+                }
+                else
+                {
+                    this->currentAverege = -1;
+                }
 
                 for(auto& term : student["terms"])
                 {

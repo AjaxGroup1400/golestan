@@ -421,13 +421,31 @@ QList<Class> TeacherMainMenu::getClasses()
 
 void TeacherMainMenu::cleantecher_lessons()
 {
+    string path = "../data_resources/teacher_lessons.json";
+
+    ifstream ifs(path);
+
     Json::Value dataHolder;
-    ofstream ofs ("../data_resources/teacher_lessons.json");
-    dataHolder = Json::arrayValue;
-    Json::StyledWriter writer;
-    string finalPart = writer.write(dataHolder);
-    ofs << finalPart;
-    ofs.close();
+
+    Json::Reader dataReader;
+
+    if(dataReader.parse(ifs, dataHolder))
+    {
+        for(int i = 0; i < dataHolder.size(); i++)
+        {
+            dataHolder[i]["lessons"] = Json::arrayValue;
+        }
+
+        ofstream ofs(path);
+
+        Json::StyledWriter writer;
+
+        string serializedData = writer.write(dataHolder);
+
+        ofs << serializedData;
+
+        ofs.close();
+    }
 }
 
 

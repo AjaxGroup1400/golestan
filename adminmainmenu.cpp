@@ -179,7 +179,8 @@ void AdminMainMenu::on_pushButton_8_clicked()
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
     exit->show();
-    if(exit->exec() == QMessageBox::Yes){  
+    if(exit->exec() == QMessageBox::Yes){
+
         ending_term();
 
         exit->close();
