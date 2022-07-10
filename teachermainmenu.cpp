@@ -358,7 +358,7 @@ int TeacherMainMenu::teacherIsValidFile(QString teacherUsername)
         }
         return -1 ;
     }
-    return -2;
+    return -1;
 }
 
 bool TeacherMainMenu::lessonIsValid(QString lesson)
