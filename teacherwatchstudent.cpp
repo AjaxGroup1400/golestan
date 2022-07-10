@@ -216,6 +216,8 @@ QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QStr
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
     QPushButton* deleteStudent = new QPushButton;
+    deleteStudent->setMaximumWidth(81);
+    deleteStudent->setMaximumHeight(20);
     deleteStudent->setText("remove student");
 
     connect (deleteStudent, &QPushButton::clicked, [this,thisClass,studentusername] {removeStudent_clicked(thisClass,studentusername);});
