@@ -37,14 +37,24 @@ private slots:
 
     void on_comboBox_2_currentTextChanged(const QString &arg1);
 
+    void on_pushButton_6_clicked();
+
+    void on_teacherCombo_currentTextChanged(const QString &arg1);
+
 private:
     Ui::adminAddClass *ui;
+
     AdminMainMenu * mainmenu;
+
     int lesson = 0;
+
     QString teacherusername;
+
     QString location;
-    QString time;
-    int day=0;
+
+    QList<QMap<QString, QString>> times;
+
+    void loadTeacherList();
 };
 
 #endif // ADMINADDCLASS_H

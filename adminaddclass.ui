@@ -615,7 +615,7 @@ font: 9pt &quot;Montserrat&quot;;</string>
      <string>Days and Time</string>
     </property>
    </widget>
-   <widget class="QTimeEdit" name="timeEdit">
+   <widget class="QTimeEdit" name="startingTime">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -646,7 +646,7 @@ font: 9pt &quot;Montserrat&quot;;</string>
      <string>Location</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="teacherCombo">
     <property name="geometry">
      <rect>
       <x>170</x>
@@ -782,7 +782,7 @@ font: 9pt &quot;Montserrat&quot;;</string>
      </property>
     </item>
    </widget>
-   <widget class="QTimeEdit" name="timeEdit_2">
+   <widget class="QTimeEdit" name="endingTime">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -1014,14 +1014,14 @@ color: rgb(178, 8, 55);</string>
     </item>
    </widget>
    <zorder>label_17</zorder>
-   <zorder>timeEdit</zorder>
+   <zorder>startingTime</zorder>
    <zorder>label_16</zorder>
-   <zorder>comboBox</zorder>
+   <zorder>teacherCombo</zorder>
    <zorder>comboBox_3</zorder>
    <zorder>label_13</zorder>
    <zorder>label_15</zorder>
    <zorder>comboBox_2</zorder>
-   <zorder>timeEdit_2</zorder>
+   <zorder>endingTime</zorder>
    <zorder>label_19</zorder>
    <zorder>label_20</zorder>
    <zorder>label_21</zorder>
@@ -1045,10 +1045,10 @@ color: rgb(178, 8, 55);</string>
   <zorder>groupBox</zorder>
  </widget>
  <resources>
-  <include location="classIcon.qrc"/>
   <include location="arrowIcon.qrc"/>
-  <include location="pictures.qrc"/>
   <include location="icon.qrc"/>
+  <include location="classIcon.qrc"/>
+  <include location="pictures.qrc"/>
  </resources>
  <connections/>
 </ui>

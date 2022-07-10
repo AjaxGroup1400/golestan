@@ -9,6 +9,8 @@
 #include "adminmessages.h"
 #include "Class.h"
 #include"teachermainmenu.h"
+#include "Filemanager.h"
+#include <iostream>
 
 adminAddClass::adminAddClass(AdminMainMenu * member , QWidget *parent) :
     QWidget(parent),
@@ -26,6 +28,9 @@ adminAddClass::adminAddClass(AdminMainMenu * member , QWidget *parent) :
     this->ui->backToMenu->setStyleSheet("background-color: transparent");
 
     this->mainmenu = member;
+
+    this->loadTeacherList();
+
     this->ui->label_2->setText("Hi dear " + mainmenu->get_first_name());
 }
 
@@ -135,16 +140,26 @@ void adminAddClass::on_pushButton_4_clicked()
 void adminAddClass::on_pushButton_5_clicked()
 {
 
+    auto startingTime = ui->startingTime->time();
 
+    auto strStartingTime = QString::number(startingTime.hour()) + ":" + QString::number(startingTime.minute());
 
+    qDebug() << startingTime;
 
-    Class newClass (string_to_lesson(lesson_enum_str[this->lesson]), this->teacherusername);
-    newClass.setLocation(this->location);
-    newClass.setTime(this->time);
-    newClass.setDay(string_to_day(day_enum_str[this->day]));
-    TeacherMainMenu::addNewLessonFile(this->teacherusername , newClass);
-    QMessageBox* classAdded = new QMessageBox(QMessageBox::Icon::Information, "class Added", "Class with entered info created.", QMessageBox::Button::Ok);
-    classAdded->show();
+    qDebug() << strStartingTime;
+
+//    Class newClass (string_to_lesson(lesson_enum_str[this->lesson]), this->teacherusername);
+
+//    newClass.setLocation(this->location);
+
+//    newClass.setTime(this->time);
+
+//    newClass.setDay(string_to_day(day_enum_str[this->day]));
+
+//    TeacherMainMenu::addNewLessonFile(this->teacherusername , newClass);
+
+//    QMessageBox* classAdded = new QMessageBox(QMessageBox::Icon::Information, "class Added", "Class with entered info created.", QMessageBox::Button::Ok);
+//    classAdded->show();
 
 }
 
@@ -157,7 +172,7 @@ void adminAddClass::on_comboBox_4_currentIndexChanged(int index)
 
 void adminAddClass::on_comboBox_3_currentIndexChanged(int index)
 {
-    this->day = index;
+//    this->day = index;
 
 }
 
@@ -165,5 +180,47 @@ void adminAddClass::on_comboBox_3_currentIndexChanged(int index)
 void adminAddClass::on_comboBox_2_currentTextChanged(const QString &arg1)
 {
     this->location = arg1;
+}
+
+
+void adminAddClass::on_pushButton_6_clicked()
+{
+    qDebug() << this->teacherusername;
+
+    qDebug() << this->location;
+
+//    qDebug() << this->time;
+
+//    qDebug() << this->day;
+
+}
+
+void adminAddClass::loadTeacherList()
+{
+    auto teacherComboList = ui->teacherCombo;
+
+    FileManager userFile;
+
+    userFile.create();
+
+    userFile.loadData();
+
+    for(auto& user : userFile.getData())
+    {
+        auto parsedUser = userFile.parse(user);
+
+        auto userRole = parsedUser.at(parsedUser.size() - 1);
+
+        if(userRole == "Teacher")
+        {
+            teacherComboList->addItem(parsedUser.at(0));
+        }
+    }
+
+}
+
+void adminAddClass::on_teacherCombo_currentTextChanged(const QString &arg1)
+{
+    this->teacherusername = arg1;
 }
 
