@@ -77,10 +77,12 @@ void TeacherMainMenu::on_pushButton_7_clicked()
         LoginPage* lg = new LoginPage;
         lg->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -150,7 +152,7 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 //    }
 
 
-    QMessageBox * studentdeleted = new QMessageBox(QMessageBox::Icon::Information, "Student deleted", "the student was deleted succesfuly", QMessageBox::Button::Ok);
+    QMessageBox * studentdeleted = new QMessageBox(QMessageBox::Icon::Information, "Student removed", "the student was removed succesfuly", QMessageBox::Button::Ok);
 //    studentdeleted->setParent(this);
 
     studentdeleted->show();

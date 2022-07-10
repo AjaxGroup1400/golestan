@@ -151,7 +151,7 @@ void AdminProfile::on_changePassBtn_clicked()
 
 void AdminProfile::on_backToMenu_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -160,10 +160,14 @@ void AdminProfile::on_backToMenu_clicked()
         AdminMainMenu* amm = new AdminMainMenu(mainmenu->get_first_name() , mainmenu);
         amm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
     }
 }
 
@@ -179,17 +183,21 @@ void AdminProfile::on_pushButton_4_clicked()
         AdminSendAssertion* asa= new AdminSendAssertion;
         asa->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
     }
 }
 
 
 void AdminProfile::on_pushButton_3_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add people","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add people","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -198,10 +206,14 @@ void AdminProfile::on_pushButton_3_clicked()
         AdminAddPeople* aap= new AdminAddPeople(mainmenu);
         aap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
     }
 }
 

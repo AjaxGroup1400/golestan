@@ -121,7 +121,7 @@ QGroupBox *teacherMessages::createMessageBox(QString messageTitle, QString messa
 
 void teacherMessages::on_pushButton_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -130,10 +130,12 @@ void teacherMessages::on_pushButton_clicked()
         teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -159,7 +161,7 @@ void teacherMessages::on_msgBtn_clicked(QString title, QString description)
 
 void teacherMessages::on_pushButton_4_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -168,10 +170,12 @@ void teacherMessages::on_pushButton_4_clicked()
         TeacherSendAssertion* tsa= new TeacherSendAssertion;
         tsa->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -188,10 +192,12 @@ void teacherMessages::on_backToMenu_clicked()
         TeacherMainMenu* smm = new TeacherMainMenu(mainmenu->get_first_name(), mainmenu->get_username() , mainmenu );
         smm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -241,7 +247,7 @@ void teacherMessages::on_backToMenu_clicked()
 
 void teacherMessages::on_pushButton_5_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -250,9 +256,11 @@ void teacherMessages::on_pushButton_5_clicked()
         teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }

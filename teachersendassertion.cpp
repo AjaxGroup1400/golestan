@@ -61,17 +61,19 @@ void TeacherSendAssertion::on_backToMenu_clicked()
         TeacherMainMenu* tmm = new TeacherMainMenu(mainmenu->get_first_name(), mainmenu->get_username() , mainmenu );
         tmm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
 
 void TeacherSendAssertion::on_pushButton_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -80,10 +82,12 @@ void TeacherSendAssertion::on_pushButton_clicked()
         teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -102,7 +106,8 @@ void TeacherSendAssertion::on_sendbtn_clicked()
         QString title = ui->TitleLine->text();
         QString message = ui->messageLine->toPlainText();        
         QString ls = this->ui->comboBox->currentText();
-
+        if(ls == "BASIC PROGRAMMING")
+            ls = "BP";
 
 
 //        QList<QString> lessons;

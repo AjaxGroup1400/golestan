@@ -84,7 +84,7 @@ QGroupBox* StudentTermScores::showScores(int lessonNumber , int term)
 
 void StudentTermScores::on_pushButton_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to student profile","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to student profile","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -93,17 +93,19 @@ void StudentTermScores::on_pushButton_clicked()
         StudentProfile* sp= new StudentProfile(mainmenu);
         sp->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
 
 void StudentTermScores::on_pushButton_2_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -112,17 +114,19 @@ void StudentTermScores::on_pushButton_2_clicked()
         studentMessages* sm= new studentMessages(mainmenu);
         sm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
 
 void StudentTermScores::on_pushButton_3_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -131,10 +135,12 @@ void StudentTermScores::on_pushButton_3_clicked()
         studentWeeklySchedule* swc = new studentWeeklySchedule(mainmenu);
         swc->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -143,7 +149,7 @@ void StudentTermScores::on_pushButton_3_clicked()
 void StudentTermScores::on_pushButton_6_clicked()
 {
 
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to terms","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to terms","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -152,10 +158,12 @@ void StudentTermScores::on_pushButton_6_clicked()
         StudentTerms* st = new StudentTerms(mainmenu);
         st->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -163,7 +171,7 @@ void StudentTermScores::on_pushButton_6_clicked()
 
 void StudentTermScores::on_pushButton_7_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher survey","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher survey","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -172,10 +180,12 @@ void StudentTermScores::on_pushButton_7_clicked()
         StudentTeacherSurvey* sts = new StudentTeacherSurvey(mainmenu);
         sts->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 
@@ -184,7 +194,7 @@ void StudentTermScores::on_pushButton_7_clicked()
 
 void StudentTermScores::on_backToMenu_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to terms","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to terms","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -193,10 +203,12 @@ void StudentTermScores::on_backToMenu_clicked()
         StudentTerms* st = new StudentTerms(mainmenu);
         st->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -204,7 +216,7 @@ void StudentTermScores::on_backToMenu_clicked()
 
 void StudentTermScores::on_pushButton_4_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to enrolment","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to enrolment","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -213,10 +225,12 @@ void StudentTermScores::on_pushButton_4_clicked()
         StudentEnrolment* se = new StudentEnrolment(mainmenu);
         se->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 

@@ -46,7 +46,7 @@ TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member ,Class thisCla
 
         QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
 
-        ui->verticalLayout_2->addWidget(students(parsedUser[2],parsedUser[3],usernameList[i]));
+        ui->verticalLayout_2->addWidget(students(parsedUser[2],parsedUser[3],usernameList[i], thisClass));
 
     }
 }
@@ -68,10 +68,12 @@ void TeacherWatchStudent::on_backToMenu_clicked()
         TeacherClassInfo* tci = new TeacherClassInfo(mainmenu);
         tci->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -79,7 +81,7 @@ void TeacherWatchStudent::on_backToMenu_clicked()
 
 void TeacherWatchStudent::on_pushButton_5_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -88,10 +90,12 @@ void TeacherWatchStudent::on_pushButton_5_clicked()
         teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 
@@ -100,7 +104,7 @@ void TeacherWatchStudent::on_pushButton_5_clicked()
 
 void TeacherWatchStudent::on_pushButton_4_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -109,17 +113,19 @@ void TeacherWatchStudent::on_pushButton_4_clicked()
         TeacherSendAssertion* tsa= new TeacherSendAssertion;
         tsa->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
 
 void TeacherWatchStudent::on_pushButton_3_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to class info","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to class info","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -128,10 +134,12 @@ void TeacherWatchStudent::on_pushButton_3_clicked()
         TeacherClassInfo* tci = new TeacherClassInfo(mainmenu);
         tci->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -139,7 +147,7 @@ void TeacherWatchStudent::on_pushButton_3_clicked()
 
 void TeacherWatchStudent::on_pushButton_2_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -159,7 +167,7 @@ void TeacherWatchStudent::on_pushButton_2_clicked()
 
 void TeacherWatchStudent::on_pushButton_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -168,15 +176,18 @@ void TeacherWatchStudent::on_pushButton_clicked()
         teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
 
-QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QString studentusername)
+
+QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QString studentusername, Class thisClass)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -204,6 +215,10 @@ QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QStr
     studentNumber->setText(studentusername);
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
+    QPushButton* deleteStudent = new QPushButton;
+    deleteStudent->setText("remove student");
+
+    connect (deleteStudent, &QPushButton::clicked, [this,thisClass,studentusername] {removeStudent_clicked(thisClass,studentusername);});
 
 //    QLabel * field = new QLabel;
 //    field->setMaximumWidth(81);
@@ -216,8 +231,14 @@ QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QStr
     grid->addWidget(lastName,0,1);
     grid->addWidget(studentNumber,0,2);
 //    grid->addWidget(field,0,3);
+    grid->addWidget(deleteStudent,0,3);
+
 
     gBox->setLayout(grid);
     return gBox;
 }
 
+void TeacherWatchStudent::removeStudent_clicked(Class thisClass, QString studentusername)
+{
+    this->mainmenu->deleteStudent(studentusername, thisClass);
+}

@@ -17,7 +17,7 @@ using namespace std ;
 #include"dist/json/json.h"
 #include"Auth.h"
 #include"Filemanager.h"
-
+using namespace std;
 
 
 
@@ -70,6 +70,7 @@ QGroupBox *AdminClassInfo::watchClass(QString teacherUsername , QString lesson)
 
     QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
 
+    Class thisClass(string_to_lesson(lesson),teacherUsername);
 
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -94,13 +95,13 @@ QGroupBox *AdminClassInfo::watchClass(QString teacherUsername , QString lesson)
     QLabel * studentNumber = new QLabel;
     studentNumber->setMaximumWidth(95);
     studentNumber->setMaximumHeight(20);
-    studentNumber->setText("Student Number");
+    studentNumber->setText(QString:: fromStdString(to_string(thisClass.getStudentNum())));
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
 
     QPushButton* watchBtn = new QPushButton;
     QString Name;
-    connect(watchBtn,&QPushButton::clicked,[this, Name] { goToClassInfo(Name);});
+    connect(watchBtn,&QPushButton::clicked,[this, thisClass] { goToClassInfo(thisClass);});
     watchBtn->setMaximumWidth(101);
     watchBtn->setMaximumHeight(26);
     watchBtn->setText("Watch More");
@@ -117,9 +118,9 @@ QGroupBox *AdminClassInfo::watchClass(QString teacherUsername , QString lesson)
 
 }
 
-void AdminClassInfo::goToClassInfo(QString className)
+void AdminClassInfo::goToClassInfo(Class classToShow)
 {
-    AdminWatchStudent* aws = new AdminWatchStudent(mainmenu);
+    AdminWatchStudent* aws = new AdminWatchStudent(mainmenu, classToShow);
     aws->show();
     close();
 
@@ -127,7 +128,7 @@ void AdminClassInfo::goToClassInfo(QString className)
 
 void AdminClassInfo::on_backToMenu_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to menu","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -136,17 +137,19 @@ void AdminClassInfo::on_backToMenu_clicked()
         AdminMainMenu* amm = new AdminMainMenu(mainmenu->get_first_name() , mainmenu);
         amm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
 
 void AdminClassInfo::on_pushButton_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to admin profile","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to admin profile","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -155,10 +158,12 @@ void AdminClassInfo::on_pushButton_clicked()
         AdminProfile* ap= new AdminProfile(mainmenu);
         ap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -167,7 +172,7 @@ void AdminClassInfo::on_pushButton_clicked()
 void AdminClassInfo::on_pushButton_2_clicked()
 {
 
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to messages","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to messages","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -176,17 +181,19 @@ void AdminClassInfo::on_pushButton_2_clicked()
         adminMessages* as = new adminMessages(mainmenu);
         as->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
 
 void AdminClassInfo::on_pushButton_3_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add people","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add people","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -195,10 +202,13 @@ void AdminClassInfo::on_pushButton_3_clicked()
         AdminAddPeople* aap= new AdminAddPeople(mainmenu);
         aap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
     }
 
 }
@@ -206,7 +216,7 @@ void AdminClassInfo::on_pushButton_3_clicked()
 
 void AdminClassInfo::on_pushButton_4_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -215,10 +225,13 @@ void AdminClassInfo::on_pushButton_4_clicked()
         AdminSendAssertion* asa= new AdminSendAssertion;
         asa->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
     }
 
 }
@@ -226,7 +239,7 @@ void AdminClassInfo::on_pushButton_4_clicked()
 
 void AdminClassInfo::on_pushButton_7_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add class","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to add class","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -235,10 +248,14 @@ void AdminClassInfo::on_pushButton_7_clicked()
         adminAddClass* adc= new adminAddClass(mainmenu);
         adc->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
     }
 
 }

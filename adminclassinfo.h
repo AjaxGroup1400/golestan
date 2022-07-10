@@ -36,7 +36,7 @@ private slots:
 private:
     Ui::AdminClassInfo *ui;
 
-    void goToClassInfo(QString className);
+    void goToClassInfo(Class classToShow);
 
     AdminMainMenu * mainmenu;
 };

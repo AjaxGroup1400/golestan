@@ -120,7 +120,7 @@ QGroupBox *TeacherStudentSetScore::showStudent(QString firstname,QString lastnam
 
 void TeacherStudentSetScore::on_pushButton_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher profile","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -129,10 +129,12 @@ void TeacherStudentSetScore::on_pushButton_clicked()
         teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -140,7 +142,7 @@ void TeacherStudentSetScore::on_pushButton_clicked()
 
 void TeacherStudentSetScore::on_pushButton_2_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -149,10 +151,12 @@ void TeacherStudentSetScore::on_pushButton_2_clicked()
         teacherMessages* tm= new teacherMessages(mainmenu);
         tm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -160,7 +164,7 @@ void TeacherStudentSetScore::on_pushButton_2_clicked()
 
 void TeacherStudentSetScore::on_pushButton_3_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to class info","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to class info","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -169,10 +173,12 @@ void TeacherStudentSetScore::on_pushButton_3_clicked()
         TeacherClassInfo* tci = new TeacherClassInfo(mainmenu);
         tci->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -181,7 +187,7 @@ void TeacherStudentSetScore::on_pushButton_3_clicked()
 void TeacherStudentSetScore::on_pushButton_4_clicked()
 {
 
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -200,7 +206,7 @@ void TeacherStudentSetScore::on_pushButton_4_clicked()
 
 void TeacherStudentSetScore::on_pushButton_5_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -209,10 +215,12 @@ void TeacherStudentSetScore::on_pushButton_5_clicked()
         teacherWeeklySchedule* tws = new teacherWeeklySchedule(mainmenu);
         tws->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -220,7 +228,7 @@ void TeacherStudentSetScore::on_pushButton_5_clicked()
 
 void TeacherStudentSetScore::on_pushButton_6_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to set score","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to set score","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -229,10 +237,12 @@ void TeacherStudentSetScore::on_pushButton_6_clicked()
         TeacherClassSetScore* tcss = new TeacherClassSetScore(mainmenu);
         tcss->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -240,7 +250,7 @@ void TeacherStudentSetScore::on_pushButton_6_clicked()
 
 void TeacherStudentSetScore::on_backToMenu_clicked()
 {
-    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to set score","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Back to set score","Do you want to leave?");
     exit->setStandardButtons(QMessageBox::Yes);
     exit->addButton(QMessageBox::No);
     exit->setDefaultButton(QMessageBox::No);
@@ -249,10 +259,12 @@ void TeacherStudentSetScore::on_backToMenu_clicked()
         TeacherClassSetScore* tcss = new TeacherClassSetScore(mainmenu);
         tcss->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
