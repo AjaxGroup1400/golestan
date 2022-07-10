@@ -106,7 +106,8 @@ void TeacherSendAssertion::on_sendbtn_clicked()
         QString title = ui->TitleLine->text();
         QString message = ui->messageLine->toPlainText();        
         QString ls = this->ui->comboBox->currentText();
-
+        if(ls == "BASIC PROGRAMMING")
+            ls = "BP";
 
 
 //        QList<QString> lessons;
