@@ -1,9 +1,6 @@
 #include "studentenrolment.h"
 #include "ui_studentenrolment.h"
 #include "studentmainmenu.h"
-#include <QMessageBox>
-#include <QAbstractButton>
-#include <QPushButton>
 #include "loginpage.h"
 #include "studentprofile.h"
 #include "studentmessages.h"
@@ -14,8 +11,14 @@
 #include "QCheckBox"
 #include "Auth.h"
 #include "Filemanager.h"
+#include "StudentWeeklyCalendar.h"
+
+#include <QMessageBox>
+#include <QAbstractButton>
+#include <QPushButton>
 #include <iostream>
 #include <fstream>
+
 using namespace std;
 
 StudentEnrolment::StudentEnrolment(StudentMainMenu * member , QWidget *parent) :
@@ -38,11 +41,12 @@ StudentEnrolment::StudentEnrolment(StudentMainMenu * member , QWidget *parent) :
     Json::Value TdataHolder;
     Json::Reader TdataReader;
     ifstream ifs("../data_resources/teacher_lessons.json");
+
     if(TdataReader.parse(ifs , TdataHolder))
     {
         for(auto teacher : TdataHolder)
         {
-            QString teacherUsr =QString::fromStdString( teacher["teacher"].asString());
+            QString teacherUsr = QString::fromStdString( teacher["teacher"].asString());
 
             for(auto &lesson : teacher["lessons"])
             {
@@ -222,7 +226,7 @@ QGroupBox *StudentEnrolment::showLessons(Class classToShow)
     QString nameOfTerm;
     selection->setMaximumWidth(40);
     selection->setMaximumHeight(20);
-    connect(selection , &QCheckBox:: stateChanged ,[this, classToShow, selection] { registeryStatus(classToShow, selection); } );
+    connect(selection, &QCheckBox::stateChanged, [this, classToShow, selection] { registeryStatus(classToShow, selection); } );
     //connect(showScore,&QPushButton::clicked,[this, nameOfTerm] { goToScores(nameOfTerm);});
 
 
@@ -237,8 +241,14 @@ QGroupBox *StudentEnrolment::showLessons(Class classToShow)
 
 void StudentEnrolment::registeryStatus(Class classToShow, QCheckBox *selection)
 {
+    StudentWeeklyCalendar swc;
+
     if (selection->isChecked()){
+
+        swc.addClass(mainmenu->get_username(), classToShow);
+
         this->mainmenu->registry(classToShow);
+
         QMessageBox* registred = new QMessageBox(QMessageBox::Icon::Information, "registred", "The lesson has been added successfully!", QMessageBox::Button::Ok);
 
         registred->show();
@@ -247,6 +257,9 @@ void StudentEnrolment::registeryStatus(Class classToShow, QCheckBox *selection)
     }
 
     else{
+
+        swc.removeClass(mainmenu->get_username(), classToShow);
+
         this->mainmenu->unregistery(classToShow);
 
         QMessageBox* unregistred = new QMessageBox(QMessageBox::Icon::Information, "unregistred", "The lesson has been deleted successfully!", QMessageBox::Button::Ok);
