@@ -33,10 +33,12 @@ private slots:
 
     void on_backToMenu_clicked();
 
+    void removeStudentUser_clicked(Class thisClass,QString studentusername);
+
 private:
     Ui::AdminWatchStudent *ui;
 
-    QGroupBox* students(QString firstname,QString lastname,QString studentusername);
+    QGroupBox* students(QString firstname,QString lastname,QString studentusername ,Class thisClass);
 
     AdminMainMenu * mainmenu ;
 };

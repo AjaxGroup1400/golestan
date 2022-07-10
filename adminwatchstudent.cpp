@@ -11,6 +11,7 @@
 #include "Filemanager.h"
 #include "Auth.h"
 #include "adminaddclass.h"
+#include <fstream>
 
 using namespace std;
 
@@ -45,7 +46,7 @@ AdminWatchStudent::AdminWatchStudent(AdminMainMenu * member, Class classToShow ,
 
         QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
 
-        ui->verticalLayout_2->addWidget(students(parsedUser[2],parsedUser[3],usernameList[i]));
+        ui->verticalLayout_2->addWidget(students(parsedUser[2],parsedUser[3],usernameList[i], classToShow));
 
     }
 
@@ -208,7 +209,7 @@ void AdminWatchStudent::on_backToMenu_clicked()
 
 }
 
-QGroupBox *AdminWatchStudent::students(QString firstname,QString lastname,QString studentusername)
+QGroupBox *AdminWatchStudent::students(QString firstname,QString lastname,QString studentusername, Class thisClass)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -236,6 +237,12 @@ QGroupBox *AdminWatchStudent::students(QString firstname,QString lastname,QStrin
     studentNumber->setText(studentusername);
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
+    QPushButton* deleteStudentUser = new QPushButton;
+    deleteStudentUser->setMaximumWidth(81);
+    deleteStudentUser->setMaximumHeight(20);
+    deleteStudentUser->setText("remove user");
+
+    connect (deleteStudentUser, &QPushButton::clicked, [this,thisClass,studentusername] {removeStudentUser_clicked(thisClass,studentusername);});
 
 //    QLabel * field = new QLabel;
 //    field->setMaximumWidth(81);
@@ -248,8 +255,63 @@ QGroupBox *AdminWatchStudent::students(QString firstname,QString lastname,QStrin
     grid->addWidget(lastName,0,1);
     grid->addWidget(studentNumber,0,2);
 //    grid->addWidget(field,0,3);
+    grid->addWidget(deleteStudentUser,0,3);
+
 
     gBox->setLayout(grid);
     return gBox;
 }
 
+
+void AdminWatchStudent::removeStudentUser_clicked(Class thisClass, QString studentusername)
+{
+
+    QString SfilePath = "../data_resources/student_term.json";
+    Json::Value SdataHolder;
+    Json::Reader SdataReader;
+
+    if(thisClass.studentIsValid(studentusername))
+    {
+        thisClass.deleteStudent(studentusername);
+
+        ifstream ifs(SfilePath.toStdString());
+
+        if(SdataReader.parse(ifs, SdataHolder))
+        {
+
+            Json::Value wantedUsers;
+
+            for(int i = 0; i < SdataHolder.size(); i++)
+            {
+                if(studentusername.toStdString() != SdataHolder[i]["username"].asString())
+                {
+                    wantedUsers.append(SdataHolder[i]);
+
+                    ofstream ofs(SfilePath.toStdString());
+
+                    Json::StyledWriter writer;
+
+                    string serializedData = writer.write(wantedUsers);
+                    ofs << serializedData;
+                    ofs.close();
+
+                    break;
+                }
+            }
+        }
+    }
+
+    int userIndex = Auth::findUser(studentusername);
+
+            FileManager userFile;
+            userFile.create();
+            userFile.loadData();
+
+            userFile.deleteRecord(userIndex);
+            userFile.write();
+
+     QMessageBox * studentdeleted = new QMessageBox(QMessageBox::Icon::Information, "User deleted", "the student was deleted succesfuly", QMessageBox::Button::Ok);
+     studentdeleted->show();
+     QObject::connect(studentdeleted , &QMessageBox::buttonClicked , studentdeleted , &QMessageBox::deleteLater);
+
+}
