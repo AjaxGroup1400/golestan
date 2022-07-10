@@ -19,7 +19,7 @@ public:
     ~AdminClassInfo();
 
 public slots:
-    QGroupBox* watchClass();
+    QGroupBox* watchClass(QString teacherUsername , QString lesson);
 private slots:
     void on_backToMenu_clicked();
 
