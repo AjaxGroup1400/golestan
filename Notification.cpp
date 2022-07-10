@@ -79,7 +79,7 @@ QList<QMap<QString, QString>> Notification::getNotifs(QString username)
             {
                 for(int j = 0 ; j < dataHolder[i]["allowed_users"].size() ; j++ )
                 {
-                    if (dataHolder[i]["allowed_users"][j].asInt() == username.toInt())
+                    if (dataHolder[i]["allowed_users"][j].asString() == username.toStdString())
                     {
                         QMap<QString , QString> relatedMessage;
 
