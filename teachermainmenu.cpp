@@ -152,7 +152,7 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 //    }
 
 
-    QMessageBox * studentdeleted = new QMessageBox(QMessageBox::Icon::Information, "Student deleted", "the student was deleted succesfuly", QMessageBox::Button::Ok);
+    QMessageBox * studentdeleted = new QMessageBox(QMessageBox::Icon::Information, "Student removed", "the student was removed succesfuly", QMessageBox::Button::Ok);
 //    studentdeleted->setParent(this);
 
     studentdeleted->show();

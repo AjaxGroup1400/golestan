@@ -46,7 +46,7 @@ TeacherWatchStudent::TeacherWatchStudent(TeacherMainMenu * member ,Class thisCla
 
         QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
 
-        ui->verticalLayout_2->addWidget(students(parsedUser[2],parsedUser[3],usernameList[i]));
+        ui->verticalLayout_2->addWidget(students(parsedUser[2],parsedUser[3],usernameList[i], thisClass));
 
     }
 }
@@ -186,7 +186,8 @@ void TeacherWatchStudent::on_pushButton_clicked()
 
 }
 
-QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QString studentusername)
+
+QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QString studentusername, Class thisClass)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -214,6 +215,10 @@ QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QStr
     studentNumber->setText(studentusername);
     studentNumber->setStyleSheet("font:Montesrat 9px; color: rgb(41, 39, 40);");
 
+    QPushButton* deleteStudent = new QPushButton;
+    deleteStudent->setText("remove student");
+
+    connect (deleteStudent, &QPushButton::clicked, [this,thisClass,studentusername] {removeStudent_clicked(thisClass,studentusername);});
 
 //    QLabel * field = new QLabel;
 //    field->setMaximumWidth(81);
@@ -226,8 +231,14 @@ QGroupBox *TeacherWatchStudent::students(QString firstname,QString lastname,QStr
     grid->addWidget(lastName,0,1);
     grid->addWidget(studentNumber,0,2);
 //    grid->addWidget(field,0,3);
+    grid->addWidget(deleteStudent,0,3);
+
 
     gBox->setLayout(grid);
     return gBox;
 }
 
+void TeacherWatchStudent::removeStudent_clicked(Class thisClass, QString studentusername)
+{
+    this->mainmenu->deleteStudent(studentusername, thisClass);
+}

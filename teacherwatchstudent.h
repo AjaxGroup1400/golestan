@@ -31,10 +31,12 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void removeStudent_clicked(Class thisClass,QString studentusername);
+
 private:
     Ui::TeacherWatchStudent *ui;
 
-    QGroupBox* students(QString firstname,QString lastname,QString studentusername);
+    QGroupBox* students(QString firstname,QString lastname,QString studentusername, Class thisClass);
 
     TeacherMainMenu * mainmenu ;
 };
