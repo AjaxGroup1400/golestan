@@ -18,6 +18,8 @@ public:
     virtual int isUserValid(QString username);
 
     virtual void addClass(QString username, Class Class);
+
+    void removeClass(QString username, Class Class);
 };
 
 #endif // STUDENTWEEKLYCALENDAR_H

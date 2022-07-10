@@ -16,7 +16,7 @@ class StudentWatchMessageComplitly : public QWidget
     Q_OBJECT
 
 public:
-    explicit StudentWatchMessageComplitly(QString title , QString message , StudentMainMenu * member , QWidget *parent = nullptr);
+    explicit StudentWatchMessageComplitly(QString title , QString message , QString senderUsername , StudentMainMenu * member , QWidget *parent = nullptr);
     ~StudentWatchMessageComplitly();
 
 private slots:

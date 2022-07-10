@@ -78,7 +78,7 @@ teacherMessages::~teacherMessages()
     delete ui;
 }
 
-QGroupBox *teacherMessages::createMessageBox(QString messageTitle, QString messageDescription, int id)
+QGroupBox *teacherMessages::createMessageBox(QString messageTitle, QString messageDescription, QString senderUsername , int id)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -103,7 +103,7 @@ QGroupBox *teacherMessages::createMessageBox(QString messageTitle, QString messa
 
     QPushButton* watchBtn = new QPushButton;   
 
-    connect(watchBtn,&QPushButton::clicked,[this, messageTitle, messageDescription] { on_msgBtn_clicked(messageTitle, messageDescription);});
+    connect(watchBtn,&QPushButton::clicked,[this, messageTitle, messageDescription , senderUsername] { on_msgBtn_clicked(messageTitle, messageDescription , senderUsername);});
 
     watchBtn->setMaximumWidth(101);
     watchBtn->setMaximumHeight(26);
@@ -147,14 +147,14 @@ void teacherMessages::showMeassages()
     for(auto notif : notifs)
     {
         this->ui->verticalLayout_2->addWidget(
-            createMessageBox(notif["title"], notif["description"], notif["id"].toInt())
+            createMessageBox(notif["title"], notif["description"], notif["sender"] , notif["id"].toInt())
         );
     }    
 }
 
-void teacherMessages::on_msgBtn_clicked(QString title, QString description)
+void teacherMessages::on_msgBtn_clicked(QString title, QString description , QString senderUsername)
 {
-    teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly(title, description, mainmenu);
+    teacherWatchMessageComplitly* twmc = new teacherWatchMessageComplitly(title, description, senderUsername , mainmenu);
     twmc->show();
     close();    
 }

@@ -1,10 +1,10 @@
 #include"Auth.h"
-#include<QMessageBox>
-
-
-#include "forgotpasspage.h"
 #include "ui_forgotpasspage.h"
+#include "forgotpasspage.h"
+#include "loginpage.h"
 
+
+#include<QMessageBox>
 
 
 ForgotPassPage::ForgotPassPage(QWidget *parent) :
@@ -12,7 +12,10 @@ ForgotPassPage::ForgotPassPage(QWidget *parent) :
     ui(new Ui::ForgotPassPage)
 {
     ui->setupUi(this);
-    this->ui->Confirmbtn->setStyleSheet("background-color:transparent");
+
+    this->ui->Confirmbtn->setStyleSheet("background-color: transparent");
+
+    this->ui->backToLogin->setStyleSheet("background-color: transparent");
 }
 
 
@@ -46,5 +49,17 @@ void ForgotPassPage::on_Confirmbtn_clicked()
     enp->show();
     close();
 
+}
+
+
+void ForgotPassPage::on_backToLogin_clicked()
+{
+    qDebug() << "Hello";
+
+    LoginPage* lp = new LoginPage;
+
+    lp->show();
+
+    close();
 }
 

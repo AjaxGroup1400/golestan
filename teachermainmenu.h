@@ -42,6 +42,7 @@ public:
     Class getLesson(lesson lesson);
     QString lessonNameCheck(QString sentName);
     QList<Class> getClasses();
+    static void cleantecher_lessons();
 
 
 

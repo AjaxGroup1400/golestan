@@ -12,9 +12,11 @@ using namespace std;
 #include "teacherprofile.h"
 #include "teachersendassertion.h"
 #include "teacherweeklyschedule.h"
+#include"Auth.h"
+#include"Filemanager.h"
 
 
-teacherWatchMessageComplitly::teacherWatchMessageComplitly(QString title , QString message, TeacherMainMenu * member, QWidget *parent) :
+teacherWatchMessageComplitly::teacherWatchMessageComplitly(QString title , QString message, QString senderUsername , TeacherMainMenu * member, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::teacherWatchMessageComplitly)
 {
@@ -38,6 +40,17 @@ teacherWatchMessageComplitly::teacherWatchMessageComplitly(QString title , QStri
 //    this->ui->SenderLine->setText(sender);
     this->ui->TitleLine->setText(title);
     this->ui->messageLine->setText(message);
+
+
+    int userIndex = Auth::findUser(senderUsername);
+    FileManager userFile;
+    userFile.create();
+    userFile.loadData();
+
+    QVector<QString> parsedUser = userFile.parse(userFile.getRecord(userIndex));
+
+    this->ui->SenderLine->setText(parsedUser[2] + " " + parsedUser[3]);
+
 
 //    if(isread == false)
 //    {

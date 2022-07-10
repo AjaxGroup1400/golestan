@@ -18,6 +18,10 @@ public:
     ~AdminMainMenu();
 
 
+public slots:
+    void ending_term();
+
+
 
 private slots:
     void on_pushButton_5_clicked();
@@ -34,6 +38,8 @@ private slots:
     void on_pushButton_7_clicked();
 
     void on_pushButton_6_clicked();
+
+    void on_pushButton_8_clicked();
 
 private:
     Ui::AdminMainMenu *ui;

@@ -673,39 +673,6 @@ border-color: rgb(178, 8, 55);</string>
     <enum>QFrame::Raised</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
-   <property name="geometry">
-    <rect>
-     <x>660</x>
-     <y>640</y>
-     <width>83</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_8">
-   <property name="geometry">
-    <rect>
-     <x>670</x>
-     <y>645</y>
-     <width>63</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(178, 8, 55);
-font: 9pt &quot;Montserrat&quot;;</string>
-   </property>
-   <property name="text">
-    <string>Apply</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_12">
    <property name="geometry">
     <rect>
@@ -781,18 +748,16 @@ color: rgb(178, 8, 55);</string>
   <zorder>frame_2</zorder>
   <zorder>frame</zorder>
   <zorder>label_9</zorder>
-  <zorder>label_8</zorder>
-  <zorder>pushButton_5</zorder>
   <zorder>label_12</zorder>
   <zorder>label_13</zorder>
   <zorder>label_15</zorder>
   <zorder>label_16</zorder>
  </widget>
  <resources>
+  <include location="arrowIcon.qrc"/>
   <include location="term-management-icon.qrc"/>
   <include location="icon.qrc"/>
   <include location="pictures.qrc"/>
-  <include location="arrowIcon.qrc"/>
  </resources>
  <connections/>
 </ui>

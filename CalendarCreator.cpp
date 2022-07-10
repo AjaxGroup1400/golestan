@@ -1,4 +1,5 @@
 #include "CalendarCreator.h"
+#include "Enum.h"
 
 CalendarCreator::CalendarCreator()
 {
@@ -33,11 +34,11 @@ void CalendarCreator::append(Class Class)
 
     Json::Value classData;
 
-    classData["day"] = lesson_enum_str[Class.getDay()].toStdString();
+    classData["day"] = day_enum_str[Class.getDay()].toStdString();
 
     classData["time"] = Class.getTime().toStdString();
 
-    classData["name"] = day_enum_str[Class.getLesson()].toStdString();
+    classData["name"] = lesson_enum_str[Class.getLesson()].toStdString();
 
     modifiedClasses.append(classData);
 
