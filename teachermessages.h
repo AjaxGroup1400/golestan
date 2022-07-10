@@ -30,7 +30,7 @@ private slots:
 
     void on_backToMenu_clicked();
 
-    void on_msgBtn_clicked(QString title, QString description);
+    void on_msgBtn_clicked(QString title, QString description , QString senderUsername);
 
     void on_pushButton_5_clicked();
 
@@ -50,7 +50,7 @@ private:
 
     void showMeassages();
 
-    QGroupBox* createMessageBox(QString messageTitle, QString messageDescription, int id);
+    QGroupBox* createMessageBox(QString messageTitle, QString messageDescription, QString senderUsername , int id);
 
 //    Json::Value dataHolder;
 //    Json::Reader dataReader;

@@ -114,10 +114,10 @@ void studentMessages::on_pushButton_3_clicked()
 
 }
 
-void studentMessages::on_msgBtn_clicked(QString title , QString description)
+void studentMessages::on_msgBtn_clicked(QString title , QString description , QString senderUsername)
 {
 
-    StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly(title, description, mainmenu);
+    StudentWatchMessageComplitly* swmc = new StudentWatchMessageComplitly(title, description, senderUsername , mainmenu);
     swmc->show();
     close();
 }
@@ -194,13 +194,13 @@ void studentMessages::showMeassages()
     for(auto notif : notifs)
     {
         this->ui->verticalLayout_2->addWidget(
-            createMessageBox(notif["title"], notif["description"], notif["id"].toInt())
+            createMessageBox(notif["title"], notif["description"],  notif["sender"], notif["id"].toInt())
         );
     }
 
 }
 
-QGroupBox *studentMessages::createMessageBox(QString messageTitle, QString messageDescription, int id)
+QGroupBox *studentMessages::createMessageBox(QString messageTitle, QString messageDescription, QString senderUsername , int id)
 {
     QWidget* widget = new QWidget;
     QGridLayout* grid = new QGridLayout(widget);
@@ -225,7 +225,7 @@ QGroupBox *studentMessages::createMessageBox(QString messageTitle, QString messa
 
     QPushButton* watchBtn = new QPushButton;    
 
-    connect(watchBtn,&QPushButton::clicked,[this, messageTitle, messageDescription] { on_msgBtn_clicked(messageTitle, messageDescription);});
+    connect(watchBtn,&QPushButton::clicked,[this, messageTitle, messageDescription , senderUsername] { on_msgBtn_clicked(messageTitle, messageDescription , senderUsername);});
 
     watchBtn->setMaximumWidth(101);
     watchBtn->setMaximumHeight(26);
