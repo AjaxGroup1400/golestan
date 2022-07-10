@@ -285,6 +285,15 @@ void AdminWatchStudent::removeStudentUser_clicked(Class thisClass, QString stude
             {
                 if(studentusername.toStdString() != SdataHolder[i]["username"].asString())
                 {
+                    int Term = SdataHolder[i]["count_of_terms"].asInt()-1;
+                    Json::Value classesCopy = SdataHolder[i]["terms"][Term]["lessons"];
+
+                    for(int l = 0; l < classesCopy.size(); l++){
+                        Class studentClass (string_to_lesson( QString::fromStdString(classesCopy[l]["lesson"].asString())),QString::fromStdString(classesCopy[l]["teacher"].asString()) );
+                        studentClass.deleteStudent(studentusername);
+                    }
+
+
                     wantedUsers.append(SdataHolder[i]);
 
                     ofstream ofs(SfilePath.toStdString());
