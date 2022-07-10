@@ -208,7 +208,7 @@ void studentWeeklySchedule::loadSchedule()
 
             wantedDay->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
 
-            wantedDay->setStyleSheet("text-align: center; font-size: 9px; min-width: fit-content;");
+            wantedDay->setStyleSheet("text-align: center; font-size: 7px; min-width: fit-content;");
         }
     }
 }

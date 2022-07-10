@@ -120,8 +120,8 @@ void TeacherMainMenu::  deleteStudent(QString studentname , Class Class)
 
                     for(int j = 0; j < classesCopy.size(); j++)
                     {
-                        if(classesCopy[i]["lesson"].asString() != lesson_enum_str[Class.getLesson()].toStdString() )
-                            wantedClasses.append(classesCopy[i]);
+                        if(classesCopy[j]["lesson"].asString() != lesson_enum_str[Class.getLesson()].toStdString() )
+                            wantedClasses.append(classesCopy[j]);
                     }
 
                     SdataHolder[i]["terms"][Term]["lessons"] = wantedClasses;

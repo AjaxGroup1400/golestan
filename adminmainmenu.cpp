@@ -175,10 +175,15 @@ void AdminMainMenu::on_pushButton_6_clicked()
 void AdminMainMenu::on_pushButton_8_clicked()
 {
     QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Finish term","Do you want to finish the term?");
+
     exit->setStandardButtons(QMessageBox::Yes);
+
     exit->addButton(QMessageBox::No);
+
     exit->setDefaultButton(QMessageBox::No);
+
     exit->show();
+
     if(exit->exec() == QMessageBox::Yes){
 
         ending_term();
