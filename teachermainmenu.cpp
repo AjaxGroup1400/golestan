@@ -230,7 +230,7 @@ void TeacherMainMenu::addNewTeacherToFile(QString teacherUsername)
         Json::Value teacherInformation ;
         teacherInformation["teacher"] = teacherUsername.toStdString();
         teacherInformation["lessons"] = Json::arrayValue;
-
+        dataHolder.append(teacherInformation);
         ofstream ofs("../data_resources/teacher_lessons.json");
         Json::StyledWriter writer;
         string finalPart = writer.write(dataHolder);
