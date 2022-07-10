@@ -47,10 +47,12 @@ void AdminWatchStudent::on_pushButton_clicked()
         AdminProfile* ap= new AdminProfile(mainmenu);
         ap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -66,10 +68,12 @@ void AdminWatchStudent::on_pushButton_2_clicked()
         adminMessages* as = new adminMessages(mainmenu);
         as->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -85,10 +89,12 @@ void AdminWatchStudent::on_pushButton_3_clicked()
         AdminAddPeople* aap= new AdminAddPeople(mainmenu);
         aap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -105,10 +111,12 @@ void AdminWatchStudent::on_pushButton_4_clicked()
         AdminSendAssertion* asa= new AdminSendAssertion;
         asa->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -125,10 +133,12 @@ void AdminWatchStudent::on_pushButton_7_clicked()
         adminAddClass* adc= new adminAddClass(mainmenu);
         adc->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -145,10 +155,12 @@ void AdminWatchStudent::on_pushButton_6_clicked()
         AdminClassInfo* aci = new AdminClassInfo(mainmenu);
         aci->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -165,10 +177,12 @@ void AdminWatchStudent::on_backToMenu_clicked()
         AdminClassInfo* aci = new AdminClassInfo(mainmenu);
         aci->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 

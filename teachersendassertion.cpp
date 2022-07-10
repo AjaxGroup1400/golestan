@@ -61,10 +61,12 @@ void TeacherSendAssertion::on_backToMenu_clicked()
         TeacherMainMenu* tmm = new TeacherMainMenu(mainmenu->get_first_name(), mainmenu->get_username() , mainmenu );
         tmm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -80,10 +82,12 @@ void TeacherSendAssertion::on_pushButton_clicked()
         teacherProfile* tp= new teacherProfile(mainmenu);
         tp->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 

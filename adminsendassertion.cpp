@@ -72,10 +72,14 @@ void AdminSendAssertion::on_backToMenu_clicked()
         AdminMainMenu* amm = new AdminMainMenu(mainmenu->get_first_name() ,mainmenu);
         amm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
+
     }
 }
 
@@ -91,10 +95,12 @@ void AdminSendAssertion::on_pushButton_clicked()
         AdminProfile* ap= new AdminProfile(mainmenu);
         ap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -110,10 +116,12 @@ void AdminSendAssertion::on_pushButton_3_clicked()
         AdminAddPeople* aap= new AdminAddPeople(mainmenu);
         aap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 

@@ -45,10 +45,12 @@ void adminAddClass::on_backToMenu_clicked()
         AdminMainMenu* amm = new AdminMainMenu(mainmenu->get_first_name() ,mainmenu);
         amm->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
@@ -64,12 +66,13 @@ void adminAddClass::on_pushButton_clicked()
         AdminProfile* ap= new AdminProfile(this->mainmenu);
         ap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
-
 }
 
 
@@ -84,10 +87,12 @@ void adminAddClass::on_pushButton_2_clicked()
         adminMessages* as = new adminMessages(this->mainmenu);
         as->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 
 }
@@ -104,12 +109,13 @@ void adminAddClass::on_pushButton_3_clicked()
         AdminAddPeople* aap= new AdminAddPeople(this->mainmenu);
         aap->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
-
 }
 
 
@@ -124,20 +130,18 @@ void adminAddClass::on_pushButton_4_clicked()
         AdminSendAssertion* asa= new AdminSendAssertion(this->mainmenu);
         asa->show();
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
         close();
     }
     else{
         exit->close();
+        connect(exit ,&QMessageBox::buttonClicked ,exit ,&QMessageBox::deleteLater);
     }
 }
 
 
 void adminAddClass::on_pushButton_5_clicked()
 {
-
-
-
-
     Class newClass (string_to_lesson(lesson_enum_str[this->lesson]), this->teacherusername);
     newClass.setLocation(this->location);
     newClass.setTime(this->time);
@@ -145,7 +149,7 @@ void adminAddClass::on_pushButton_5_clicked()
     TeacherMainMenu::addNewLessonFile(this->teacherusername , newClass);
     QMessageBox* classAdded = new QMessageBox(QMessageBox::Icon::Information, "class Added", "Class with entered info created.", QMessageBox::Button::Ok);
     classAdded->show();
-
+    connect(classAdded ,&QMessageBox::buttonClicked ,classAdded ,&QMessageBox::deleteLater);
 }
 
 
@@ -158,7 +162,6 @@ void adminAddClass::on_comboBox_4_currentIndexChanged(int index)
 void adminAddClass::on_comboBox_3_currentIndexChanged(int index)
 {
     this->day = index;
-
 }
 
 
