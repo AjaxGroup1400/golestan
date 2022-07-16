@@ -1,8 +1,13 @@
 #include "teacherprofile.h"
+#include "teacherclassinfo.h"
 #include <QValidator>
 #include "ui_teacherprofile.h"
 #include <QMessageBox>
+#include "teachersendassertion.h"
 #include "teachermainmenu.h"
+#include "teachermessages.h"
+#include "teacherweeklyschedule.h"
+#include "teacherclasssetscore.h"
 
 teacherProfile::teacherProfile(QWidget *parent) :
     QWidget(parent),
@@ -91,6 +96,101 @@ void teacherProfile::on_backToMenu_clicked()
     if(exit->exec() == QMessageBox::Yes){
         TeacherMainMenu* smm = new TeacherMainMenu;
         smm->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void teacherProfile::on_pushButton_4_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to send assertion","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        TeacherSendAssertion* tsa= new TeacherSendAssertion;
+        tsa->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void teacherProfile::on_pushButton_2_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        teacherMessages* tm= new teacherMessages;
+        tm->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void teacherProfile::on_pushButton_5_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        teacherWeeklySchedule* tws = new teacherWeeklySchedule;
+        tws->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void teacherProfile::on_pushButton_3_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to class info","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        TeacherClassInfo* tci = new TeacherClassInfo;
+        tci->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void teacherProfile::on_pushButton_6_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"go to set score","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        TeacherClassSetScore* tcss = new TeacherClassSetScore;
+        tcss->show();
         exit->close();
         close();
     }

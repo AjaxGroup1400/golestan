@@ -5,6 +5,12 @@
 #include <QPushButton>
 #include "loginpage.h"
 #include "studentprofile.h"
+#include "studentmessages.h"
+#include "studentweeklyschedule.h"
+#include "studentteachersurvey.h"
+#include "studentterms.h"
+#include "studenttermscores.h"
+#include "studentenrolment.h"
 
 StudentMainMenu::StudentMainMenu(QWidget *parent) :
     QWidget(parent),
@@ -16,6 +22,8 @@ StudentMainMenu::StudentMainMenu(QWidget *parent) :
     this->ui->pushButton_3->setStyleSheet("background-color:transparent");
     this->ui->pushButton_4->setStyleSheet("background-color:transparent");
     this->ui->pushButton_5->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_6->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->label_8->setStyleSheet("background-color: #f0f0f0; border-radius: 20px;");
 
 }
@@ -50,4 +58,48 @@ void StudentMainMenu::on_pushButton_clicked()
     sp->show();
     close();
 }
+
+
+void StudentMainMenu::on_pushButton_2_clicked()
+{
+    studentMessages* sm = new studentMessages;
+    sm->show();
+    close();
+}
+
+
+void StudentMainMenu::on_pushButton_3_clicked()
+{
+    studentWeeklySchedule* swc = new studentWeeklySchedule;
+    swc->show();
+    close();
+}
+
+
+void StudentMainMenu::on_pushButton_7_clicked()
+{
+    StudentTeacherSurvey* sts = new StudentTeacherSurvey;
+    sts->show();
+    close();
+}
+
+
+void StudentMainMenu::on_pushButton_6_clicked()
+{
+    StudentTerms* st = new StudentTerms;
+    st->show();
+    close();
+}
+
+
+
+
+void StudentMainMenu::on_pushButton_4_clicked()
+{
+    StudentEnrolment* se = new StudentEnrolment;
+    se->show();
+    close();
+}
+
+
 

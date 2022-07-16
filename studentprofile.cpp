@@ -3,7 +3,12 @@
 #include <QValidator>
 #include <QMessageBox>
 #include "studentmainmenu.h"
-
+#include "studentmessages.h"
+#include "studentweeklyschedule.h"
+#include "studentteachersurvey.h"
+#include "studentterms.h"
+#include "studenttermscores.h"
+#include "studentenrolment.h"
 StudentProfile::StudentProfile(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StudentProfile)
@@ -13,6 +18,8 @@ StudentProfile::StudentProfile(QWidget *parent) :
     this->ui->pushButton_2->setStyleSheet("background-color: transparent");
     this->ui->pushButton_3->setStyleSheet("background-color: transparent");
     this->ui->pushButton_4->setStyleSheet("background-color: transparent");
+    this->ui->pushButton_6->setStyleSheet("background-color:transparent");
+    this->ui->pushButton_7->setStyleSheet("background-color:transparent");
     this->ui->applychng->setStyleSheet("background-color: transparent");
     this->ui->applychng_2->setStyleSheet("background-color: transparent");
     this->ui->chngPass->setStyleSheet("background-color: transparent");
@@ -88,6 +95,102 @@ void StudentProfile::on_backToMenu_clicked()
     if(exit->exec() == QMessageBox::Yes){
         StudentMainMenu* smm = new StudentMainMenu;
         smm->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void StudentProfile::on_pushButton_2_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to message","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        studentMessages* sm= new studentMessages;
+        sm->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void StudentProfile::on_pushButton_3_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to weekly shedule","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        studentWeeklySchedule* swc = new studentWeeklySchedule;
+        swc->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void StudentProfile::on_pushButton_7_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to teacher survey","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        StudentTeacherSurvey* sts = new StudentTeacherSurvey;
+        sts->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+}
+
+
+void StudentProfile::on_pushButton_6_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to view scores","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        StudentTerms* st = new StudentTerms;
+        st->show();
+        exit->close();
+        close();
+    }
+    else{
+        exit->close();
+    }
+
+}
+
+
+void StudentProfile::on_pushButton_4_clicked()
+{
+    QMessageBox* exit = new QMessageBox(QMessageBox::Warning,"Go to enrolment","If you do not save the changes, they will not be saved\nDo you want to leave?");
+    exit->setStandardButtons(QMessageBox::Yes);
+    exit->addButton(QMessageBox::No);
+    exit->setDefaultButton(QMessageBox::No);
+    exit->show();
+    if(exit->exec() == QMessageBox::Yes){
+        StudentEnrolment* se = new StudentEnrolment;
+        se->show();
         exit->close();
         close();
     }
